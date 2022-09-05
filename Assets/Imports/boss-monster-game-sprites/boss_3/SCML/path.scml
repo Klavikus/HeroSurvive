@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="parts">
+        <file id="0" name="parts/eyes.png" width="168" height="68" pivot_x="0.5" pivot_y="0.5"/>
+        <file id="1" name="parts/shadow.png" width="411" height="158" pivot_x="0.5" pivot_y="0.5"/>
+        <file id="2" name="parts/path.png" width="280" height="128" pivot_x="0.5" pivot_y="0.5"/>
+    </folder>
+    <entity id="0" name="path">
+        <animation id="0" name="path" length="1000" interval="100" l="-136" t="-253" r="142" b="-126">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="500">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+                <key id="2" time="1000">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="path">
+                <key id="0" spin="0">
+                    <object folder="0" file="2" x="2.987013" y="189.896104" a="0"/>
+                </key>
+                <key id="1" time="500" spin="0">
+                    <object folder="0" file="2" x="2.987013" y="189.896104"/>
+                </key>
+                <key id="2" time="1000" spin="0">
+                    <object folder="0" file="2" x="2.987013" y="189.896104"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>
