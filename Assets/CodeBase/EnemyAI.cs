@@ -1,30 +1,66 @@
 ﻿using System;
-using System.Collections.Generic;
+using CodeBase;
 using UnityEngine;
 
-public class EnemyAI : InputHandler
+public class EnemyAI : InputHandler, IEntity
 {
-    [SerializeField] private Player _player;
-    [SerializeField] private float MinError;
+    [SerializeField] private MoveStrategy _moveStrategy;
+    [SerializeField] private float _speed;
     [SerializeField] private float _distance;
+    [SerializeField] private bool _isFacedRight;
+    [SerializeField] private float _attackRange;
+    [SerializeField] private AbilityHandler _abilityHandler;
 
-    private RaycastHit2D[] _hits = new RaycastHit2D[2];
+    private EntityState _currentState;
+    private TargetService _targetService;
+    public event Action<EntityState> StateChanged;
+    public event Action<EnemyAI> Die;
+
+    private void OnDestroy()
+    {
+        Die?.Invoke(this);
+    }
+
+    public void Initialize(TargetService targetService)
+    {
+        _targetService = targetService;
+        enabled = true;
+    }
 
     private void Update()
     {
-        Vector3 direction = _player.transform.position - transform.position;
+        Vector3 moveVector = _moveStrategy.GetMoveVector(transform, _targetService.GetPlayerPosition(), _distance);
+        Move(moveVector, _speed);
+    }
 
-        if (direction.magnitude > MinError)
+    private void Move(Vector3 direction, float speed)
+    {
+        Vector3 directionToTarget = _targetService.GetPlayerPosition()- transform.position;
+
+        if (directionToTarget.magnitude > _attackRange)
         {
-            direction.Normalize();
+            transform.Translate(direction * (speed * Time.deltaTime), Space.World);
+        }
+        else
+        {
+            // _abilityHandler.HandleAttack();
+        }
 
-            InvokeInputUpdated(new InputData(direction.x, direction.y));
+        if ((directionToTarget.x < 0 && _isFacedRight) || (directionToTarget.x > 0 && !_isFacedRight))
+            Flip();
+
+        if (directionToTarget.magnitude > _attackRange && _currentState != EntityState.Walk)
+        {
+            _currentState = EntityState.Walk;
+            StateChanged?.Invoke(_currentState);
         }
     }
 
-    private bool CheckPath(Vector3 direction)
+    private void Flip()
     {
-        Debug.DrawLine(transform.position, transform.position + direction.normalized * _distance, Color.green, 1f);
-        return Physics2D.RaycastNonAlloc(transform.position, direction.normalized * _distance, _hits, _distance) <= 1;
+        _isFacedRight = !_isFacedRight;
+        Vector3 newScale = transform.localScale;
+        newScale.x *= -1;
+        transform.localScale = newScale;
     }
 }

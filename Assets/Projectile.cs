@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private int _maxAffectedEnemy;
     [SerializeField] private float _radius;
     [SerializeField] private float _lifeTime;
+    [SerializeField] private int _penetration;
 
     private RaycastHit2D[] _results;
     private List<Enemy> _previousEnemys = new List<Enemy>();
@@ -24,17 +25,15 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector3.right * (_speed * Time.deltaTime));
-        // CheckOverlap();
+        // transform.Translate(Vector3.right * (_speed * Time.deltaTime));
+        CheckOverlap();
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.TryGetComponent(out Enemy enemy))
-        {
-            enemy.TakeDamage(_damage);
-        }
-    }
+    // private void OnTriggerEnter2D(Collider2D col)
+    // {
+    // if (col.TryGetComponent(out Enemy enemy)) 
+    // enemy.TakeDamage(_damage);
+    // }
 
     private void CheckOverlap()
     {
@@ -47,7 +46,13 @@ public class Projectile : MonoBehaviour
                     _currentEnemys.Add(enemy);
 
             foreach (Enemy newEnemy in _currentEnemys.Except(_previousEnemys))
+            {
                 newEnemy.TakeDamage(_damage);
+                if (--_penetration == 0)
+                {
+                    Destroy(gameObject);
+                }
+            }
         }
 
         _previousEnemys.Clear();

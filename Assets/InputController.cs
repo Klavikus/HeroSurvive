@@ -11,15 +11,6 @@ public class InputController : InputHandler
         float horizontal = SimpleInput.GetAxis(Horizontal);
         float vertical = SimpleInput.GetAxis(Vertical);
 
-        // if (Input.GetKey(KeyCode.A))
-        //     horizontal -= 1;
-        // if (Input.GetKey(KeyCode.D))
-        //     horizontal += 1;
-        // if (Input.GetKey(KeyCode.W))
-        //     vertical += 1;
-        // if (Input.GetKey(KeyCode.S))
-        //     vertical -= 1;
-
         InvokeInputUpdated(new InputData(horizontal, vertical));
     }
 }
