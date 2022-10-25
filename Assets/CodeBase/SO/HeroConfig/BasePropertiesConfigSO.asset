@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b74e1e611b443ea713cd65c7966ae8, type: 3}
+  m_Name: BasePropertiesConfigSO
+  m_EditorClassIdentifier: 
+  _data:
+  - Value: 100
+    <BaseProperty>k__BackingField: 0
+    <Icon>k__BackingField: {fileID: 21300000, guid: e5487dbe2dfee44bf949e0ade82bcbf5, type: 3}
+    <Prefix>k__BackingField: 
+    <Suffix>k__BackingField: 
+    <ShortName>k__BackingField: HP
+    <FullName>k__BackingField: Health
+  - Value: 0.5
+    <BaseProperty>k__BackingField: 1
+    <Icon>k__BackingField: {fileID: 21300000, guid: 79b6da8b67c0d4130b619d38ee221bf2, type: 3}
+    <Prefix>k__BackingField: 
+    <Suffix>k__BackingField: '%'
+    <ShortName>k__BackingField: HP/s
+    <FullName>k__BackingField: Regeneration
+  - Value: 100
+    <BaseProperty>k__BackingField: 2
+    <Icon>k__BackingField: {fileID: 21300000, guid: 9fbdd0376ab914cc6a1b8835495610c8, type: 3}
+    <Prefix>k__BackingField: 
+    <Suffix>k__BackingField: '%'
+    <ShortName>k__BackingField: MS
+    <FullName>k__BackingField: Move Speed
+  - Value: 0
+    <BaseProperty>k__BackingField: 3
+    <Icon>k__BackingField: {fileID: 21300000, guid: c5f379770ddf3470cab5328d5615bb23, type: 3}
+    <Prefix>k__BackingField: +
+    <Suffix>k__BackingField: '%'
+    <ShortName>k__BackingField: Dmg
+    <FullName>k__BackingField: Dmage
+  - Value: 0
+    <BaseProperty>k__BackingField: 4
+    <Icon>k__BackingField: {fileID: 21300000, guid: 31db59f0a66f144f99d4d7d6ef9bbb9f, type: 3}
+    <Prefix>k__BackingField: '-'
+    <Suffix>k__BackingField: '%'
+    <ShortName>k__BackingField: CD
+    <FullName>k__BackingField: Cooldown
+  - Value: 0
+    <BaseProperty>k__BackingField: 5
+    <Icon>k__BackingField: {fileID: 21300000, guid: 552ee50297f7b4c04a775dedd5c96aea, type: 3}
+    <Prefix>k__BackingField: +
+    <Suffix>k__BackingField: '%'
+    <ShortName>k__BackingField: Duration
+    <FullName>k__BackingField: Duration
+  - Value: 0
+    <BaseProperty>k__BackingField: 6
+    <Icon>k__BackingField: {fileID: 21300000, guid: a222a9e7d571b458092a70ec97a64a03, type: 3}
+    <Prefix>k__BackingField: +
+    <Suffix>k__BackingField: 
+    <ShortName>k__BackingField: Amount
+    <FullName>k__BackingField: Amount
+  - Value: 0
+    <BaseProperty>k__BackingField: 7
+    <Icon>k__BackingField: {fileID: 21300000, guid: cfca08577a857449f9070ba922aa86df, type: 3}
+    <Prefix>k__BackingField: +
+    <Suffix>k__BackingField: '%'
+    <ShortName>k__BackingField: Area
+    <FullName>k__BackingField: Area
+  <PropertyView>k__BackingField: {fileID: 7018724567780845100, guid: b875eb1b778aefc42a54cc05f78be2f0, type: 3}

@@ -4725,6 +4725,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _abilityConfigSo:
   - {fileID: 11400000, guid: 0b4fb934f2791c840a6a63ca7003e87e, type: 2}
+  - {fileID: 11400000, guid: 54d04df3847b358489171411a23878a3, type: 2}
+  - {fileID: 11400000, guid: c1e03a1550dcb0c49beb766c31da0184, type: 2}
   _playerStatsSO: {fileID: 11400000, guid: 95cd1096ae9d675489e15d249c6865a3, type: 2}
   _additionalStatsSO: {fileID: 11400000, guid: 4502f7161507a3444a1d13d97c651c06, type: 2}
   _coroutineRunner: {fileID: 1700688167}
