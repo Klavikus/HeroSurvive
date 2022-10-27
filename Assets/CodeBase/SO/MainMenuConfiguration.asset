@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f478429f6c8f45e69af76eca3fc71540, type: 3}
   m_Name: MainMenuConfiguration
   m_EditorClassIdentifier: 
-  HeroSelector: {fileID: 4530374533999214187, guid: 2292a0ac8ef1a26409a3899f29f25e8a, type: 3}
+  HeroSelectorView: {fileID: 4139313647616340675, guid: 2292a0ac8ef1a26409a3899f29f25e8a, type: 3}
+  HeroDescriptionView: {fileID: 4999258271655339708, guid: 3a9f719226cd17d4fac8ed31fb2a2297, type: 3}
+  BaseAbilityView: {fileID: 7106445827667595905, guid: 43a0937c34d956943ae8a07078eaaaaf, type: 3}

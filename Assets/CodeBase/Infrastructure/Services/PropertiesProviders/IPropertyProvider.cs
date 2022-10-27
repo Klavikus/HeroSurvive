@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBase.HeroSelection;
+using CodeBase.MVVM.Views;
 
 namespace CodeBase.Infrastructure.Services.PropertiesProviders
 {

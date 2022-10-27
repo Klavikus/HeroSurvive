@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Enums;
 using CodeBase.Stats;
 using UnityEngine;
 

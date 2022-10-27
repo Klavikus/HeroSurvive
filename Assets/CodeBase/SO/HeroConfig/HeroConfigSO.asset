@@ -16,23 +16,78 @@ MonoBehaviour:
   - <Name>k__BackingField: Maximus The Slayer
     <Description>k__BackingField: A dark templar who brings terror to his enemies.
     <Sprite>k__BackingField: {fileID: 21300000, guid: 67b802153b93ca247b11458839bfb0ea, type: 3}
-    <AdditionalProperties>k__BackingField: 
+    <AdditionalProperties>k__BackingField:
+    - BaseProperty: 0
+      Value: 50
+    - BaseProperty: 1
+      Value: 1
+    <InitialAbilityConfig>k__BackingField: {fileID: 0}
+    <AbilityViewData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 7373fd7bf31584a4c94eff167568d97c, type: 3}
+      <Name>k__BackingField: Skull Guard
+      <Description>k__BackingField: 
   - <Name>k__BackingField: O'Legend
     <Description>k__BackingField: This man is a legend, though not all legends are
       good.
     <Sprite>k__BackingField: {fileID: 21300000, guid: 1c5600036ee76bc4fa718b8a10767c77, type: 3}
-    <AdditionalProperties>k__BackingField: 
+    <AdditionalProperties>k__BackingField:
+    - BaseProperty: 2
+      Value: 15
+    - BaseProperty: 3
+      Value: 15
+    <InitialAbilityConfig>k__BackingField: {fileID: 0}
+    <AbilityViewData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 0}
+      <Name>k__BackingField: 
+      <Description>k__BackingField: 
   - <Name>k__BackingField: Danilius The Snake
     <Description>k__BackingField: Powerful snake charmer. Snakes can do a lot.
     <Sprite>k__BackingField: {fileID: 21300000, guid: 5dbe1cbd3a1e20046b25cabc8594d271, type: 3}
-    <AdditionalProperties>k__BackingField: 
+    <AdditionalProperties>k__BackingField:
+    - BaseProperty: 0
+      Value: -20
+    - BaseProperty: 2
+      Value: 30
+    - BaseProperty: 4
+      Value: 30
+    <InitialAbilityConfig>k__BackingField: {fileID: 0}
+    <AbilityViewData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 0}
+      <Name>k__BackingField: 
+      <Description>k__BackingField: 
   - <Name>k__BackingField: Boris The Auspex
     <Description>k__BackingField: Father's son, grandfather's grandson forever.
     <Sprite>k__BackingField: {fileID: 21300000, guid: cd6cb12b2ee58c140b67ce73e6b26052, type: 3}
-    <AdditionalProperties>k__BackingField: 
+    <AdditionalProperties>k__BackingField:
+    - BaseProperty: 0
+      Value: 50
+    - BaseProperty: 5
+      Value: 25
+    - BaseProperty: 3
+      Value: 15
+    - BaseProperty: 2
+      Value: -15
+    <InitialAbilityConfig>k__BackingField: {fileID: 0}
+    <AbilityViewData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 0}
+      <Name>k__BackingField: 
+      <Description>k__BackingField: 
   - <Name>k__BackingField: Vampure
     <Description>k__BackingField: An ancient creature that sucks from all living
       things.
     <Sprite>k__BackingField: {fileID: 21300000, guid: 09b7270abb522ce47adf11b149930bee, type: 3}
-    <AdditionalProperties>k__BackingField: 
+    <AdditionalProperties>k__BackingField:
+    - BaseProperty: 0
+      Value: 100
+    - BaseProperty: 1
+      Value: 4.5
+    - BaseProperty: 2
+      Value: 50
+    - BaseProperty: 8
+      Value: 100
+    <InitialAbilityConfig>k__BackingField: {fileID: 0}
+    <AbilityViewData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 0}
+      <Name>k__BackingField: 
+      <Description>k__BackingField: 
   <BaseHeroView>k__BackingField: {fileID: 5794044302373075351, guid: 4fb7c26dcf24d964699c614b8b7ce628, type: 3}

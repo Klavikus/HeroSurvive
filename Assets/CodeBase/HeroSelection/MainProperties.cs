@@ -11,6 +11,15 @@ namespace CodeBase.HeroSelection
 
         public static MainProperties operator +(MainProperties a, MainProperties b)
         {
+            if (a == null && b == null)
+                return null;
+
+            if (a == null)
+                return b;
+
+            if (b == null)
+                return a;
+
             MainProperties result = new MainProperties();
             foreach (BaseProperty propertiesKey in a.BaseProperties.Keys)
                 result.UpdateProperty(propertiesKey, a.BaseProperties[propertiesKey] + b.BaseProperties[propertiesKey]);
@@ -19,9 +28,23 @@ namespace CodeBase.HeroSelection
 
         public static MainProperties operator -(MainProperties a, MainProperties b)
         {
+            if (a == null && b == null)
+                return null;
+
+            if (b == null)
+                return a;
+
             MainProperties result = new MainProperties();
-            foreach (BaseProperty propertiesKey in a.BaseProperties.Keys)
-                result.UpdateProperty(propertiesKey, a.BaseProperties[propertiesKey] - b.BaseProperties[propertiesKey]);
+
+
+            if (a == null)
+                foreach (BaseProperty propertiesKey in b.BaseProperties.Keys)
+                    result.UpdateProperty(propertiesKey, -b.BaseProperties[propertiesKey]);
+            else
+                foreach (BaseProperty propertiesKey in a.BaseProperties.Keys)
+                    result.UpdateProperty(propertiesKey,
+                        a.BaseProperties[propertiesKey] - b.BaseProperties[propertiesKey]);
+           
             return result;
         }
 
@@ -32,9 +55,6 @@ namespace CodeBase.HeroSelection
                 _baseProperties.Add(baseProperty, 0);
         }
 
-        public void UpdateProperty(BaseProperty baseProperty, float baseValue)
-        {
-            _baseProperties[baseProperty] = baseValue;
-        }
+        public void UpdateProperty(BaseProperty baseProperty, float baseValue) => _baseProperties[baseProperty] = baseValue;
     }
 }

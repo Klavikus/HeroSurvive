@@ -4,7 +4,10 @@ using CodeBase.Infrastructure.Services.HeroSelectionService;
 using CodeBase.Infrastructure.Services.PropertiesProviders;
 using CodeBase.Infrastructure.Services.UpgradeService;
 using CodeBase.Infrastructure.StateMachine;
+using CodeBase.MVVM.Builders;
+using CodeBase.MVVM.Models;
 using CodeBase.MVVM.ViewModels;
+using CodeBase.MVVM.Views;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
@@ -46,27 +49,44 @@ namespace CodeBase.Infrastructure.States
             Debug.Log("RegisterServices");
             ConfigurationProvider configurationProvider = new ConfigurationProvider(_configurationContainer);
 
+            //Models
+            HeroModel heroModel = new HeroModel();
+            PropertiesModel propertiesModel = new PropertiesModel();
+
             //ViewModels
-            HeroSelectorViewModel heroSelectorViewModel = new HeroSelectorViewModel();
-
-            ViewFactory viewFactory = new ViewFactory(configurationProvider, heroSelectorViewModel);
-
-            MainMenuBuilder mainMenuBuilder = new MainMenuBuilder(viewFactory);
+            HeroSelectorViewModel heroSelectorViewModel = new HeroSelectorViewModel(heroModel);
+            MainPropertiesViewModel propertiesViewModel = new MainPropertiesViewModel(propertiesModel);
+            HeroDescriptionViewModel heroDescriptionViewModel = new HeroDescriptionViewModel(heroModel);
+            BaseAbilityViewModel baseAbilityViewModel = new BaseAbilityViewModel(heroModel);
             
-            HeroSelectionService heroSelectionService = new HeroSelectionService(configurationProvider);
+            ViewFactory viewFactory = new ViewFactory(configurationProvider, 
+                heroSelectorViewModel,
+                propertiesViewModel,
+                heroDescriptionViewModel,
+                baseAbilityViewModel);
+
+            MainMenuViewBuilder mainMenuViewBuilder = new MainMenuViewBuilder(viewFactory);
+
+
+            // HeroSelectionService heroSelectionService = new HeroSelectionService(heroSelectorViewModel);
+            
             UpgradeService upgradeService = new UpgradeService();
-            PropertyProvider propertyProvider = new PropertyProvider(configurationProvider, upgradeService, heroSelectionService);
+            PropertyProvider propertyProvider = new PropertyProvider(configurationProvider,
+                upgradeService,
+                heroModel,
+                propertiesModel);
 
             propertyProvider.Initialize();
-            
-            MainMenuFactory mainMenuFactory = new MainMenuFactory(_stateMachine, configurationProvider, propertyProvider);
+
+            MainMenuFactory mainMenuFactory = new MainMenuFactory(mainMenuViewBuilder);
 
 
             _services.RegisterSingle<IConfigurationProvider>(configurationProvider);
-            _services.RegisterSingle<IHeroSelectionService>(heroSelectionService);
+            // _services.RegisterSingle<IHeroSelectionService>(heroSelectionService);
             _services.RegisterSingle<IUpgradeService>(upgradeService);
             _services.RegisterSingle<IPropertyProvider>(propertyProvider);
             _services.RegisterSingle<IMainMenuFactory>(mainMenuFactory);
         }
+        
     }
 }

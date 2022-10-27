@@ -25,7 +25,6 @@ namespace CodeBase.Infrastructure.States
         private void OnLoaded()
         {
             _mainMenuFactory.Initialization();
-            _mainMenuFactory.ShowMenu();
         }
     }
 }

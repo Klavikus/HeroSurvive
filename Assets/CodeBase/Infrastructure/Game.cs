@@ -1,5 +1,4 @@
 ﻿using CodeBase.Infrastructure.StateMachine;
-using CodeBase.Infrastructure.States;
 
 namespace CodeBase.Infrastructure
 {

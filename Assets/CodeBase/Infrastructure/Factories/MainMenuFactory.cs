@@ -1,37 +1,20 @@
-﻿using CodeBase.HeroSelection;
-using CodeBase.Infrastructure.Services;
-using CodeBase.Infrastructure.Services.PropertiesProviders;
-using CodeBase.Infrastructure.StateMachine;
-using CodeBase.Infrastructure.States;
-using UnityEngine;
+﻿using CodeBase.Infrastructure.States;
+using CodeBase.MVVM.Builders;
 
 namespace CodeBase.Infrastructure.Factories
 {
     public class MainMenuFactory : IMainMenuFactory
     {
-        private readonly GameStateMachine _stateMachine;
-        private readonly IConfigurationProvider _configurationProvider;
-        private readonly IPropertyProvider _propertyProvider;
+        private readonly MainMenuViewBuilder _mainMenuViewBuilder;
 
-        private HeroSelectorUI _heroSelectorUI;
-
-        public MainMenuFactory(GameStateMachine stateMachine, IConfigurationProvider configurationProvider, IPropertyProvider propertyProvider)
+        public MainMenuFactory(MainMenuViewBuilder mainMenuViewBuilder)
         {
-            _stateMachine = stateMachine;
-            _configurationProvider = configurationProvider;
-            _propertyProvider = propertyProvider;
+            _mainMenuViewBuilder = mainMenuViewBuilder;
         }
 
         public void Initialization()
         {
-            _heroSelectorUI = GameObject.Instantiate(_configurationProvider.GetMainMenuConfig().HeroSelector,
-                Vector3.zero, Quaternion.identity);
-            _heroSelectorUI.Initialize(_configurationProvider, _propertyProvider);
-            // _heroSelectorUI.HeroSelected += OnHeroSelected;
+            _mainMenuViewBuilder.Build();
         }
-
-        // private void OnHeroSelected(Hero hero) => _stateMachine.Enter<GameLoopState, Hero>(hero);
-
-        public void ShowMenu() => _heroSelectorUI.Show();
     }
 }

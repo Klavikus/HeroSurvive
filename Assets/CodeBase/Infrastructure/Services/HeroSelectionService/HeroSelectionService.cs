@@ -1,25 +1,23 @@
 ﻿using System;
 using CodeBase.HeroSelection;
+using CodeBase.MVVM.ViewModels;
 
 namespace CodeBase.Infrastructure.Services.HeroSelectionService
 {
     class HeroSelectionService : IHeroSelectionService
     {
-        private readonly IConfigurationProvider _configurationProvider;
-        
         private HeroData _currentSelectedHero;
         private MainProperties _mainProperties;
-        private HeroViewController _heroViewController;
-        
+        private HeroSelectorViewModel _heroSelectorViewModel;
         public event Action HeroSelected;
 
-        public HeroSelectionService(IConfigurationProvider configurationProvider, HeroViewController heroViewController)
+        public HeroSelectionService(HeroSelectorViewModel heroSelectorViewModel)
         {
-            _configurationProvider = configurationProvider;
-
-            _heroViewController = heroViewController;
-            _heroViewController.HeroSelected += OnHeroSelected;
+            _heroSelectorViewModel = heroSelectorViewModel;
+            _heroSelectorViewModel.HeroSelected += OnHeroSelected;
         }
+
+        public MainProperties GetHeroPropertiesData() => _mainProperties;
 
         private void OnHeroSelected(HeroData heroData)
         {
@@ -27,8 +25,6 @@ namespace CodeBase.Infrastructure.Services.HeroSelectionService
             UpdateMainProperties();
             HeroSelected?.Invoke();
         }
-
-        public MainProperties GetHeroPropertiesData() => _mainProperties;
 
         private void UpdateMainProperties()
         {

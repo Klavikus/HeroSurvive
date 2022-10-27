@@ -1,19 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodeBase.Enums;
 using UnityEngine;
 
 namespace CodeBase.Stats
 {
-    public enum PlayerStat
-    {
-        ProjectilesCountModifier,
-        DamageModifier,
-        SpeedModifier,
-        SizeModifier,
-        DurationModifier,
-        CooldownModifier,
-    }
-
     public class PlayerStats
     {
         public int ProjectilesCountModifier { get; private set; }

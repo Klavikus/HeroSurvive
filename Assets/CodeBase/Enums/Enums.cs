@@ -10,5 +10,16 @@
         Duration,
         Amount,
         Area,
+        Mana,
+    }
+    
+    public enum PlayerStat
+    {
+        ProjectilesCountModifier,
+        DamageModifier,
+        SpeedModifier,
+        SizeModifier,
+        DurationModifier,
+        CooldownModifier,
     }
 }

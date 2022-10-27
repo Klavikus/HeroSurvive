@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodeBase.Enums;
 using UnityEngine;
 
 namespace CodeBase.Stats

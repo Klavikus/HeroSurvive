@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CodeBase;
 using CodeBase.Abilities;
+using CodeBase.Enums;
 using CodeBase.Stats;
 using UnityEngine;
 
