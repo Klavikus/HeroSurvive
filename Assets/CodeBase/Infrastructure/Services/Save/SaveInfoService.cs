@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.Services.SaveLoad
+namespace CodeBase.Infrastructure.Services.Save
 {
     public class SaveInfoService : ISaveInfoService
     {

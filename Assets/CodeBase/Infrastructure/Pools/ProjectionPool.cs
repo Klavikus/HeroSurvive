@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CodeBase.Abilities;
+using CodeBase.Domain.Abilities;
 using UnityEngine;
 
-namespace CodeBase
+namespace CodeBase.Infrastructure.Pools
 {
     public class ProjectionPool
     {
@@ -24,9 +24,9 @@ namespace CodeBase
                 .Where(x => x.gameObject.activeSelf == false)
                 .Take(count)
                 .ToList();
-            
+
             int forSpawn = count - result.Count;
-            
+
             if (forSpawn > 0)
             {
                 for (int i = 0; i <= forSpawn; i++)
@@ -44,7 +44,8 @@ namespace CodeBase
         public void Clear()
         {
             foreach (AbilityProjection projection in _projections)
-                Object.Destroy(projection.gameObject);
+                if (projection)
+                    GameObject.Destroy(projection.gameObject);
             _projections.Clear();
         }
     }

@@ -1,8 +1,13 @@
+using CodeBase.Domain.Data;
+using CodeBase.MVVM.Views.HeroSelector;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Create HeroConfigSO", fileName = "HeroConfigSO", order = 0)]
-public class HeroesConfigSO : ScriptableObject
+namespace CodeBase.Configs
 {
-    [field: SerializeField] public HeroData[] HeroesData { get; private set; }
-    [field: SerializeField] public HeroView BaseHeroView { get; private set; }
+    [CreateAssetMenu(menuName = "Create HeroConfigSO", fileName = "HeroConfigSO", order = 0)]
+    public class HeroesConfigSO : ScriptableObject
+    {
+        [field: SerializeField] public HeroData[] HeroesData { get; private set; }
+        [field: SerializeField] public HeroView BaseHeroView { get; private set; }
+    }
 }

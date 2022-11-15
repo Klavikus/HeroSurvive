@@ -1,4 +1,6 @@
-﻿namespace CodeBase.MVVM.Views
+﻿using CodeBase.Domain.Data;
+
+namespace CodeBase.MVVM.Models
 {
     public class BaseAbilityModel
     {

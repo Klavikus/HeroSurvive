@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f478429f6c8f45e69af76eca3fc71540, type: 3}
+  m_Name: MainMenuConfiguration
+  m_EditorClassIdentifier: 
+  HeroSelectorView: {fileID: 7638257530875824781, guid: 514060f884ce9fc4a839f77f8c328b61, type: 3}
+  HeroDescriptionView: {fileID: 4999258271655339708, guid: 3a9f719226cd17d4fac8ed31fb2a2297, type: 3}
+  BaseAbilityView: {fileID: 7106445827667595905, guid: 43a0937c34d956943ae8a07078eaaaaf, type: 3}
+  StartMenuView: {fileID: 1811968119968325085, guid: 1d0092591d16fbd4485317222248e22f, type: 3}
+  UpgradesSelectorView: {fileID: 8883131261918350896, guid: 1857b56c160afc94f8769ba26c727cb5, type: 3}
+  UpgradeView: {fileID: 991554778460930842, guid: 9a67c85b089db6346ac5506cb21d2831, type: 3}
+  UpgradeLevelView: {fileID: 2622214659853327643, guid: f8a614f8aae216d43a798034a8cf2545, type: 3}
+  CurrencyView: {fileID: 7772495651174236389, guid: 0538b073f06c98c4bae6a2f67cf632b6, type: 3}

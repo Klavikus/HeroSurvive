@@ -1,31 +1,13 @@
-﻿using UnityEngine;
+﻿using CodeBase.Domain.Abilities;
+using CodeBase.Domain.Enums;
+using UnityEngine;
 
-namespace CodeBase.Abilities
+namespace CodeBase.Configs
 {
-    public enum AttackType
-    {
-        Continuous,
-        Periodical,
-        Single,
-    }
-
-    public enum MoveType
-    {
-        MoveUp,
-        Orbital,
-    }
-
-    public enum SpawnType
-    {
-        Point,
-        Circle,
-        Arc
-    }
-
     [CreateAssetMenu(menuName = "SO/CreateAbilityData/AbilityConfigSO", fileName = "AbilityConfigSO", order = 0)]
     public class AbilityConfigSO : ScriptableObject
     {
-        [field: Header("Attack Settings")]
+        [field: Header("HandleAttack Settings")]
         [field: SerializeField]
         public AttackType AttackType { get; private set; }
 
@@ -61,6 +43,8 @@ namespace CodeBase.Abilities
         [field: SerializeField] public AnimationCurve MainRadiusCurve { get; private set; }
         [field: SerializeField] public AnimationCurve EndRadiusCurve { get; private set; }
         [field: SerializeField] public bool AlignWithRotation { get; private set; }
+        [field: SerializeField] public bool FlipDirectionAllowed { get; private set; }
+        [field: SerializeField] public TargetingType TargetingType { get; private set; }
 
         [field: Header("Base Settings")]
         [field: SerializeField]
@@ -70,6 +54,9 @@ namespace CodeBase.Abilities
         [field: SerializeField] public float Cooldown { get; private set; }
         [field: SerializeField] public AbilityProjection AbilityView { get; private set; }
         [field: SerializeField] public bool IsSelfParent { get; private set; }
+
+        [field: Header("Available upgrades")]
+        [field: SerializeField] public AbilityUpgradeData[] UpgradeData { get; private set; }
 
         private void OnValidate()
         {

@@ -1,29 +1,41 @@
-﻿using CodeBase.HeroSelection;
-using CodeBase.Infrastructure.StateMachine;
+﻿using CodeBase.Configs;
+using CodeBase.Domain.Data;
+using CodeBase.Infrastructure.Services;
 
-namespace CodeBase.Infrastructure.States
+namespace CodeBase.Infrastructure.StateMachine
 {
-    public class GameLoopState: IPayloadedState<Hero>
+    public class GameLoopState : IPayloadedState<HeroData>
     {
-        private const string GameLoopScene = "GameLoop";
-        
-        private readonly GameStateMachine _stateMachine;
+        private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
+        private readonly IModelProvider _modelProvider;
+        private readonly IGameLoopService _gameLoopService;
 
-        public GameLoopState(GameStateMachine stateMachine, SceneLoader sceneLoader)
+        public GameLoopState(GameStateMachine gameStateMachine, SceneLoader sceneLoader)
         {
-            _stateMachine = stateMachine;
+            _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
+            _modelProvider = AllServices.Container.Single<IModelProvider>();
+            _gameLoopService = AllServices.Container.Single<IGameLoopService>();
+            _modelProvider.GameLoopModel.CloseLevelInvoked += OnLevelCloseInvoked;
         }
 
-        public void Enter(Hero hero)
+        public void Enter(HeroData heroData)
         {
-            _sceneLoader.Load(GameLoopScene);
+            _sceneLoader.Load(GameConstants.GameLoopScene, OnLoaded);
         }
 
         public void Exit()
         {
-            
+            _gameLoopService.Stop();
         }
+
+        private void OnLoaded()
+        {
+            _gameLoopService.Start();
+        }
+
+        private void OnLevelCloseInvoked() =>
+            _gameStateMachine.Enter<LoadLevelState, string>(GameConstants.MainMenuScene);
     }
 }

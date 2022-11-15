@@ -1,13 +1,15 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Component : MonoBehaviour
+namespace CodeBase.Infrastructure.StateMachine
 {
-    private Animator _animator;
-
-
-    public void Initialize(Animator animator)
+    public class Component : MonoBehaviour
     {
-        _animator = animator;
+        private Animator _animator;
+
+
+        public void Initialize(Animator animator)
+        {
+            _animator = animator;
+        }
     }
 }

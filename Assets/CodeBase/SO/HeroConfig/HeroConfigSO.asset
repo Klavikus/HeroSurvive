@@ -21,11 +21,12 @@ MonoBehaviour:
       Value: 50
     - BaseProperty: 1
       Value: 1
-    <InitialAbilityConfig>k__BackingField: {fileID: 0}
+    <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 0b4fb934f2791c840a6a63ca7003e87e, type: 2}
     <AbilityViewData>k__BackingField:
-      <Icon>k__BackingField: {fileID: 21300000, guid: 7373fd7bf31584a4c94eff167568d97c, type: 3}
+      <Icon>k__BackingField: {fileID: 21300000, guid: b7528b1fcfb09014ba7e62876bbe042a, type: 3}
       <Name>k__BackingField: Skull Guard
       <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 143579194, guid: eddb32c3f95ea0e4fb1afc7f1fc31cfc, type: 3}
   - <Name>k__BackingField: O'Legend
     <Description>k__BackingField: This man is a legend, though not all legends are
       good.
@@ -35,11 +36,12 @@ MonoBehaviour:
       Value: 15
     - BaseProperty: 3
       Value: 15
-    <InitialAbilityConfig>k__BackingField: {fileID: 0}
+    <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 479d7d8d154415f44a78f1af7609db75, type: 2}
     <AbilityViewData>k__BackingField:
-      <Icon>k__BackingField: {fileID: 0}
-      <Name>k__BackingField: 
+      <Icon>k__BackingField: {fileID: 21300000, guid: 5b81854d27f924a7baec8371989d5377, type: 3}
+      <Name>k__BackingField: Noise
       <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 146323654, guid: 41bb55a2d163cd247a04608fab015470, type: 3}
   - <Name>k__BackingField: Danilius The Snake
     <Description>k__BackingField: Powerful snake charmer. Snakes can do a lot.
     <Sprite>k__BackingField: {fileID: 21300000, guid: 5dbe1cbd3a1e20046b25cabc8594d271, type: 3}
@@ -50,11 +52,12 @@ MonoBehaviour:
       Value: 30
     - BaseProperty: 4
       Value: 30
-    <InitialAbilityConfig>k__BackingField: {fileID: 0}
+    <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 7196225b3978613488d172c832efc231, type: 2}
     <AbilityViewData>k__BackingField:
-      <Icon>k__BackingField: {fileID: 0}
-      <Name>k__BackingField: 
+      <Icon>k__BackingField: {fileID: 21300000, guid: 86dce0fad1c32a84b8e37b82537ebe85, type: 3}
+      <Name>k__BackingField: Sssnake
       <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 1853629464, guid: 8cddd1e01f3153445b01f33bcbc647e6, type: 3}
   - <Name>k__BackingField: Boris The Auspex
     <Description>k__BackingField: Father's son, grandfather's grandson forever.
     <Sprite>k__BackingField: {fileID: 21300000, guid: cd6cb12b2ee58c140b67ce73e6b26052, type: 3}
@@ -67,11 +70,12 @@ MonoBehaviour:
       Value: 15
     - BaseProperty: 2
       Value: -15
-    <InitialAbilityConfig>k__BackingField: {fileID: 0}
+    <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: c1e03a1550dcb0c49beb766c31da0184, type: 2}
     <AbilityViewData>k__BackingField:
-      <Icon>k__BackingField: {fileID: 0}
-      <Name>k__BackingField: 
+      <Icon>k__BackingField: {fileID: 21300000, guid: 9b69b31a64f1f38409a15962ec731f65, type: 3}
+      <Name>k__BackingField: Lightning Strike
       <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 8080295087906964449, guid: 2ed1bce4578aabc49ae4048e5bafca3c, type: 3}
   - <Name>k__BackingField: Vampure
     <Description>k__BackingField: An ancient creature that sucks from all living
       things.
@@ -85,9 +89,48 @@ MonoBehaviour:
       Value: 50
     - BaseProperty: 8
       Value: 100
-    <InitialAbilityConfig>k__BackingField: {fileID: 0}
+    <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 6ec69776f56dc1e428be94931fb0ff71, type: 2}
     <AbilityViewData>k__BackingField:
-      <Icon>k__BackingField: {fileID: 0}
-      <Name>k__BackingField: 
+      <Icon>k__BackingField: {fileID: 21300000, guid: 95c5d835e43d0d24f8e8416b02c3076b, type: 3}
+      <Name>k__BackingField: Blood Shard
       <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 1023466671, guid: f4b7d0f86eb92c44ebb45f4813cb0f43, type: 3}
+  - <Name>k__BackingField: Vampure
+    <Description>k__BackingField: An ancient creature that sucks from all living
+      things.
+    <Sprite>k__BackingField: {fileID: 21300000, guid: 09b7270abb522ce47adf11b149930bee, type: 3}
+    <AdditionalProperties>k__BackingField:
+    - BaseProperty: 0
+      Value: 100
+    - BaseProperty: 1
+      Value: 4.5
+    - BaseProperty: 2
+      Value: 50
+    - BaseProperty: 8
+      Value: 100
+    <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 0b4fb934f2791c840a6a63ca7003e87e, type: 2}
+    <AbilityViewData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 95c5d835e43d0d24f8e8416b02c3076b, type: 3}
+      <Name>k__BackingField: Blood Shard
+      <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 1023466671, guid: f4b7d0f86eb92c44ebb45f4813cb0f43, type: 3}
+  - <Name>k__BackingField: Vampure
+    <Description>k__BackingField: An ancient creature that sucks from all living
+      things.
+    <Sprite>k__BackingField: {fileID: 21300000, guid: 09b7270abb522ce47adf11b149930bee, type: 3}
+    <AdditionalProperties>k__BackingField:
+    - BaseProperty: 0
+      Value: 100
+    - BaseProperty: 1
+      Value: 4.5
+    - BaseProperty: 2
+      Value: 50
+    - BaseProperty: 8
+      Value: 100
+    <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 7196225b3978613488d172c832efc231, type: 2}
+    <AbilityViewData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 95c5d835e43d0d24f8e8416b02c3076b, type: 3}
+      <Name>k__BackingField: Blood Shard
+      <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 1023466671, guid: f4b7d0f86eb92c44ebb45f4813cb0f43, type: 3}
   <BaseHeroView>k__BackingField: {fileID: 5794044302373075351, guid: 4fb7c26dcf24d964699c614b8b7ce628, type: 3}

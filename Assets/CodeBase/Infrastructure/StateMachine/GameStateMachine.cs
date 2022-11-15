@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.Infrastructure.States;
+using CodeBase.ForSort;
 
 namespace CodeBase.Infrastructure.StateMachine
 {
@@ -10,11 +10,13 @@ namespace CodeBase.Infrastructure.StateMachine
 
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, ConfigurationContainer configurationContainer)
+        public GameStateMachine(SceneLoader sceneLoader, ConfigurationContainer configurationContainer,
+            ICoroutineRunner coroutineRunner)
         {
             _states = new Dictionary<Type, IExitableState>
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, configurationContainer),
+                [typeof(BootstrapState)] =
+                    new BootstrapState(this, sceneLoader, configurationContainer, coroutineRunner),
                 [typeof(LoadProgressState)] = new LoadProgressState(this),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader),
                 [typeof(GameLoopState)] = new GameLoopState(this, sceneLoader),

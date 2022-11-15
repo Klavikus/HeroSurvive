@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.HeroSelection;
+using CodeBase.Configs;
+using CodeBase.Domain;
+using CodeBase.Domain.Data;
 using CodeBase.Infrastructure.Services.UpgradeService;
 using CodeBase.MVVM.Models;
 using CodeBase.MVVM.Views;
+using CodeBase.MVVM.Views.HeroSelector;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.Services.PropertiesProviders
 {
@@ -70,6 +74,7 @@ namespace CodeBase.Infrastructure.Services.PropertiesProviders
 
         private void OnUpgradesUpdated()
         {
+            Debug.Log("OnUpgradesUpdated provider");
             _upgradesData = _upgradeService.GetUpgradesPropertiesData();
             RecalculateData();
         }

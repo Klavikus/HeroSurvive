@@ -1,32 +1,35 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/MoveStrategy/OnlyForwardObstacle", fileName = "MoveOnlyForwardObstacle", order = 51)]
-public sealed class MoveOnlyForwardObstacle : MoveStrategy
+namespace CodeBase.SO.MoveStrategy
 {
-    [SerializeField] private LayerMask _whatIsObstacle;
-
-    private readonly Collider2D[] _colliders = new Collider2D[2];
-
-    public override Vector3 GetMoveVector(Transform origin, Vector3 target, float checkDistance)
+    [CreateAssetMenu(menuName = "SO/MoveStrategy/OnlyForwardObstacle", fileName = "MoveOnlyForwardObstacle", order = 51)]
+    public sealed class MoveOnlyForwardObstacle : MoveStrategy
     {
-        Vector3 directionToTarget = (target - origin.position).normalized;
+        [SerializeField] private LayerMask _whatIsObstacle;
 
-        if (CheckForwardObstacle(origin, directionToTarget* checkDistance))
-            return Vector3.zero;
+        private readonly Collider2D[] _colliders = new Collider2D[2];
 
-        return directionToTarget;
-    }
+        public override Vector3 GetMoveVector(Transform origin, Vector3 target, float checkDistance)
+        {
+            Vector3 directionToTarget = (target - origin.position).normalized;
 
-    private bool CheckForwardObstacle(Transform origin, Vector3 directionToTarget)
-    {
-        int hitsCount =
-            Physics2D.OverlapPointNonAlloc(origin.position + directionToTarget, _colliders, _whatIsObstacle);
+            if (CheckForwardObstacle(origin, directionToTarget* checkDistance))
+                return Vector3.zero;
 
-        if (hitsCount > 0)
-            for (var i = 0; i < hitsCount; i++)
-                if (_colliders[i].transform != origin)
-                    return true;
+            return directionToTarget;
+        }
 
-        return false;
+        private bool CheckForwardObstacle(Transform origin, Vector3 directionToTarget)
+        {
+            int hitsCount =
+                Physics2D.OverlapPointNonAlloc(origin.position + directionToTarget, _colliders, _whatIsObstacle);
+
+            if (hitsCount > 0)
+                for (var i = 0; i < hitsCount; i++)
+                    if (_colliders[i].transform != origin)
+                        return true;
+
+            return false;
+        }
     }
 }

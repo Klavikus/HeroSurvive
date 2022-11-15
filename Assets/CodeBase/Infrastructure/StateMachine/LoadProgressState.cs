@@ -1,6 +1,4 @@
-﻿using CodeBase.Infrastructure.StateMachine;
-
-namespace CodeBase.Infrastructure.States
+﻿namespace CodeBase.Infrastructure.StateMachine
 {
     public class LoadProgressState : IState
     {

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb391cae9e124ebdbae81d97e5277fec, type: 3}
   m_Name: PlayerStatsSOAdditional
   m_EditorClassIdentifier: 
-  <Count>k__BackingField: 0
+  <Count>k__BackingField: 55

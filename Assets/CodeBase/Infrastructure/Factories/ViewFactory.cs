@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Domain.Data;
 using CodeBase.Infrastructure.Services;
+using CodeBase.MVVM.Builders;
 using CodeBase.MVVM.ViewModels;
 using CodeBase.MVVM.Views;
+using CodeBase.MVVM.Views.HeroSelector;
+using CodeBase.MVVM.Views.Upgrades;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factories
@@ -11,26 +15,35 @@ namespace CodeBase.Infrastructure.Factories
         private readonly ConfigurationProvider _configurationProvider;
         private readonly HeroSelectorViewModel _heroSelectorViewModel;
         private readonly MainPropertiesViewModel _mainPropertiesViewModel;
-        private readonly HeroDescriptionViewModel _heroDescriptionViewModel;
-        private readonly BaseAbilityViewModel _baseAbilityViewModel;
+        private readonly MenuViewModel _menuViewModel;
+        private readonly UpgradeViewModel _upgradeViewModel;
+        private readonly UpgradeDescriptionBuilder _descriptionBuilder;
+        private readonly CurrencyViewModel _currencyViewModel;
+        private readonly GameLoopViewModel _gameLoopViewModel;
 
-        public ViewFactory(ConfigurationProvider configurationProvider,
+        public ViewFactory(
+            ConfigurationProvider configurationProvider,
             HeroSelectorViewModel heroSelectorViewModel,
             MainPropertiesViewModel mainPropertiesViewModel,
-            HeroDescriptionViewModel heroDescriptionViewModel, 
-            BaseAbilityViewModel baseAbilityViewModel)
+            MenuViewModel menuViewModel,
+            UpgradeViewModel upgradeViewModel,
+            CurrencyViewModel currencyViewModel,
+            UpgradeDescriptionBuilder descriptionBuilder)
         {
             _configurationProvider = configurationProvider;
             _heroSelectorViewModel = heroSelectorViewModel;
             _mainPropertiesViewModel = mainPropertiesViewModel;
-            _heroDescriptionViewModel = heroDescriptionViewModel;
-            _baseAbilityViewModel = baseAbilityViewModel;
+            _menuViewModel = menuViewModel;
+            _upgradeViewModel = upgradeViewModel;
+            _currencyViewModel = currencyViewModel;
+            _descriptionBuilder = descriptionBuilder;
         }
 
         public HeroSelectorView CreateHeroSelectorView()
         {
             HeroSelectorView heroSelectorView =
                 GameObject.Instantiate(_configurationProvider.GetMainMenuConfig().HeroSelectorView);
+            heroSelectorView.Initialize(_heroSelectorViewModel, _currencyViewModel, _descriptionBuilder);
             return heroSelectorView;
         }
 
@@ -52,32 +65,100 @@ namespace CodeBase.Infrastructure.Factories
 
         public PropertyView[] CreatePropertyViews()
         {
-            IReadOnlyList<MainPropertyViewData> viewData = _configurationProvider.GetBasePropertiesConfig().PropertiesData;
+            IReadOnlyList<MainPropertyViewData> viewData =
+                _configurationProvider.GetBasePropertiesConfig().PropertiesData;
             PropertyView[] result = new PropertyView[viewData.Count];
 
             for (int i = 0; i < viewData.Count; i++)
             {
                 result[i] = GameObject.Instantiate(_configurationProvider.GetBasePropertiesConfig().PropertyView);
-                result[i].Initialize(_mainPropertiesViewModel, viewData[i]);
+                result[i].Initialize(_mainPropertiesViewModel, viewData[i], _descriptionBuilder);
             }
 
             return result;
         }
 
-        public HeroDescriptionView CreateHeroDescriptionView()
+        public StartMenuView CreateStartMenu()
         {
-            HeroDescriptionView heroDescriptionView =
-                GameObject.Instantiate(_configurationProvider.GetMainMenuConfig().HeroDescriptionView);
-            heroDescriptionView.Initialize(_heroDescriptionViewModel);
-            return heroDescriptionView;
+            StartMenuView startMenuView =
+                GameObject.Instantiate(_configurationProvider.GetMainMenuConfig().StartMenuView);
+            startMenuView.Initialize(_menuViewModel);
+            return startMenuView;
         }
 
-        public BaseAbilityView CreateBaseAbilityView()
+        public UpgradesSelectorView CreateUpgradesSelectorView()
         {
-            BaseAbilityView baseAbilityView =
-                GameObject.Instantiate(_configurationProvider.GetMainMenuConfig().BaseAbilityView);
-            baseAbilityView.Initialize(_baseAbilityViewModel);
-            return baseAbilityView;
+            UpgradesSelectorView upgradesSelectorView =
+                GameObject.Instantiate(_configurationProvider.GetMainMenuConfig().UpgradesSelectorView);
+            upgradesSelectorView.Initialize(
+                _menuViewModel,
+                _upgradeViewModel,
+                _currencyViewModel,
+                viewFactory: this,
+                _descriptionBuilder);
+            return upgradesSelectorView;
+        }
+
+        private UpgradeView CreateUpgradeView(UpgradeData upgradeData)
+        {
+            UpgradeView upgradeView = GameObject.Instantiate(_configurationProvider.GetMainMenuConfig().UpgradeView);
+
+            upgradeView.Initialize(_upgradeViewModel, upgradeData,
+                CreateUpgradeLevelViews(upgradeData.Upgrades.Length));
+            return upgradeView;
+        }
+
+        public UpgradeView[] CreateUpgradeViews()
+        {
+            UpgradeData[] upgradesData = _configurationProvider.GetUpgradesConfig().UpgradeData;
+            UpgradeView[] result = new UpgradeView[upgradesData.Length];
+
+            for (int i = 0; i < upgradesData.Length; i++)
+                result[i] = CreateUpgradeView(upgradesData[i]);
+
+            return result;
+        }
+
+        public UpgradeLevelView[] CreateUpgradeLevelViews(int count)
+        {
+            UpgradeLevelView[] result = new UpgradeLevelView[count];
+
+            for (int i = 0; i < count; i++)
+                result[i] = GameObject.Instantiate(_configurationProvider.GetMainMenuConfig().UpgradeLevelView);
+
+            return result;
+        }
+
+        public CurrencyView CreateCurrencyView()
+        {
+            CurrencyView currencyView = GameObject.Instantiate(_configurationProvider.GetMainMenuConfig().CurrencyView);
+
+            currencyView.Initialize(_currencyViewModel, _descriptionBuilder);
+            return currencyView;
+        }
+    }
+
+    public class GameLoopViewFactory
+    {
+        private readonly IConfigurationProvider _configurationProvider;
+        private readonly GameLoopViewModel _gameLoopViewModel;
+        private readonly LevelUpViewModel _levelUpViewModel;
+
+        public GameLoopViewFactory(IConfigurationProvider configurationProvider,
+            GameLoopViewModel gameLoopViewModel,
+            LevelUpViewModel levelUpViewModel)
+        {
+            _configurationProvider = configurationProvider;
+            _gameLoopViewModel = gameLoopViewModel;
+            _levelUpViewModel = levelUpViewModel;
+        }
+
+        public GameLoopView CreateGameLoopView()
+        {
+            GameLoopView gameLoopView = GameObject.Instantiate(_configurationProvider.GetGameLoopConfig().GameLoopView);
+            gameLoopView.Initialize(_gameLoopViewModel, _levelUpViewModel);
+
+            return gameLoopView;
         }
     }
 }

@@ -118,8 +118,23 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   <AlignWithRotation>k__BackingField: 1
+  <FlipDirectionAllowed>k__BackingField: 0
+  <TargetingType>k__BackingField: 0
   <Size>k__BackingField: 1
   <Duration>k__BackingField: 3
   <Cooldown>k__BackingField: 0.15
   <AbilityView>k__BackingField: {fileID: 8083731926487651469, guid: ef7999ca0c642384c989bdf5e89d0cef, type: 3}
   <IsSelfParent>k__BackingField: 0
+  <UpgradeData>k__BackingField:
+  - <PropertyType>k__BackingField: 3
+    <Value>k__BackingField: 0.1
+  - <PropertyType>k__BackingField: 7
+    <Value>k__BackingField: 0.2
+  - <PropertyType>k__BackingField: 8
+    <Value>k__BackingField: 0.2
+  - <PropertyType>k__BackingField: 3
+    <Value>k__BackingField: 0.2
+  - <PropertyType>k__BackingField: 6
+    <Value>k__BackingField: 1
+  - <PropertyType>k__BackingField: 7
+    <Value>k__BackingField: 0.2

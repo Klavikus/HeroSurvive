@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.Enums;
-using CodeBase.HeroSelection;
+using CodeBase.Domain;
+using CodeBase.Domain.Enums;
 using CodeBase.MVVM.Models;
 
 namespace CodeBase.MVVM.ViewModels

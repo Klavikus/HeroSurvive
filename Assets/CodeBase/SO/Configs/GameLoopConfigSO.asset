@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19349d7b4c854975992dd05ad4f62d90, type: 3}
+  m_Name: GameLoopConfigSO
+  m_EditorClassIdentifier: 
+  <LevelMapPrefab>k__BackingField: {fileID: 8503763865428039119, guid: a73d4e22baebc9d479bc5740a6595519, type: 3}
+  <GameLoopView>k__BackingField: {fileID: 7592990280823321356, guid: 3d691a356a69c0341a03c38b266572d7, type: 3}

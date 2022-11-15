@@ -1,30 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.HeroSelection;
-using CodeBase.MVVM.Views;
-using UnityEngine;
+using CodeBase.Domain;
+using CodeBase.Domain.Data;
 
 namespace CodeBase.MVVM.Models
 {
     public class HeroModel
     {
-        private string _name;
-        private string _description;
-        private Sprite _sprite;
         private List<AdditionalHeroProperty> _additionalProperties = new List<AdditionalHeroProperty>();
 
-        private AbilityViewData _abilityViewData;
-        
+        public HeroData CurrentSelectedHero;
         public event Action<HeroData> Changed;
 
-        public void SetHeroData(HeroData data)
+        public void SetHeroData(HeroData heroData)
         {
-            _name = data.Name;
-            _description = data.Description;
-            _sprite = data.Sprite;
-            _additionalProperties = data.AdditionalProperties;
-            _abilityViewData = data.AbilityViewData;
-            Changed?.Invoke(data);
+            CurrentSelectedHero = heroData;
+            _additionalProperties = heroData.AdditionalProperties;
+            Changed?.Invoke(heroData);
         }
 
         public MainProperties GetMainPropertiesData()

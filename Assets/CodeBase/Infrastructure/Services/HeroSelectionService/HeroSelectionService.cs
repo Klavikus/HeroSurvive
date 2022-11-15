@@ -1,5 +1,6 @@
 ﻿using System;
-using CodeBase.HeroSelection;
+using CodeBase.Domain;
+using CodeBase.Domain.Data;
 using CodeBase.MVVM.ViewModels;
 
 namespace CodeBase.Infrastructure.Services.HeroSelectionService

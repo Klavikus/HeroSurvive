@@ -1,4 +1,5 @@
-﻿using CodeBase.HeroSelection;
+﻿using System.Collections;
+using CodeBase.Configs;
 using CodeBase.Infrastructure.Factories;
 
 namespace CodeBase.Infrastructure.Services
@@ -6,7 +7,10 @@ namespace CodeBase.Infrastructure.Services
     public interface IConfigurationProvider : IService
     {
         BasePropertiesConfigSO GetBasePropertiesConfig();
-        MainMenuConfiguration GetMainMenuConfig();
+        MainMenuConfigurationSO GetMainMenuConfig();
         HeroesConfigSO GetHeroConfig();
+        StageCompetitionConfigSO GetStageCompetitionConfig();
+        GameLoopConfigSO GetGameLoopConfig();
+        AbilityConfigSO[] GetAbilityConfigs();
     }
 }

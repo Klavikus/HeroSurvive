@@ -17,56 +17,81 @@ MonoBehaviour:
     <BaseProperty>k__BackingField: 0
     <Icon>k__BackingField: {fileID: 21300000, guid: e5487dbe2dfee44bf949e0ade82bcbf5, type: 3}
     <Prefix>k__BackingField: 
-    <Suffix>k__BackingField: 
+    <Postfix>k__BackingField: 
     <ShortName>k__BackingField: HP
     <FullName>k__BackingField: Health
+    <IsIncreaseGood>k__BackingField: 1
+    <IsSigned>k__BackingField: 0
   - Value: 0.5
     <BaseProperty>k__BackingField: 1
     <Icon>k__BackingField: {fileID: 21300000, guid: 79b6da8b67c0d4130b619d38ee221bf2, type: 3}
     <Prefix>k__BackingField: 
-    <Suffix>k__BackingField: '%'
+    <Postfix>k__BackingField: '%'
     <ShortName>k__BackingField: HP/s
     <FullName>k__BackingField: Regeneration
+    <IsIncreaseGood>k__BackingField: 1
+    <IsSigned>k__BackingField: 1
   - Value: 100
     <BaseProperty>k__BackingField: 2
     <Icon>k__BackingField: {fileID: 21300000, guid: 9fbdd0376ab914cc6a1b8835495610c8, type: 3}
     <Prefix>k__BackingField: 
-    <Suffix>k__BackingField: '%'
+    <Postfix>k__BackingField: '%'
     <ShortName>k__BackingField: MS
     <FullName>k__BackingField: Move Speed
+    <IsIncreaseGood>k__BackingField: 1
+    <IsSigned>k__BackingField: 0
   - Value: 0
     <BaseProperty>k__BackingField: 3
     <Icon>k__BackingField: {fileID: 21300000, guid: c5f379770ddf3470cab5328d5615bb23, type: 3}
     <Prefix>k__BackingField: +
-    <Suffix>k__BackingField: '%'
+    <Postfix>k__BackingField: '%'
     <ShortName>k__BackingField: Dmg
-    <FullName>k__BackingField: Dmage
+    <FullName>k__BackingField: Damage
+    <IsIncreaseGood>k__BackingField: 1
+    <IsSigned>k__BackingField: 1
   - Value: 0
     <BaseProperty>k__BackingField: 4
     <Icon>k__BackingField: {fileID: 21300000, guid: 31db59f0a66f144f99d4d7d6ef9bbb9f, type: 3}
     <Prefix>k__BackingField: '-'
-    <Suffix>k__BackingField: '%'
+    <Postfix>k__BackingField: '%'
     <ShortName>k__BackingField: CD
     <FullName>k__BackingField: Cooldown
+    <IsIncreaseGood>k__BackingField: 0
+    <IsSigned>k__BackingField: 1
   - Value: 0
     <BaseProperty>k__BackingField: 5
     <Icon>k__BackingField: {fileID: 21300000, guid: 552ee50297f7b4c04a775dedd5c96aea, type: 3}
     <Prefix>k__BackingField: +
-    <Suffix>k__BackingField: '%'
+    <Postfix>k__BackingField: '%'
     <ShortName>k__BackingField: Duration
     <FullName>k__BackingField: Duration
+    <IsIncreaseGood>k__BackingField: 1
+    <IsSigned>k__BackingField: 1
   - Value: 0
     <BaseProperty>k__BackingField: 6
     <Icon>k__BackingField: {fileID: 21300000, guid: a222a9e7d571b458092a70ec97a64a03, type: 3}
     <Prefix>k__BackingField: +
-    <Suffix>k__BackingField: 
+    <Postfix>k__BackingField: 
     <ShortName>k__BackingField: Amount
     <FullName>k__BackingField: Amount
+    <IsIncreaseGood>k__BackingField: 1
+    <IsSigned>k__BackingField: 1
   - Value: 0
     <BaseProperty>k__BackingField: 7
     <Icon>k__BackingField: {fileID: 21300000, guid: cfca08577a857449f9070ba922aa86df, type: 3}
     <Prefix>k__BackingField: +
-    <Suffix>k__BackingField: '%'
+    <Postfix>k__BackingField: '%'
     <ShortName>k__BackingField: Area
     <FullName>k__BackingField: Area
+    <IsIncreaseGood>k__BackingField: 1
+    <IsSigned>k__BackingField: 1
+  - Value: 0
+    <BaseProperty>k__BackingField: 8
+    <Icon>k__BackingField: {fileID: 21300000, guid: dbef0a76fe3974542888e09e324d1836, type: 3}
+    <Prefix>k__BackingField: +
+    <Postfix>k__BackingField: '%'
+    <ShortName>k__BackingField: PS
+    <FullName>k__BackingField: Projectile Speed
+    <IsIncreaseGood>k__BackingField: 1
+    <IsSigned>k__BackingField: 1
   <PropertyView>k__BackingField: {fileID: 7018724567780845100, guid: b875eb1b778aefc42a54cc05f78be2f0, type: 3}

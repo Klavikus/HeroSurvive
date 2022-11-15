@@ -13,10 +13,10 @@ namespace CodeBase.ViewUI
 
         private Vector2 CalculateNewSize()
         {
-            int cellInRow = _gridLayoutGroup.constraintCount;
+            int cellsInRow = _gridLayoutGroup.constraintCount;
             float paddingOffset = _gridLayoutGroup.padding.left + _gridLayoutGroup.padding.right;
-            float spacingOffset = _gridLayoutGroup.spacing.x * (cellInRow - 1);
-            float cellSize = (_rectTransform.rect.width - paddingOffset - spacingOffset) / cellInRow;
+            float spacingOffset = _gridLayoutGroup.spacing.x * (cellsInRow - 1);
+            float cellSize = (_rectTransform.rect.width - paddingOffset - spacingOffset) / cellsInRow;
             return new Vector2(cellSize, cellSize);
         }
     }

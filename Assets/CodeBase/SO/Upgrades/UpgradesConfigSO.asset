@@ -1,0 +1,182 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dee4b610fae493daeba0c5863d50046, type: 3}
+  m_Name: UpgradesConfigSO
+  m_EditorClassIdentifier: 
+  <UpgradeData>k__BackingField:
+  - <Name>k__BackingField: Health
+    <Icon>k__BackingField: {fileID: 21300000, guid: e5487dbe2dfee44bf949e0ade82bcbf5, type: 3}
+    <Upgrades>k__BackingField:
+    - AdditionalHeroProperties:
+      - BaseProperty: 0
+        Value: 50
+      Price: 1000
+    - AdditionalHeroProperties:
+      - BaseProperty: 0
+        Value: 100
+      Price: 3000
+    - AdditionalHeroProperties:
+      - BaseProperty: 0
+        Value: 200
+      Price: 6000
+  - <Name>k__BackingField: Regeneration
+    <Icon>k__BackingField: {fileID: 21300000, guid: 79b6da8b67c0d4130b619d38ee221bf2, type: 3}
+    <Upgrades>k__BackingField:
+    - AdditionalHeroProperties:
+      - BaseProperty: 1
+        Value: 0.5
+      Price: 2000
+    - AdditionalHeroProperties:
+      - BaseProperty: 1
+        Value: 1.5
+      Price: 5000
+    - AdditionalHeroProperties:
+      - BaseProperty: 1
+        Value: 3
+      Price: 12000
+  - <Name>k__BackingField: Move Speed
+    <Icon>k__BackingField: {fileID: 21300000, guid: 9fbdd0376ab914cc6a1b8835495610c8, type: 3}
+    <Upgrades>k__BackingField:
+    - AdditionalHeroProperties:
+      - BaseProperty: 2
+        Value: 10
+      Price: 1000
+    - AdditionalHeroProperties:
+      - BaseProperty: 2
+        Value: 20
+      Price: 2000
+    - AdditionalHeroProperties:
+      - BaseProperty: 2
+        Value: 35
+      Price: 4000
+    - AdditionalHeroProperties:
+      - BaseProperty: 2
+        Value: 50
+      Price: 9000
+    - AdditionalHeroProperties:
+      - BaseProperty: 2
+        Value: 100
+      Price: 16000
+  - <Name>k__BackingField: Damage
+    <Icon>k__BackingField: {fileID: 21300000, guid: c5f379770ddf3470cab5328d5615bb23, type: 3}
+    <Upgrades>k__BackingField:
+    - AdditionalHeroProperties:
+      - BaseProperty: 3
+        Value: 15
+      Price: 1000
+    - AdditionalHeroProperties:
+      - BaseProperty: 3
+        Value: 30
+      Price: 2000
+    - AdditionalHeroProperties:
+      - BaseProperty: 3
+        Value: 50
+      Price: 6000
+    - AdditionalHeroProperties:
+      - BaseProperty: 3
+        Value: 100
+      Price: 10000
+    - AdditionalHeroProperties:
+      - BaseProperty: 3
+        Value: 150
+      Price: 15000
+  - <Name>k__BackingField: Cooldown
+    <Icon>k__BackingField: {fileID: 21300000, guid: 31db59f0a66f144f99d4d7d6ef9bbb9f, type: 3}
+    <Upgrades>k__BackingField:
+    - AdditionalHeroProperties:
+      - BaseProperty: 4
+        Value: -10
+      Price: 1000
+    - AdditionalHeroProperties:
+      - BaseProperty: 4
+        Value: -20
+      Price: 3000
+    - AdditionalHeroProperties:
+      - BaseProperty: 4
+        Value: -30
+      Price: 6000
+    - AdditionalHeroProperties:
+      - BaseProperty: 4
+        Value: -40
+      Price: 7000
+    - AdditionalHeroProperties:
+      - BaseProperty: 4
+        Value: -50
+      Price: 10000
+  - <Name>k__BackingField: Duration
+    <Icon>k__BackingField: {fileID: 21300000, guid: 552ee50297f7b4c04a775dedd5c96aea, type: 3}
+    <Upgrades>k__BackingField:
+    - AdditionalHeroProperties:
+      - BaseProperty: 5
+        Value: 10
+      Price: 1000
+    - AdditionalHeroProperties:
+      - BaseProperty: 5
+        Value: 20
+      Price: 2000
+    - AdditionalHeroProperties:
+      - BaseProperty: 5
+        Value: 35
+      Price: 5000
+    - AdditionalHeroProperties:
+      - BaseProperty: 5
+        Value: 50
+      Price: 9000
+    - AdditionalHeroProperties:
+      - BaseProperty: 5
+        Value: 100
+      Price: 20000
+  - <Name>k__BackingField: Amount
+    <Icon>k__BackingField: {fileID: 21300000, guid: a222a9e7d571b458092a70ec97a64a03, type: 3}
+    <Upgrades>k__BackingField:
+    - AdditionalHeroProperties:
+      - BaseProperty: 6
+        Value: 1
+      Price: 5000
+    - AdditionalHeroProperties:
+      - BaseProperty: 6
+        Value: 2
+      Price: 15000
+    - AdditionalHeroProperties:
+      - BaseProperty: 6
+        Value: 3
+      Price: 30000
+  - <Name>k__BackingField: Area
+    <Icon>k__BackingField: {fileID: 21300000, guid: cfca08577a857449f9070ba922aa86df, type: 3}
+    <Upgrades>k__BackingField:
+    - AdditionalHeroProperties:
+      - BaseProperty: 7
+        Value: 20
+      Price: 2000
+    - AdditionalHeroProperties:
+      - BaseProperty: 7
+        Value: 40
+      Price: 6000
+    - AdditionalHeroProperties:
+      - BaseProperty: 7
+        Value: 75
+      Price: 20000
+  - <Name>k__BackingField: Haste
+    <Icon>k__BackingField: {fileID: 21300000, guid: dbef0a76fe3974542888e09e324d1836, type: 3}
+    <Upgrades>k__BackingField:
+    - AdditionalHeroProperties:
+      - BaseProperty: 8
+        Value: 20
+      Price: 2000
+    - AdditionalHeroProperties:
+      - BaseProperty: 8
+        Value: 40
+      Price: 6000
+    - AdditionalHeroProperties:
+      - BaseProperty: 8
+        Value: 75
+      Price: 20000

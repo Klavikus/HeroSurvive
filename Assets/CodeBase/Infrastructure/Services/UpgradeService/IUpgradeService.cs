@@ -1,5 +1,7 @@
 ﻿using System;
-using CodeBase.HeroSelection;
+using CodeBase.Domain;
+using CodeBase.MVVM.Models;
+using CodeBase.MVVM.Views;
 
 namespace CodeBase.Infrastructure.Services.UpgradeService
 {
@@ -7,5 +9,6 @@ namespace CodeBase.Infrastructure.Services.UpgradeService
     {
         event Action Updated;
         MainProperties GetUpgradesPropertiesData();
+        void AddProperties(UpgradeModel upgradeModel);
     }
 }

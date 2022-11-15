@@ -1,23 +1,36 @@
-﻿using CodeBase.Abilities;
+﻿using System.Collections.Generic;
+using CodeBase.Configs;
+using CodeBase.Domain.Abilities;
+using CodeBase.ForSort;
+using CodeBase.Infrastructure.Pools;
+using CodeBase.Infrastructure.StateMachine;
 
-namespace CodeBase.Factories
+namespace CodeBase.Infrastructure.Factories
 {
     public class AbilityFactory
     {
-        private readonly AbilityProjectionFactory _abilityProjectionFactory;
-        private readonly CoroutineRunner _coroutineRunner;
-        private readonly TargetService _targetService;
+        private readonly AbilityProjectionBuilder _abilityProjectionBuilder;
+        private readonly ICoroutineRunner _coroutineRunner;
+        private readonly AbilityUpgradesProvider _abilityUpgradesProvider;
+        private readonly ProjectionPool _projectionPool;
 
-        public AbilityFactory(AbilityProjectionFactory abilityProjectionFactory, CoroutineRunner coroutineRunner,
-            TargetService targetService)
+        public AbilityFactory(AbilityProjectionBuilder abilityProjectionBuilder,
+            ICoroutineRunner coroutineRunner,
+            AbilityUpgradesProvider abilityUpgradesProvider)
         {
+            _abilityProjectionBuilder = abilityProjectionBuilder;
             _coroutineRunner = coroutineRunner;
-            _targetService = targetService;
-            _abilityProjectionFactory = abilityProjectionFactory;
+            _abilityUpgradesProvider = abilityUpgradesProvider;
         }
 
-        public Ability Create(AbilityData abilityConfig, ProjectionPool projectionPool) =>
-            new Ability(_abilityProjectionFactory, abilityConfig, _coroutineRunner, projectionPool,
-                _targetService);
+        public Ability Create(AbilityConfigSO initialAbilityConfig)
+        {
+            AbilityData abilityData = _abilityUpgradesProvider.ConfigsByAbilityData[initialAbilityConfig];
+            //TODO: Replace _abilityProjectionBuilder.GetOrCreateProjectionPool() to projectionPoolFactory.Create()
+            return Create(abilityData, _abilityProjectionBuilder.GetOrCreateProjectionPool(abilityData));
+        }
+
+        private Ability Create(AbilityData abilityConfig, ProjectionPool projectionPool) =>
+            new Ability(_abilityProjectionBuilder, abilityConfig, _coroutineRunner, projectionPool);
     }
 }

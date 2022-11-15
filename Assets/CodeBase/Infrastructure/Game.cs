@@ -1,4 +1,5 @@
-﻿using CodeBase.Infrastructure.StateMachine;
+﻿using CodeBase.ForSort;
+using CodeBase.Infrastructure.StateMachine;
 
 namespace CodeBase.Infrastructure
 {
@@ -8,7 +9,7 @@ namespace CodeBase.Infrastructure
 
         public Game(ICoroutineRunner coroutineRunner, ConfigurationContainer configurationContainer)
         {
-            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), configurationContainer);
+            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), configurationContainer, coroutineRunner);
         }
     }
 }

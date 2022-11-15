@@ -14,4 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <HeroConfigSO>k__BackingField: {fileID: 11400000, guid: 00206a69e21d5a04abf958bf369478e3, type: 2}
   <BasePropertiesConfigSO>k__BackingField: {fileID: 11400000, guid: c04a4fb8e84240d4482f46b42c00c1f6, type: 2}
-  <MainMenuConfiguration>k__BackingField: {fileID: 11400000, guid: 33f7d89f62822134d91b29955e7495e1, type: 2}
+  <MainMenuConfigurationSo>k__BackingField: {fileID: 11400000, guid: 33f7d89f62822134d91b29955e7495e1, type: 2}
+  <UpgradesConfigSO>k__BackingField: {fileID: 11400000, guid: 905ec28cdae7f0146b556df896ede51a, type: 2}
+  <ColorConfigSO>k__BackingField: {fileID: 11400000, guid: 06899f7aed917de478989ad5ec56feab, type: 2}
+  <GameLoopConfigSO>k__BackingField: {fileID: 11400000, guid: ecad34a8a998d3c4889b2737c90f6907, type: 2}
+  <EnemyConfigSO>k__BackingField: {fileID: 11400000, guid: b50750cd67eec974fa6ec33ac26d748a, type: 2}
+  <StageCompetitionConfigSO>k__BackingField: {fileID: 11400000, guid: 52e9facd5e52dbc4abaa350c6f0a6f18, type: 2}
+  <CoroutineRunner>k__BackingField: {fileID: 0}
+  <AbilityConfigsSO>k__BackingField:
+  - {fileID: 11400000, guid: 8a489f53276633d4b99a914e49d37dd2, type: 2}
+  - {fileID: 11400000, guid: 72a4d8972008a2f46894cab34a1ce4ae, type: 2}
+  - {fileID: 11400000, guid: e5a06c12cd7910e49ac0cec952677a7f, type: 2}
+  - {fileID: 11400000, guid: e77d0d05c929fcd409cb62c13d37e936, type: 2}
+  - {fileID: 11400000, guid: 54d04df3847b358489171411a23878a3, type: 2}
+  - {fileID: 11400000, guid: 8de417bab3c16294c95191f89825a027, type: 2}
+  - {fileID: 11400000, guid: c1e03a1550dcb0c49beb766c31da0184, type: 2}
+  - {fileID: 11400000, guid: 479d7d8d154415f44a78f1af7609db75, type: 2}
+  - {fileID: 11400000, guid: 6ec69776f56dc1e428be94931fb0ff71, type: 2}
+  - {fileID: 11400000, guid: 510dfc873b6838a41a996572d965d506, type: 2}
+  - {fileID: 11400000, guid: 7196225b3978613488d172c832efc231, type: 2}
+  - {fileID: 11400000, guid: 22e844543a8117949a8a241139cde28a, type: 2}

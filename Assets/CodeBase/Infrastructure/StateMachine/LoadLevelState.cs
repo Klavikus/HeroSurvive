@@ -1,30 +1,39 @@
-﻿using CodeBase.Infrastructure.Factories;
+﻿using CodeBase.Domain.Data;
+using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Services;
-using CodeBase.Infrastructure.StateMachine;
-using UnityEngine;
 
-namespace CodeBase.Infrastructure.States
+namespace CodeBase.Infrastructure.StateMachine
 {
     public class LoadLevelState : IPayloadedState<string>
     {
-        private readonly GameStateMachine _stateMachine;
+        private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly IMainMenuFactory _mainMenuFactory;
-        
-        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader)
+        private readonly IModelProvider _modelProvider;
+
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader)
         {
-            _stateMachine = stateMachine;
+            _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _mainMenuFactory = AllServices.Container.Single<IMainMenuFactory>();
+            _modelProvider = AllServices.Container.Single<IModelProvider>();
+            _modelProvider.GameLoopModel.StartLevelInvoked += OnLevelInvoked;
         }
 
-        public void Enter(string sceneName) => _sceneLoader.Load(sceneName, onLoaded: OnLoaded);
+        public void Enter(string sceneName)
+        {
+            _sceneLoader.Load(sceneName, onLoaded: OnLoaded);
+        }
 
-        public void Exit() { }
+        public void Exit()
+        {
+        }
 
         private void OnLoaded()
         {
             _mainMenuFactory.Initialization();
         }
+
+        private void OnLevelInvoked(HeroData heroData) => _gameStateMachine.Enter<GameLoopState, HeroData>(heroData);
     }
 }

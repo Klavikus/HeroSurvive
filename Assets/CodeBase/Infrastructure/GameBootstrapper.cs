@@ -1,6 +1,6 @@
 using System.Collections;
+using CodeBase.ForSort;
 using CodeBase.Infrastructure.StateMachine;
-using CodeBase.Infrastructure.States;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure
@@ -18,15 +18,7 @@ namespace CodeBase.Infrastructure
             DontDestroyOnLoad(target: this);
         }
 
-        public void Run(IEnumerator coroutine)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public T InstantiateGameObject<T>(T prefab, Vector2 position, Quaternion rotation, bool isSelfParent)
-            where T : Object
-        {
-            throw new System.NotImplementedException();
-        }
+        public Coroutine Run(IEnumerator coroutine) => StartCoroutine(coroutine);
+        public void Stop(Coroutine coroutine) => StopCoroutine(coroutine);
     }
 }

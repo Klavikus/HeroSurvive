@@ -1,5 +1,5 @@
 ﻿using System;
-using CodeBase.HeroSelection;
+using CodeBase.Domain;
 
 namespace CodeBase.Infrastructure.Services.HeroSelectionService
 {

@@ -1,6 +1,8 @@
 ﻿using System;
-using CodeBase.HeroSelection;
+using CodeBase.Domain;
+using CodeBase.Domain.Data;
 using CodeBase.MVVM.Views;
+using CodeBase.MVVM.Views.HeroSelector;
 
 namespace CodeBase.Infrastructure.Services.PropertiesProviders
 {
