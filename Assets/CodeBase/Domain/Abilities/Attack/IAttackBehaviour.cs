@@ -7,6 +7,7 @@ namespace CodeBase.Domain.Abilities.Attack
     public interface IAttackBehaviour
     {
         event Action PenetrationLimit;
+        event Action EnemyHitted;
         void Initialize(Rigidbody2D rigidbody2D);
         IEnumerator Run();
     }

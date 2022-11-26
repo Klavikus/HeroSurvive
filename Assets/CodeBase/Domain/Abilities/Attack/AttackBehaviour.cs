@@ -19,11 +19,10 @@ namespace CodeBase.Domain.Abilities.Attack
         protected bool _canRun;
 
         public event Action PenetrationLimit;
+        public event Action EnemyHitted;
 
-        protected void InvokePenetrationLimit()
-        {
-            PenetrationLimit?.Invoke();
-        }
+        protected void InvokePenetrationLimit() => PenetrationLimit?.Invoke();
+        protected void InvokeEnemyHitted() => EnemyHitted?.Invoke();
 
         protected AttackBehaviour(AbilityData abilityConfig)
         {

@@ -10,7 +10,7 @@ namespace CodeBase.Infrastructure.Factories
         private readonly GameLoopConfigSO _gameLoopConfig;
 
         public LevelMapFactory(ConfigurationProvider configurationProvider) => 
-            _gameLoopConfig = configurationProvider.GetGameLoopConfig();
+            _gameLoopConfig = configurationProvider.GameLoopConfig;
 
         public void Create() => GameObject.Instantiate(_gameLoopConfig.LevelMapPrefab);
     }

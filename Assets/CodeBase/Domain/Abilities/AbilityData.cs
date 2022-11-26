@@ -1,28 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeBase.Configs;
+using CodeBase.Domain.Abilities.Size;
 using CodeBase.Domain.Enums;
 using UnityEngine;
 
 namespace CodeBase.Domain.Abilities
 {
-    public enum AbilityBaseProperty
-    {
-        Damage,
-        Penetration,
-        AttackDelay,
-        SpawnCount,
-        BurstCount,
-    }
-
     public class AbilityData
     {
         private readonly Dictionary<BaseProperty, float> _upgradeModifiers = new Dictionary<BaseProperty, float>();
         private readonly Dictionary<BaseProperty, float> _heroUpgradeModifiers = new Dictionary<BaseProperty, float>();
         private readonly Dictionary<BaseProperty, float> _resultProperties = new Dictionary<BaseProperty, float>();
 
+        private AbilityModifiersMask _modifiersMask;
+
         public AbilityData(AbilityConfigSO abilityConfig)
         {
+            SizeBehaviourData = abilityConfig.SizeBehaviourData;
+            Stagger = abilityConfig.Stagger;
+            _modifiersMask = abilityConfig.AbilityModifiersMask;
             AttackType = abilityConfig.AttackType;
             WhatIsEnemy = abilityConfig.WhatIsEnemy;
             BaseDamage = abilityConfig.Damage;
@@ -61,6 +58,10 @@ namespace CodeBase.Domain.Abilities
             Cooldown = BaseCooldown;
             AbilityView = abilityConfig.AbilityView;
             IsSelfParent = abilityConfig.IsSelfParent;
+            AudioData = abilityConfig.AudioData;
+
+            SizeBehaviourData.UpdateFullTime(BaseDuration);
+            SizeBehaviourData.UpdateTargetSize(BaseSize);
         }
 
         public AttackType AttackType { get; private set; }
@@ -98,7 +99,6 @@ namespace CodeBase.Domain.Abilities
         public bool AlignWithRotation { get; private set; }
         public bool FlipDirectionAllowed { get; private set; }
         public TargetingType TargetingType { get; private set; }
-
         public float BaseSize { get; private set; }
         public float Size { get; private set; }
 
@@ -108,6 +108,9 @@ namespace CodeBase.Domain.Abilities
         public float BaseCooldown { get; private set; }
         public AbilityProjection AbilityView { get; private set; }
         public bool IsSelfParent { get; private set; }
+        public float Stagger { get; private set; }
+        public AudioData AudioData { get; set; }
+        public SizeBehaviourData SizeBehaviourData { get; set; }
 
         public void UpdateUpgradeModifiers(IReadOnlyList<AbilityUpgradeData> abilityUpgradesData)
         {
@@ -156,35 +159,68 @@ namespace CodeBase.Domain.Abilities
         private void UseModifiers()
         {
             //Amount
-            if (MaxBurstCount > 1)
+            if (_modifiersMask.UseAmount)
             {
-                BurstCount = (int) (BaseBurstCount + _resultProperties[BaseProperty.Amount]);
+                if (MaxBurstCount > 1)
+                {
+                    BurstCount = (int) (BaseBurstCount + _resultProperties[BaseProperty.Amount]);
 
-                if (BurstCount > MaxBurstCount)
-                    BurstCount = MaxBurstCount;
+                    if (BurstCount > MaxBurstCount)
+                        BurstCount = MaxBurstCount;
+                }
+                else
+                {
+                    SpawnCount = (int) (BaseSpawnCount + _resultProperties[BaseProperty.Amount]);
+                }
             }
-            else
-            {
-                SpawnCount = (int) (BaseSpawnCount + _resultProperties[BaseProperty.Amount]);
-            }
+
 
             //Damage
-            Damage = (int) (BaseDamage * (1 + _resultProperties[BaseProperty.Damage] / 100));
+            if (_modifiersMask.UseDamage)
+                Damage = (int) (BaseDamage * (1 + _resultProperties[BaseProperty.Damage] / 100));
 
             //Cooldown
-            Cooldown = BaseCooldown * (1 + _resultProperties[BaseProperty.Cooldown] / 100);
+            if (_modifiersMask.UseCooldown)
+                Cooldown = BaseCooldown * (1 + _resultProperties[BaseProperty.Cooldown] / 100);
 
             //Duration
-            Duration = BaseDuration * (1 + _resultProperties[BaseProperty.Duration] / 100);
+            if (_modifiersMask.UseDuration)
+            {
+                Duration = BaseDuration * (1 + _resultProperties[BaseProperty.Duration] / 100);
+                SizeBehaviourData.UpdateFullTime(Duration);
+            }
 
             //Area
-            Size = BaseSize * (1 + _resultProperties[BaseProperty.Area] / 100);
-            Radius = BaseRadius * (1 + _resultProperties[BaseProperty.Area] / 100);
+            if (_modifiersMask.UseArea)
+            {
+                Size = BaseSize * (1 + _resultProperties[BaseProperty.Area] / 100);
+                SizeBehaviourData.UpdateTargetSize(Size);
+                Radius = BaseRadius * (1 + _resultProperties[BaseProperty.Area] / 100);
+            }
 
             //ProjectileSpeed
-            Speed = BaseSpeed * (1 + _resultProperties[BaseProperty.ProjectileSpeed] / 100);
+            if (_modifiersMask.UseProjectileSpeed)
+                Speed = BaseSpeed * (1 + _resultProperties[BaseProperty.ProjectileSpeed] / 100);
 
             // Changed?.Invoke(this);
         }
+    }
+
+    [Serializable]
+    public class AudioData
+    {
+        public AudioClip HitAFX;
+        public AudioClip StartAFX;
+    }
+
+    [Serializable]
+    public struct AbilityModifiersMask
+    {
+        [field: SerializeField] public bool UseAmount { get; private set; }
+        [field: SerializeField] public bool UseDamage { get; private set; }
+        [field: SerializeField] public bool UseCooldown { get; private set; }
+        [field: SerializeField] public bool UseDuration { get; private set; }
+        [field: SerializeField] public bool UseArea { get; private set; }
+        [field: SerializeField] public bool UseProjectileSpeed { get; private set; }
     }
 }

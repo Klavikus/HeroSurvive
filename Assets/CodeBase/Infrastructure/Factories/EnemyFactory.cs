@@ -21,7 +21,7 @@ namespace CodeBase.Infrastructure
         {
             _configurationProvider = configurationProvider;
             _enemiesData = new Dictionary<EnemyType, EnemyData>();
-            foreach (EnemyData enemyData in _configurationProvider.GetEnemyConfig().EnemiesData)
+            foreach (EnemyData enemyData in _configurationProvider.EnemyConfig.EnemiesData)
                 _enemiesData.Add(enemyData.Type, enemyData);
 
             _enemies = new List<Enemy>();

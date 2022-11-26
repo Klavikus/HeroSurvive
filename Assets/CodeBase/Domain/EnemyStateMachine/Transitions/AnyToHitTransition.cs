@@ -11,7 +11,7 @@ class AnyToHitTransition : Transition
         _damageable.DamageTaken += OnHitTaken;
     }
 
-    private void OnHitTaken(int damage) => MoveNextState();
+    private void OnHitTaken(int damage, float stagger) => MoveNextState();
 
     public override void Update()
     {

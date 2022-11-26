@@ -31,7 +31,7 @@ namespace CodeBase.Domain.Abilities.Attack
             {
                 for (var i = 0; i < count; i++)
                     if (_results[i].collider.TryGetComponent(out Damageable enemy))
-                        enemy.TakeDamage(_abilityConfig.Damage);
+                        enemy.TakeDamage(_abilityConfig.Damage, _abilityConfig.Stagger);
             }
         }
     }

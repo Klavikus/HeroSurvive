@@ -23,7 +23,7 @@ namespace CodeBase.Infrastructure.StateMachine
 
         private void InitializeUpgrades()
         {
-            foreach (AbilityConfigSO configSO in _configurationProvider.GetAbilityConfigs())
+            foreach (AbilityConfigSO configSO in _configurationProvider.AbilityConfigs)
                 _configsByAbilityData.Add(configSO, new AbilityData(configSO));
         }
 

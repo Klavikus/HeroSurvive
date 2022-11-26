@@ -17,11 +17,11 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 7336016358369244030, guid: da74fb8ad7daddf46bf7bb382861951c, type: 3}
     <AIData>k__BackingField:
       MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
-      Speed: 4
+      Speed: 2
       AttackRange: 0.4
       AttackCheckInterval: 1
       ObstacleCheckDistance: 0.2
-      StaggerDelay: 0.3
+      StaggerDelay: 0
     <DamageableData>k__BackingField:
       <MaxHealth>k__BackingField: 40
       <HealthRegenerationPercent>k__BackingField: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
       <AttackRadius>k__BackingField: 2
       <MaxAffectedTargets>k__BackingField: 55
     <LootData>k__BackingField:
-      <Experience>k__BackingField: 5
+      <Experience>k__BackingField: 1
       <Currency>k__BackingField: 1
     <ProgressionData>k__BackingField:
       <EnemyAI>k__BackingField:
@@ -78,17 +78,17 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 2
-          outSlope: 2
+          inSlope: 29
+          outSlope: 29
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 3
-          inSlope: 2
-          outSlope: 2
+          value: 30
+          inSlope: 29
+          outSlope: 29
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334

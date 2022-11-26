@@ -9,6 +9,7 @@ namespace CodeBase.MVVM.Views
     {
         [SerializeField] private Canvas _mainCanvas;
         [SerializeField] private Button _closeButton;
+        [SerializeField] private Button _adsDoubleRewardButton;
         [SerializeField] private TMP_Text _killedCounter;
 
         private GameLoopViewModel _gameLoopViewModel;
@@ -17,6 +18,16 @@ namespace CodeBase.MVVM.Views
         {
             _gameLoopViewModel.AllWavesCompleted -= OnWin;
             _closeButton.onClick.RemoveListener(OnCloseButtonClicked);
+            _adsDoubleRewardButton.onClick.RemoveListener(OnDoubleRewardButtonClicked);
+        }
+
+        public void Initialize(GameLoopViewModel gameLoopViewModel)
+        {
+            _gameLoopViewModel = gameLoopViewModel;
+            _mainCanvas.enabled = false;
+            _gameLoopViewModel.AllWavesCompleted += OnWin;
+            _closeButton.onClick.AddListener(OnCloseButtonClicked);
+            _adsDoubleRewardButton.onClick.AddListener(OnDoubleRewardButtonClicked);
         }
 
         private void OnCloseButtonClicked()
@@ -26,13 +37,7 @@ namespace CodeBase.MVVM.Views
             _gameLoopViewModel.CloseLevel();
         }
 
-        public void Initialize(GameLoopViewModel gameLoopViewModel)
-        {
-            _gameLoopViewModel = gameLoopViewModel;
-            _mainCanvas.enabled = false;
-            _gameLoopViewModel.AllWavesCompleted += OnWin;
-            _closeButton.onClick.AddListener(OnCloseButtonClicked);
-        }
+        private void OnDoubleRewardButtonClicked() => _gameLoopViewModel.CloseLevelDoubleReward();
 
         private void OnWin()
         {

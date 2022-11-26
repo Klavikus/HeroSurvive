@@ -1,4 +1,5 @@
 ﻿using CodeBase.Infrastructure.Factories;
+using CodeBase.MVVM.Builders;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,10 +27,10 @@ namespace CodeBase.MVVM.Views
         }
 
         public void Initialize(GameLoopViewModel gameLoopViewModel,
-            LevelUpViewModel levelUpViewModel)
+            LevelUpViewModel levelUpViewModel, UpgradeDescriptionBuilder upgradeDescriptionBuilder)
         {
             _gameLoopViewModel = gameLoopViewModel;
-            _levelUpView.Initialize(levelUpViewModel);
+            _levelUpView.Initialize(levelUpViewModel, upgradeDescriptionBuilder);
             _killCounterView.Initialize();
             _currencyCounterView.Initialize();
             _gameLoopViewModel.KilledChanged += _killCounterView.OnCounterChanged;

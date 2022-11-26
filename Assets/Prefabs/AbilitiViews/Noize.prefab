@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1217470133990065166}
   - component: {fileID: 1217470133990065169}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 2821740967155975314}
   - component: {fileID: 2821740967136489736}
   - component: {fileID: 2821740967136512266}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4882,7 +4882,7 @@ GameObject:
   - component: {fileID: 2821740967155888668}
   - component: {fileID: 2821740967136569814}
   - component: {fileID: 2821740967135658714}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SoulMissileGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9638,7 +9638,7 @@ GameObject:
   - component: {fileID: 2821740967155890750}
   - component: {fileID: 2821740967136495906}
   - component: {fileID: 2821740967135613274}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CloudTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14409,7 +14409,7 @@ GameObject:
   - component: {fileID: 2821740967155931048}
   - component: {fileID: 2821740967136552838}
   - component: {fileID: 2821740967135636536}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: StarTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19198,7 +19198,7 @@ GameObject:
   - component: {fileID: 4969867161554785347}
   - component: {fileID: 5059331622344985103}
   - component: {fileID: 5058336578982292701}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24000,7 +24000,7 @@ GameObject:
   - component: {fileID: 4970187868607701761}
   - component: {fileID: 5059770550043796437}
   - component: {fileID: 5058617479926428989}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28847,7 +28847,7 @@ GameObject:
   - component: {fileID: 4969968758492845439}
   - component: {fileID: 5059710039673499761}
   - component: {fileID: 5058115624172982807}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SwordWaveWhite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33652,7 +33652,7 @@ GameObject:
   - component: {fileID: 6860531375468099535}
   - component: {fileID: 4896959507009966448}
   - component: {fileID: 185176353856665973}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Noize
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -6,11 +6,12 @@ namespace CodeBase.Infrastructure.Services
 {
     public interface IConfigurationProvider : IService
     {
-        BasePropertiesConfigSO GetBasePropertiesConfig();
-        MainMenuConfigurationSO GetMainMenuConfig();
-        HeroesConfigSO GetHeroConfig();
-        StageCompetitionConfigSO GetStageCompetitionConfig();
-        GameLoopConfigSO GetGameLoopConfig();
-        AbilityConfigSO[] GetAbilityConfigs();
+        BasePropertiesConfigSO BasePropertiesConfig { get; }
+        MainMenuConfigurationSO MainMenuConfig { get; }
+        HeroesConfigSO HeroConfig { get; }
+        StageCompetitionConfigSO StageCompetitionConfig { get; }
+        GameLoopConfigSO GameLoopConfig { get; }
+        AbilityConfigSO[] AbilityConfigs { get; }
+        UpgradesConfigSO UpgradesConfig { get; }
     }
 }

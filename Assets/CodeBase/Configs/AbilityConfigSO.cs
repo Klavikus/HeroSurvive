@@ -1,4 +1,5 @@
 ﻿using CodeBase.Domain.Abilities;
+using CodeBase.Domain.Abilities.Size;
 using CodeBase.Domain.Enums;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace CodeBase.Configs
 
         [field: SerializeField] public ContactFilter2D WhatIsEnemy { get; private set; }
         [field: SerializeField] public int Damage { get; private set; }
+        [field: SerializeField] public float Stagger { get; private set; }
         [field: SerializeField] public int MaxAffectedEnemy { get; private set; }
         [field: SerializeField] public int Penetration { get; private set; }
         [field: SerializeField] public bool _isLimitedPenetration { get; private set; }
@@ -22,9 +24,7 @@ namespace CodeBase.Configs
         [field: SerializeField] public float BurstFireDelay { get; private set; }
 
         [field: Header("Spawn Position Settings")]
-        [field: SerializeField]
-
-        public SpawnType SpawnPosition { get; private set; }
+        [field: SerializeField] public SpawnType SpawnPosition { get;private set;  }
 
         [field: SerializeField] public Vector2 Direction { get; private set; }
         [field: SerializeField] public int SpawnCount { get; private set; }
@@ -56,7 +56,14 @@ namespace CodeBase.Configs
         [field: SerializeField] public bool IsSelfParent { get; private set; }
 
         [field: Header("Available upgrades")]
-        [field: SerializeField] public AbilityUpgradeData[] UpgradeData { get; private set; }
+        [field: SerializeField]
+        public AbilityUpgradeData[] UpgradeData { get; private set; }
+
+        [field: SerializeField] public AbilityUpgradeViewData UpgradeViewData { get; private set; }
+        [field: SerializeField] public AbilityModifiersMask AbilityModifiersMask { get; private set; }
+        [field: SerializeField] public AudioData AudioData { get; private set; }
+        [field: SerializeField] public SizeBehaviourData SizeBehaviourData { get; private set; }
+
 
         private void OnValidate()
         {

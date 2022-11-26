@@ -1,11 +1,13 @@
-using System;
+using CodeBase.Configs;
 using CodeBase.Domain;
 using CodeBase.Domain.Abilities;
 using CodeBase.Domain.Data;
 using CodeBase.Domain.Enemies;
 using CodeBase.Domain.Enums;
 using CodeBase.ForSort;
+using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Services.PropertiesProviders;
+using CodeBase.Infrastructure.StateMachine;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -17,12 +19,21 @@ public class Player : MonoBehaviour
 
     private IPropertyProvider _propertyProvider;
     private MainProperties _currentProperties;
+    private LevelUpModel _levelUpModel;
+    private AudioPlayerService _audioPlayerService;
 
-    public void Initialize(IPropertyProvider propertyProvider, Ability initialAbility)
+    public bool IsFreeSlotAvailable => _abilityHandler.IsFreeSlotAvailable;
+    public AbilityHandler AbilityHandler => _abilityHandler;
+
+    public void Initialize(IPropertyProvider propertyProvider, AbilityConfigSO initialAbilityConfigSO,
+        LevelUpModel levelUpModel,
+        AbilityFactory abilityFactory, AudioPlayerService audioPlayerService)
     {
         _propertyProvider = propertyProvider;
-        _abilityHandler.AddAbility(initialAbility);
-        _abilityHandler.Initialize();
+        _levelUpModel = levelUpModel;
+        _audioPlayerService = audioPlayerService;
+        _abilityHandler.Initialize(abilityFactory, _audioPlayerService);
+        _abilityHandler.AddAbility(initialAbilityConfigSO);
         _propertyProvider.PropertiesUpdated += OnPropertiesUpdated;
 
         OnPropertiesUpdated();
@@ -42,6 +53,7 @@ public class Player : MonoBehaviour
 
         _damageable.Initialize(new DamageableData(_currentProperties));
         _moveController.Initialize(_currentProperties.BaseProperties[BaseProperty.MoveSpeed]);
-        _abilityHandler.UpdateAbilityData(_currentProperties.BaseProperties);
+        _abilityHandler.UpdatePlayerModifiers(_currentProperties.BaseProperties);
+        _abilityHandler.UpdatePlayerModifiers(_currentProperties.BaseProperties);
     }
 }

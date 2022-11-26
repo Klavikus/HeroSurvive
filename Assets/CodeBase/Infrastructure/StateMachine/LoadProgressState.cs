@@ -1,4 +1,7 @@
-﻿namespace CodeBase.Infrastructure.StateMachine
+﻿using CodeBase.Infrastructure.Factories;
+using CodeBase.Infrastructure.Services;
+
+namespace CodeBase.Infrastructure.StateMachine
 {
     public class LoadProgressState : IState
     {
@@ -6,12 +9,31 @@
 
         private readonly GameStateMachine _gameStateMachine;
 
-        public LoadProgressState(GameStateMachine gameStateMachine) => 
+        private IPersistentDataService _persistentDataService;
+        private IAdsProvider _adsProvider;
+
+        public LoadProgressState(GameStateMachine gameStateMachine) =>
             _gameStateMachine = gameStateMachine;
 
-        public void Enter() => 
+        public void Enter()
+        {
+            _persistentDataService = AllServices.Container.Single<IPersistentDataService>();
+            _adsProvider = AllServices.Container.Single<IAdsProvider>();
+           
+            _persistentDataService.LoadOrDefaultUpgradeModels();
             _gameStateMachine.Enter<LoadLevelState, string>(MainMenuScene);
+            
+            // _adsProvider.Initialized += AdsProviderOnInitialized;
+        }
 
-        public void Exit() { }
+        private void AdsProviderOnInitialized()
+        {
+            _persistentDataService.LoadOrDefaultUpgradeModels();
+            _gameStateMachine.Enter<LoadLevelState, string>(MainMenuScene);
+        }
+
+        public void Exit()
+        {
+        }
     }
 }

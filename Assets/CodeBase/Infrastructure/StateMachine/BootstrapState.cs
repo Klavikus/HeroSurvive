@@ -18,15 +18,17 @@ namespace CodeBase.Infrastructure.StateMachine
         private readonly SceneLoader _sceneLoader;
         private readonly ConfigurationContainer _configurationContainer;
         private readonly ICoroutineRunner _coroutineRunner;
+        private readonly AudioPlayer _audioPlayer;
         private readonly AllServices _services;
 
         public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader,
-            ConfigurationContainer configurationContainer, ICoroutineRunner coroutineRunner)
+            ConfigurationContainer configurationContainer, ICoroutineRunner coroutineRunner, AudioPlayer audioPlayer)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _configurationContainer = configurationContainer;
             _coroutineRunner = coroutineRunner;
+            _audioPlayer = audioPlayer;
             _services = AllServices.Container;
             RegisterServices();
         }
@@ -47,14 +49,22 @@ namespace CodeBase.Infrastructure.StateMachine
         {
             Debug.Log("RegisterServices");
             ConfigurationProvider configurationProvider = new ConfigurationProvider(_configurationContainer);
+            AudioPlayerService audioPlayerService = new AudioPlayerService(_audioPlayer);
+
+            AdsProvider adsProvider = new AdsProvider(_coroutineRunner);
+            adsProvider.Initialize();
+
+            SaveLoadService saveLoadService = new SaveLoadService(configurationProvider);
 
             ModelFactory modelFactory = new ModelFactory(configurationProvider);
+
 
             //Builders
             UpgradeDescriptionBuilder upgradeDescriptionBuilder = new UpgradeDescriptionBuilder(configurationProvider);
             LevelMapFactory levelMapFactory = new LevelMapFactory(configurationProvider);
 
             //Models
+            UserModel userModel = new UserModel();
             HeroModel heroModel = new HeroModel();
             PropertiesModel propertiesModel = new PropertiesModel();
             MenuModel menuModel = new MenuModel();
@@ -63,17 +73,27 @@ namespace CodeBase.Infrastructure.StateMachine
             GameLoopModel gameLoopModel = new GameLoopModel();
 
 
-            ModelProvider modelProvider = new ModelProvider(gameLoopModel);
+            ModelProvider modelProvider = new ModelProvider(
+                gameLoopModel,
+                upgradeModels,
+                currencyModel,
+                userModel);
             UpgradeService upgradeService = new UpgradeService(upgradeModels);
 
+            PersistentDataService persistentDataService =
+                new PersistentDataService(configurationProvider, saveLoadService, modelProvider);
+            AllServices.Container.RegisterSingle<IPersistentDataService>(persistentDataService);
+            AllServices.Container.RegisterSingle<IAdsProvider>(adsProvider);
+
             //ViewModels
+            UserNameViewModel userNameViewModel = new UserNameViewModel(userModel, gameLoopModel);
             HeroSelectorViewModel heroSelectorViewModel =
                 new HeroSelectorViewModel(heroModel, menuModel, gameLoopModel);
             MainPropertiesViewModel propertiesViewModel = new MainPropertiesViewModel(propertiesModel);
             MenuViewModel menuViewModel = new MenuViewModel(menuModel);
-            UpgradeViewModel upgradeViewModel = new UpgradeViewModel(upgradeModels, currencyModel, upgradeService);
+            UpgradeViewModel upgradeViewModel =
+                new UpgradeViewModel(upgradeModels, currencyModel, upgradeService);
             CurrencyViewModel currencyViewModel = new CurrencyViewModel(currencyModel);
-
 
             ViewFactory viewFactory = new ViewFactory(
                 configurationProvider,
@@ -82,7 +102,8 @@ namespace CodeBase.Infrastructure.StateMachine
                 menuViewModel,
                 upgradeViewModel,
                 currencyViewModel,
-                upgradeDescriptionBuilder);
+                upgradeDescriptionBuilder,
+                userNameViewModel);
 
 
             MainMenuViewBuilder mainMenuViewBuilder = new MainMenuViewBuilder(viewFactory);
@@ -102,19 +123,25 @@ namespace CodeBase.Infrastructure.StateMachine
             _services.RegisterSingle<IModelProvider>(modelProvider);
 
             //GameLoopCompositionRoot
-
-
-            PlayerBuilder playerBuilder = new PlayerBuilder(heroModel, configurationProvider, propertyProvider);
-            EnemyFactory enemyFactory = new EnemyFactory(configurationProvider);
-            TargetFinderService targetFinderService = new TargetFinderService(playerBuilder, enemyFactory);
-            _services.RegisterSingle<ITargetService>(targetFinderService);
-
             AbilityUpgradesProvider abilityUpgradesProvider = new AbilityUpgradesProvider(configurationProvider);
-
-            AbilityProjectionBuilder abilityProjectionBuilder = new AbilityProjectionBuilder(targetFinderService);
+            AbilityUpgradeService abilityUpgradeService = new AbilityUpgradeService(configurationProvider);
+            EnemyFactory enemyFactory = new EnemyFactory(configurationProvider);
+            TargetFinderService targetFinderService = new TargetFinderService(enemyFactory);
+            AbilityProjectionBuilder abilityProjectionBuilder =
+                new AbilityProjectionBuilder(targetFinderService, audioPlayerService);
             AbilityFactory abilityFactory =
                 new AbilityFactory(abilityProjectionBuilder, _coroutineRunner, abilityUpgradesProvider);
-            AbilityBuilder abilityBuilder = new AbilityBuilder(playerBuilder, abilityFactory);
+
+
+            LevelUpModel levelUpModel = new LevelUpModel(currencyModel, abilityUpgradeService);
+
+            PlayerBuilder playerBuilder = new PlayerBuilder(heroModel, configurationProvider, propertyProvider,
+                levelUpModel, abilityUpgradeService, abilityFactory, audioPlayerService);
+            targetFinderService.BindPlayerBuilder(playerBuilder);
+            _services.RegisterSingle<ITargetService>(targetFinderService);
+
+
+            AbilityBuilder abilityBuilder = new AbilityBuilder(playerBuilder);
             MainMenuFactory mainMenuFactory = new MainMenuFactory(mainMenuViewBuilder);
 
 
@@ -123,17 +150,18 @@ namespace CodeBase.Infrastructure.StateMachine
             _services.RegisterSingle<IEnemySpawnService>(enemySpawnService);
 
 
-            LevelUpModel levelUpModel = new LevelUpModel(abilityUpgradesProvider.GetUpgradesData(), currencyModel);
             LeveCompetitionService leveCompetitionService =
                 new LeveCompetitionService(enemySpawnService, configurationProvider, levelUpModel);
 
-            LevelUpViewModel levelUpViewModel = new LevelUpViewModel(levelUpModel);
+            LevelUpViewModel levelUpViewModel = new LevelUpViewModel(levelUpModel, abilityUpgradeService, adsProvider);
 
             PlayerEventHandler playerEventHandler = new PlayerEventHandler();
             GameLoopViewModel gameLoopViewModel =
-                new GameLoopViewModel(gameLoopModel, leveCompetitionService, playerEventHandler, currencyViewModel);
+                new GameLoopViewModel(gameLoopModel, leveCompetitionService, playerEventHandler, currencyViewModel,
+                    adsProvider);
             GameLoopViewFactory gameLoopViewFactory =
-                new GameLoopViewFactory(configurationProvider, gameLoopViewModel, levelUpViewModel);
+                new GameLoopViewFactory(configurationProvider, gameLoopViewModel, levelUpViewModel,
+                    upgradeDescriptionBuilder);
             GameLoopViewBuilder gameLoopViewBuilder = new GameLoopViewBuilder(gameLoopViewFactory);
             GameLoopService gameLoopService = new GameLoopService(levelMapFactory, gameLoopViewBuilder, abilityBuilder,
                 heroModel, playerBuilder, gameLoopModel, leveCompetitionService, playerEventHandler);

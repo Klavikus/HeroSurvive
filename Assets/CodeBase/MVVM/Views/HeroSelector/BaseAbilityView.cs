@@ -12,8 +12,8 @@ namespace CodeBase.MVVM.Views.HeroSelector
 
         public void Render(HeroData heroData)
         {
-            _abilityViewText.text = heroData.AbilityViewData.Name;
-            _abilityIcon.sprite = heroData.AbilityViewData.Icon;
+            _abilityViewText.text = heroData.InitialAbilityConfig.UpgradeViewData.Name;
+            _abilityIcon.sprite = heroData.InitialAbilityConfig.UpgradeViewData.Icon;
         }
     }
 }

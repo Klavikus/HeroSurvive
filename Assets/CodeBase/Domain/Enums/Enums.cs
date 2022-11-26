@@ -12,7 +12,7 @@
         Area,
         ProjectileSpeed,
     }
-    
+
     public enum PlayerStat
     {
         ProjectilesCountModifier,
@@ -42,7 +42,7 @@
         Idle,
         Run,
     }
-    
+
     public enum AttackType
     {
         Continuous,
@@ -50,15 +50,25 @@
         Single,
     }
 
+    public enum SizeType
+    {
+        Constant,
+        OverLifetime,
+        OverLifetimeFixed,
+    }
+
     public enum MoveType
     {
         MoveUp,
         Orbital,
+        OrbitalMovePoint,
+        Follow
     }
 
     public enum SpawnType
     {
         Point,
+        PivotPoint,
         Circle,
         Arc
     }
@@ -68,5 +78,11 @@
         ByDirection,
         ToClosest,
         RandomTarget
+    }
+
+    public enum AudioSourceType
+    {
+        Main,
+        Secondary,
     }
 }

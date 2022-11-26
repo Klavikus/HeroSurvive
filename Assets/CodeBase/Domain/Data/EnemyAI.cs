@@ -37,25 +37,34 @@ namespace CodeBase.Domain.Data
             _targetService = targetService;
 
             _attackCheckDelay = new WaitForSeconds(enemyAIData.AttackCheckInterval);
-            _staggerDelay = new WaitForSeconds(enemyAIData.StaggerDelay);
+            _staggerDelay = new WaitForSeconds(0.1f);
             _isWaitingForInitialize = false;
         }
 
         public void UpdateProgression(float progressionModifier) =>
             _enemyAIData.CalculateWithProgression(progressionModifier);
 
-        public void Stagger()
+        public void Stagger(float stagger)
         {
+            if (stagger == 0)
+            {
+                StaggerOut?.Invoke();
+                return;
+            }
+
             if (_staggerCoroutine != null)
                 StopCoroutine(_staggerCoroutine);
 
-            _staggerCoroutine = StartCoroutine(StartStaggerCooldown());
+            _staggerCoroutine = StartCoroutine(StartStaggerCooldown(stagger));
         }
 
-        private IEnumerator StartStaggerCooldown()
+        private IEnumerator StartStaggerCooldown(float stagger)
         {
             _isStaggered = true;
-            yield return _staggerDelay;
+
+            for (float i = 0; i < stagger; i += 0.1f)
+                yield return _staggerDelay;
+
             _isStaggered = false;
             StaggerOut?.Invoke();
         }

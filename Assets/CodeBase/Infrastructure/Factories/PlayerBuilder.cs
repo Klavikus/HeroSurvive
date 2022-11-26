@@ -1,10 +1,12 @@
 ﻿using Cinemachine;
+using CodeBase.Configs;
 using CodeBase.Domain.Abilities;
 using CodeBase.Domain.Data;
 using CodeBase.Domain.Enemies;
 using CodeBase.ForSort;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PropertiesProviders;
+using CodeBase.Infrastructure.StateMachine;
 using CodeBase.MVVM.Models;
 using UnityEngine;
 
@@ -15,6 +17,10 @@ namespace CodeBase.Infrastructure.Factories
         private readonly ConfigurationProvider _configurationProvider;
         private readonly IPropertyProvider _propertyProvider;
         private readonly HeroModel _heroModel;
+        private readonly LevelUpModel _levelUpModel;
+        private readonly IAbilityUpgradeService _abilityUpgradeService;
+        private readonly AbilityFactory _abilityFactory;
+        private readonly AudioPlayerService _audioPlayerService;
 
         private Player _player;
 
@@ -25,20 +31,28 @@ namespace CodeBase.Infrastructure.Factories
         private MoveController _moveController;
 
         public PlayerBuilder(HeroModel heroModel,
-            ConfigurationProvider configurationProvider, IPropertyProvider propertyProvider)
+            ConfigurationProvider configurationProvider, IPropertyProvider propertyProvider, LevelUpModel levelUpModel,
+            IAbilityUpgradeService abilityUpgradeService, AbilityFactory abilityFactory,
+            AudioPlayerService audioPlayerService)
         {
             _heroModel = heroModel;
             _configurationProvider = configurationProvider;
             _propertyProvider = propertyProvider;
+            _levelUpModel = levelUpModel;
+            _abilityUpgradeService = abilityUpgradeService;
+            _abilityFactory = abilityFactory;
+            _audioPlayerService = audioPlayerService;
         }
 
-        public Player Build(Ability initialAbility)
+        public Player Build(AbilityConfigSO initialAbilityConfigSO)
         {
             _player = GameObject.Instantiate(_heroModel.CurrentSelectedHero.Prefab, Vector3.zero, Quaternion.identity);
             _inputController = _player.GetComponent<InputController>();
             _moveController = _player.GetComponent<MoveController>();
             _inputController.InputUpdated += OnPlayerInputUpdated;
-            _player.Initialize(_propertyProvider, initialAbility);
+            _player.Initialize(_propertyProvider, initialAbilityConfigSO, _levelUpModel, _abilityFactory,
+                _audioPlayerService);
+            _abilityUpgradeService.BindToPlayer(_player);
             return _player;
         }
 
@@ -73,6 +87,14 @@ namespace CodeBase.Infrastructure.Factories
         {
             IDamageable damagable = _player.GetComponent<IDamageable>();
             playerEventHandler.Initialize(damagable);
+        }
+
+        public void RespawnPlayer()
+        {
+            if (_player == null)
+                return;
+
+            _player.GetComponent<IDamageable>().RestoreHealth(1000);
         }
     }
 }

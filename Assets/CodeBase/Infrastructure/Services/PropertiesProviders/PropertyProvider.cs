@@ -38,7 +38,7 @@ namespace CodeBase.Infrastructure.Services.PropertiesProviders
 
         public void Initialize()
         {
-            _baseData = _configurationProvider.GetBasePropertiesConfig().GetPropertiesData();
+            _baseData = _configurationProvider.BasePropertiesConfig.GetPropertiesData();
             _upgradesData = _upgradeService.GetUpgradesPropertiesData();
             _heroData = _heroModel.GetMainPropertiesData();
             RecalculateData();
@@ -51,7 +51,7 @@ namespace CodeBase.Infrastructure.Services.PropertiesProviders
 
         public MainPropertyViewData[] GetResultPropertiesViewData()
         {
-            BasePropertiesConfigSO baseConfigurationSO = _configurationProvider.GetBasePropertiesConfig();
+            BasePropertiesConfigSO baseConfigurationSO = _configurationProvider.BasePropertiesConfig;
             IReadOnlyList<MainPropertyViewData> baseViews = baseConfigurationSO.PropertiesData;
             MainPropertyViewData[] result = new MainPropertyViewData[baseViews.Count];
           
@@ -64,7 +64,7 @@ namespace CodeBase.Infrastructure.Services.PropertiesProviders
             return result;
         }
 
-        public PropertyView GetBasePropertyView() => _configurationProvider.GetBasePropertiesConfig().PropertyView;
+        public PropertyView GetBasePropertyView() => _configurationProvider.BasePropertiesConfig.PropertyView;
 
         private void OnHeroChanged(HeroData heroData)
         {

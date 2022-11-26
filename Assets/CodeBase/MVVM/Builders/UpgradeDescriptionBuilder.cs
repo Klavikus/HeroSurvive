@@ -16,8 +16,8 @@ namespace CodeBase.MVVM.Builders
 
         public UpgradeDescriptionBuilder(ConfigurationProvider configurationProvider)
         {
-            _colorsConfig = configurationProvider.GetColorsConfig();
-            _propertiesData = configurationProvider.GetBasePropertiesConfig().GetPropertyViewsData();
+            _colorsConfig = configurationProvider.ColorsConfig;
+            _propertiesData = configurationProvider.BasePropertiesConfig.GetPropertyViewsData();
         }
 
         //TODO Need refactoring
@@ -34,7 +34,7 @@ namespace CodeBase.MVVM.Builders
 
             AdditionalHeroProperty[] additionalHeroProperties =
                 upgradeData.Upgrades[currentLevel].AdditionalHeroProperties;
-            
+
             Debug.LogWarning($"{nameof(additionalHeroProperties)}");
 
             foreach (AdditionalHeroProperty additionalHeroProperty in additionalHeroProperties)
@@ -120,5 +120,19 @@ namespace CodeBase.MVVM.Builders
 
         public string GetCurrencyText(int amount) =>
             $"<color=#{ColorUtility.ToHtmlStringRGBA(_colorsConfig.CurrencyColor)}>{amount}</color>";
+
+        public string GetAbilityUpgradeDescription(AbilityUpgradeData abilityUpgradeData)
+        {
+            if (abilityUpgradeData.IsFirstAbilityGain == false)
+            {
+                string hexRGBA = ColorUtility.ToHtmlStringRGBA(_colorsConfig.GoodPropertyColor);
+                return $"<color=#{hexRGBA}>New ability!</color>";
+            }
+
+            string nameString = _propertiesData[abilityUpgradeData.PropertyType].FullName;
+            string valueString = GetPropertyTextDescription(_propertiesData[abilityUpgradeData.PropertyType],
+                abilityUpgradeData.Value);
+            return $"{nameString} {valueString}";
+        }
     }
 }

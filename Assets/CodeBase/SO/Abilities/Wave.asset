@@ -71,3 +71,12 @@ MonoBehaviour:
   <Cooldown>k__BackingField: 2
   <AbilityView>k__BackingField: {fileID: 4896959507009966448, guid: 8e697e0c57d49db40ab050fcadca404e, type: 3}
   <IsSelfParent>k__BackingField: 0
+  <UpgradeData>k__BackingField:
+  - <ViewData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 0}
+      <Name>k__BackingField: 
+    <PropertyType>k__BackingField: 3
+    <Value>k__BackingField: 1
+  <UpgradeViewData>k__BackingField:
+    <Icon>k__BackingField: {fileID: 21300000, guid: 413710b631bd5493ebbf1a29b2d82eb3, type: 3}
+    <Name>k__BackingField: TestName

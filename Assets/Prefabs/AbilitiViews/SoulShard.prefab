@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2081273021629239484}
   - component: {fileID: 9803929599555075}
   - component: {fileID: 4703529115424103942}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SoulShard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5995127300453180285}
   - component: {fileID: 5995127300453180258}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 7277672220130619611}
   - component: {fileID: 7277672220148973813}
   - component: {fileID: 7277672220148321099}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: StarTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4987,7 +4987,7 @@ GameObject:
   - component: {fileID: 7277672220130665441}
   - component: {fileID: 7277672220148913787}
   - component: {fileID: 7277672220148952697}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9776,7 +9776,7 @@ GameObject:
   - component: {fileID: 7277672220130565453}
   - component: {fileID: 7277672220148936273}
   - component: {fileID: 7277672220148315689}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CloudTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14547,7 +14547,7 @@ GameObject:
   - component: {fileID: 7277672220130563439}
   - component: {fileID: 7277672220148993701}
   - component: {fileID: 7277672220148360617}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SoulMissileGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}

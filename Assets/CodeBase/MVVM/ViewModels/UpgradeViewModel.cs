@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using CodeBase.Domain.Data;
 using CodeBase.Infrastructure.Services.UpgradeService;
 using CodeBase.MVVM.Models;
-using UnityEngine;
 
 namespace CodeBase.MVVM.ViewModels
 {
@@ -24,13 +23,12 @@ namespace CodeBase.MVVM.ViewModels
             _upgradeService = upgradeService;
 
             _upgradeModels = new Dictionary<UpgradeData, UpgradeModel>();
+
             foreach (UpgradeModel upgradeModel in _upgrades)
                 _upgradeModels.Add(upgradeModel.Data, upgradeModel);
 
             foreach (UpgradeModel upgradeModel in _upgrades)
-            {
                 upgradeModel.LevelChanged += OnUpgradeChanged;
-            }
         }
 
 
@@ -39,10 +37,7 @@ namespace CodeBase.MVVM.ViewModels
 
         private void OnUpgradeChanged(UpgradeModel upgradeModel)
         {
-            Debug.Log("OnUpgradeChanged viewModel");
-
             _upgradeService.AddProperties(upgradeModel);
-
             Upgraded?.Invoke(upgradeModel.Data, upgradeModel.CurrentLevel);
         }
 

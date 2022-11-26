@@ -530,8 +530,8 @@ MonoBehaviour:
   _damageable: {fileID: 146323655}
   _moveController: {fileID: 5607023953017445907}
   _damageableData:
-    <MaxHealth>k__BackingField: 100
-    <HealthRegenerationPercent>k__BackingField: 0.1
+    <MaxHealth>k__BackingField: 30
+    <HealthRegenerationPercent>k__BackingField: 0.01
     <RegenerationDelayInSeconds>k__BackingField: 0
   _abilityHandler: {fileID: 5607023952429265277}
 --- !u!114 &146323655

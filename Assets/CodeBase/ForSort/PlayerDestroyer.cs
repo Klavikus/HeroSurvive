@@ -19,7 +19,7 @@ public class PlayerDestroyer : MonoBehaviour
                 _layerMask.layerMask);
 
             if (count > 0)
-                _results[0].collider.GetComponent<IDamageable>().TakeDamage(_damage);
+                _results[0].collider.GetComponent<IDamageable>().TakeDamage(_damage, 0);
 
             yield return new WaitForSeconds(_destroyDelay);
         }

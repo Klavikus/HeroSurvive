@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
  
 namespace EpicToonFX
 {
@@ -12,13 +11,6 @@ namespace EpicToonFX
         public enum spaceEnum { Local, World };
         public spaceEnum rotateSpace;
  
-        // Use this for initialization
-        void Start()
-        {
- 
-        }
- 
-        // Update is called once per frame
         void Update()
         {
             if (rotateSpace == spaceEnum.Local)

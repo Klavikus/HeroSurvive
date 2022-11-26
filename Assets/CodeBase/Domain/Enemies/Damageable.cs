@@ -13,9 +13,10 @@ namespace CodeBase.Domain.Enemies
         private WaitForSeconds _healthRegenerationDelay;
         private Coroutine _regenerationCoroutine;
         private DamageableData _damageableData;
+        private float _lastStagger;
 
         public event Action<int, float> HealthChanged;
-        public event Action<int> DamageTaken;
+        public event Action<int, float> DamageTaken;
         public event Action<int> HealTaken;
         public event Action Died;
 
@@ -48,13 +49,14 @@ namespace CodeBase.Domain.Enemies
             HealthChanged?.Invoke(_currentHealth, CurrentHealthPercent);
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(int damage, float stagger)
         {
             if (damage < 0)
                 throw new ArgumentException($"{nameof(damage)} should be greater then 0");
 
             _currentHealth -= damage;
-            DamageTaken?.Invoke(damage);
+            _lastStagger = stagger;
+            DamageTaken?.Invoke(damage, stagger);
             HealthChanged?.Invoke(_currentHealth, CurrentHealthPercent);
 
             if (_currentHealth <= 0)
@@ -73,7 +75,7 @@ namespace CodeBase.Domain.Enemies
             HealTaken?.Invoke(healAmount);
             HealthChanged?.Invoke(_currentHealth, CurrentHealthPercent);
 
-            if (_currentHealth > _maxHealth) 
+            if (_currentHealth > _maxHealth)
                 _currentHealth = _maxHealth;
         }
 
@@ -85,5 +87,7 @@ namespace CodeBase.Domain.Enemies
                 RestoreHealth(_healthRegeneration);
             }
         }
+
+        public float GetLastStagger() => _lastStagger;
     }
 }

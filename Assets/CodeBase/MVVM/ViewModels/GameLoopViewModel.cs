@@ -2,8 +2,10 @@
 using CodeBase.Domain.Data;
 using CodeBase.Domain.Enemies;
 using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.StateMachine;
 using CodeBase.MVVM.Models;
 using CodeBase.MVVM.ViewModels;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factories
 {
@@ -13,6 +15,7 @@ namespace CodeBase.Infrastructure.Factories
         private readonly LeveCompetitionService _leveCompetitionService;
         private readonly PlayerEventHandler _playerEventHandler;
         private readonly CurrencyViewModel _currencyViewModel;
+        private readonly IAdsProvider _adsProvider;
 
         private int _currentEnemyKilled;
         private int _lastCompletedWave;
@@ -23,17 +26,22 @@ namespace CodeBase.Infrastructure.Factories
         public event Action<int> KilledChanged;
         public event Action AllWavesCompleted;
         public event Action PlayerDied;
+        public event Action PlayerResurrected;
         public event Action<int> RewardCurrencyChanged;
 
         public GameLoopViewModel(GameLoopModel gameLoopModel,
             LeveCompetitionService leveCompetitionService,
-            PlayerEventHandler playerEventHandler, CurrencyViewModel currencyViewModel)
+            PlayerEventHandler playerEventHandler,
+            CurrencyViewModel currencyViewModel,
+            IAdsProvider adsProvider)
         {
             _gameLoopModel = gameLoopModel;
             _gameLoopModel.StartLevelInvoked += OnLevelStart;
+            _gameLoopModel.PlayerResurrected += () => PlayerResurrected?.Invoke();
             _leveCompetitionService = leveCompetitionService;
             _playerEventHandler = playerEventHandler;
             _currencyViewModel = currencyViewModel;
+            _adsProvider = adsProvider;
             _lastCompletedWave = 0;
             _playerEventHandler.Died += OnPlayerDied;
             _leveCompetitionService.WaveCompleted += OnWaveCompleted;
@@ -69,7 +77,11 @@ namespace CodeBase.Infrastructure.Factories
             KilledChanged?.Invoke(_currentEnemyKilled);
         }
 
-        public void CloseLevel() => _gameLoopModel.InvokeLevelClose();
+        public void CloseLevel()
+        {
+            Time.timeScale = 1;
+            _gameLoopModel.InvokeLevelClose();
+        }
 
         public void StartLevel(HeroData heroData) => _gameLoopModel.InvokeStartLevel(heroData);
 
@@ -84,5 +96,22 @@ namespace CodeBase.Infrastructure.Factories
         public int GetKillCount() => _currentEnemyKilled;
 
         public int GetClearedWaveCount() => _lastCompletedWave;
+
+        public void ResurrectByAds()
+        {
+            _gameLoopModel.ResurrectPlayer();
+            // PlayerResurrected?.Invoke();
+            _adsProvider.ShowAds(onRewardCallback: () => _gameLoopModel.ResurrectPlayer());
+        }
+
+        public void CloseLevelDoubleReward()
+        {
+            _adsProvider.ShowAds(
+                onRewardCallback: () => _currencyViewModel.AdditionalReward(_gainedCurrency),
+                onCloseCallback: CloseLevel);
+
+            // _currencyViewModel.AdditionalReward(_gainedCurrency);
+            // CloseLevel();
+        }
     }
 }

@@ -51,6 +51,7 @@ namespace CodeBase.MVVM.Views.HeroSelector
             Hide();
         }
 
+
         public void SetHeroViews(HeroView[] heroViews)
         {
             foreach (HeroView heroView in heroViews)
@@ -58,6 +59,8 @@ namespace CodeBase.MVVM.Views.HeroSelector
                 heroView.transform.SetParent(_heroViewsContainer);
                 heroView.transform.localScale = Vector3.one;
             }
+
+            heroViews[0].SelectAsInitial();
         }
 
         public void SetPropertyViews(PropertyView[] propertiesViews)

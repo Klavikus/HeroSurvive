@@ -2,6 +2,7 @@
 using CodeBase.ForSort;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.StateMachine;
+using CodeBase.MVVM.Views;
 
 namespace CodeBase.Infrastructure.Services
 {
@@ -12,16 +13,19 @@ namespace CodeBase.Infrastructure.Services
         public ConfigurationProvider(ConfigurationContainer configurationContainer) =>
             _configurationContainer = configurationContainer;
 
-        public BasePropertiesConfigSO GetBasePropertiesConfig() => _configurationContainer.BasePropertiesConfigSO;
-        public MainMenuConfigurationSO GetMainMenuConfig() => _configurationContainer.MainMenuConfigurationSo;
-        public HeroesConfigSO GetHeroConfig() => _configurationContainer.HeroConfigSO;
-        public UpgradesConfigSO GetUpgradesConfig() => _configurationContainer.UpgradesConfigSO;
-        public ColorConfigSO GetColorsConfig() => _configurationContainer.ColorConfigSO;
-        public GameLoopConfigSO GetGameLoopConfig() => _configurationContainer.GameLoopConfigSO;
-        public EnemyConfigSO GetEnemyConfig() => _configurationContainer.EnemyConfigSO;
-        public StageCompetitionConfigSO GetStageCompetitionConfig() => _configurationContainer.StageCompetitionConfigSO;
-        public AbilityConfigSO[] GetAbilityConfigs() => _configurationContainer.AbilityConfigsSO;
+        public UserNameView UserNameView => _configurationContainer.UserNameView;
+        public BasePropertiesConfigSO BasePropertiesConfig => _configurationContainer.BasePropertiesConfigSO;
+        public MainMenuConfigurationSO MainMenuConfig => _configurationContainer.MainMenuConfigurationSo;
+        public HeroesConfigSO HeroConfig => _configurationContainer.HeroConfigSO;
+        public UpgradesConfigSO UpgradesConfig => _configurationContainer.UpgradesConfigSO;
+        public ColorConfigSO ColorsConfig => _configurationContainer.ColorConfigSO;
+        public GameLoopConfigSO GameLoopConfig => _configurationContainer.GameLoopConfigSO;
+        public EnemyConfigSO EnemyConfig => _configurationContainer.EnemyConfigSO;
+        public StageCompetitionConfigSO StageCompetitionConfig => _configurationContainer.StageCompetitionConfigSO;
+        public AbilityConfigSO[] AbilityConfigs => _configurationContainer.AbilityConfigsSO;
 
         public CoroutineRunner GetCoroutineRunner() => _configurationContainer.CoroutineRunner;
+
+        public AudioPlayer GetAudioPlayer() => _configurationContainer.AudioPlayer;
     }
 }

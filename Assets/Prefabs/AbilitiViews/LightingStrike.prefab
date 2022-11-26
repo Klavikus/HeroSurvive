@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 550520186151107554}
   - component: {fileID: 550520186151107536}
   - component: {fileID: 550520186151107537}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LightingStrike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5220522424548018211}
   - component: {fileID: 5220522424548018236}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Rebderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

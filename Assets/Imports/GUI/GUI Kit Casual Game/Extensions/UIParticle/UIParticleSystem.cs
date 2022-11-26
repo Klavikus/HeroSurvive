@@ -10,7 +10,7 @@ namespace UnityEngine.UI.Extensions
     [AddComponentMenu("UI/Effects/MainPropertiesMapper/UIParticleSystem")]
     public class UIParticleSystem : MaskableGraphic
     {
-        [Tooltip("Having this enabled run the system in LateUpdate rather than in Update making it faster but less precise (more clunky)")]
+        [Tooltip("Having this enabled run the system in LateUpdate rather than in UpdatePlayerModifiers making it faster but less precise (more clunky)")]
         public bool fixedTime = true;
 
         [Tooltip("Enables 3d rotation for the particles")]

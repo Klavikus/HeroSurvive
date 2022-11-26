@@ -1,7 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public struct AbilityUpgradeViewData
+[Serializable]
+public class AbilityUpgradeViewData
 {
-    public Sprite Icon { get; set; }
-    public string Description { get; set; }
+    [field: SerializeField] public Sprite Icon { get; private set; }
+
+    [field: SerializeField] public string Name { get; private set; }
+
+    public AbilityUpgradeViewData(Sprite icon, string name)
+    {
+        Icon = icon;
+        Name = name;
+    }
 }

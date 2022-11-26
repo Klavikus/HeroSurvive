@@ -4,7 +4,7 @@ namespace CodeBase.MVVM.Models
 {
     public class CurrencyModel
     {
-        private int _currentCurrency = 237000;
+        private int _currentCurrency;
         public event Action<int> CurrencyChanged;
         public int CurrentAmount => _currentCurrency;
         public bool CheckPayAvailability(int price) => _currentCurrency >= price;
@@ -28,6 +28,12 @@ namespace CodeBase.MVVM.Models
         private void UpdateCurrency(int currency)
         {
             _currentCurrency += currency;
+            CurrencyChanged?.Invoke(_currentCurrency);
+        }
+
+        public void SetAmount(int newValue)
+        {
+            _currentCurrency = newValue;
             CurrencyChanged?.Invoke(_currentCurrency);
         }
     }

@@ -36,19 +36,23 @@ namespace CodeBase.Domain.Abilities.Attack
 
                 foreach (Damageable newDamageable in _currentEnemys.Except(_previousEnemys))
                 {
-                    newDamageable.TakeDamage(_abilityConfig.Damage);
-
+                    newDamageable.TakeDamage(_abilityConfig.Damage, _abilityConfig.Stagger);
                     if (_abilityConfig.IsLimitedPenetration && --Penetration == 0)
                     {
                         _canRun = false;
                         InvokePenetrationLimit();
                     }
                 }
+
+                if (_currentEnemys.Except(_previousEnemys).Any()) 
+                    InvokeEnemyHitted();
             }
 
             _previousEnemys.Clear();
             _previousEnemys.AddRange(_currentEnemys);
             _currentEnemys.Clear();
         }
+
+
     }
 }

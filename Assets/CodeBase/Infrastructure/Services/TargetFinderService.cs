@@ -5,14 +5,13 @@ namespace CodeBase.Infrastructure.Services
 {
     public class TargetFinderService : ITargetService
     {
-        private readonly PlayerBuilder _playerBuilder;
         private readonly EnemyFactory _enemyFactory;
+        
+        private PlayerBuilder _playerBuilder;
 
-        public TargetFinderService(PlayerBuilder playerBuilder, EnemyFactory enemyFactory)
-        {
-            _playerBuilder = playerBuilder;
-            _enemyFactory = enemyFactory;
-        }
+        public TargetFinderService(EnemyFactory enemyFactory) => _enemyFactory = enemyFactory;
+
+        public void BindPlayerBuilder(PlayerBuilder playerBuilder) => _playerBuilder = playerBuilder;
 
         public Vector3 GetPlayerPosition() =>
             _playerBuilder.GetPlayerPosition();

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CodeBase.Infrastructure.Factories;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.Services
 {
@@ -7,5 +8,6 @@ namespace CodeBase.Infrastructure.Services
         Vector3 GetPlayerPosition();
         Vector3 GetPlayerDirection();
         Vector3 GetClosestEnemyToPlayer();
+        void BindPlayerBuilder(PlayerBuilder playerBuilder);
     }
 }

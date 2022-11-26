@@ -24,7 +24,7 @@ namespace EpicToonFX
                 print("No light object found on " + gameObject.name);
         }
 
-        // Update is called once per frame
+        // UpdatePlayerModifiers is called once per frame
         void Update()
         {
             if (gameObject.GetComponent<Light>())

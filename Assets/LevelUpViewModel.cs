@@ -1,28 +1,39 @@
 ﻿using System;
+using CodeBase.Infrastructure.StateMachine;
 
 public class LevelUpViewModel
 {
     private readonly LevelUpModel _levelUpModel;
+    private readonly IAbilityUpgradeService _abilityUpgradeService;
+    private readonly IAdsProvider _adsProvider;
+
+    public event Action Rerolled;
     public event Action<int> LevelChanged;
     public event Action InvokedViewHide;
     public event Action<AbilityUpgradeData[]> AvailableUpgradesChanged;
     public event Action<float> LevelProgressChanged;
 
-    public LevelUpViewModel(LevelUpModel levelUpModel)
+    public LevelUpViewModel(LevelUpModel levelUpModel, IAbilityUpgradeService abilityUpgradeService, IAdsProvider adsProvider)
     {
         _levelUpModel = levelUpModel;
+        _abilityUpgradeService = abilityUpgradeService;
+        _adsProvider = adsProvider;
         _levelUpModel.LevelChanged += OnLevelChanged;
-        _levelUpModel.AvailableUpgradesChanged += OnAvailableUpgradesChanged;
+        _abilityUpgradeService.AvailableUpgradesChanged += OnAvailableUpgradesChanged;
         _levelUpModel.LevelProgressChanged += OnLevelProgressChanged;
         _levelUpModel.UpgradeSelected += OnUpgradeSelected;
     }
 
     private void OnUpgradeSelected(AbilityUpgradeData obj) => InvokedViewHide?.Invoke();
 
-    private void OnAvailableUpgradesChanged(AbilityUpgradeData[] availableUpgrades) =>
-        AvailableUpgradesChanged?.Invoke(availableUpgrades);
+    private void OnAvailableUpgradesChanged(AbilityUpgradeData[] availableUpgrades) => AvailableUpgradesChanged?.Invoke(availableUpgrades);
 
-    private void OnLevelChanged(int currentLevel) => LevelChanged?.Invoke(currentLevel);
+    private void OnLevelChanged(int currentLevel)
+    {
+        _abilityUpgradeService.CalculateAvailableUpgrades();
+        LevelChanged?.Invoke(currentLevel);
+    }
+
     private void OnLevelProgressChanged(float currentPercent) => LevelProgressChanged?.Invoke(currentPercent);
 
     public void SelectUpgrade(AbilityUpgradeData abilityUpgradeData) => _levelUpModel.SelectUpgrade(abilityUpgradeData);
@@ -31,4 +42,9 @@ public class LevelUpViewModel
     {
         _levelUpModel.ResetLevels();
     }
+
+    public AbilityUpgradeData[] GetAvailableUpgrades() => _abilityUpgradeService.GetAvailableUpgrades();
+
+    public void Reroll() =>
+        _adsProvider.ShowAds(onRewardCallback: () => Rerolled?.Invoke());
 }

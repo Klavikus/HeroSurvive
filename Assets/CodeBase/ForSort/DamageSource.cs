@@ -21,7 +21,7 @@ public class DamageSource
 
         for (int i = 0; i < availableTargetsCount; i++)
             if (_results[i].transform.TryGetComponent(out IDamageable damageable))
-                damageable.TakeDamage(_damageSourceData.Damage);
+                damageable.TakeDamage(_damageSourceData.Damage, 0);
     }
 
     private int CalculateAvailableTargets() =>

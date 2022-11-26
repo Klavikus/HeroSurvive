@@ -3,9 +3,11 @@ using System.Linq;
 using CodeBase.Domain;
 using CodeBase.Domain.Data;
 using CodeBase.Domain.Enums;
+using UnityEngine;
 
 namespace CodeBase.MVVM.Models
 {
+    [Serializable]
     public class UpgradeModel
     {
         public readonly MainProperties Properties;
@@ -25,8 +27,8 @@ namespace CodeBase.MVVM.Models
                 Properties.UpdateProperty(property.BaseProperty, property.Value);
         }
 
-        public UpgradeData Data { get; }
-        public int CurrentLevel { get; private set; }
+        [field: SerializeField] public UpgradeData Data { get; }
+        [field: SerializeField] public int CurrentLevel { get; private set; }
 
         public Action<UpgradeModel> LevelChanged;
 
@@ -59,6 +61,14 @@ namespace CodeBase.MVVM.Models
                 result += Data.Upgrades[i].Price;
 
             return result;
+        }
+
+        public void SetLevel(int newLevel)
+        {
+            Debug.Log($"{Data.Name} {newLevel}");
+            CurrentLevel = newLevel;
+            Recalculate();
+            LevelChanged?.Invoke(this);
         }
 
         public void LevelUp()

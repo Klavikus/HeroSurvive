@@ -31,7 +31,7 @@ namespace CodeBase.Infrastructure.Services
         {
             _enemySpawnService = enemySpawnService;
             _levelUpModel = levelUpModel;
-            _competitionConfig = configurationProvider.GetStageCompetitionConfig();
+            _competitionConfig = configurationProvider.StageCompetitionConfig;
             _enemies = new List<Enemy>();
         }
 

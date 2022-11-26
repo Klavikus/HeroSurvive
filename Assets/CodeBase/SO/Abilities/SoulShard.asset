@@ -28,6 +28,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   <Damage>k__BackingField: 7
+  <Stagger>k__BackingField: 0
   <MaxAffectedEnemy>k__BackingField: 5
   <Penetration>k__BackingField: 5
   <_isLimitedPenetration>k__BackingField: 1
@@ -35,7 +36,7 @@ MonoBehaviour:
   <BurstCount>k__BackingField: 1
   <MaxBurstCount>k__BackingField: 1
   <BurstFireDelay>k__BackingField: 0
-  <SpawnPosition>k__BackingField: 2
+  <SpawnPosition>k__BackingField: 3
   <Direction>k__BackingField: {x: 0, y: 0}
   <SpawnCount>k__BackingField: 1
   <Radius>k__BackingField: 0.1
@@ -65,9 +66,71 @@ MonoBehaviour:
     m_RotationOrder: 4
   <AlignWithRotation>k__BackingField: 0
   <FlipDirectionAllowed>k__BackingField: 0
-  <TargetingType>k__BackingField: 2
+  <TargetingType>k__BackingField: 1
   <Size>k__BackingField: 1
   <Duration>k__BackingField: 1
   <Cooldown>k__BackingField: 1
   <AbilityView>k__BackingField: {fileID: 9803929599555075, guid: 659b826dd7531df44bbf17f19501efda, type: 3}
   <IsSelfParent>k__BackingField: 0
+  <UpgradeData>k__BackingField:
+  - <PropertyType>k__BackingField: 3
+    <Value>k__BackingField: 100
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 1
+  - <PropertyType>k__BackingField: 6
+    <Value>k__BackingField: 1
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 1
+  - <PropertyType>k__BackingField: 8
+    <Value>k__BackingField: 100
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 1
+  - <PropertyType>k__BackingField: 4
+    <Value>k__BackingField: 10
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 1
+  - <PropertyType>k__BackingField: 3
+    <Value>k__BackingField: 100
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 1
+  - <PropertyType>k__BackingField: 6
+    <Value>k__BackingField: 1
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 1
+  - <PropertyType>k__BackingField: 3
+    <Value>k__BackingField: 100
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 1
+  - <PropertyType>k__BackingField: 7
+    <Value>k__BackingField: 100
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 1
+  - <PropertyType>k__BackingField: 6
+    <Value>k__BackingField: 1
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 1
+  - <PropertyType>k__BackingField: 4
+    <Value>k__BackingField: 15
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 1
+  <UpgradeViewData>k__BackingField:
+    <Icon>k__BackingField: {fileID: 21300000, guid: 2adcfbfe5db0e45f0abd58d13e6f6e40, type: 3}
+    <Name>k__BackingField: Soul Shard
+  <AbilityModifiersMask>k__BackingField:
+    <UseAmount>k__BackingField: 1
+    <UseDamage>k__BackingField: 1
+    <UseCooldown>k__BackingField: 1
+    <UseDuration>k__BackingField: 0
+    <UseArea>k__BackingField: 1
+    <UseProjectileSpeed>k__BackingField: 1
+  <AudioData>k__BackingField:
+    HitAFX: {fileID: 8300000, guid: b7a210df23bd255428bdf4def67109f2, type: 3}
+    StartAFX: {fileID: 8300000, guid: 88fd32a7053d6da4ba6550048f13453f, type: 3}
+  <SizeBehaviourData>k__BackingField:
+    <SizeType>k__BackingField: 0
+    <MainTargetSize>k__BackingField: 1
+    <StartTargetSize>k__BackingField: 0
+    <EndTargetSize>k__BackingField: 0
+    <StartTime>k__BackingField: 0
+    <EndTime>k__BackingField: 0
+    <FullTimePeriod>k__BackingField: 1

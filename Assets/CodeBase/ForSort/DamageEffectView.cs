@@ -26,7 +26,7 @@ public class DamageEffectView : MonoBehaviour
         _damageable.DamageTaken -= OnDamageTaken;
     }
 
-    private void OnDamageTaken(int damage)
+    private void OnDamageTaken(int damage, float stagger)
     {
         if (_isEnabledFloatingDamageView)
             Instantiate(_floatingDamageView, transform.position, Quaternion.identity)

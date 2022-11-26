@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 866848417505653627}
   - component: {fileID: 866848417505653604}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2194124114044980736}
   - component: {fileID: 4888508170757603514}
   - component: {fileID: 6852092769471931909}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sssnake_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

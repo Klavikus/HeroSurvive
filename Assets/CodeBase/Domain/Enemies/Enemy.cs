@@ -39,7 +39,6 @@ namespace CodeBase.Domain.Enemies
             _animationSynchronizer = new AnimationSynchronizer(_animator);
 
             _damageable.Initialize(enemyData.DamageableData);
-
             _damageable.Died += () => Died?.Invoke(this);
             //TODO: Move _damageSource.HandleAttack into enemyStateMachine
             _enemyAI.AttackDistanceReached += _damageSource.HandleAttack;
@@ -59,7 +58,7 @@ namespace CodeBase.Domain.Enemies
             IdleEntityState idleEntityState = new IdleEntityState(_animationSynchronizer, _enemyAI);
             RunEntityState runEntityState = new RunEntityState(_animationSynchronizer, _enemyAI);
             DieEntityState dieEntityState = new DieEntityState(_animationSynchronizer, _enemyAI);
-            HitEntityState hitEntityState = new HitEntityState(_animationSynchronizer, _enemyAI);
+            HitEntityState hitEntityState = new HitEntityState(_animationSynchronizer, _enemyAI, _damageable);
 
             IdleToRunTransition idleToRunTransition = new IdleToRunTransition(runEntityState, _enemyAI);
             RunToIdleTransition runToIdleTransition = new RunToIdleTransition(idleEntityState, _enemyAI);

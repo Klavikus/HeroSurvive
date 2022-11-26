@@ -25,12 +25,15 @@ namespace CodeBase.Infrastructure.Factories
 
         public Ability Create(AbilityConfigSO initialAbilityConfig)
         {
-            AbilityData abilityData = _abilityUpgradesProvider.ConfigsByAbilityData[initialAbilityConfig];
+            // AbilityData abilityData = _abilityUpgradesProvider.ConfigsByAbilityData[initialAbilityConfig];
+            AbilityData abilityData = new AbilityData(initialAbilityConfig);
             //TODO: Replace _abilityProjectionBuilder.GetOrCreateProjectionPool() to projectionPoolFactory.Create()
-            return Create(abilityData, _abilityProjectionBuilder.GetOrCreateProjectionPool(abilityData));
+            return Create(abilityData, _abilityProjectionBuilder.GetOrCreateProjectionPool(abilityData),
+                initialAbilityConfig.UpgradeData);
         }
 
-        private Ability Create(AbilityData abilityConfig, ProjectionPool projectionPool) =>
-            new Ability(_abilityProjectionBuilder, abilityConfig, _coroutineRunner, projectionPool);
+        private Ability Create(AbilityData abilityConfig, ProjectionPool projectionPool,
+            AbilityUpgradeData[] upgradesData) =>
+            new Ability(_abilityProjectionBuilder, abilityConfig, _coroutineRunner, projectionPool, upgradesData);
     }
 }

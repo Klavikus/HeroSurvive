@@ -15,7 +15,6 @@ namespace CodeBase.Domain.Data
         [field: SerializeField] public List<AdditionalHeroProperty> AdditionalProperties { get; private set; }
 
         [field: SerializeField] public AbilityConfigSO InitialAbilityConfig { get; private set; }
-        [field: SerializeField] public AbilityViewData AbilityViewData { get; private set; }
         [field: SerializeField] public Player Prefab { get; private set; }
     }
 

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using CodeBase.Domain.Abilities;
 using CodeBase.Domain.Abilities.Attack;
 using CodeBase.Domain.Abilities.Movement;
+using CodeBase.Domain.Abilities.Size;
 using CodeBase.Domain.Enums;
 using CodeBase.Infrastructure.Pools;
 using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.StateMachine;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factories
@@ -13,13 +15,16 @@ namespace CodeBase.Infrastructure.Factories
     public class AbilityProjectionBuilder
     {
         private readonly TargetFinderService _targetFinderService;
+        private readonly AudioPlayerService _audioPlayerService;
         private readonly ProjectionPool _projectionPool;
         private readonly Transform _poolContainer;
 
         private Dictionary<MoveType, Type> _dictionaryMoveTypes = new Dictionary<MoveType, Type>()
         {
             [MoveType.Orbital] = typeof(OrbitalMove),
+            [MoveType.OrbitalMovePoint] = typeof(OrbitalMovePoint),
             [MoveType.MoveUp] = typeof(MoveUp),
+            [MoveType.Follow] = typeof(Follow),
         };
 
         private Dictionary<AttackType, Type> _dictionaryAttackTypes = new Dictionary<AttackType, Type>()
@@ -29,12 +34,20 @@ namespace CodeBase.Infrastructure.Factories
             [AttackType.Single] = typeof(SingleAttack),
         };
 
+        private Dictionary<SizeType, Type> _dictionarySizeTypes = new Dictionary<SizeType, Type>()
+        {
+            [SizeType.Constant] = typeof(ConstantSize),
+            [SizeType.OverLifetime] = typeof(SizeOverLifetime),
+            [SizeType.OverLifetimeFixed] = typeof(SizeOverLifetimeFixed),
+        };
+
         private readonly Dictionary<AbilityData, ProjectionPool> _projectionPools =
             new Dictionary<AbilityData, ProjectionPool>();
 
-        public AbilityProjectionBuilder(TargetFinderService targetFinderService)
+        public AbilityProjectionBuilder(TargetFinderService targetFinderService, AudioPlayerService audioPlayerService)
         {
             _targetFinderService = targetFinderService;
+            _audioPlayerService = audioPlayerService;
             _poolContainer = GameObject.Instantiate(new GameObject("poolContainer")).transform;
         }
 
@@ -58,15 +71,26 @@ namespace CodeBase.Infrastructure.Factories
             for (var i = 0; i < projections.Length; i++)
             {
                 projections[i].Initialize(
+                    _audioPlayerService,
                     _targetFinderService,
                     abilityData,
                     GetAttackBehaviour(abilityData),
                     GetMovementBehaviour(abilityData),
+                    GetSizeBehaviour(abilityData),
                     GetSpawnData(abilityData, pivotObject, i));
             }
-            
+
 
             return projections;
+        }
+
+        private ISizeBehaviour GetSizeBehaviour(AbilityData abilityConfig)
+        {
+            Type sizeType = _dictionarySizeTypes.ContainsKey(abilityConfig.SizeBehaviourData.SizeType)
+                ? _dictionarySizeTypes[abilityConfig.SizeBehaviourData.SizeType]
+                : throw new NullReferenceException(nameof(sizeType));
+
+            return Activator.CreateInstance(sizeType) as ISizeBehaviour;
         }
 
         private IAttackBehaviour GetAttackBehaviour(AbilityData abilityConfig)
@@ -91,7 +115,7 @@ namespace CodeBase.Infrastructure.Factories
         {
             Vector3 directionToTarget = _targetFinderService.GetClosestEnemyToPlayer();
             Vector3 directionToClosest = (directionToTarget - pivotObject.position).normalized;
-
+            Vector3 enemyPosition = Vector3.zero;
 
             if (abilityData.TargetingType == TargetingType.ByDirection)
                 directionToClosest = _targetFinderService.GetPlayerDirection();
@@ -106,23 +130,39 @@ namespace CodeBase.Infrastructure.Factories
 
             if (abilityData.TargetingType == TargetingType.RandomTarget)
             {
-                directionToClosest = (_targetFinderService.GetRandomEnemyPosition() - pivotObject.position).normalized;
-
+                enemyPosition = _targetFinderService.GetRandomEnemyPosition();
+                directionToClosest = (enemyPosition - pivotObject.position).normalized;
                 if (directionToTarget == Vector3.zero)
                     directionToClosest = _targetFinderService.GetPlayerDirection();
             }
 
+            float distanceToTarget = (directionToTarget - pivotObject.position).magnitude;
+
+            Vector3 startPosition = Vector3.zero;
+            float newOffset = 0;
+
             switch (abilityData.SpawnPosition)
             {
                 case SpawnType.Point:
-                    Vector3 startPosition = pivotObject.position + directionToClosest * abilityData.Radius;
-                    float newOffset;
+                    // Vector3 startPosition = pivotObject.position + directionToClosest * abilityData.Radius;
+                    startPosition = enemyPosition;
                     if (abilityData.MoveType == MoveType.Orbital)
                         newOffset = 360f / abilityData.SpawnCount * i;
                     else
                         newOffset = abilityData.Radius;
-                    return new SpawnData(pivotObject, i, newOffset, startPosition,
-                        directionToClosest);
+
+
+                    return new SpawnData(pivotObject, i, newOffset, startPosition, directionToClosest);
+
+                case SpawnType.PivotPoint:
+                    startPosition = pivotObject.position + directionToClosest * abilityData.Radius;
+                    if (abilityData.MoveType == MoveType.Orbital)
+                        newOffset = 360f / abilityData.SpawnCount * i;
+                    else
+                        newOffset = abilityData.Radius;
+
+
+                    return new SpawnData(pivotObject, i, newOffset, startPosition, directionToClosest);
 
                 case SpawnType.Circle:
                     float degreeStep = 360f / abilityData.SpawnCount;
