@@ -56,12 +56,17 @@ namespace CodeBase.Infrastructure.Factories
             }
 
             Debug.Log("LoadPrefsToData loaded");
+        
             string currencyValue = PlayerPrefs.HasKey(GameConstants.CurrencyDataKey)
                 ? PlayerPrefs.GetString(GameConstants.CurrencyDataKey)
                 : "300000";
-
             SaveToData(GameConstants.CurrencyDataKey, currencyValue);
 
+            string userName = PlayerPrefs.HasKey(GameConstants.UserNameDataKey)
+                ? PlayerPrefs.GetString(GameConstants.UserNameDataKey)
+                : GameConstants.BaseUserName;
+            SaveToData(GameConstants.UserNameDataKey, userName);
+            
             AllLoaded?.Invoke();
         }
 

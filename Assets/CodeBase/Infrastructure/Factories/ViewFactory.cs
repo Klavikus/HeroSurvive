@@ -2,6 +2,7 @@
 using CodeBase.Domain.Data;
 using CodeBase.Infrastructure.Services;
 using CodeBase.MVVM.Builders;
+using CodeBase.MVVM.Models;
 using CodeBase.MVVM.ViewModels;
 using CodeBase.MVVM.Views;
 using CodeBase.MVVM.Views.HeroSelector;
@@ -10,7 +11,7 @@ using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factories
 {
-    public class ViewFactory
+    public class ViewFactory : IViewFactory
     {
         private readonly ConfigurationProvider _configurationProvider;
         private readonly HeroSelectorViewModel _heroSelectorViewModel;
@@ -139,13 +140,25 @@ namespace CodeBase.Infrastructure.Factories
             return currencyView;
         }
 
-        public UserNameView CreateUserNameView()
+        public UserNameSetterView CreateUserNameView()
         {
-            UserNameView userNameView = GameObject.Instantiate(_configurationProvider.UserNameView);
+            UserNameSetterView userNameSetterView = GameObject.Instantiate(_configurationProvider.UserNameSetterView);
 
-            userNameView.Initialize(_userNameViewModel);
-            return userNameView;
+            userNameSetterView.Initialize(_userNameViewModel);
+            return userNameSetterView;
         }
+
+        public LeaderBoardScoreView[] CreateLeaderBoardScoreViews(IReadOnlyList<LeaderBoard> leaderBoards)
+        {
+            LeaderBoardScoreView[] result = new LeaderBoardScoreView[leaderBoards.Count];
+
+            for (var i = 0; i < leaderBoards.Count; i++)
+                result[i] = CreateLeaderBoardScoreView();
+
+            return result;
+        }
+        public LeaderBoardScoreView CreateLeaderBoardScoreView() =>
+            GameObject.Instantiate(_configurationProvider.MainMenuConfig.LeaderBoardScoreView);
     }
 
     public class GameLoopViewFactory

@@ -10,6 +10,7 @@ namespace CodeBase.MVVM.Views.HeroSelector
         [SerializeField] private Canvas _baseCanvas;
         [SerializeField] private Button _closeButton;
         [SerializeField] private Button _continueButton;
+        [SerializeField] private Button _userNameButton;
         [SerializeField] private RectTransform _heroViewsContainer;
         [SerializeField] private RectTransform _propertiesViewContainer;
         [SerializeField] private HeroDescriptionView _heroDescriptionView;
@@ -44,6 +45,7 @@ namespace CodeBase.MVVM.Views.HeroSelector
             _currencyView.Initialize(currencyViewModel, descriptionBuilder);
             _continueButton.onClick.AddListener(OnContinueButtonClicked);
             _closeButton.onClick.AddListener(OnCloseButtonClicked);
+            _userNameButton.onClick.AddListener(OnUserNameButtonClicked);
 
             if (_heroSelectorViewModel.CurrentSelectedHeroData != null)
                 _heroDescriptionView.Render(_heroSelectorViewModel.CurrentSelectedHeroData);
@@ -96,5 +98,7 @@ namespace CodeBase.MVVM.Views.HeroSelector
         private void OnContinueButtonClicked() => _heroSelectorViewModel.Continue();
 
         private void OnCloseButtonClicked() => _heroSelectorViewModel.DisableHeroSelector();
+
+        private void OnUserNameButtonClicked() => _heroSelectorViewModel.InvokeUserNameShow();
     }
 }

@@ -9,18 +9,18 @@ namespace CodeBase.MVVM.Builders
     {
         private readonly ViewFactory _viewFactory;
 
-        public MainMenuViewBuilder(ViewFactory viewFactory) => 
+        public MainMenuViewBuilder(ViewFactory viewFactory) =>
             _viewFactory = viewFactory;
 
         public void Build()
         {
+            UserNameSetterView userNameSetterView = _viewFactory.CreateUserNameView();
             StartMenuView startMenuView = _viewFactory.CreateStartMenu();
             HeroSelectorView heroSelector = _viewFactory.CreateHeroSelectorView();
             HeroView[] heroViews = _viewFactory.CreateHeroViews();
             PropertyView[] propertyViews = _viewFactory.CreatePropertyViews();
-           
             UpgradesSelectorView upgradesSelectorView = _viewFactory.CreateUpgradesSelectorView();
-         
+
 
             heroSelector.SetHeroViews(heroViews);
             heroSelector.SetPropertyViews(propertyViews);

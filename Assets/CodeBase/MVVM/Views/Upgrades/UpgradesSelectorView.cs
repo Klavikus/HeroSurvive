@@ -11,6 +11,7 @@ namespace CodeBase.MVVM.Views.Upgrades
         [SerializeField] private Canvas _baseCanvas;
         [SerializeField] private RectTransform _upgradeViewsContainer;
         [SerializeField] private Button _closeButton;
+        [SerializeField] private Button _userNameButton;
         [SerializeField] private UpgradeFocusView _upgradeFocusView;
         [SerializeField] private RectTransform _currencyViewContainer;
         [SerializeField] private CurrencyView _currencyView;
@@ -68,11 +69,16 @@ namespace CodeBase.MVVM.Views.Upgrades
             BindUpgradeViews();
 
             _currencyView.Initialize(_currencyViewModel, descriptionBuilder);
-
             _closeButton.onClick.AddListener(OnCloseButtonClicked);
+            _userNameButton.onClick.AddListener(OnUserNameButtonClicked);
             SubscribeToViewModel();
 
             Hide();
+        }
+
+        private void OnUserNameButtonClicked()
+        {
+            _menuViewModel.InvokeUserNameShow();
         }
 
         private void BindUpgradeViews()

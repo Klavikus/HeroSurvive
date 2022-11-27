@@ -1,4 +1,5 @@
-﻿using CodeBase.ForSort;
+﻿using CodeBase.Configs;
+using CodeBase.ForSort;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PropertiesProviders;
@@ -6,6 +7,7 @@ using CodeBase.Infrastructure.Services.UpgradeService;
 using CodeBase.MVVM.Builders;
 using CodeBase.MVVM.Models;
 using CodeBase.MVVM.ViewModels;
+using CodeBase.MVVM.Views;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.StateMachine
@@ -86,7 +88,7 @@ namespace CodeBase.Infrastructure.StateMachine
             AllServices.Container.RegisterSingle<IAdsProvider>(adsProvider);
 
             //ViewModels
-            UserNameViewModel userNameViewModel = new UserNameViewModel(userModel, gameLoopModel);
+            UserNameViewModel userNameViewModel = new UserNameViewModel(userModel, menuModel);
             HeroSelectorViewModel heroSelectorViewModel =
                 new HeroSelectorViewModel(heroModel, menuModel, gameLoopModel);
             MainPropertiesViewModel propertiesViewModel = new MainPropertiesViewModel(propertiesModel);
@@ -121,6 +123,14 @@ namespace CodeBase.Infrastructure.StateMachine
             _services.RegisterSingle<IPropertyProvider>(propertyProvider);
 
             _services.RegisterSingle<IModelProvider>(modelProvider);
+
+
+            LeaderBoardsViewModel leaderBoardsViewModel = new LeaderBoardsViewModel(new[]
+                {new LeaderBoard(GameConstants.StageTotalKillsLeaderBoardKey, userModel)}, userModel);
+
+            ViewModelProvider viewModelProvider = new ViewModelProvider(userNameViewModel,
+                leaderBoardsViewModel);
+            _services.RegisterSingle<IViewModelProvider>(viewModelProvider);
 
             //GameLoopCompositionRoot
             AbilityUpgradesProvider abilityUpgradesProvider = new AbilityUpgradesProvider(configurationProvider);
@@ -159,14 +169,14 @@ namespace CodeBase.Infrastructure.StateMachine
             GameLoopViewModel gameLoopViewModel =
                 new GameLoopViewModel(gameLoopModel, leveCompetitionService, playerEventHandler, currencyViewModel,
                     adsProvider);
-            GameLoopViewFactory gameLoopViewFactory =
-                new GameLoopViewFactory(configurationProvider, gameLoopViewModel, levelUpViewModel,
-                    upgradeDescriptionBuilder);
+            GameLoopViewFactory gameLoopViewFactory = new GameLoopViewFactory(configurationProvider, gameLoopViewModel,
+                levelUpViewModel,
+                upgradeDescriptionBuilder);
             GameLoopViewBuilder gameLoopViewBuilder = new GameLoopViewBuilder(gameLoopViewFactory);
             GameLoopService gameLoopService = new GameLoopService(levelMapFactory, gameLoopViewBuilder, abilityBuilder,
                 heroModel, playerBuilder, gameLoopModel, leveCompetitionService, playerEventHandler);
             _services.RegisterSingle<IGameLoopService>(gameLoopService);
-
+            _services.RegisterSingle<IViewFactory>(viewFactory);
 
             _services.RegisterSingle<IMainMenuFactory>(mainMenuFactory);
         }

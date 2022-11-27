@@ -2,6 +2,7 @@
 using CodeBase.ForSort;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.StateMachine;
+using CodeBase.MVVM.Models;
 using CodeBase.MVVM.Views;
 
 namespace CodeBase.Infrastructure.Services
@@ -13,7 +14,7 @@ namespace CodeBase.Infrastructure.Services
         public ConfigurationProvider(ConfigurationContainer configurationContainer) =>
             _configurationContainer = configurationContainer;
 
-        public UserNameView UserNameView => _configurationContainer.UserNameView;
+        public UserNameSetterView UserNameSetterView => _configurationContainer.UserNameSetterView;
         public BasePropertiesConfigSO BasePropertiesConfig => _configurationContainer.BasePropertiesConfigSO;
         public MainMenuConfigurationSO MainMenuConfig => _configurationContainer.MainMenuConfigurationSo;
         public HeroesConfigSO HeroConfig => _configurationContainer.HeroConfigSO;

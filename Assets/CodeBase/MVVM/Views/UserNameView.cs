@@ -1,15 +1,36 @@
-﻿using CodeBase.MVVM.ViewModels;
+﻿using System;
+using CodeBase.Infrastructure.Services;
+using CodeBase.MVVM.ViewModels;
+using TMPro;
 using UnityEngine;
 
 namespace CodeBase.MVVM.Views
 {
     public class UserNameView : MonoBehaviour
     {
-        private UserNameViewModel _userNameViewModel;
+        [SerializeField] private TMP_Text _text;
 
-        public void Initialize(UserNameViewModel userNameViewModel)
+        private UserNameViewModel _userNameViewModel;
+        private IViewModelProvider _viewModelProvider;
+
+        private void OnEnable()
         {
-            _userNameViewModel = userNameViewModel;
+            if (_userNameViewModel == null)
+                return;
+            
+            _userNameViewModel.UserNameChanged += OnNameChanged;
         }
+
+        private void OnDisable() => _userNameViewModel.UserNameChanged -= OnNameChanged;
+
+        private void Start()
+        {
+            _viewModelProvider = AllServices.Container.Single<IViewModelProvider>();
+            _userNameViewModel = _viewModelProvider.UserNameViewModel;
+            _text.text = _userNameViewModel.Name;
+            _userNameViewModel.UserNameChanged += OnNameChanged;
+        }
+
+        private void OnNameChanged(string newName) => _text.text = newName;
     }
 }

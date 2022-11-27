@@ -19,7 +19,7 @@ namespace CodeBase.Infrastructure.StateMachine
         [field: SerializeField] public StageCompetitionConfigSO StageCompetitionConfigSO { get; private set; }
         [field: SerializeField] public CoroutineRunner CoroutineRunner { get; private set; }
         [field: SerializeField] public AbilityConfigSO[] AbilityConfigsSO { get; private set; }
-        [field: SerializeField] public UserNameView UserNameView { get; private set; }
+        [field: SerializeField] public UserNameSetterView UserNameSetterView { get; private set; }
         [field: SerializeField] public AudioPlayer AudioPlayer { get; private set; }
     }
 }

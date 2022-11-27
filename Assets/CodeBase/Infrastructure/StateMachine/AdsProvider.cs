@@ -21,6 +21,12 @@ namespace CodeBase.Infrastructure.StateMachine
 
         public void Initialize()
         {
+            
+#if !UNITY_WEBGL || UNITY_EDITOR
+            Initialized?.Invoke();
+            return;
+#endif
+            
             YandexGamesSdk.CallbackLogging = true;
 
             _coroutineRunner.StartCoroutine(YandexGamesSdk.Initialize(onSuccessCallback: OnSuccessCallback));

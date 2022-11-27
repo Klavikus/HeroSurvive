@@ -1,5 +1,10 @@
-﻿using CodeBase.Infrastructure.Factories;
+﻿using Agava.YandexGames;
+using CodeBase.Configs;
+using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Services;
+using CodeBase.MVVM.Models;
+using CodeBase.MVVM.Views;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.StateMachine
 {
@@ -19,17 +24,23 @@ namespace CodeBase.Infrastructure.StateMachine
         {
             _persistentDataService = AllServices.Container.Single<IPersistentDataService>();
             _adsProvider = AllServices.Container.Single<IAdsProvider>();
-           
+
             _persistentDataService.LoadOrDefaultUpgradeModels();
             _gameStateMachine.Enter<LoadLevelState, string>(MainMenuScene);
-            
-            // _adsProvider.Initialized += AdsProviderOnInitialized;
+
+            _adsProvider.Initialized += AdsProviderOnInitialized;
         }
 
         private void AdsProviderOnInitialized()
         {
-            _persistentDataService.LoadOrDefaultUpgradeModels();
-            _gameStateMachine.Enter<LoadLevelState, string>(MainMenuScene);
+            PlayerAccount.Authorize(onSuccessCallback: () =>
+            {
+                _persistentDataService.LoadOrDefaultUpgradeModels();
+                _gameStateMachine.Enter<LoadLevelState, string>(MainMenuScene);
+                LeaderBoardsViewModel a = AllServices.Container.Single<IViewModelProvider>().LeaderBoardsViewModel;
+                a.UpdateAll();
+                a.SetScore(Random.Range(0, 100), GameConstants.StageTotalKillsLeaderBoardKey);
+            });
         }
 
         public void Exit()

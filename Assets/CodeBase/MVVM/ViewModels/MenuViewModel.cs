@@ -25,5 +25,7 @@ namespace CodeBase.MVVM.ViewModels
         public void EnableUpgradeSelection() => _menuModel.EnableUpgradeSelection();
 
         public void DisableUpgradeSelection() => _menuModel.DisableUpgradeSelection();
+
+        public void InvokeUserNameShow() => _menuModel.InvokeUserNameShow();
     }
 }

@@ -7,22 +7,30 @@ namespace CodeBase.MVVM.ViewModels
     public class UserNameViewModel
     {
         private readonly UserModel _userModel;
-        private readonly GameLoopModel _gameLoopModel;
+        private readonly MenuModel _menuModel;
 
         public event Action<string> UserNameChanged;
         public event Action ShowInvoked;
+        public event Action HideInvoked;
 
         public bool IsDefaultName => _userModel.Name == GameConstants.BaseUserName;
+        public string Name => _userModel.Name;
 
-        public UserNameViewModel(UserModel userModel, GameLoopModel gameLoopModel)
+        public UserNameViewModel(UserModel userModel, MenuModel menuModel)
         {
             _userModel = userModel;
-            _gameLoopModel = gameLoopModel;
-            _userModel.NameChanged += name => UserNameChanged?.Invoke(name);
-            _gameLoopModel.UserNameShowInvoked += () => ShowInvoked?.Invoke();
+            _menuModel = menuModel;
+            _userModel.NameChanged += OnNameChanged;
+            _menuModel.UserNameShowInvoked += () => ShowInvoked?.Invoke();
+            _menuModel.UserNameHideInvoked += () => HideInvoked?.Invoke();
+        }
+
+        private void OnNameChanged(string name)
+        {
+            UserNameChanged?.Invoke(name);
+            _menuModel.InvokeUserNameHide();
         }
 
         public void SetUserName(string name) => _userModel.SetName(name);
-        private void Show() => ShowInvoked?.Invoke();
     }
 }

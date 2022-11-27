@@ -8,5 +8,8 @@
         public const string CurrencyDataKey = "Currency";
         public const string UserNameDataKey = "UserName";
         public const string BaseUserName  = "Stranger";
+        public const string StageTotalKillsLeaderBoardKey  = "StageTotalKills";
+        
+        public const int MaxNameLength  = 15;
     }
 }

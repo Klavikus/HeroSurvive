@@ -50,6 +50,8 @@ namespace CodeBase.Infrastructure.Factories
 
             if (int.TryParse(_saveLoadService.GetData(GameConstants.CurrencyDataKey), out int loadedCurrency))
                 _modelProvider.CurrencyModel.SetAmount(loadedCurrency);
+
+            _modelProvider.UserModel.SetName(_saveLoadService.GetData(GameConstants.UserNameDataKey));
         }
 
         private void SaveUpgrade(UpgradeModel upgradeModel)
