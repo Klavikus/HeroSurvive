@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca815227c9824102b173b4ad0b69cad4, type: 3}
+  m_Name: LaserBeam
+  m_EditorClassIdentifier: 
+  <AttackType>k__BackingField: 1
+  <WhatIsEnemy>k__BackingField:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 128
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  <Damage>k__BackingField: 1
+  <MaxAffectedEnemy>k__BackingField: 5
+  <Penetration>k__BackingField: 0
+  <_isLimitedPenetration>k__BackingField: 0
+  <AttackDelay>k__BackingField: 0.1
+  <BurstCount>k__BackingField: 1
+  <MaxBurstCount>k__BackingField: 1
+  <BurstFireDelay>k__BackingField: 0
+  <SpawnPosition>k__BackingField: 1
+  <Direction>k__BackingField: {x: 0, y: 1}
+  <SpawnCount>k__BackingField: 1
+  <Radius>k__BackingField: 0.1
+  <Arc>k__BackingField: 30
+  <MoveType>k__BackingField: 3
+  <Speed>k__BackingField: 0
+  <RotationStep>k__BackingField: 30
+  <StartTimePercent>k__BackingField: 0.2
+  <EndTimePercent>k__BackingField: 0.2
+  <StartRadiusCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <MainRadiusCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <EndRadiusCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <AlignWithRotation>k__BackingField: 1
+  <FlipDirectionAllowed>k__BackingField: 0
+  <TargetingType>k__BackingField: 0
+  <Size>k__BackingField: 1
+  <Duration>k__BackingField: 3
+  <Cooldown>k__BackingField: 3
+  <AbilityView>k__BackingField: {fileID: 458041698415088978, guid: d4936fa8ae6b4694da635582d191ae48, type: 3}
+  <IsSelfParent>k__BackingField: 0
+  <UpgradeData>k__BackingField:
+  - <ViewData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 0}
+      <Name>k__BackingField: 
+    <PropertyType>k__BackingField: 3
+    <Value>k__BackingField: 1000
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+  <UpgradeViewData>k__BackingField:
+    <Icon>k__BackingField: {fileID: 21300000, guid: 9b69b31a64f1f38409a15962ec731f65, type: 3}
+    <Name>k__BackingField: LihtingStrike
