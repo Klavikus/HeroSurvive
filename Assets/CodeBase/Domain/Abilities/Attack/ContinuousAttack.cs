@@ -17,7 +17,7 @@ namespace CodeBase.Domain.Abilities.Attack
         {
             yield return base.Run();
 
-            while (_canRun)
+            while (CanRun)
             {
                 CheckOverlap();
                 yield return null;
@@ -26,33 +26,31 @@ namespace CodeBase.Domain.Abilities.Attack
 
         private void CheckOverlap()
         {
-            int count = _rigidbody2D.Cast(Vector2.zero, _abilityConfig.WhatIsEnemy, _results);
+            int count = Rigidbody2D.Cast(Vector2.zero, AbilityConfig.WhatIsEnemy, Results);
 
             if (count > 0)
             {
                 for (var i = 0; i < count; i++)
-                    if (_results[i].collider.TryGetComponent(out Damageable damageable) && damageable.CanReceiveDamage)
-                        _currentEnemys.Add(damageable);
+                    if (Results[i].collider.TryGetComponent(out Damageable damageable) && damageable.CanReceiveDamage)
+                        CurrentEnemies.Add(damageable);
 
-                foreach (Damageable newDamageable in _currentEnemys.Except(_previousEnemys))
+                foreach (Damageable newDamageable in CurrentEnemies.Except(PreviousEnemies))
                 {
-                    newDamageable.TakeDamage(_abilityConfig.Damage, _abilityConfig.Stagger);
-                    if (_abilityConfig.IsLimitedPenetration && --Penetration == 0)
+                    newDamageable.TakeDamage(AbilityConfig.Damage, AbilityConfig.Stagger);
+                    if (AbilityConfig.IsLimitedPenetration && --Penetration == 0)
                     {
-                        _canRun = false;
+                        CanRun = false;
                         InvokePenetrationLimit();
                     }
                 }
 
-                if (_currentEnemys.Except(_previousEnemys).Any()) 
+                if (CurrentEnemies.Except(PreviousEnemies).Any())
                     InvokeEnemyHitted();
             }
 
-            _previousEnemys.Clear();
-            _previousEnemys.AddRange(_currentEnemys);
-            _currentEnemys.Clear();
+            PreviousEnemies.Clear();
+            PreviousEnemies.AddRange(CurrentEnemies);
+            CurrentEnemies.Clear();
         }
-
-
     }
 }

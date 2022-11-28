@@ -11,15 +11,10 @@ namespace CodeBase.Domain.Abilities.Movement
         {
             float elapsedTime = 0;
             _currentMoveObject = ObjectForMove.transform;
-
             ObjectForMove.position = SpawnData.StartPosition;
 
-            var pivotObject = SpawnData.PivotObject;
-
-            if (AlignRotationWithDirection)
-            {
+            if (AlignRotationWithDirection) 
                 ObjectForMove.up = SpawnData.NewDirection;
-            }
 
             if (FlipDirectionAllowed)
             {

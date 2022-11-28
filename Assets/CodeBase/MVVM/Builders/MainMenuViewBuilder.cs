@@ -21,13 +21,8 @@ namespace CodeBase.MVVM.Builders
             PropertyView[] propertyViews = _viewFactory.CreatePropertyViews();
             UpgradesSelectorView upgradesSelectorView = _viewFactory.CreateUpgradesSelectorView();
 
-
             heroSelector.SetHeroViews(heroViews);
             heroSelector.SetPropertyViews(propertyViews);
-
-            // startMenuView.Show();
-            // heroSelector.Hide();
-            // upgradesSelectorView.Hide();
         }
     }
 }

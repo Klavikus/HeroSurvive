@@ -10,6 +10,8 @@ namespace CodeBase.MVVM.Models
         public event Action ClosedUpgradeSelection;
         public event Action UserNameShowInvoked;
         public event Action UserNameHideInvoked;
+        public event Action LeaderBoardShowInvoked;
+        public event Action LeaderBoardHideInvoked;
 
 
         public void EnableHeroSelector() => OpenedHeroSelection?.Invoke();
@@ -18,5 +20,8 @@ namespace CodeBase.MVVM.Models
         public void InvokeUserNameShow() => UserNameShowInvoked?.Invoke();
         public void InvokeUserNameHide() => UserNameHideInvoked?.Invoke();
         public void DisableUpgradeSelection() => ClosedUpgradeSelection?.Invoke();
+
+        public void InvokeLeaderBoardShow() => LeaderBoardShowInvoked?.Invoke();
+        public void InvokeLeaderBoardHide() => LeaderBoardHideInvoked?.Invoke();
     }
 }

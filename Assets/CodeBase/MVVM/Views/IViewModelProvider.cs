@@ -8,5 +8,6 @@ namespace CodeBase.MVVM.Views
     {
         public UserNameViewModel UserNameViewModel { get; }
         public LeaderBoardsViewModel LeaderBoardsViewModel { get; }
+        public MenuViewModel MenuViewModel { get; }
     }
 }

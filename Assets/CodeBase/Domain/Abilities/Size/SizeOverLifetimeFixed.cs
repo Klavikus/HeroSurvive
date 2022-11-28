@@ -9,10 +9,8 @@ namespace CodeBase.Domain.Abilities.Size
 
         private Transform _targetTransform;
         private SizeBehaviourData _sizeBehaviourData;
-
         private WaitForSeconds _oneStepDuration;
         private WaitForSeconds _mainPeriodInSeconds;
-
 
         public void Initialize(Transform targetTransform, SizeBehaviourData sizeBehaviourData)
         {
@@ -35,9 +33,6 @@ namespace CodeBase.Domain.Abilities.Size
             float startPeriodSteps = _sizeBehaviourData.StartTime * StepsInSecond;
             float startPeriodStepValue = (_sizeBehaviourData.MainTargetSize - _sizeBehaviourData.StartTargetSize) /
                                          startPeriodSteps;
-
-            bool _isMirored = _targetTransform.localScale.x < 0;
-
 
             for (int i = 0; i < startPeriodSteps; i++)
             {

@@ -13,9 +13,9 @@ namespace CodeBase.Configs
     public class BasePropertiesConfigSO : ScriptableObject
     {
         [SerializeField] private List<MainPropertyViewData> _data;
-        
+
         private Dictionary<BaseProperty, MainPropertyViewData> _propertyViewsData;
-        
+
         [field: SerializeField] public PropertyView PropertyView { get; private set; }
         public IReadOnlyList<MainPropertyViewData> PropertiesData => _data;
 

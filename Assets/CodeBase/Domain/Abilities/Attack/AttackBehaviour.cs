@@ -8,15 +8,15 @@ namespace CodeBase.Domain.Abilities.Attack
 {
     public abstract class AttackBehaviour : IAttackBehaviour
     {
-        protected readonly AbilityData _abilityConfig;
+        protected readonly AbilityData AbilityConfig;
 
         protected int Penetration;
-        protected RaycastHit2D[] _results;
-        protected Rigidbody2D _rigidbody2D;
-        protected List<Damageable> _previousEnemys = new List<Damageable>();
-        protected List<Damageable> _currentEnemys = new List<Damageable>();
-        protected WaitForSeconds _attackDelayInSeconds;
-        protected bool _canRun;
+        protected RaycastHit2D[] Results;
+        protected Rigidbody2D Rigidbody2D;
+        protected List<Damageable> PreviousEnemies = new();
+        protected List<Damageable> CurrentEnemies = new();
+        protected WaitForSeconds AttackDelayInSeconds;
+        protected bool CanRun;
 
         public event Action PenetrationLimit;
         public event Action EnemyHitted;
@@ -26,22 +26,22 @@ namespace CodeBase.Domain.Abilities.Attack
 
         protected AttackBehaviour(AbilityData abilityConfig)
         {
-            _abilityConfig = abilityConfig;
-            Penetration = _abilityConfig.Penetration;
+            AbilityConfig = abilityConfig;
+            Penetration = AbilityConfig.Penetration;
         }
 
         public void Initialize(Rigidbody2D rigidbody2D)
         {
-            _rigidbody2D = rigidbody2D;
-            _attackDelayInSeconds = new WaitForSeconds(_abilityConfig.AttackDelay);
-            _results = new RaycastHit2D[_abilityConfig.MaxAffectedEnemy];
-            Penetration = _abilityConfig.Penetration;
-            _canRun = true;
+            Rigidbody2D = rigidbody2D;
+            AttackDelayInSeconds = new WaitForSeconds(AbilityConfig.AttackDelay);
+            Results = new RaycastHit2D[AbilityConfig.MaxAffectedEnemy];
+            Penetration = AbilityConfig.Penetration;
+            CanRun = true;
         }
 
         public virtual IEnumerator Run()
         {
-            yield return _attackDelayInSeconds;
+            yield return AttackDelayInSeconds;
         }
     }
 }

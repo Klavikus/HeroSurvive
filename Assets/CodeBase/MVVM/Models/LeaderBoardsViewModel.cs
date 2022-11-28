@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Agava.YandexGames;
+using CodeBase.Configs;
+using CodeBase.ForSort;
 using UnityEngine;
 
 namespace CodeBase.MVVM.Models
@@ -8,72 +12,103 @@ namespace CodeBase.MVVM.Models
     public class LeaderBoardsViewModel
     {
         private readonly LeaderBoard[] _leaderBoards;
-        private List<LeaderBoardEntryData> _entriesData;
-        private UserModel _userModel;
+        private readonly UserModel _userModel;
+        private readonly ICoroutineRunner _coroutineRunner;
+        private readonly Dictionary<string, LeaderBoard> _leaderBoardByNames;
+        private readonly WaitForSeconds _passiveUpdateDelay = new(GameConstants.LeaderBoardPassiveUpdateDelay);
 
-        public IReadOnlyList<LeaderBoardEntryData> EntriesData => _entriesData;
+        private Coroutine _autoUpdateCoroutine;
+        private LeaderboardEntryResponse _playerCachedEntry;
+        private bool _playerNotInLeaderBoard;
+        public event Action LeaderBoardUpdated;
+        public event Action PlayerScoreUpdated;
 
-        public event Action<IReadOnlyList<LeaderBoardEntryData>> LeaderBoardUpdated;
-
-        public LeaderBoardsViewModel(LeaderBoard[] leaderBoards, UserModel userModel)
+        public LeaderBoardsViewModel(LeaderBoard[] leaderBoards, UserModel userModel, ICoroutineRunner coroutineRunner)
         {
             _leaderBoards = leaderBoards;
             _userModel = userModel;
+            _coroutineRunner = coroutineRunner;
+            _leaderBoardByNames = new Dictionary<string, LeaderBoard>();
             foreach (LeaderBoard leaderBoard in _leaderBoards)
             {
-                leaderBoard.Updated += OnLeaderBoardUpdated;
-                leaderBoard.ScoreSetted += OnLeaderBoardScoreSetted;
+                _leaderBoardByNames.Add(leaderBoard.Name, leaderBoard);
+                leaderBoard.Updated += OnLocalLeaderBoardUpdated;
             }
-
-            CalculateEntriesData();
         }
 
-        public IReadOnlyList<LeaderBoard> LeaderBoards => _leaderBoards;
-
-        private void OnLeaderBoardScoreSetted(string leaderboardName, int newScore) =>
-            Leaderboard.SetScore(leaderboardName, newScore, extraData: _userModel.Name);
-
-        private void OnLeaderBoardUpdated(LeaderBoard leaderBoard)
+        public IReadOnlyCollection<LeaderboardEntryResponse> GetLeaderboardEntries(string leaderBoardName)
         {
-            CalculateEntriesData();
-            LeaderBoardUpdated?.Invoke(_entriesData);
+            Debug.Log("GetLeaderboardEntries");
+            return _leaderBoardByNames[leaderBoardName].CachedEntries;
         }
 
-        public void UpdateAll()
+        public void StartAutoUpdate()
         {
-            Debug.Log($"{nameof(UpdateAll)}");
+            if (_autoUpdateCoroutine != null)
+                _coroutineRunner.Stop(_autoUpdateCoroutine);
+
+            _autoUpdateCoroutine = _coroutineRunner.Run(UpdateLeaderBoardCoroutine());
+        }
+
+        public void StopAutoUpdate()
+        {
+            if (_autoUpdateCoroutine != null)
+                _coroutineRunner.Stop(_autoUpdateCoroutine);
+        }
+
+        public void SetScore(string leaderBoardName, int newScore) =>
+            Leaderboard.SetScore(leaderBoardName, newScore, OnSuccessSetScoreCallback, extraData: _userModel.Name);
+
+        private void OnSuccessSetScoreCallback()
+        {
+            Debug.Log("OnSuccessSetScoreCallback..");
+
+            UpdateLocalLeaderBoards();
+            Debug.Log("OnSuccessSetScoreCallback..done");
+        }
+
+        public void UpdateLocalLeaderBoards()
+        {
+            Debug.Log("UpdateLocalLeaderBoards..");
+
             foreach (LeaderBoard leaderBoard in _leaderBoards)
-            {
-                Debug.Log($"{leaderBoard.Name} UpdateOrCreateEntries");
                 Leaderboard.GetEntries(leaderBoard.Name,
                     onSuccessCallback: result => leaderBoard.UpdateOrCreateEntries(result));
-            }
+
+            Leaderboard.GetPlayerEntry(GameConstants.StageTotalKillsLeaderBoardKey, OnGetPlayerScoreSuccessCallback);
+
+            // Leaderboard.GetEntries(leaderBoard.Name, _ => { });
+            Debug.Log("UpdateLocalLeaderBoards..done");
         }
 
-        public void SetScore(int range, string leaderBoardName)
-        {
-            Debug.Log($"SetScore");
+        public LeaderboardEntryResponse GetPlayerScoreEntry() => _playerCachedEntry;
 
-            foreach (LeaderBoard leaderBoard in _leaderBoards)
-            {
-                if (leaderBoard.Name == leaderBoardName)
-                    leaderBoard.SetScore(range);
-            }
+        public void SetMaxScore(int currentEnemyKilled)
+        {
+            if (_playerNotInLeaderBoard) 
+                SetScore(GameConstants.StageTotalKillsLeaderBoardKey, currentEnemyKilled);
+            
+            if (_playerCachedEntry != null && _playerCachedEntry.score < currentEnemyKilled)
+                SetScore(GameConstants.StageTotalKillsLeaderBoardKey, currentEnemyKilled);
         }
 
-        private void CalculateEntriesData()
+        private void OnLocalLeaderBoardUpdated(LeaderBoard leaderBoard)
         {
-            Debug.Log($"CalculateEntriesData 111");
-            _entriesData = new List<LeaderBoardEntryData>();
-            Debug.Log($"{_leaderBoards.Length}");
-            foreach (LeaderBoard leaderBoard in _leaderBoards)
-            {
-                Debug.Log($"{leaderBoard.Name}");
-                Debug.Log($"{leaderBoard.Entries.Count}");
-                _entriesData.Add(new LeaderBoardEntryData(leaderBoard.Name, leaderBoard.Entries));
-            }
+            Debug.Log("OnLocalLeaderBoardUpdated..");
+            LeaderBoardUpdated?.Invoke();
+        }
 
-            Debug.Log($"CalculateEntriesData done");
+        private IEnumerator UpdateLeaderBoardCoroutine()
+        {
+            yield return _passiveUpdateDelay;
+            UpdateLocalLeaderBoards();
+        }
+
+        private void OnGetPlayerScoreSuccessCallback(LeaderboardEntryResponse response)
+        {
+            _playerNotInLeaderBoard = response == null;
+            _playerCachedEntry = response;
+            PlayerScoreUpdated?.Invoke();
         }
     }
 }

@@ -37,9 +37,9 @@ namespace CodeBase.Infrastructure.StateMachine
             {
                 _persistentDataService.LoadOrDefaultUpgradeModels();
                 _gameStateMachine.Enter<LoadLevelState, string>(MainMenuScene);
-                LeaderBoardsViewModel a = AllServices.Container.Single<IViewModelProvider>().LeaderBoardsViewModel;
-                a.UpdateAll();
-                a.SetScore(Random.Range(0, 100), GameConstants.StageTotalKillsLeaderBoardKey);
+                LeaderBoardsViewModel leaderBoardsViewModel = AllServices.Container.Single<IViewModelProvider>().LeaderBoardsViewModel;
+                leaderBoardsViewModel.UpdateLocalLeaderBoards();
+                leaderBoardsViewModel.StartAutoUpdate();
             });
         }
 

@@ -16,6 +16,6 @@ namespace CodeBase.Infrastructure.Factories
         public UpgradeView UpgradeView;
         public UpgradeLevelView UpgradeLevelView;
         public CurrencyView CurrencyView;
-        public LeaderBoardScoreView LeaderBoardScoreView { get; set; }
+        public LeaderBoardScoreView LeaderBoardScoreView;
     }
 }

@@ -7,9 +7,10 @@
         public const string UpgradeModelPrefix = "Upgrade";
         public const string CurrencyDataKey = "Currency";
         public const string UserNameDataKey = "UserName";
-        public const string BaseUserName  = "Stranger";
-        public const string StageTotalKillsLeaderBoardKey  = "StageTotalKills";
-        
-        public const int MaxNameLength  = 15;
+        public const string BaseUserName = "Stranger";
+        public const string StageTotalKillsLeaderBoardKey = "StageTotalKills";
+
+        public const int MaxNameLength = 15;
+        public const float LeaderBoardPassiveUpdateDelay = 60f;
     }
 }

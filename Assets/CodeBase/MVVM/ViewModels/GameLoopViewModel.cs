@@ -16,6 +16,7 @@ namespace CodeBase.Infrastructure.Factories
         private readonly PlayerEventHandler _playerEventHandler;
         private readonly CurrencyViewModel _currencyViewModel;
         private readonly IAdsProvider _adsProvider;
+        private readonly LeaderBoardsViewModel _leaderBoardsViewModel;
 
         private int _currentEnemyKilled;
         private int _lastCompletedWave;
@@ -33,7 +34,8 @@ namespace CodeBase.Infrastructure.Factories
             LeveCompetitionService leveCompetitionService,
             PlayerEventHandler playerEventHandler,
             CurrencyViewModel currencyViewModel,
-            IAdsProvider adsProvider)
+            IAdsProvider adsProvider,
+            LeaderBoardsViewModel leaderBoardsViewModel)
         {
             _gameLoopModel = gameLoopModel;
             _gameLoopModel.StartLevelInvoked += OnLevelStart;
@@ -42,6 +44,7 @@ namespace CodeBase.Infrastructure.Factories
             _playerEventHandler = playerEventHandler;
             _currencyViewModel = currencyViewModel;
             _adsProvider = adsProvider;
+            _leaderBoardsViewModel = leaderBoardsViewModel;
             _lastCompletedWave = 0;
             _playerEventHandler.Died += OnPlayerDied;
             _leveCompetitionService.WaveCompleted += OnWaveCompleted;
@@ -80,6 +83,7 @@ namespace CodeBase.Infrastructure.Factories
         public void CloseLevel()
         {
             Time.timeScale = 1;
+            _leaderBoardsViewModel.SetMaxScore(_currentEnemyKilled);
             _gameLoopModel.InvokeLevelClose();
         }
 

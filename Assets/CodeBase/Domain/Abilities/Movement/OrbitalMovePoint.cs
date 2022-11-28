@@ -43,9 +43,7 @@ namespace CodeBase.Domain.Abilities.Movement
                     0);
 
                 if (AlignRotationWithDirection)
-                {
                     ObjectForMove.up = newPosition - TargetFinderService.GetPlayerPosition();
-                }
 
                 ObjectForMove.position = newPosition;
 

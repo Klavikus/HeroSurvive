@@ -9,7 +9,6 @@ namespace CodeBase.Domain.Abilities.Size
 
         private Transform _targetTransform;
         private SizeBehaviourData _sizeBehaviourData;
-
         private WaitForSeconds _oneStepDuration;
         private WaitForSeconds _mainPeriodInSeconds;
 
@@ -17,7 +16,6 @@ namespace CodeBase.Domain.Abilities.Size
         {
             _targetTransform = targetTransform;
             _sizeBehaviourData = sizeBehaviourData;
-
 
             float startPeriod = _sizeBehaviourData.FullTimePeriod * _sizeBehaviourData.StartTime;
             float endPeriod = _sizeBehaviourData.FullTimePeriod * _sizeBehaviourData.EndTime;

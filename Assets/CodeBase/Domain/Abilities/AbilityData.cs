@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CodeBase.Configs;
 using CodeBase.Domain.Abilities.Size;
 using CodeBase.Domain.Enums;
@@ -9,11 +8,52 @@ namespace CodeBase.Domain.Abilities
 {
     public class AbilityData
     {
-        private readonly Dictionary<BaseProperty, float> _upgradeModifiers = new Dictionary<BaseProperty, float>();
-        private readonly Dictionary<BaseProperty, float> _heroUpgradeModifiers = new Dictionary<BaseProperty, float>();
-        private readonly Dictionary<BaseProperty, float> _resultProperties = new Dictionary<BaseProperty, float>();
+        private readonly Dictionary<BaseProperty, float> _upgradeModifiers = new();
+        private readonly Dictionary<BaseProperty, float> _heroUpgradeModifiers = new();
+        private readonly Dictionary<BaseProperty, float> _resultProperties = new();
+        private readonly AbilityModifiersMask _modifiersMask;
 
-        private AbilityModifiersMask _modifiersMask;
+        public AttackType AttackType { get; private set; }
+        public ContactFilter2D WhatIsEnemy { get; private set; }
+        public int BaseDamage { get; private set; }
+        public int Damage { get; private set; }
+        public int MaxAffectedEnemy { get; private set; }
+        public int Penetration { get; private set; }
+        public bool IsLimitedPenetration { get; private set; }
+        public float AttackDelay { get; private set; }
+        public int BurstCount { get; private set; }
+        public int BaseBurstCount { get; private set; }
+        public int MaxBurstCount { get; private set; }
+        public float BurstFireDelay { get; private set; }
+        public SpawnType SpawnPosition { get; private set; }
+        public int SpawnCount { get; private set; }
+        public int BaseSpawnCount { get; private set; }
+        public float Radius { get; private set; }
+        public float BaseRadius { get; private set; }
+        public float Arc { get; private set; }
+        public MoveType MoveType { get; private set; }
+        public float Speed { get; private set; }
+        public float BaseSpeed { get; private set; }
+        public float RotationStep { get; private set; }
+        public float StartTimePercent { get; private set; }
+        public float EndTimePercent { get; private set; }
+        public AnimationCurve StartRadiusCurve { get; private set; }
+        public AnimationCurve MainRadiusCurve { get; private set; }
+        public AnimationCurve EndRadiusCurve { get; private set; }
+        public bool AlignWithRotation { get; private set; }
+        public bool FlipDirectionAllowed { get; private set; }
+        public TargetingType TargetingType { get; private set; }
+        public float BaseSize { get; private set; }
+        public float Size { get; private set; }
+        public float Duration { get; private set; }
+        public float BaseDuration { get; private set; }
+        public float Cooldown { get; private set; }
+        public float BaseCooldown { get; private set; }
+        public AbilityProjection AbilityView { get; private set; }
+        public bool IsSelfParent { get; private set; }
+        public float Stagger { get; private set; }
+        public AudioData AudioData { get; set; }
+        public SizeBehaviourData SizeBehaviourData { get; set; }
 
         public AbilityData(AbilityConfigSO abilityConfig)
         {
@@ -26,7 +66,7 @@ namespace CodeBase.Domain.Abilities
             Damage = BaseDamage;
             MaxAffectedEnemy = abilityConfig.MaxAffectedEnemy;
             Penetration = abilityConfig.Penetration;
-            IsLimitedPenetration = abilityConfig._isLimitedPenetration;
+            IsLimitedPenetration = abilityConfig.IsLimitedPenetration;
             AttackDelay = abilityConfig.AttackDelay;
             BaseBurstCount = abilityConfig.BurstCount;
             BurstCount = BaseBurstCount;
@@ -63,54 +103,6 @@ namespace CodeBase.Domain.Abilities
             SizeBehaviourData.UpdateFullTime(BaseDuration);
             SizeBehaviourData.UpdateTargetSize(BaseSize);
         }
-
-        public AttackType AttackType { get; private set; }
-
-        public ContactFilter2D WhatIsEnemy { get; private set; }
-        public int BaseDamage { get; private set; }
-        public int Damage { get; private set; }
-        public int MaxAffectedEnemy { get; private set; }
-        public int Penetration { get; private set; }
-        public bool IsLimitedPenetration { get; private set; }
-        public float AttackDelay { get; private set; }
-        public int BurstCount { get; private set; }
-        public int BaseBurstCount { get; private set; }
-        public int MaxBurstCount { get; private set; }
-        public float BurstFireDelay { get; private set; }
-
-        public SpawnType SpawnPosition { get; private set; }
-
-        public int SpawnCount { get; private set; }
-        public int BaseSpawnCount { get; private set; }
-        public float Radius { get; private set; }
-        public float BaseRadius { get; private set; }
-        public float Arc { get; private set; }
-
-        public MoveType MoveType { get; private set; }
-
-        public float Speed { get; private set; }
-        public float BaseSpeed { get; private set; }
-        public float RotationStep { get; private set; }
-        public float StartTimePercent { get; private set; }
-        public float EndTimePercent { get; private set; }
-        public AnimationCurve StartRadiusCurve { get; private set; }
-        public AnimationCurve MainRadiusCurve { get; private set; }
-        public AnimationCurve EndRadiusCurve { get; private set; }
-        public bool AlignWithRotation { get; private set; }
-        public bool FlipDirectionAllowed { get; private set; }
-        public TargetingType TargetingType { get; private set; }
-        public float BaseSize { get; private set; }
-        public float Size { get; private set; }
-
-        public float Duration { get; private set; }
-        public float BaseDuration { get; private set; }
-        public float Cooldown { get; private set; }
-        public float BaseCooldown { get; private set; }
-        public AbilityProjection AbilityView { get; private set; }
-        public bool IsSelfParent { get; private set; }
-        public float Stagger { get; private set; }
-        public AudioData AudioData { get; set; }
-        public SizeBehaviourData SizeBehaviourData { get; set; }
 
         public void UpdateUpgradeModifiers(IReadOnlyList<AbilityUpgradeData> abilityUpgradesData)
         {
@@ -201,26 +193,6 @@ namespace CodeBase.Domain.Abilities
             //ProjectileSpeed
             if (_modifiersMask.UseProjectileSpeed)
                 Speed = BaseSpeed * (1 + _resultProperties[BaseProperty.ProjectileSpeed] / 100);
-
-            // Changed?.Invoke(this);
         }
-    }
-
-    [Serializable]
-    public class AudioData
-    {
-        public AudioClip HitAFX;
-        public AudioClip StartAFX;
-    }
-
-    [Serializable]
-    public struct AbilityModifiersMask
-    {
-        [field: SerializeField] public bool UseAmount { get; private set; }
-        [field: SerializeField] public bool UseDamage { get; private set; }
-        [field: SerializeField] public bool UseCooldown { get; private set; }
-        [field: SerializeField] public bool UseDuration { get; private set; }
-        [field: SerializeField] public bool UseArea { get; private set; }
-        [field: SerializeField] public bool UseProjectileSpeed { get; private set; }
     }
 }

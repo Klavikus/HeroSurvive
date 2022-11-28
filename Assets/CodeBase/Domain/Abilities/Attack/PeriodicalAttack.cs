@@ -16,22 +16,22 @@ namespace CodeBase.Domain.Abilities.Attack
         {
             yield return base.Run();
 
-            while (_canRun)
+            while (CanRun)
             {
                 CheckOverlap();
-                yield return _attackDelayInSeconds;
+                yield return AttackDelayInSeconds;
             }
         }
 
         private void CheckOverlap()
         {
-            int count = _rigidbody2D.Cast(Vector2.zero, _abilityConfig.WhatIsEnemy, _results);
+            int count = Rigidbody2D.Cast(Vector2.zero, AbilityConfig.WhatIsEnemy, Results);
 
             if (count > 0)
             {
                 for (var i = 0; i < count; i++)
-                    if (_results[i].collider.TryGetComponent(out Damageable enemy))
-                        enemy.TakeDamage(_abilityConfig.Damage, _abilityConfig.Stagger);
+                    if (Results[i].collider.TryGetComponent(out Damageable enemy))
+                        enemy.TakeDamage(AbilityConfig.Damage, AbilityConfig.Stagger);
             }
         }
     }

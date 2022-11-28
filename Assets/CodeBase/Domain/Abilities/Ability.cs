@@ -11,17 +11,15 @@ namespace CodeBase.Domain.Abilities
 {
     public class Ability
     {
-        private AbilityData _abilityData;
-        private ICoroutineRunner _coroutineRunner;
-        private ProjectionPool _projectionPool;
+        private readonly AbilityData _abilityData;
+        private readonly ICoroutineRunner _coroutineRunner;
+        private readonly ProjectionPool _projectionPool;
+        private readonly AbilityProjectionBuilder _projectionBuilder;
+        private readonly AbilityUpgradeData[] _abilityUpgradesData;
+
         private Transform _pivotObject;
         private bool _onCooldown;
-        private AbilityProjectionBuilder _projectionBuilder;
-
         private bool _isInitialized;
-        private IReadOnlyDictionary<BaseProperty, float> _currentHeroModifiers;
-
-        private AbilityUpgradeData[] _abilityUpgradesData;
         private int _currentUpgradeLevel;
 
         public Ability(AbilityProjectionBuilder projectionBuilder, AbilityData abilityData,
@@ -52,11 +50,7 @@ namespace CodeBase.Domain.Abilities
             _coroutineRunner.Run(StartCooldown());
         }
 
-        public void UpdatePlayerModifiers(IReadOnlyDictionary<BaseProperty, float> stats)
-        {
-            _currentHeroModifiers = stats;
-            _abilityData.UpdateHeroModifiers(stats);
-        }
+        public void UpdatePlayerModifiers(IReadOnlyDictionary<BaseProperty, float> stats) => _abilityData.UpdateHeroModifiers(stats);
 
         public void Upgrade()
         {

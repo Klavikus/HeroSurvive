@@ -10,7 +10,6 @@ namespace CodeBase.Domain.Abilities.Movement
         protected Transform ObjectForMove;
         protected AbilityData BaseDataConfig;
         protected float Offset;
-        protected int ID;
         protected bool AlignRotationWithDirection;
         protected bool FlipDirectionAllowed;
         protected SpawnData SpawnData;
@@ -23,7 +22,6 @@ namespace CodeBase.Domain.Abilities.Movement
             ObjectForMove = objectForMove;
             BaseDataConfig = abilityBaseDataConfig;
             Offset = spawnData.Offset;
-            ID = spawnData.Id;
             AlignRotationWithDirection = abilityBaseDataConfig.AlignWithRotation;
             FlipDirectionAllowed = abilityBaseDataConfig.FlipDirectionAllowed;
             TargetFinderService = targetFinderService;

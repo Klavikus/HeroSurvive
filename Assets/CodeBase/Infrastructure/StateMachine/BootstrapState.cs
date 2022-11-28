@@ -126,10 +126,11 @@ namespace CodeBase.Infrastructure.StateMachine
 
 
             LeaderBoardsViewModel leaderBoardsViewModel = new LeaderBoardsViewModel(new[]
-                {new LeaderBoard(GameConstants.StageTotalKillsLeaderBoardKey, userModel)}, userModel);
+                    {new LeaderBoard(GameConstants.StageTotalKillsLeaderBoardKey)},
+                userModel, _coroutineRunner);
 
             ViewModelProvider viewModelProvider = new ViewModelProvider(userNameViewModel,
-                leaderBoardsViewModel);
+                leaderBoardsViewModel, menuViewModel);
             _services.RegisterSingle<IViewModelProvider>(viewModelProvider);
 
             //GameLoopCompositionRoot
@@ -168,7 +169,7 @@ namespace CodeBase.Infrastructure.StateMachine
             PlayerEventHandler playerEventHandler = new PlayerEventHandler();
             GameLoopViewModel gameLoopViewModel =
                 new GameLoopViewModel(gameLoopModel, leveCompetitionService, playerEventHandler, currencyViewModel,
-                    adsProvider);
+                    adsProvider, leaderBoardsViewModel);
             GameLoopViewFactory gameLoopViewFactory = new GameLoopViewFactory(configurationProvider, gameLoopViewModel,
                 levelUpViewModel,
                 upgradeDescriptionBuilder);
