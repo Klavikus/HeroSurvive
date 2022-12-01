@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodeBase.Domain.Data;
 using CodeBase.Domain.Enemies;
+using CodeBase.MVVM.Models;
 
 namespace CodeBase.Infrastructure.Services
 {

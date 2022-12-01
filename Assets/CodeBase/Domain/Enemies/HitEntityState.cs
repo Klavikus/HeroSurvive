@@ -1,6 +1,5 @@
-﻿using System;
-using CodeBase.Domain.Data;
-using CodeBase.ForSort;
+﻿using CodeBase.Domain.Data;
+using CodeBase.Domain.EntityComponents;
 using EntityState = CodeBase.Domain.EnemyStateMachine.States.EntityState;
 
 namespace CodeBase.Domain.Enemies
@@ -22,7 +21,7 @@ namespace CodeBase.Domain.Enemies
         {
             base.Enter();
             _enemyAI.Stagger(_damageable.GetLastStagger());
-            _animationSynchronizer.ChangeState(CodeBase.ForSort.EntityState.Hitted);
+            _animationSynchronizer.ChangeState(ForSort.EntityState.Hitted);
         }
     }
 }

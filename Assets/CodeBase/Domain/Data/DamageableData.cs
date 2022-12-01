@@ -14,7 +14,7 @@ namespace CodeBase.Domain.Data
         public DamageableData(MainProperties mainProperties)
         {
             MaxHealth = (int) mainProperties.BaseProperties[BaseProperty.MaxHealth];
-            HealthRegenerationPercent = mainProperties.BaseProperties[BaseProperty.HealthRegen];
+            HealthRegenerationPercent = mainProperties.BaseProperties[BaseProperty.HealthRegen]/100;
             RegenerationDelayInSeconds = 1f;
         }
 

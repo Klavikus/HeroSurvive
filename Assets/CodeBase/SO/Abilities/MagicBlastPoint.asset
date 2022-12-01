@@ -31,13 +31,12 @@ MonoBehaviour:
   <Stagger>k__BackingField: 0.6
   <MaxAffectedEnemy>k__BackingField: 50
   <Penetration>k__BackingField: 0
-  <_isLimitedPenetration>k__BackingField: 0
+  <IsLimitedPenetration>k__BackingField: 0
   <AttackDelay>k__BackingField: 0
   <BurstCount>k__BackingField: 1
   <MaxBurstCount>k__BackingField: 1
   <BurstFireDelay>k__BackingField: 0
   <SpawnPosition>k__BackingField: 0
-  <Direction>k__BackingField: {x: 0, y: 0}
   <SpawnCount>k__BackingField: 1
   <Radius>k__BackingField: 0.1
   <Arc>k__BackingField: 30
@@ -168,7 +167,7 @@ MonoBehaviour:
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
     <IsFirstAbilityGain>k__BackingField: 1
   <UpgradeViewData>k__BackingField:
-    <Icon>k__BackingField: {fileID: 21300000, guid: 3c6f5b7a54bd84489ba7d655c5b7b812, type: 3}
+    <Icon>k__BackingField: {fileID: 21300000, guid: 92482e0b3fd17834e947ef92c1555708, type: 3}
     <Name>k__BackingField: Magic Blast
   <AbilityModifiersMask>k__BackingField:
     <UseAmount>k__BackingField: 1

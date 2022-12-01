@@ -4,10 +4,9 @@ using CodeBase.Domain.Enemies;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.StateMachine;
 using CodeBase.MVVM.Models;
-using CodeBase.MVVM.ViewModels;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.Factories
+namespace CodeBase.MVVM.ViewModels
 {
     public class GameLoopViewModel
     {
@@ -22,6 +21,7 @@ namespace CodeBase.Infrastructure.Factories
         private int _lastCompletedWave;
         private int _initialCurrency;
         private int _gainedCurrency;
+        private bool _isLastAdsRewarded;
 
         public event Action<int> WaveCompleted;
         public event Action<int> KilledChanged;
@@ -83,7 +83,8 @@ namespace CodeBase.Infrastructure.Factories
         public void CloseLevel()
         {
             Time.timeScale = 1;
-            _leaderBoardsViewModel.SetMaxScore(_currentEnemyKilled);
+            // _leaderBoardsViewModel.SetMaxScore(_currentEnemyKilled);
+            _leaderBoardsViewModel.SetMaxScore(_lastCompletedWave);
             _gameLoopModel.InvokeLevelClose();
         }
 
@@ -103,9 +104,14 @@ namespace CodeBase.Infrastructure.Factories
 
         public void ResurrectByAds()
         {
-            _gameLoopModel.ResurrectPlayer();
-            // PlayerResurrected?.Invoke();
-            _adsProvider.ShowAds(onRewardCallback: () => _gameLoopModel.ResurrectPlayer());
+            _isLastAdsRewarded = false;
+            _adsProvider.ShowAds(onRewardCallback: () => _isLastAdsRewarded = true, onCloseCallback: OnRewardResurrect);
+        }
+
+        private void OnRewardResurrect()
+        {
+            if (_isLastAdsRewarded) 
+                _gameLoopModel.ResurrectPlayer();
         }
 
         public void CloseLevelDoubleReward()
@@ -113,9 +119,6 @@ namespace CodeBase.Infrastructure.Factories
             _adsProvider.ShowAds(
                 onRewardCallback: () => _currencyViewModel.AdditionalReward(_gainedCurrency),
                 onCloseCallback: CloseLevel);
-
-            // _currencyViewModel.AdditionalReward(_gainedCurrency);
-            // CloseLevel();
         }
     }
 }

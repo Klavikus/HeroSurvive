@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using CodeBase.Configs;
 using CodeBase.Domain.Enemies;
 using CodeBase.Infrastructure.Services;
 using UnityEngine;
@@ -17,7 +18,9 @@ namespace CodeBase.Domain.Data
         private bool _isMoving;
         private bool _isPreviousMoving;
         private bool _isAttackOnCooldown;
-        public bool _isStaggered;
+        private bool _isStaggered;
+        private float _currentStaggerPower;
+        private float _staggerResist;
 
         private Coroutine _attackCoroutine;
         private Coroutine _staggerCoroutine;
@@ -30,6 +33,7 @@ namespace CodeBase.Domain.Data
         public event Action StaggerOut;
 
         public bool IsMoving => _isMoving;
+        public bool IsStaggered => _isStaggered;
 
         public void Initialize(EnemyAIData enemyAIData, ITargetService targetService)
         {
@@ -37,8 +41,9 @@ namespace CodeBase.Domain.Data
             _targetService = targetService;
 
             _attackCheckDelay = new WaitForSeconds(enemyAIData.AttackCheckInterval);
-            _staggerDelay = new WaitForSeconds(0.1f);
+            _staggerDelay = new WaitForSeconds(GameConstants.AIMinimumStaggerDelay);
             _isWaitingForInitialize = false;
+            _staggerResist = enemyAIData.StaggerResist;
         }
 
         public void UpdateProgression(float progressionModifier) =>
@@ -46,24 +51,36 @@ namespace CodeBase.Domain.Data
 
         public void Stagger(float stagger)
         {
-            if (stagger == 0)
+            stagger -= stagger * _staggerResist;
+            stagger = Mathf.Max(stagger, 0);
+            
+            if (stagger == 0 && _isStaggered == false)
             {
                 StaggerOut?.Invoke();
                 return;
             }
 
+            if (_isStaggered)
+                return;
+
+            if (_currentStaggerPower < stagger)
+                _currentStaggerPower = stagger;
+
             if (_staggerCoroutine != null)
                 StopCoroutine(_staggerCoroutine);
 
-            _staggerCoroutine = StartCoroutine(StartStaggerCooldown(stagger));
+            _staggerCoroutine = StartCoroutine(StartStaggerCooldown());
         }
 
-        private IEnumerator StartStaggerCooldown(float stagger)
+        private IEnumerator StartStaggerCooldown()
         {
             _isStaggered = true;
 
-            for (float i = 0; i < stagger; i += 0.1f)
+            while (_currentStaggerPower > 0)
+            {
+                _currentStaggerPower -= 0.1f;
                 yield return _staggerDelay;
+            }
 
             _isStaggered = false;
             StaggerOut?.Invoke();

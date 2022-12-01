@@ -1,19 +1,22 @@
 ﻿using CodeBase.Domain.Enemies;
 using CodeBase.Domain.EnemyStateMachine.States;
 
-class AnyToHitTransition : Transition
+namespace CodeBase.Domain.EnemyStateMachine.Transitions
 {
-    private readonly Damageable _damageable;
-
-    public AnyToHitTransition(IEntityState nextEntityState, Damageable damageable) : base(nextEntityState)
+    class AnyToHitTransition : Transition
     {
-        _damageable = damageable;
-        _damageable.DamageTaken += OnHitTaken;
-    }
+        private readonly Damageable _damageable;
 
-    private void OnHitTaken(int damage, float stagger) => MoveNextState();
+        public AnyToHitTransition(IEntityState nextEntityState, Damageable damageable) : base(nextEntityState)
+        {
+            _damageable = damageable;
+            _damageable.DamageTaken += OnHitTaken;
+        }
 
-    public override void Update()
-    {
+        private void OnHitTaken(int damage, float stagger) => MoveNextState();
+
+        public override void Update()
+        {
+        }
     }
 }

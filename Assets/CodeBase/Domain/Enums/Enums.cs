@@ -13,16 +13,6 @@
         ProjectileSpeed,
     }
 
-    public enum PlayerStat
-    {
-        ProjectilesCountModifier,
-        DamageModifier,
-        SpeedModifier,
-        SizeModifier,
-        DurationModifier,
-        CooldownModifier,
-    }
-
     public enum EnemyType
     {
         Ghost,
@@ -35,12 +25,6 @@
         Dragon,
         Dwarf,
         Orc
-    }
-
-    public enum MoveState
-    {
-        Idle,
-        Run,
     }
 
     public enum AttackType

@@ -1,23 +1,26 @@
 ﻿using CodeBase.Domain.Data;
 using CodeBase.Domain.EnemyStateMachine.States;
 
-class HitToIdleTransition : Transition
+namespace CodeBase.Domain.EnemyStateMachine.Transitions
 {
-    private readonly EnemyAI _enemyAI;
-
-    public HitToIdleTransition(IEntityState nextEntityState, EnemyAI enemyAI) : base(nextEntityState)
+    class HitToIdleTransition : Transition
     {
-        _enemyAI = enemyAI;
-        _enemyAI.StaggerOut += OnStaggerOut;
-    }
+        private readonly EnemyAI _enemyAI;
 
-    private void OnStaggerOut()
-    {
-        if (_enemyAI.IsMoving == false)
-            MoveNextState();
-    }
+        public HitToIdleTransition(IEntityState nextEntityState, EnemyAI enemyAI) : base(nextEntityState)
+        {
+            _enemyAI = enemyAI;
+            _enemyAI.StaggerOut += OnStaggerOut;
+        }
 
-    public override void Update()
-    {
+        private void OnStaggerOut()
+        {
+            if (_enemyAI.IsMoving == false)
+                MoveNextState();
+        }
+
+        public override void Update()
+        {
+        }
     }
 }

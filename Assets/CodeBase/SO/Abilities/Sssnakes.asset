@@ -31,13 +31,12 @@ MonoBehaviour:
   <Stagger>k__BackingField: 0.2
   <MaxAffectedEnemy>k__BackingField: 5
   <Penetration>k__BackingField: 0
-  <_isLimitedPenetration>k__BackingField: 0
+  <IsLimitedPenetration>k__BackingField: 0
   <AttackDelay>k__BackingField: 0
   <BurstCount>k__BackingField: 1
   <MaxBurstCount>k__BackingField: 1
   <BurstFireDelay>k__BackingField: 0.2
   <SpawnPosition>k__BackingField: 1
-  <Direction>k__BackingField: {x: 0, y: 0}
   <SpawnCount>k__BackingField: 3
   <Radius>k__BackingField: 0.01
   <Arc>k__BackingField: 30
@@ -76,9 +75,9 @@ MonoBehaviour:
   - <PropertyType>k__BackingField: 3
     <Value>k__BackingField: 500
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 1
+    <IsFirstAbilityGain>k__BackingField: 0
   <UpgradeViewData>k__BackingField:
-    <Icon>k__BackingField: {fileID: 21300000, guid: f8b4424356783104696ad42cd3050eeb, type: 3}
+    <Icon>k__BackingField: {fileID: 21300000, guid: 1249593c021f26c47b5e1f19b671d1dc, type: 3}
     <Name>k__BackingField: Sssnakes
   <AbilityModifiersMask>k__BackingField:
     <UseAmount>k__BackingField: 1

@@ -1,18 +1,21 @@
 using System;
 using CodeBase.Domain.EnemyStateMachine.States;
 
-abstract class Transition
+namespace CodeBase.Domain.EnemyStateMachine.Transitions
 {
-    private readonly IEntityState _nextEntityState;
-
-    protected Transition(IEntityState nextEntityState)
+    abstract class Transition
     {
-        _nextEntityState = nextEntityState;
-    }
+        private readonly IEntityState _nextEntityState;
 
-    public event Action<IEntityState> NeedChangeState;
+        protected Transition(IEntityState nextEntityState)
+        {
+            _nextEntityState = nextEntityState;
+        }
+
+        public event Action<IEntityState> NeedChangeState;
     
-    public abstract void Update();
+        public abstract void Update();
 
-    protected void MoveNextState() => NeedChangeState?.Invoke(_nextEntityState);
+        protected void MoveNextState() => NeedChangeState?.Invoke(_nextEntityState);
+    }
 }

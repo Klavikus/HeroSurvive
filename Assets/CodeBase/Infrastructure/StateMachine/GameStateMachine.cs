@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.ForSort;
+using CodeBase.Domain.Additional;
 
 namespace CodeBase.Infrastructure.StateMachine
 {

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Agava.YandexGames;
 using CodeBase.Configs;
-using CodeBase.ForSort;
+using CodeBase.Domain.Additional;
 using UnityEngine;
 
 namespace CodeBase.MVVM.Models
@@ -36,11 +35,8 @@ namespace CodeBase.MVVM.Models
             }
         }
 
-        public IReadOnlyCollection<LeaderboardEntryResponse> GetLeaderboardEntries(string leaderBoardName)
-        {
-            Debug.Log("GetLeaderboardEntries");
-            return _leaderBoardByNames[leaderBoardName].CachedEntries;
-        }
+        public IReadOnlyCollection<LeaderboardEntryResponse> GetLeaderboardEntries(string leaderBoardName) => 
+            _leaderBoardByNames[leaderBoardName].CachedEntries;
 
         public void StartAutoUpdate()
         {
@@ -59,26 +55,15 @@ namespace CodeBase.MVVM.Models
         public void SetScore(string leaderBoardName, int newScore) =>
             Leaderboard.SetScore(leaderBoardName, newScore, OnSuccessSetScoreCallback, extraData: _userModel.Name);
 
-        private void OnSuccessSetScoreCallback()
-        {
-            Debug.Log("OnSuccessSetScoreCallback..");
-
-            UpdateLocalLeaderBoards();
-            Debug.Log("OnSuccessSetScoreCallback..done");
-        }
+        private void OnSuccessSetScoreCallback() => UpdateLocalLeaderBoards();
 
         public void UpdateLocalLeaderBoards()
         {
-            Debug.Log("UpdateLocalLeaderBoards..");
-
             foreach (LeaderBoard leaderBoard in _leaderBoards)
                 Leaderboard.GetEntries(leaderBoard.Name,
                     onSuccessCallback: result => leaderBoard.UpdateOrCreateEntries(result));
 
             Leaderboard.GetPlayerEntry(GameConstants.StageTotalKillsLeaderBoardKey, OnGetPlayerScoreSuccessCallback);
-
-            // Leaderboard.GetEntries(leaderBoard.Name, _ => { });
-            Debug.Log("UpdateLocalLeaderBoards..done");
         }
 
         public LeaderboardEntryResponse GetPlayerScoreEntry() => _playerCachedEntry;
@@ -92,11 +77,7 @@ namespace CodeBase.MVVM.Models
                 SetScore(GameConstants.StageTotalKillsLeaderBoardKey, currentEnemyKilled);
         }
 
-        private void OnLocalLeaderBoardUpdated(LeaderBoard leaderBoard)
-        {
-            Debug.Log("OnLocalLeaderBoardUpdated..");
-            LeaderBoardUpdated?.Invoke();
-        }
+        private void OnLocalLeaderBoardUpdated(LeaderBoard leaderBoard) => LeaderBoardUpdated?.Invoke();
 
         private IEnumerator UpdateLeaderBoardCoroutine()
         {

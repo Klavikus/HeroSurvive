@@ -1,17 +1,20 @@
 using CodeBase.Domain.Enemies;
 using CodeBase.Domain.EnemyStateMachine.States;
 
-class AnyToDieTransition : Transition
+namespace CodeBase.Domain.EnemyStateMachine.Transitions
 {
-    private readonly Damageable _damageable;
-
-    public AnyToDieTransition(IEntityState nextEntityState, Damageable damageable) : base(nextEntityState)
+    class AnyToDieTransition : Transition
     {
-        _damageable = damageable;
-        _damageable.Died += MoveNextState;
-    }
+        private readonly Damageable _damageable;
 
-    public override void Update()
-    {
+        public AnyToDieTransition(IEntityState nextEntityState, Damageable damageable) : base(nextEntityState)
+        {
+            _damageable = damageable;
+            _damageable.Died += MoveNextState;
+        }
+
+        public override void Update()
+        {
+        }
     }
 }

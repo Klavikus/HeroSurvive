@@ -74,7 +74,6 @@ namespace CodeBase.Infrastructure.Services.PropertiesProviders
 
         private void OnUpgradesUpdated()
         {
-            Debug.Log("OnUpgradesUpdated provider");
             _upgradesData = _upgradeService.GetUpgradesPropertiesData();
             RecalculateData();
         }

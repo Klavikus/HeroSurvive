@@ -1,5 +1,4 @@
 ﻿using CodeBase.Configs;
-using CodeBase.ForSort;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.StateMachine;
 using CodeBase.MVVM.Models;
@@ -24,9 +23,5 @@ namespace CodeBase.Infrastructure.Services
         public EnemyConfigSO EnemyConfig => _configurationContainer.EnemyConfigSO;
         public StageCompetitionConfigSO StageCompetitionConfig => _configurationContainer.StageCompetitionConfigSO;
         public AbilityConfigSO[] AbilityConfigs => _configurationContainer.AbilityConfigsSO;
-
-        public CoroutineRunner GetCoroutineRunner() => _configurationContainer.CoroutineRunner;
-
-        public AudioPlayer GetAudioPlayer() => _configurationContainer.AudioPlayer;
     }
 }

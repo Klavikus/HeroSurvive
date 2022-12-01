@@ -26,7 +26,6 @@ namespace CodeBase.Infrastructure.Factories
 
         public void SaveToData(string dattaKey, string json)
         {
-            Debug.Log($"SaveToData {dattaKey} {json}");
             if (ContainData(dattaKey))
                 _data[dattaKey] = json;
             else
@@ -47,15 +46,11 @@ namespace CodeBase.Infrastructure.Factories
 
         public void LoadPrefsToData()
         {
-            Debug.Log("LoadPrefsToData...");
-
             foreach (UpgradeData upgradeData in _configurationProvider.UpgradesConfig.UpgradeData)
             {
                 string upgradeDataKey = $"{GameConstants.UpgradeModelPrefix}_{upgradeData.Name}";
                 SaveToData(upgradeDataKey, PlayerPrefs.GetString(upgradeDataKey, "0"));
             }
-
-            Debug.Log("LoadPrefsToData loaded");
         
             string currencyValue = PlayerPrefs.HasKey(GameConstants.CurrencyDataKey)
                 ? PlayerPrefs.GetString(GameConstants.CurrencyDataKey)

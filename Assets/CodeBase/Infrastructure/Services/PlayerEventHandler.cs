@@ -15,7 +15,6 @@ namespace CodeBase.Infrastructure.Services
 
         private void OnDied()
         {
-            Debug.Log("PlayerEventHandler DIED");
             Died?.Invoke();
         }
     }

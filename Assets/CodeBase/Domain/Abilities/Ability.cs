@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using CodeBase.Configs;
+using CodeBase.Domain.Additional;
+using CodeBase.Domain.Data;
 using CodeBase.Domain.Enums;
-using CodeBase.ForSort;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Pools;
+using CodeBase.Infrastructure.Services;
 using UnityEngine;
 
 namespace CodeBase.Domain.Abilities
@@ -16,20 +18,37 @@ namespace CodeBase.Domain.Abilities
         private readonly ProjectionPool _projectionPool;
         private readonly AbilityProjectionBuilder _projectionBuilder;
         private readonly AbilityUpgradeData[] _abilityUpgradesData;
+        private readonly IGameLoopService _gameLoopService;
 
         private Transform _pivotObject;
         private bool _onCooldown;
         private bool _isInitialized;
         private int _currentUpgradeLevel;
+        private Coroutine _activateProjectionCoroutine;
 
-        public Ability(AbilityProjectionBuilder projectionBuilder, AbilityData abilityData,
-            ICoroutineRunner coroutineRunner, ProjectionPool projectionPool, AbilityUpgradeData[] abilityUpgradesData)
+        public Ability(
+            AbilityProjectionBuilder projectionBuilder,
+            AbilityData abilityData,
+            ICoroutineRunner coroutineRunner,
+            ProjectionPool projectionPool,
+            AbilityUpgradeData[] abilityUpgradesData,
+            IGameLoopService gameLoopService)
         {
             _projectionBuilder = projectionBuilder;
             _abilityData = abilityData;
             _coroutineRunner = coroutineRunner;
             _projectionPool = projectionPool;
             _abilityUpgradesData = abilityUpgradesData;
+            _gameLoopService = gameLoopService;
+            _gameLoopService.LevelCloseInvoked += OnGameCloseInvoked;
+        }
+
+        ~Ability() => _gameLoopService.LevelCloseInvoked -= OnGameCloseInvoked;
+
+        private void OnGameCloseInvoked()
+        {
+            _coroutineRunner.Stop(_activateProjectionCoroutine);
+            _projectionPool.Clear();
         }
 
         public bool CanUpgrade => _currentUpgradeLevel < _abilityUpgradesData.Length;
@@ -46,18 +65,19 @@ namespace CodeBase.Domain.Abilities
             if (_onCooldown || !_isInitialized)
                 return;
 
-            _coroutineRunner.Run(ActivateProjections());
+            _activateProjectionCoroutine = _coroutineRunner.Run(ActivateProjections());
             _coroutineRunner.Run(StartCooldown());
         }
 
-        public void UpdatePlayerModifiers(IReadOnlyDictionary<BaseProperty, float> stats) => _abilityData.UpdateHeroModifiers(stats);
+        public void UpdatePlayerModifiers(IReadOnlyDictionary<BaseProperty, float> stats) =>
+            _abilityData.UpdateHeroModifiers(stats);
 
         public void Upgrade()
         {
             _currentUpgradeLevel++;
             List<AbilityUpgradeData> upgrades = new List<AbilityUpgradeData>();
 
-            for (int i = 0; i < _currentUpgradeLevel; i++) 
+            for (int i = 0; i < _currentUpgradeLevel; i++)
                 upgrades.Add(_abilityUpgradesData[i]);
 
             _abilityData.UpdateUpgradeModifiers(upgrades);
@@ -66,7 +86,7 @@ namespace CodeBase.Domain.Abilities
         public void ResetUpgrades()
         {
             _currentUpgradeLevel = 0;
-            _abilityData.UpdateUpgradeModifiers(new AbilityUpgradeData[]{});
+            _abilityData.UpdateUpgradeModifiers(new AbilityUpgradeData[] { });
         }
 
         private IEnumerator ActivateProjections()
@@ -85,6 +105,7 @@ namespace CodeBase.Domain.Abilities
             _onCooldown = false;
         }
 
-        public bool CheckConfig(AbilityConfigSO abilityConfigSO) => _abilityUpgradesData[0].BaseConfigSO == abilityConfigSO;
+        public bool CheckConfig(AbilityConfigSO abilityConfigSO) =>
+            _abilityUpgradesData[0].BaseConfigSO == abilityConfigSO;
     }
 }

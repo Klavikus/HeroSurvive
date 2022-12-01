@@ -1,4 +1,5 @@
-﻿using CodeBase.Domain.Enums;
+﻿using CodeBase.Domain.Additional;
+using CodeBase.Domain.Enums;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.StateMachine

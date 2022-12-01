@@ -1,23 +1,21 @@
 ﻿using CodeBase.Domain.Data;
 using CodeBase.Domain.EnemyStateMachine.States;
 
-class HitToRunTransition : Transition
+namespace CodeBase.Domain.EnemyStateMachine.Transitions
 {
-    private readonly EnemyAI _enemyAI;
-
-    public HitToRunTransition(IEntityState nextEntityState, EnemyAI enemyAI) : base(nextEntityState)
+    class HitToRunTransition : Transition
     {
-        _enemyAI = enemyAI;
-        _enemyAI.StaggerOut += OnStaggerOut;
-    }
+        private readonly EnemyAI _enemyAI;
 
-    private void OnStaggerOut()
-    {
-        if (_enemyAI.IsMoving)
-            MoveNextState();
-    }
+        public HitToRunTransition(IEntityState nextEntityState, EnemyAI enemyAI) : base(nextEntityState)
+        {
+            _enemyAI = enemyAI;
+        }
 
-    public override void Update()
-    {
+        public override void Update()
+        {
+            if (_enemyAI.IsStaggered == false) 
+                MoveNextState();
+        }
     }
 }

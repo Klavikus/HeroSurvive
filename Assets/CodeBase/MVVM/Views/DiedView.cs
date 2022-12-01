@@ -1,4 +1,5 @@
 ﻿using CodeBase.Infrastructure.Factories;
+using CodeBase.MVVM.ViewModels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

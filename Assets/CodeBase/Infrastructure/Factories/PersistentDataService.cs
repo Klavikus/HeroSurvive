@@ -42,7 +42,6 @@ namespace CodeBase.Infrastructure.Factories
 
                 if (_saveLoadService.ContainData(dattaKey))
                 {
-                    Debug.Log(dattaKey + " " + _saveLoadService.GetData(dattaKey));
                     if (int.TryParse(_saveLoadService.GetData(dattaKey), out int value))
                         result[i].SetLevel(value);
                 }

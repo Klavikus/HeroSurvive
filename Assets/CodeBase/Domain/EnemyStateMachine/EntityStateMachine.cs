@@ -1,30 +1,33 @@
 using CodeBase.Domain.EnemyStateMachine.States;
 
-public class EntityStateMachine
+namespace CodeBase.Domain.EnemyStateMachine
 {
-    private readonly IEntityState _startEntityState;
-    private IEntityState _currentEntityState;
-
-    public EntityStateMachine(IEntityState startEntityState) => 
-        _startEntityState = startEntityState;
-
-    public void Reset() => ChangeEntityState(_startEntityState);
-
-    public void Update() => _currentEntityState?.Update();
-
-    private void ChangeEntityState(IEntityState nextEntityState)
+    public class EntityStateMachine
     {
-        if (_currentEntityState == nextEntityState)
-            return;
+        private readonly IEntityState _startEntityState;
+        private IEntityState _currentEntityState;
 
-        if (_currentEntityState != null)
+        public EntityStateMachine(IEntityState startEntityState) => 
+            _startEntityState = startEntityState;
+
+        public void Reset() => ChangeEntityState(_startEntityState);
+
+        public void Update() => _currentEntityState?.Update();
+
+        private void ChangeEntityState(IEntityState nextEntityState)
         {
-            _currentEntityState.Exit();
-            _currentEntityState.NeedChangeState -= ChangeEntityState;
-        }
+            if (_currentEntityState == nextEntityState)
+                return;
 
-        _currentEntityState = nextEntityState;
-        _currentEntityState.Enter();
-        _currentEntityState.NeedChangeState += ChangeEntityState;
+            if (_currentEntityState != null)
+            {
+                _currentEntityState.Exit();
+                _currentEntityState.NeedChangeState -= ChangeEntityState;
+            }
+
+            _currentEntityState = nextEntityState;
+            _currentEntityState.Enter();
+            _currentEntityState.NeedChangeState += ChangeEntityState;
+        }
     }
 }

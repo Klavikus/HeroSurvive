@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Configs;
 using CodeBase.Domain.Abilities;
-using CodeBase.ForSort;
+using CodeBase.Domain.Additional;
+using CodeBase.Domain.Data;
 using CodeBase.Infrastructure.Pools;
+using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.StateMachine;
 
 namespace CodeBase.Infrastructure.Factories
@@ -13,6 +15,7 @@ namespace CodeBase.Infrastructure.Factories
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly AbilityUpgradesProvider _abilityUpgradesProvider;
         private readonly ProjectionPool _projectionPool;
+        private IGameLoopService _gameLoopService;
 
         public AbilityFactory(AbilityProjectionBuilder abilityProjectionBuilder,
             ICoroutineRunner coroutineRunner,
@@ -22,6 +25,8 @@ namespace CodeBase.Infrastructure.Factories
             _coroutineRunner = coroutineRunner;
             _abilityUpgradesProvider = abilityUpgradesProvider;
         }
+
+        public void BindGameLoopService(IGameLoopService gameLoopService) => _gameLoopService = gameLoopService;
 
         public Ability Create(AbilityConfigSO initialAbilityConfig)
         {
@@ -34,6 +39,7 @@ namespace CodeBase.Infrastructure.Factories
 
         private Ability Create(AbilityData abilityConfig, ProjectionPool projectionPool,
             AbilityUpgradeData[] upgradesData) =>
-            new Ability(_abilityProjectionBuilder, abilityConfig, _coroutineRunner, projectionPool, upgradesData);
+            new(_abilityProjectionBuilder, abilityConfig, _coroutineRunner, projectionPool, upgradesData,
+                _gameLoopService);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using Agava.YandexGames;
-using CodeBase.ForSort;
+using CodeBase.Domain.Additional;
 
 namespace CodeBase.Infrastructure.StateMachine
 {

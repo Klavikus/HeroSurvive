@@ -65,7 +65,6 @@ namespace CodeBase.MVVM.Models
 
         public void SetLevel(int newLevel)
         {
-            Debug.Log($"{Data.Name} {newLevel}");
             CurrentLevel = newLevel;
             Recalculate();
             LevelChanged?.Invoke(this);

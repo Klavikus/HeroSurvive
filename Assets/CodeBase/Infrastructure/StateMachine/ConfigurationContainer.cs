@@ -1,5 +1,4 @@
 using CodeBase.Configs;
-using CodeBase.ForSort;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.MVVM.Views;
 using UnityEngine;
@@ -17,9 +16,7 @@ namespace CodeBase.Infrastructure.StateMachine
         [field: SerializeField] public GameLoopConfigSO GameLoopConfigSO { get; private set; }
         [field: SerializeField] public EnemyConfigSO EnemyConfigSO { get; private set; }
         [field: SerializeField] public StageCompetitionConfigSO StageCompetitionConfigSO { get; private set; }
-        [field: SerializeField] public CoroutineRunner CoroutineRunner { get; private set; }
         [field: SerializeField] public AbilityConfigSO[] AbilityConfigsSO { get; private set; }
         [field: SerializeField] public UserNameSetterView UserNameSetterView { get; private set; }
-        [field: SerializeField] public AudioPlayer AudioPlayer { get; private set; }
     }
 }

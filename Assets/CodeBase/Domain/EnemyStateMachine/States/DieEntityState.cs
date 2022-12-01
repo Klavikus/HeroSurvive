@@ -1,26 +1,28 @@
 using CodeBase.Domain.Data;
-using CodeBase.ForSort;
+using CodeBase.Domain.EntityComponents;
 using UnityEngine;
-using EntityState = CodeBase.Domain.EnemyStateMachine.States.EntityState;
 
-class DieEntityState : EntityState
+namespace CodeBase.Domain.EnemyStateMachine.States
 {
-    private readonly AnimationSynchronizer _animationSynchronizer;
-    private readonly EnemyAI _enemyAI;
-
-    public DieEntityState(AnimationSynchronizer animationSynchronizer, EnemyAI enemyAI)
+    class DieEntityState : EntityState
     {
-        _animationSynchronizer = animationSynchronizer;
-        _enemyAI = enemyAI;
-    }
+        private readonly AnimationSynchronizer _animationSynchronizer;
+        private readonly EnemyAI _enemyAI;
 
-    public override void Enter()
-    {
-        base.Enter();
-        _animationSynchronizer.ChangeState(CodeBase.ForSort.EntityState.Died);
-        _enemyAI.enabled = false;
+        public DieEntityState(AnimationSynchronizer animationSynchronizer, EnemyAI enemyAI)
+        {
+            _animationSynchronizer = animationSynchronizer;
+            _enemyAI = enemyAI;
+        }
 
-        //TODO: change Destroy for BackToPool
-        GameObject.Destroy(_enemyAI.gameObject, 0.5f);
+        public override void Enter()
+        {
+            base.Enter();
+            _animationSynchronizer.ChangeState(ForSort.EntityState.Died);
+            _enemyAI.enabled = false;
+
+            //TODO: change Destroy for BackToPool
+            GameObject.Destroy(_enemyAI.gameObject, 0.5f);
+        }
     }
 }

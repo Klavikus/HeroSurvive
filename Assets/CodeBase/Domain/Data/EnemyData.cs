@@ -15,5 +15,7 @@ namespace CodeBase.Domain.Data
         [field: SerializeField] public DamageSourceData DamageSourceData { get; private set; }
         [field: SerializeField] public LootData LootData { get; private set; }
         [field: SerializeField] public ProgressionData ProgressionData { get; private set; }
+
+        public void SetProgressionData(ProgressionData progressionData) => ProgressionData = progressionData;
     }
 }

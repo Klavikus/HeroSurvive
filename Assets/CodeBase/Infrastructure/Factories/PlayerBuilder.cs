@@ -3,7 +3,7 @@ using CodeBase.Configs;
 using CodeBase.Domain.Abilities;
 using CodeBase.Domain.Data;
 using CodeBase.Domain.Enemies;
-using CodeBase.ForSort;
+using CodeBase.Domain.EntityComponents;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PropertiesProviders;
 using CodeBase.Infrastructure.StateMachine;
@@ -50,7 +50,7 @@ namespace CodeBase.Infrastructure.Factories
             _inputController = _player.GetComponent<InputController>();
             _moveController = _player.GetComponent<MoveController>();
             _inputController.InputUpdated += OnPlayerInputUpdated;
-            _player.Initialize(_propertyProvider, initialAbilityConfigSO, _levelUpModel, _abilityFactory,
+            _player.Initialize(_propertyProvider, initialAbilityConfigSO, _abilityFactory,
                 _audioPlayerService);
             _abilityUpgradeService.BindToPlayer(_player);
             return _player;

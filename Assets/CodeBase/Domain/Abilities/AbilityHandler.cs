@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeBase.Configs;
+using CodeBase.Domain.Data;
 using CodeBase.Domain.Enums;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.StateMachine;

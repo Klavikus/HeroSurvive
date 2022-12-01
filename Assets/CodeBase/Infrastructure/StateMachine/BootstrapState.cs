@@ -1,5 +1,5 @@
 ﻿using CodeBase.Configs;
-using CodeBase.ForSort;
+using CodeBase.Domain.Additional;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PropertiesProviders;
@@ -8,7 +8,6 @@ using CodeBase.MVVM.Builders;
 using CodeBase.MVVM.Models;
 using CodeBase.MVVM.ViewModels;
 using CodeBase.MVVM.Views;
-using UnityEngine;
 
 namespace CodeBase.Infrastructure.StateMachine
 {
@@ -49,7 +48,6 @@ namespace CodeBase.Infrastructure.StateMachine
 
         private void RegisterServices()
         {
-            Debug.Log("RegisterServices");
             ConfigurationProvider configurationProvider = new ConfigurationProvider(_configurationContainer);
             AudioPlayerService audioPlayerService = new AudioPlayerService(_audioPlayer);
 
@@ -73,7 +71,6 @@ namespace CodeBase.Infrastructure.StateMachine
             UpgradeModel[] upgradeModels = modelFactory.CreateUpgradeModels();
             CurrencyModel currencyModel = new CurrencyModel();
             GameLoopModel gameLoopModel = new GameLoopModel();
-
 
             ModelProvider modelProvider = new ModelProvider(
                 gameLoopModel,
@@ -107,7 +104,6 @@ namespace CodeBase.Infrastructure.StateMachine
                 upgradeDescriptionBuilder,
                 userNameViewModel);
 
-
             MainMenuViewBuilder mainMenuViewBuilder = new MainMenuViewBuilder(viewFactory);
 
             PropertyProvider propertyProvider = new PropertyProvider(configurationProvider,
@@ -117,13 +113,10 @@ namespace CodeBase.Infrastructure.StateMachine
 
             propertyProvider.Initialize();
 
-
             _services.RegisterSingle<IConfigurationProvider>(configurationProvider);
             _services.RegisterSingle<IUpgradeService>(upgradeService);
             _services.RegisterSingle<IPropertyProvider>(propertyProvider);
-
             _services.RegisterSingle<IModelProvider>(modelProvider);
-
 
             LeaderBoardsViewModel leaderBoardsViewModel = new LeaderBoardsViewModel(new[]
                     {new LeaderBoard(GameConstants.StageTotalKillsLeaderBoardKey)},
@@ -143,7 +136,6 @@ namespace CodeBase.Infrastructure.StateMachine
             AbilityFactory abilityFactory =
                 new AbilityFactory(abilityProjectionBuilder, _coroutineRunner, abilityUpgradesProvider);
 
-
             LevelUpModel levelUpModel = new LevelUpModel(currencyModel, abilityUpgradeService);
 
             PlayerBuilder playerBuilder = new PlayerBuilder(heroModel, configurationProvider, propertyProvider,
@@ -151,15 +143,12 @@ namespace CodeBase.Infrastructure.StateMachine
             targetFinderService.BindPlayerBuilder(playerBuilder);
             _services.RegisterSingle<ITargetService>(targetFinderService);
 
-
             AbilityBuilder abilityBuilder = new AbilityBuilder(playerBuilder);
             MainMenuFactory mainMenuFactory = new MainMenuFactory(mainMenuViewBuilder);
-
 
             EnemySpawnService enemySpawnService =
                 new EnemySpawnService(targetFinderService, enemyFactory);
             _services.RegisterSingle<IEnemySpawnService>(enemySpawnService);
-
 
             LeveCompetitionService leveCompetitionService =
                 new LeveCompetitionService(enemySpawnService, configurationProvider, levelUpModel);
@@ -176,9 +165,10 @@ namespace CodeBase.Infrastructure.StateMachine
             GameLoopViewBuilder gameLoopViewBuilder = new GameLoopViewBuilder(gameLoopViewFactory);
             GameLoopService gameLoopService = new GameLoopService(levelMapFactory, gameLoopViewBuilder, abilityBuilder,
                 heroModel, playerBuilder, gameLoopModel, leveCompetitionService, playerEventHandler);
+            abilityFactory.BindGameLoopService(gameLoopService);
+            
             _services.RegisterSingle<IGameLoopService>(gameLoopService);
             _services.RegisterSingle<IViewFactory>(viewFactory);
-
             _services.RegisterSingle<IMainMenuFactory>(mainMenuFactory);
         }
     }

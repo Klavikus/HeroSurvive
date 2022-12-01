@@ -13,7 +13,6 @@ namespace CodeBase.Domain.Abilities.Movement
         {
             _currenRotationAngle =  Offset * Mathf.Deg2Rad;
 
-            float elapsedTime = 0;
             float startDuration = BaseDataConfig.Duration * BaseDataConfig.StartTimePercent;
             float midDuration = BaseDataConfig.Duration - BaseDataConfig.Duration *
                 (BaseDataConfig.StartTimePercent + BaseDataConfig.EndTimePercent);

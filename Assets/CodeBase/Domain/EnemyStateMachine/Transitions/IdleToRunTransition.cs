@@ -1,17 +1,20 @@
 using CodeBase.Domain.Data;
 using CodeBase.Domain.EnemyStateMachine.States;
 
-class IdleToRunTransition : Transition
+namespace CodeBase.Domain.EnemyStateMachine.Transitions
 {
-    private readonly EnemyAI _enemyAI;
-
-    public IdleToRunTransition(IEntityState nextEntityState, EnemyAI enemyAI) : base(nextEntityState)
+    class IdleToRunTransition : Transition
     {
-        _enemyAI = enemyAI;
-        _enemyAI.StartMoving += MoveNextState;
-    }
+        private readonly EnemyAI _enemyAI;
 
-    public override void Update()
-    {
+        public IdleToRunTransition(IEntityState nextEntityState, EnemyAI enemyAI) : base(nextEntityState)
+        {
+            _enemyAI = enemyAI;
+            _enemyAI.StartMoving += MoveNextState;
+        }
+
+        public override void Update()
+        {
+        }
     }
 }
