@@ -6,7 +6,7 @@ namespace CodeBase.MVVM.Models
 {
     public class LevelUpModel
     {
-        private const int ExperiencePerLevel = 10;
+        private const int ExperiencePerLevelSoft = 10;
 
         private AbilityUpgradeData _selectedUpgrade;
         private int _currentExperience;
@@ -46,14 +46,15 @@ namespace CodeBase.MVVM.Models
             _currentExperience += enemy.KillExperience;
             _currencyModel.Add(enemy.KillCurrency);
 
+            float currentLevelNeedExperience = ExperiencePerLevelSoft * _currentLevel * _currentLevel;
             //TODO: Handle multiple levelup upgrades selection
-            while (_currentExperience >= ExperiencePerLevel * _currentLevel)
+            while (_currentExperience >= currentLevelNeedExperience)
             {
-                _currentExperience -= ExperiencePerLevel * _currentLevel;
+                _currentExperience -= (int) currentLevelNeedExperience;
                 LevelUp();
             }
 
-            LevelProgressChanged?.Invoke((float) _currentExperience / (ExperiencePerLevel * _currentLevel));
+            LevelProgressChanged?.Invoke(_currentExperience / currentLevelNeedExperience);
         }
 
         public void ResetLevels()

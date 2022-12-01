@@ -531,7 +531,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 4014900518795304680}
   _changeColorTime: 0.4
   _colorOnDamage: {r: 1, g: 0.047058824, b: 0.047058824, a: 1}
-  _isEnabledFloatingDamageView: 1
+  _isEnabledFloatingDamageView: 0
   _floatingDamageColor: {r: 0.9339623, g: 0.16447127, b: 0.16447127, a: 1}
   _floatingDamageView: {fileID: 2431884276538896776, guid: 54e43efb7ef61b44fb83a9c048997e94, type: 3}
 --- !u!114 &7632515284718552501
