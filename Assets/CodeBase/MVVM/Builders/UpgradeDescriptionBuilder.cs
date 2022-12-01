@@ -23,11 +23,9 @@ namespace CodeBase.MVVM.Builders
         //TODO Need refactoring
         public string BuildDescriptionText(UpgradeData upgradeData, int currentLevel)
         {
-            Debug.LogWarning($"{nameof(BuildDescriptionText)}");
             StringBuilder stringBuilder = new StringBuilder();
 
             bool isMaxLevel = upgradeData.Upgrades.Length == currentLevel;
-            Debug.LogWarning($"{nameof(isMaxLevel)}");
 
             if (isMaxLevel)
                 currentLevel -= 1;
@@ -35,15 +33,10 @@ namespace CodeBase.MVVM.Builders
             AdditionalHeroProperty[] additionalHeroProperties =
                 upgradeData.Upgrades[currentLevel].AdditionalHeroProperties;
 
-            Debug.LogWarning($"{nameof(additionalHeroProperties)}");
-
             foreach (AdditionalHeroProperty additionalHeroProperty in additionalHeroProperties)
             {
                 //TODO add this » to properties
-                Debug.LogWarning($"foreach");
-
                 MainPropertyViewData property = _propertiesData[additionalHeroProperty.BaseProperty];
-                Debug.LogWarning($"property");
 
                 stringBuilder.AppendLine(
                     isMaxLevel == false

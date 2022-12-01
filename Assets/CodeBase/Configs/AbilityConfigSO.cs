@@ -60,7 +60,6 @@ namespace CodeBase.Configs
         {
             if (BurstFireDelay * BurstCount >= Cooldown)
             {
-                Debug.LogWarning($"{nameof(BurstFireDelay)} * {nameof(BurstCount)} should be lower then {nameof(Cooldown)}");
                 BurstFireDelay = Cooldown / BurstCount;
             }
         }
