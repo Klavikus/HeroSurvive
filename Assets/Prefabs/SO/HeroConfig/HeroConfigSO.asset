@@ -90,19 +90,18 @@ MonoBehaviour:
       Value: 100
     <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 0b4fb934f2791c840a6a63ca7003e87e, type: 2}
     <Prefab>k__BackingField: {fileID: 1023466671, guid: f4b7d0f86eb92c44ebb45f4813cb0f43, type: 3}
-  - <Name>k__BackingField: Vampure
-    <Description>k__BackingField: An ancient creature that sucks from all living
-      things.
+  - <Name>k__BackingField: Vampure IMBA
+    <Description>k__BackingField: Imbalanced char, don't use them!
     <Sprite>k__BackingField: {fileID: 21300000, guid: 09b7270abb522ce47adf11b149930bee, type: 3}
     <AdditionalProperties>k__BackingField:
     - BaseProperty: 0
-      Value: 100
+      Value: 1000
     - BaseProperty: 1
-      Value: 4.5
+      Value: 9
     - BaseProperty: 2
       Value: 50
-    - BaseProperty: 8
-      Value: 100
+    - BaseProperty: 6
+      Value: 5
     <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 7196225b3978613488d172c832efc231, type: 2}
     <Prefab>k__BackingField: {fileID: 1023466671, guid: f4b7d0f86eb92c44ebb45f4813cb0f43, type: 3}
   <BaseHeroView>k__BackingField: {fileID: 5794044302373075351, guid: 4fb7c26dcf24d964699c614b8b7ce628, type: 3}

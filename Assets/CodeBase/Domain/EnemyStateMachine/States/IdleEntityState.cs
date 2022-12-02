@@ -19,7 +19,7 @@ namespace CodeBase.Domain.EnemyStateMachine.States
             base.Enter();
             
             _enemyAI.enabled = true;
-            _animationSynchronizer.ChangeState(ForSort.EntityState.Idle);
+            // _animationSynchronizer.ChangeState(ForSort.EntityState.Idle);
         }
     }
 }
