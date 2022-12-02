@@ -3,6 +3,7 @@ using CodeBase.Configs;
 using CodeBase.Domain.Abilities.Size;
 using CodeBase.Domain.Data;
 using CodeBase.Domain.Enums;
+using CodeBase.Extensions;
 using UnityEngine;
 
 namespace CodeBase.Domain.Abilities
@@ -14,47 +15,48 @@ namespace CodeBase.Domain.Abilities
         private readonly Dictionary<BaseProperty, float> _resultProperties = new();
         private readonly AbilityModifiersMask _modifiersMask;
 
-        public AttackType AttackType { get; private set; }
-        public ContactFilter2D WhatIsEnemy { get; private set; }
-        public int BaseDamage { get; private set; }
+        private int _baseDamage;
+        private int _baseBurstCount;
+        private int _maxBurstCount;
+        private int _baseSpawnCount;
+        private float _baseRadius;
+        private float _baseSpeed;
+        private float _baseSize;
+        private float _baseDuration;
+        private float _baseCooldown;
+        private bool _isSelfParent;
+        private float _size;
+        
+        public AttackType AttackType { get; }
+        public ContactFilter2D WhatIsEnemy { get; }
+        public int MaxAffectedEnemy { get; }
+        public int Penetration { get; }
+        public bool IsLimitedPenetration { get; }
+        public float AttackDelay { get; }
+        public float BurstFireDelay { get; }
+        public SpawnType SpawnPosition { get; }
+        public float Arc { get; }
+        public MoveType MoveType { get; }
+        public float RotationStep { get; }
+        public float StartTimePercent { get; }
+        public float EndTimePercent { get; }
+        public AnimationCurve StartRadiusCurve { get; }
+        public AnimationCurve MainRadiusCurve { get; }
+        public AnimationCurve EndRadiusCurve { get; }
+        public bool AlignWithRotation { get; }
+        public bool FlipDirectionAllowed { get; }
+        public TargetingType TargetingType { get; }
+        public AbilityProjection AbilityView { get; }
+        public float Stagger { get; }
+        public AudioData AudioData { get; }
+        public SizeBehaviourData SizeBehaviourData { get; }
         public int Damage { get; private set; }
-        public int MaxAffectedEnemy { get; private set; }
-        public int Penetration { get; private set; }
-        public bool IsLimitedPenetration { get; private set; }
-        public float AttackDelay { get; private set; }
         public int BurstCount { get; private set; }
-        public int BaseBurstCount { get; private set; }
-        public int MaxBurstCount { get; private set; }
-        public float BurstFireDelay { get; private set; }
-        public SpawnType SpawnPosition { get; private set; }
         public int SpawnCount { get; private set; }
-        public int BaseSpawnCount { get; private set; }
         public float Radius { get; private set; }
-        public float BaseRadius { get; private set; }
-        public float Arc { get; private set; }
-        public MoveType MoveType { get; private set; }
         public float Speed { get; private set; }
-        public float BaseSpeed { get; private set; }
-        public float RotationStep { get; private set; }
-        public float StartTimePercent { get; private set; }
-        public float EndTimePercent { get; private set; }
-        public AnimationCurve StartRadiusCurve { get; private set; }
-        public AnimationCurve MainRadiusCurve { get; private set; }
-        public AnimationCurve EndRadiusCurve { get; private set; }
-        public bool AlignWithRotation { get; private set; }
-        public bool FlipDirectionAllowed { get; private set; }
-        public TargetingType TargetingType { get; private set; }
-        public float BaseSize { get; private set; }
-        public float Size { get; private set; }
         public float Duration { get; private set; }
-        public float BaseDuration { get; private set; }
         public float Cooldown { get; private set; }
-        public float BaseCooldown { get; private set; }
-        public AbilityProjection AbilityView { get; private set; }
-        public bool IsSelfParent { get; private set; }
-        public float Stagger { get; private set; }
-        public AudioData AudioData { get; set; }
-        public SizeBehaviourData SizeBehaviourData { get; set; }
 
         public AbilityData(AbilityConfigSO abilityConfig)
         {
@@ -63,25 +65,25 @@ namespace CodeBase.Domain.Abilities
             _modifiersMask = abilityConfig.AbilityModifiersMask;
             AttackType = abilityConfig.AttackType;
             WhatIsEnemy = abilityConfig.WhatIsEnemy;
-            BaseDamage = abilityConfig.Damage;
-            Damage = BaseDamage;
+            _baseDamage = abilityConfig.Damage;
+            Damage = _baseDamage;
             MaxAffectedEnemy = abilityConfig.MaxAffectedEnemy;
             Penetration = abilityConfig.Penetration;
             IsLimitedPenetration = abilityConfig.IsLimitedPenetration;
             AttackDelay = abilityConfig.AttackDelay;
-            BaseBurstCount = abilityConfig.BurstCount;
-            BurstCount = BaseBurstCount;
-            MaxBurstCount = abilityConfig.MaxBurstCount;
+            _baseBurstCount = abilityConfig.BurstCount;
+            BurstCount = _baseBurstCount;
+            _maxBurstCount = abilityConfig.MaxBurstCount;
             BurstFireDelay = abilityConfig.BurstFireDelay;
             SpawnPosition = abilityConfig.SpawnPosition;
-            BaseSpawnCount = abilityConfig.SpawnCount;
-            SpawnCount = BaseSpawnCount;
-            BaseRadius = abilityConfig.Radius;
-            Radius = BaseRadius;
+            _baseSpawnCount = abilityConfig.SpawnCount;
+            SpawnCount = _baseSpawnCount;
+            _baseRadius = abilityConfig.Radius;
+            Radius = _baseRadius;
             Arc = abilityConfig.Arc;
             MoveType = abilityConfig.MoveType;
-            BaseSpeed = abilityConfig.Speed;
-            Speed = BaseSpeed;
+            _baseSpeed = abilityConfig.Speed;
+            Speed = _baseSpeed;
             RotationStep = abilityConfig.RotationStep;
             StartTimePercent = abilityConfig.StartTimePercent;
             EndTimePercent = abilityConfig.EndTimePercent;
@@ -91,18 +93,18 @@ namespace CodeBase.Domain.Abilities
             AlignWithRotation = abilityConfig.AlignWithRotation;
             FlipDirectionAllowed = abilityConfig.FlipDirectionAllowed;
             TargetingType = abilityConfig.TargetingType;
-            BaseSize = abilityConfig.Size;
-            Size = BaseSize;
-            BaseDuration = abilityConfig.Duration;
-            Duration = BaseDuration;
-            BaseCooldown = abilityConfig.Cooldown;
-            Cooldown = BaseCooldown;
+            _baseSize = abilityConfig.Size;
+            _size = _baseSize;
+            _baseDuration = abilityConfig.Duration;
+            Duration = _baseDuration;
+            _baseCooldown = abilityConfig.Cooldown;
+            Cooldown = _baseCooldown;
             AbilityView = abilityConfig.AbilityView;
-            IsSelfParent = abilityConfig.IsSelfParent;
+            _isSelfParent = abilityConfig.IsSelfParent;
             AudioData = abilityConfig.AudioData;
 
-            SizeBehaviourData.UpdateFullTime(BaseDuration);
-            SizeBehaviourData.UpdateTargetSize(BaseSize);
+            SizeBehaviourData.UpdateFullTime(_baseDuration);
+            SizeBehaviourData.UpdateTargetSize(_baseSize);
         }
 
         public void UpdateUpgradeModifiers(IReadOnlyList<AbilityUpgradeData> abilityUpgradesData)
@@ -154,46 +156,46 @@ namespace CodeBase.Domain.Abilities
             //Amount
             if (_modifiersMask.UseAmount)
             {
-                if (MaxBurstCount > 1)
+                if (_maxBurstCount > 1)
                 {
-                    BurstCount = (int) (BaseBurstCount + _resultProperties[BaseProperty.Amount]);
+                    BurstCount = (int) (_baseBurstCount + _resultProperties[BaseProperty.Amount]);
 
-                    if (BurstCount > MaxBurstCount)
-                        BurstCount = MaxBurstCount;
+                    if (BurstCount > _maxBurstCount)
+                        BurstCount = _maxBurstCount;
                 }
                 else
                 {
-                    SpawnCount = (int) (BaseSpawnCount + _resultProperties[BaseProperty.Amount]);
+                    SpawnCount = (int) (_baseSpawnCount + _resultProperties[BaseProperty.Amount]);
                 }
             }
 
 
             //Damage
             if (_modifiersMask.UseDamage)
-                Damage = (int) (BaseDamage * (1 + _resultProperties[BaseProperty.Damage] / 100));
+                Damage = (int) (_baseDamage * (1 + _resultProperties[BaseProperty.Damage].AsPercentFactor()));
 
             //Cooldown
             if (_modifiersMask.UseCooldown)
-                Cooldown = BaseCooldown * (1 + _resultProperties[BaseProperty.Cooldown] / 100);
+                Cooldown = _baseCooldown * (1 + _resultProperties[BaseProperty.Cooldown].AsPercentFactor());
 
             //Duration
             if (_modifiersMask.UseDuration)
             {
-                Duration = BaseDuration * (1 + _resultProperties[BaseProperty.Duration] / 100);
+                Duration = _baseDuration * (1 + _resultProperties[BaseProperty.Duration].AsPercentFactor());
                 SizeBehaviourData.UpdateFullTime(Duration);
             }
 
             //Area
             if (_modifiersMask.UseArea)
             {
-                Size = BaseSize * (1 + _resultProperties[BaseProperty.Area] / 100);
-                SizeBehaviourData.UpdateTargetSize(Size);
-                Radius = BaseRadius * (1 + _resultProperties[BaseProperty.Area] / 100);
+                _size = _baseSize * (1 + _resultProperties[BaseProperty.Area].AsPercentFactor());
+                SizeBehaviourData.UpdateTargetSize(_size);
+                Radius = _baseRadius * (1 + _resultProperties[BaseProperty.Area].AsPercentFactor());
             }
 
             //ProjectileSpeed
             if (_modifiersMask.UseProjectileSpeed)
-                Speed = BaseSpeed * (1 + _resultProperties[BaseProperty.ProjectileSpeed] / 100);
+                Speed = _baseSpeed * (1 + _resultProperties[BaseProperty.ProjectileSpeed].AsPercentFactor());
         }
     }
 }
