@@ -1,5 +1,7 @@
 using System.Collections;
+using CodeBase.Configs;
 using CodeBase.Domain.Data;
+using CodeBase.Extensions;
 using UnityEngine;
 
 namespace CodeBase.Domain.EntityComponents
@@ -10,6 +12,9 @@ namespace CodeBase.Domain.EntityComponents
         [SerializeField] private float _baseMoveSpeed;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private SpriteRenderer _spriteRenderer;
+
+        private readonly WaitForSeconds _directionTrackingDelay = new(GameConstants.DirectionTrackingDelay);
+        private readonly float _minimumStopDistance = GameConstants.MinimumStopDistance;
 
         private bool _facedRight = true;
         private Vector3 _previousPosition;
@@ -31,17 +36,17 @@ namespace CodeBase.Domain.EntityComponents
 
         public void Initialize(float moveSpeedModifier)
         {
-            _resultMoveSpeed = _baseMoveSpeed * moveSpeedModifier / 100;
+            _resultMoveSpeed = _baseMoveSpeed * moveSpeedModifier.AsPercentFactor();
         }
 
         //TODO: Refactor this
         private IEnumerator TrackDirection()
         {
             _previousPosition = transform.position;
-            yield return new WaitForSeconds(0.35f);
+            yield return _directionTrackingDelay;
         }
 
-        private void OnInputUpdated(InputData inputData) => 
+        private void OnInputUpdated(InputData inputData) =>
             PhysicsMove(inputData.Horizontal, inputData.Vertical);
 
         private void PhysicsMove(float inputDataHorizontal, float inputDataVertical)
@@ -53,7 +58,7 @@ namespace CodeBase.Domain.EntityComponents
 
             _rigidbody2D.velocity = direction * _resultMoveSpeed;
 
-            if ((transform.position - _previousPosition).magnitude > 0.2f)
+            if ((transform.position - _previousPosition).magnitude > _minimumStopDistance)
             {
                 LastMoveVector = (transform.position - _previousPosition).normalized;
                 _previousPosition = transform.position;

@@ -1,5 +1,7 @@
 ﻿using System;
+using CodeBase.Configs;
 using CodeBase.Domain.Enums;
+using CodeBase.Extensions;
 using UnityEngine;
 
 namespace CodeBase.Domain.Data
@@ -14,8 +16,8 @@ namespace CodeBase.Domain.Data
         public DamageableData(MainProperties mainProperties)
         {
             MaxHealth = (int) mainProperties.BaseProperties[BaseProperty.MaxHealth];
-            HealthRegenerationPercent = mainProperties.BaseProperties[BaseProperty.HealthRegen]/100;
-            RegenerationDelayInSeconds = 1f;
+            HealthRegenerationPercent = mainProperties.BaseProperties[BaseProperty.HealthRegen].AsPercentFactor();
+            RegenerationDelayInSeconds = GameConstants.RegenerationDelay;
         }
 
         public void UpdateProgression(float stageProgressionModifier)
