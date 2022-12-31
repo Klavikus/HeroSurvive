@@ -16,14 +16,16 @@ namespace CodeBase.Infrastructure.StateMachine
 
         private IPersistentDataService _persistentDataService;
         private IAdsProvider _adsProvider;
+        private ITranslationService _translationService;
 
         public LoadProgressState(GameStateMachine gameStateMachine) =>
             _gameStateMachine = gameStateMachine;
 
         public void Enter()
         {
-            _persistentDataService = AllServices.Container.Single<IPersistentDataService>();
-            _adsProvider = AllServices.Container.Single<IAdsProvider>();
+            _persistentDataService = AllServices.Container.AsSingle<IPersistentDataService>();
+            _adsProvider = AllServices.Container.AsSingle<IAdsProvider>();
+            _translationService = AllServices.Container.AsSingle<ITranslationService>();
 
             _persistentDataService.LoadOrDefaultUpgradeModels();
             _gameStateMachine.Enter<LoadLevelState, string>(MainMenuScene);
@@ -35,9 +37,11 @@ namespace CodeBase.Infrastructure.StateMachine
         {
             PlayerAccount.Authorize(onSuccessCallback: () =>
             {
+                _translationService.UpdateLanguage();
                 _persistentDataService.LoadOrDefaultUpgradeModels();
                 _gameStateMachine.Enter<LoadLevelState, string>(MainMenuScene);
-                LeaderBoardsViewModel leaderBoardsViewModel = AllServices.Container.Single<IViewModelProvider>().LeaderBoardsViewModel;
+                LeaderBoardsViewModel leaderBoardsViewModel =
+                    AllServices.Container.AsSingle<IViewModelProvider>().LeaderBoardsViewModel;
                 leaderBoardsViewModel.UpdateLocalLeaderBoards();
                 leaderBoardsViewModel.StartAutoUpdate();
             });

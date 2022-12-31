@@ -15,8 +15,8 @@ namespace CodeBase.Infrastructure.StateMachine
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
-            _mainMenuFactory = AllServices.Container.Single<IMainMenuFactory>();
-            _modelProvider = AllServices.Container.Single<IModelProvider>();
+            _mainMenuFactory = AllServices.Container.AsSingle<IMainMenuFactory>();
+            _modelProvider = AllServices.Container.AsSingle<IModelProvider>();
             _modelProvider.GameLoopModel.StartLevelInvoked += OnLevelInvoked;
         }
 

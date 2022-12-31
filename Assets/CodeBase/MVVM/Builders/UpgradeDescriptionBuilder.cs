@@ -11,11 +11,26 @@ namespace CodeBase.MVVM.Builders
 {
     public class UpgradeDescriptionBuilder
     {
+        private static TranslatableString[] TranslatableStringMaxLevel = new[]
+        {
+            new TranslatableString(Language.en, "Max Level"),
+            new TranslatableString(Language.ru, "Макс Уровень"),
+            new TranslatableString(Language.tr, "Sınır"),
+        };   
+        
+        private static TranslatableString[] TranslatableStringNewAbility = new[]
+        {
+            new TranslatableString(Language.en, "New ability!"),
+            new TranslatableString(Language.ru, "Новая способность!"),
+            new TranslatableString(Language.tr, "Yeni yetenek!"),
+        };
+        private readonly ITranslationService _translationService;
         private readonly IReadOnlyDictionary<BaseProperty, MainPropertyViewData> _propertiesData;
         private readonly ColorConfigSO _colorsConfig;
 
-        public UpgradeDescriptionBuilder(ConfigurationProvider configurationProvider)
+        public UpgradeDescriptionBuilder(ConfigurationProvider configurationProvider, ITranslationService translationService)
         {
+            _translationService = translationService;
             _colorsConfig = configurationProvider.ColorsConfig;
             _propertiesData = configurationProvider.BasePropertiesConfig.GetPropertyViewsData();
         }
@@ -38,10 +53,11 @@ namespace CodeBase.MVVM.Builders
                 //TODO add this » to properties
                 MainPropertyViewData property = _propertiesData[additionalHeroProperty.BaseProperty];
 
+                string localizedName = _translationService.GetLocalizedText(property.TranslatableFullName);
                 stringBuilder.AppendLine(
                     isMaxLevel == false
-                        ? $"{property.FullName} » {GetAdditionalPropertyColorValue(additionalHeroProperty)}"
-                        : $"{property.FullName}{GetAdditionalPropertyColorValue(additionalHeroProperty)}");
+                        ? $"{localizedName} » {GetAdditionalPropertyColorValue(additionalHeroProperty)}"
+                        : $"{localizedName}{GetAdditionalPropertyColorValue(additionalHeroProperty)}");
             }
 
             return stringBuilder.ToString();
@@ -69,7 +85,7 @@ namespace CodeBase.MVVM.Builders
             string hexRGBA = ColorUtility.ToHtmlStringRGBA(_colorsConfig.CurrencyColor);
 
             if (isMaxLevel)
-                return $"<color=#{hexRGBA}>Max Level</color>";
+                return $"<color=#{hexRGBA}>{_translationService.GetLocalizedText(TranslatableStringMaxLevel)}</color>";
 
             if (cantUpgrade == false)
                 return $"<color=#{hexRGBA}>-{upgradesData[currentLevel].Price}</color>";
@@ -119,10 +135,10 @@ namespace CodeBase.MVVM.Builders
             if (abilityUpgradeData.IsFirstAbilityGain == false)
             {
                 string hexRGBA = ColorUtility.ToHtmlStringRGBA(_colorsConfig.GoodPropertyColor);
-                return $"<color=#{hexRGBA}>New ability!</color>";
+                return $"<color=#{hexRGBA}>{_translationService.GetLocalizedText(TranslatableStringNewAbility)}</color>";
             }
 
-            string nameString = _propertiesData[abilityUpgradeData.PropertyType].FullName;
+            string nameString = _translationService.GetLocalizedText(_propertiesData[abilityUpgradeData.PropertyType].TranslatableFullName);
             string valueString = GetPropertyTextDescription(_propertiesData[abilityUpgradeData.PropertyType],
                 abilityUpgradeData.Value);
             return $"{nameString} {valueString}";

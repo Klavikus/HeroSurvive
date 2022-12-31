@@ -43,13 +43,13 @@ namespace CodeBase.MVVM.Views
             _wavesSlider.maxValue = _gameLoopViewModel.GetAllWavesCount();
             //TODO: Change to TextBuilder
             _wavesSlider.value = 0;
-            _wavesCounter.text = "Wave 1";
+            _wavesCounter.text = "1";
         }
 
         private void OnWaveCompleted(int completedWaveIndex)
         {
             _wavesSlider.value = completedWaveIndex;
-            _wavesCounter.text = $"Wave {completedWaveIndex}";
+            _wavesCounter.text = completedWaveIndex.ToString();
         }
 
         private void OnCloseLevelButtonClicked() => _gameLoopViewModel.CloseLevel();

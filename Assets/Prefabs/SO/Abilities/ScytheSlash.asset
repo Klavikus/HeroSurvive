@@ -169,6 +169,13 @@ MonoBehaviour:
   <UpgradeViewData>k__BackingField:
     <Icon>k__BackingField: {fileID: 21300000, guid: 21a88b9ff8c2f684098b29a577daf0ac, type: 3}
     <Name>k__BackingField: Scythe Slash
+    <TranslatableName>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Scythe Slash
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u0412\u0437\u043C\u0430\u0445 \u041A\u043E\u0441\u044B"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: "T\u0131rpan Kesi\u011Fi"
   <AbilityModifiersMask>k__BackingField:
     <UseAmount>k__BackingField: 0
     <UseDamage>k__BackingField: 1

@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBase.Domain.Data;
+using CodeBase.Infrastructure.Services;
 using CodeBase.MVVM.Builders;
 using TMPro;
 using UnityEngine;
@@ -17,10 +18,14 @@ namespace CodeBase.MVVM.Views
         [SerializeField] private TMP_Text _title;
 
         private UpgradeDescriptionBuilder _upgradeDescriptionBuilder;
+        private ITranslationService _translationService;
         public event Action<AbilityUpgradeView> Selected;
 
-        public void Initialize(UpgradeDescriptionBuilder upgradeDescriptionBuilder) =>
+        public void Initialize(UpgradeDescriptionBuilder upgradeDescriptionBuilder)
+        {
             _upgradeDescriptionBuilder = upgradeDescriptionBuilder;
+            _translationService = AllServices.Container.AsSingle<ITranslationService>();
+        }
 
         public void OnPointerClick(PointerEventData eventData) => Selected?.Invoke(this);
 
@@ -29,7 +34,10 @@ namespace CodeBase.MVVM.Views
             gameObject.SetActive(true);
             //TODO: Доделать билдер для иконок и названия, с учётом локализации
             _icon.sprite = abilityUpgradeData.BaseConfigSO.UpgradeViewData.Icon;
-            _title.text = abilityUpgradeData.BaseConfigSO.UpgradeViewData.Name;
+
+            _title.text =
+                _translationService.GetLocalizedText(abilityUpgradeData.BaseConfigSO.UpgradeViewData.TranslatableName);
+
             _description.text = _upgradeDescriptionBuilder.GetAbilityUpgradeDescription(abilityUpgradeData);
             _selectionBorder.enabled = false;
             _selectionBackground.enabled = false;

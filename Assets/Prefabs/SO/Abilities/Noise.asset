@@ -115,6 +115,13 @@ MonoBehaviour:
   <UpgradeViewData>k__BackingField:
     <Icon>k__BackingField: {fileID: 21300000, guid: 806e6002b16723a40944b1376b66f33f, type: 3}
     <Name>k__BackingField: Noise
+    <TranslatableName>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Noise
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u0428\u0443\u043C"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: "G\xFCr\xFClt\xFC"
   <AbilityModifiersMask>k__BackingField:
     <UseAmount>k__BackingField: 0
     <UseDamage>k__BackingField: 1

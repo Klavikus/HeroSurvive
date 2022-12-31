@@ -31,13 +31,12 @@ MonoBehaviour:
   <Stagger>k__BackingField: 0.2
   <MaxAffectedEnemy>k__BackingField: 5
   <Penetration>k__BackingField: 1
-  <_isLimitedPenetration>k__BackingField: 0
+  <IsLimitedPenetration>k__BackingField: 0
   <AttackDelay>k__BackingField: 0
   <BurstCount>k__BackingField: 1
   <MaxBurstCount>k__BackingField: 1
   <BurstFireDelay>k__BackingField: 0
   <SpawnPosition>k__BackingField: 1
-  <Direction>k__BackingField: {x: 1, y: 0}
   <SpawnCount>k__BackingField: 3
   <Radius>k__BackingField: 1
   <Arc>k__BackingField: 120
@@ -170,6 +169,13 @@ MonoBehaviour:
   <UpgradeViewData>k__BackingField:
     <Icon>k__BackingField: {fileID: 21300000, guid: 7373fd7bf31584a4c94eff167568d97c, type: 3}
     <Name>k__BackingField: Skull Guard
+    <TranslatableName>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Skull Guard
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u0427\u0435\u0440\u0435\u043F \u0421\u0442\u0440\u0430\u0436"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: "Kafatas\u0131 Muhaf\u0131z\u0131"
   <AbilityModifiersMask>k__BackingField:
     <UseAmount>k__BackingField: 1
     <UseDamage>k__BackingField: 1

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using CodeBase.Domain.Data;
 using CodeBase.Infrastructure.Factories;
+using CodeBase.Infrastructure.Services;
 using CodeBase.MVVM.Builders;
 using CodeBase.MVVM.ViewModels;
 using TMPro;
@@ -26,6 +27,8 @@ namespace CodeBase.MVVM.Views.Upgrades
         private ViewFactory _viewFactory;
         private UpgradeDescriptionBuilder _descriptionBuilder;
         private CurrencyViewModel _currencyViewModel;
+        private ITranslationService _translationService;
+        private int _currentLevel;
 
         private void OnEnable()
         {
@@ -53,6 +56,7 @@ namespace CodeBase.MVVM.Views.Upgrades
             CurrencyViewModel currencyViewModel,
             UpgradeDescriptionBuilder descriptionBuilder)
         {
+            _translationService = AllServices.Container.AsSingle<ITranslationService>();
             _upgradeViewModel = upgradeViewModel;
             _viewFactory = viewFactory;
             _descriptionBuilder = descriptionBuilder;
@@ -60,7 +64,6 @@ namespace CodeBase.MVVM.Views.Upgrades
 
             _upgradeViewModel.Upgraded += OnUpgraded;
             _upgradeViewModel.UpgradeSelected += OnUpgradeSelected;
-
             _upgradeButton.onClick.AddListener(OnBuyButtonClicked);
             _sellButton.onClick.AddListener(OnResetButtonClicked);
         }
@@ -70,19 +73,16 @@ namespace CodeBase.MVVM.Views.Upgrades
             for (int i = 0; i < currentLevel; i++)
                 _levelUpgradeViews[i].SetSelectedStatus(true);
 
-
             UpdateRender(upgradeData, currentLevel);
         }
 
         private void OnUpgradeSelected(UpgradeData upgradeData, int currentLevel)
         {
             _upgradeData = upgradeData;
-
-            _name.text = upgradeData.Name;
-            var a = upgradeData.Icon;
+            _name.text = _translationService.GetLocalizedText(upgradeData.TranslatableNames);
             _icon.sprite = upgradeData.Icon;
-
-            UpdateRender(upgradeData, currentLevel);
+            _currentLevel = currentLevel;
+            UpdateRender(_upgradeData, _currentLevel);
         }
 
         private void UpdateRender(UpgradeData upgradeData, int currentLevel)

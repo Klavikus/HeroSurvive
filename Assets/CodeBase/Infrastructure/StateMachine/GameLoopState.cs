@@ -15,8 +15,8 @@ namespace CodeBase.Infrastructure.StateMachine
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
-            _modelProvider = AllServices.Container.Single<IModelProvider>();
-            _gameLoopService = AllServices.Container.Single<IGameLoopService>();
+            _modelProvider = AllServices.Container.AsSingle<IModelProvider>();
+            _gameLoopService = AllServices.Container.AsSingle<IGameLoopService>();
             _modelProvider.GameLoopModel.CloseLevelInvoked += OnLevelCloseInvoked;
         }
 

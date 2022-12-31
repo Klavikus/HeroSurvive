@@ -48,7 +48,7 @@ namespace CodeBase.Infrastructure.Factories
         {
             foreach (UpgradeData upgradeData in _configurationProvider.UpgradesConfig.UpgradeData)
             {
-                string upgradeDataKey = $"{GameConstants.UpgradeModelPrefix}_{upgradeData.Name}";
+                string upgradeDataKey = $"{GameConstants.UpgradeModelPrefix}_{upgradeData.KeyName}";
                 SaveToData(upgradeDataKey, PlayerPrefs.GetString(upgradeDataKey, "0"));
             }
         

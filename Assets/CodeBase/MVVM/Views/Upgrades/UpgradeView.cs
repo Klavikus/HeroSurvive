@@ -1,4 +1,5 @@
 ﻿using CodeBase.Domain.Data;
+using CodeBase.Infrastructure.Services;
 using CodeBase.MVVM.ViewModels;
 using TMPro;
 using UnityEngine;
@@ -18,7 +19,8 @@ namespace CodeBase.MVVM.Views.Upgrades
         private UpgradeViewModel _upgradeViewModel;
 
         private UpgradeData _upgradeData;
-
+        private ITranslationService _translationService;
+        
         private void OnDisable()
         {
             if (_upgradeViewModel == null)
@@ -33,13 +35,14 @@ namespace CodeBase.MVVM.Views.Upgrades
             UpgradeData upgradeData,
             UpgradeLevelView[] levelUpgradeViews)
         {
+            _translationService = AllServices.Container.AsSingle<ITranslationService>();
             _upgradeViewModel = upgradeViewModel;
             _upgradeData = upgradeData;
             _levelUpgradeViews = levelUpgradeViews;
            
             _upgradeViewModel.Upgraded += OnUpgraded;
             _upgradeViewModel.UpgradeSelected += OnUpgradedSelected;
-
+            _translationService.LocalizationChanged += OnLocalizationChanged;
 
             foreach (UpgradeLevelView levelView in _levelUpgradeViews)
             {
@@ -49,8 +52,13 @@ namespace CodeBase.MVVM.Views.Upgrades
 
             UpdateLevelsView(_upgradeViewModel.GetCurrentUpgradeLevel(_upgradeData));
 
-            _name.text = upgradeData.Name;
+            _name.text = _translationService.GetLocalizedText(upgradeData.TranslatableNames);
             _icon.sprite = upgradeData.Icon;
+        }
+
+        private void OnLocalizationChanged()
+        {
+            _name.text = _translationService.GetLocalizedText(_upgradeData.TranslatableNames);
         }
 
         public void OnPointerClick(PointerEventData eventData) => _upgradeViewModel.SelectUpgrade(_upgradeData);

@@ -115,6 +115,13 @@ MonoBehaviour:
   <UpgradeViewData>k__BackingField:
     <Icon>k__BackingField: {fileID: 21300000, guid: 19b8f1b349b5fec428920bbfd28cd0eb, type: 3}
     <Name>k__BackingField: Soul Shard
+    <TranslatableName>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Soul Shard
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u041E\u0441\u043A\u043E\u043B\u043E\u043A \u0434\u0443\u0448\u0438"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: "Ruh Par\xE7as\u0131"
   <AbilityModifiersMask>k__BackingField:
     <UseAmount>k__BackingField: 1
     <UseDamage>k__BackingField: 1

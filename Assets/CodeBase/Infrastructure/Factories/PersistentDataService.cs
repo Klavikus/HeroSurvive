@@ -38,7 +38,7 @@ namespace CodeBase.Infrastructure.Factories
 
             for (var i = 0; i < result.Length; i++)
             {
-                string dattaKey = $"{GameConstants.UpgradeModelPrefix}_{result[i].Data.Name}";
+                string dattaKey = $"{GameConstants.UpgradeModelPrefix}_{result[i].Data.KeyName}";
 
                 if (_saveLoadService.ContainData(dattaKey))
                 {
@@ -55,7 +55,7 @@ namespace CodeBase.Infrastructure.Factories
 
         private void SaveUpgrade(UpgradeModel upgradeModel)
         {
-            string dattaKey = $"{GameConstants.UpgradeModelPrefix}_{upgradeModel.Data.Name}";
+            string dattaKey = $"{GameConstants.UpgradeModelPrefix}_{upgradeModel.Data.KeyName}";
             _saveLoadService.SaveToData(dattaKey, upgradeModel.CurrentLevel.ToString());
         }
 

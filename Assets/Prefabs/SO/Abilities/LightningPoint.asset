@@ -169,6 +169,13 @@ MonoBehaviour:
   <UpgradeViewData>k__BackingField:
     <Icon>k__BackingField: {fileID: 21300000, guid: b3d072dec7ef03947a572f6eb9fa255f, type: 3}
     <Name>k__BackingField: Lightning
+    <TranslatableName>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Lightning
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u041C\u043E\u043B\u043D\u0438\u044F"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: "\u015Eim\u015Fek"
   <AbilityModifiersMask>k__BackingField:
     <UseAmount>k__BackingField: 1
     <UseDamage>k__BackingField: 1

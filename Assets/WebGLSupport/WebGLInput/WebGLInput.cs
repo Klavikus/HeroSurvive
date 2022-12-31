@@ -287,7 +287,7 @@ namespace WebGLSupport
                 instance.input.text = value;
             }
 
-            // InputField.ContentType.Name が Name の場合、先頭文字が強制的大文字になるため小文字にして比べる
+            // InputField.ContentType.KeyName が KeyName の場合、先頭文字が強制的大文字になるため小文字にして比べる
             if (instance.input.contentType == ContentType.Name)
             {
                 if (string.Compare(instance.input.text, value, true) == 0)

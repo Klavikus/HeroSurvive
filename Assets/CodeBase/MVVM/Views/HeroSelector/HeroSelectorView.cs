@@ -47,6 +47,9 @@ namespace CodeBase.MVVM.Views.HeroSelector
             _closeButton.onClick.AddListener(OnCloseButtonClicked);
             _userNameButton.onClick.AddListener(OnUserNameButtonClicked);
 
+            _baseAbilityView.Initialize();
+            _heroDescriptionView.Initialize();
+
             if (_heroSelectorViewModel.CurrentSelectedHeroData != null)
                 _heroDescriptionView.Render(_heroSelectorViewModel.CurrentSelectedHeroData);
 

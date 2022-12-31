@@ -12,7 +12,7 @@ namespace CodeBase.MVVM.Views
 
         private void Start()
         {
-            _menuViewModel = AllServices.Container.Single<IViewModelProvider>().MenuViewModel;
+            _menuViewModel = AllServices.Container.AsSingle<IViewModelProvider>().MenuViewModel;
             _showButton.onClick.AddListener(_menuViewModel.InvokeLeaderBoardShow);
         }
 

@@ -48,7 +48,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304302846004404402}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -755,6 +755,7 @@ GameObject:
   - component: {fileID: 304302847012978755}
   - component: {fileID: 304302847012978753}
   - component: {fileID: 304302847012978752}
+  - component: {fileID: 595947782711102358}
   m_Layer: 5
   m_Name: LeaderBoardName
   m_TagString: Untagged
@@ -812,8 +813,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Top players
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 943740ed2ff034fc48ce7c5125f00570, type: 2}
-  m_sharedMaterial: {fileID: -4171563015097924827, guid: 943740ed2ff034fc48ce7c5125f00570, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
+  m_sharedMaterial: {fileID: 942589445191879500, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -879,6 +880,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &595947782711102358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304302847012978754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15f33690f4ed47619c095574ccaaad6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tmpText: {fileID: 304302847012978752}
+  _translatableStrings:
+  - <Language>k__BackingField: 0
+    <Text>k__BackingField: Top Players
+  - <Language>k__BackingField: 1
+    <Text>k__BackingField: "\u041B\u0443\u0447\u0448\u0438\u0435 \u0418\u0433\u0440\u043E\u043A\u0438"
+  - <Language>k__BackingField: 2
+    <Text>k__BackingField: 'En Iyi Oyuncular '
 --- !u!1 &304302847023967567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,7 +1668,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 112.32505}
+  m_AnchoredPosition: {x: 0, y: -0.000030517578}
   m_SizeDelta: {x: -52, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &2646250414019605483

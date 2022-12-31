@@ -25,9 +25,9 @@ namespace CodeBase.MVVM.Views
         private void Start()
         {
             Hide();
-            _leaderBoardsViewModel = AllServices.Container.Single<IViewModelProvider>().LeaderBoardsViewModel;
-            _menuViewModel = AllServices.Container.Single<IViewModelProvider>().MenuViewModel;
-            _viewFactory = AllServices.Container.Single<IViewFactory>();
+            _leaderBoardsViewModel = AllServices.Container.AsSingle<IViewModelProvider>().LeaderBoardsViewModel;
+            _menuViewModel = AllServices.Container.AsSingle<IViewModelProvider>().MenuViewModel;
+            _viewFactory = AllServices.Container.AsSingle<IViewFactory>();
             _leaderBoardsViewModel.PlayerScoreUpdated += UpdatePlayerScoreView;
             _leaderBoardsViewModel.LeaderBoardUpdated += CreateScoreViews;
             _menuViewModel.ShowLeaderBordInvoked += Show;

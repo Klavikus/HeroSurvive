@@ -54,13 +54,17 @@ namespace CodeBase.Infrastructure.StateMachine
             AdsProvider adsProvider = new AdsProvider(_coroutineRunner);
             adsProvider.Initialize();
 
+            TranslationService translationService = new TranslationService();
+            AllServices.Container.RegisterAsSingle<ITranslationService>(translationService);
+
             SaveLoadService saveLoadService = new SaveLoadService(configurationProvider);
 
             ModelFactory modelFactory = new ModelFactory(configurationProvider);
 
 
             //Builders
-            UpgradeDescriptionBuilder upgradeDescriptionBuilder = new UpgradeDescriptionBuilder(configurationProvider);
+            UpgradeDescriptionBuilder upgradeDescriptionBuilder =
+                new UpgradeDescriptionBuilder(configurationProvider, translationService);
             LevelMapFactory levelMapFactory = new LevelMapFactory(configurationProvider);
 
             //Models
@@ -81,14 +85,15 @@ namespace CodeBase.Infrastructure.StateMachine
 
             PersistentDataService persistentDataService =
                 new PersistentDataService(configurationProvider, saveLoadService, modelProvider);
-            AllServices.Container.RegisterSingle<IPersistentDataService>(persistentDataService);
-            AllServices.Container.RegisterSingle<IAdsProvider>(adsProvider);
+            AllServices.Container.RegisterAsSingle<IPersistentDataService>(persistentDataService);
+            AllServices.Container.RegisterAsSingle<IAdsProvider>(adsProvider);
 
             //ViewModels
             UserNameViewModel userNameViewModel = new UserNameViewModel(userModel, menuModel);
             HeroSelectorViewModel heroSelectorViewModel =
-                new HeroSelectorViewModel(heroModel, menuModel, gameLoopModel);
-            MainPropertiesViewModel propertiesViewModel = new MainPropertiesViewModel(propertiesModel);
+                new HeroSelectorViewModel(heroModel, menuModel, gameLoopModel, translationService);
+            MainPropertiesViewModel propertiesViewModel =
+                new MainPropertiesViewModel(propertiesModel, translationService);
             MenuViewModel menuViewModel = new MenuViewModel(menuModel);
             UpgradeViewModel upgradeViewModel =
                 new UpgradeViewModel(upgradeModels, currencyModel, upgradeService);
@@ -113,10 +118,10 @@ namespace CodeBase.Infrastructure.StateMachine
 
             propertyProvider.Initialize();
 
-            _services.RegisterSingle<IConfigurationProvider>(configurationProvider);
-            _services.RegisterSingle<IUpgradeService>(upgradeService);
-            _services.RegisterSingle<IPropertyProvider>(propertyProvider);
-            _services.RegisterSingle<IModelProvider>(modelProvider);
+            _services.RegisterAsSingle<IConfigurationProvider>(configurationProvider);
+            _services.RegisterAsSingle<IUpgradeService>(upgradeService);
+            _services.RegisterAsSingle<IPropertyProvider>(propertyProvider);
+            _services.RegisterAsSingle<IModelProvider>(modelProvider);
 
             LeaderBoardsViewModel leaderBoardsViewModel = new LeaderBoardsViewModel(new[]
                     {new LeaderBoard(GameConstants.StageTotalKillsLeaderBoardKey)},
@@ -124,7 +129,7 @@ namespace CodeBase.Infrastructure.StateMachine
 
             ViewModelProvider viewModelProvider = new ViewModelProvider(userNameViewModel,
                 leaderBoardsViewModel, menuViewModel);
-            _services.RegisterSingle<IViewModelProvider>(viewModelProvider);
+            _services.RegisterAsSingle<IViewModelProvider>(viewModelProvider);
 
             //GameLoopCompositionRoot
             AbilityUpgradesProvider abilityUpgradesProvider = new AbilityUpgradesProvider(configurationProvider);
@@ -141,14 +146,14 @@ namespace CodeBase.Infrastructure.StateMachine
             PlayerBuilder playerBuilder = new PlayerBuilder(heroModel, configurationProvider, propertyProvider,
                 levelUpModel, abilityUpgradeService, abilityFactory, audioPlayerService);
             targetFinderService.BindPlayerBuilder(playerBuilder);
-            _services.RegisterSingle<ITargetService>(targetFinderService);
+            _services.RegisterAsSingle<ITargetService>(targetFinderService);
 
             AbilityBuilder abilityBuilder = new AbilityBuilder(playerBuilder);
             MainMenuFactory mainMenuFactory = new MainMenuFactory(mainMenuViewBuilder);
 
             EnemySpawnService enemySpawnService =
                 new EnemySpawnService(targetFinderService, enemyFactory);
-            _services.RegisterSingle<IEnemySpawnService>(enemySpawnService);
+            _services.RegisterAsSingle<IEnemySpawnService>(enemySpawnService);
 
             LeveCompetitionService leveCompetitionService =
                 new LeveCompetitionService(enemySpawnService, configurationProvider, levelUpModel);
@@ -166,10 +171,10 @@ namespace CodeBase.Infrastructure.StateMachine
             GameLoopService gameLoopService = new GameLoopService(levelMapFactory, gameLoopViewBuilder, abilityBuilder,
                 heroModel, playerBuilder, gameLoopModel, leveCompetitionService, playerEventHandler);
             abilityFactory.BindGameLoopService(gameLoopService);
-            
-            _services.RegisterSingle<IGameLoopService>(gameLoopService);
-            _services.RegisterSingle<IViewFactory>(viewFactory);
-            _services.RegisterSingle<IMainMenuFactory>(mainMenuFactory);
+
+            _services.RegisterAsSingle<IGameLoopService>(gameLoopService);
+            _services.RegisterAsSingle<IViewFactory>(viewFactory);
+            _services.RegisterAsSingle<IMainMenuFactory>(mainMenuFactory);
         }
     }
 }

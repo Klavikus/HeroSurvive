@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CodeBase.Domain.Data;
 using CodeBase.Domain.Enums;
+using CodeBase.Infrastructure.Services;
 using CodeBase.MVVM.Builders;
 using CodeBase.MVVM.ViewModels;
 using TMPro;
@@ -19,13 +21,14 @@ namespace CodeBase.MVVM.Views.HeroSelector
 
         private MainPropertiesViewModel _viewModel;
         private UpgradeDescriptionBuilder _upgradeDescriptionBuilder;
+        private ITranslationService _translationService;
 
         private void OnEnable()
         {
             if (_viewModel == null)
                 return;
 
-            _viewModel.PropertiesChanged += Render;
+            _viewModel.PropertiesChanged += RenderValue;
         }
 
         private void OnDisable()
@@ -33,23 +36,28 @@ namespace CodeBase.MVVM.Views.HeroSelector
             if (_viewModel == null)
                 return;
 
-            _viewModel.PropertiesChanged -= Render;
+            _viewModel.PropertiesChanged -= RenderValue;
         }
 
         public void Initialize(MainPropertiesViewModel mainPropertiesViewModel, MainPropertyViewData viewData,
             UpgradeDescriptionBuilder upgradeDescriptionBuilder)
         {
+            _translationService = AllServices.Container.AsSingle<ITranslationService>();
             _viewModel = mainPropertiesViewModel;
             _viewData = viewData;
             _upgradeDescriptionBuilder = upgradeDescriptionBuilder;
             _image.sprite = _viewData.Icon;
-            _shortName.text = _viewData.ShortName;
+            _shortName.text = _translationService.GetLocalizedText(_viewData.TranslatableShortName);
             _value.text = $"{_viewData.Prefix} {_viewData.Value} {_viewData.Postfix}";
-            Render(mainPropertiesViewModel.BaseProperties);
-            _viewModel.PropertiesChanged += Render;
+            RenderValue(mainPropertiesViewModel.BaseProperties);
+            _viewModel.PropertiesChanged += RenderValue;
+            _viewModel.InvokedRender += Render;
         }
 
-        private void Render(IReadOnlyDictionary<BaseProperty, float> mainProperties)
+        private void Render() =>
+            _shortName.text = _translationService.GetLocalizedText(_viewData.TranslatableShortName);
+
+        private void RenderValue(IReadOnlyDictionary<BaseProperty, float> mainProperties)
         {
             _value.text =
                 _upgradeDescriptionBuilder.GetPropertyTextDescription(_viewData,

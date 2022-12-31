@@ -12,8 +12,8 @@ namespace CodeBase.Domain.Data
         [field: SerializeField] public Sprite Icon { get; private set; }
         [field: SerializeField] public string Prefix { get; private set; }
         [field: SerializeField] public string Postfix { get; private set; }
-        [field: SerializeField] public string ShortName { get; private set; }
-        [field: SerializeField] public string FullName { get; private set; }
+        [field: SerializeField] public TranslatableString[] TranslatableShortName { get; private set; }
+        [field: SerializeField] public TranslatableString[] TranslatableFullName { get; private set; }
         [field: SerializeField] public bool IsIncreaseGood { get; private set; }
         [field: SerializeField] public bool IsSigned { get; private set; }
     }

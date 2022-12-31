@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.Domain;
 using CodeBase.Domain.Enums;
+using CodeBase.Infrastructure.Services;
 using CodeBase.MVVM.Models;
 
 namespace CodeBase.MVVM.ViewModels
@@ -9,18 +10,29 @@ namespace CodeBase.MVVM.ViewModels
     public class MainPropertiesViewModel
     {
         private readonly PropertiesModel _propertiesModel;
-        
+        private readonly ITranslationService _translationService;
+
         public event Action<IReadOnlyDictionary<BaseProperty, float>> PropertiesChanged;
-        
+        public event Action InvokedRender;
+
         public IReadOnlyDictionary<BaseProperty, float> BaseProperties { get; private set; }
 
-        public MainPropertiesViewModel(PropertiesModel propertiesModel)
+        public MainPropertiesViewModel(PropertiesModel propertiesModel, ITranslationService translationService)
         {
             _propertiesModel = propertiesModel;
+            _translationService = translationService;
             _propertiesModel.Changed += OnPropertiesChanged;
+            _translationService.LocalizationChanged += OnLocalizationChanged;
         }
 
-        ~MainPropertiesViewModel() => _propertiesModel.Changed -= OnPropertiesChanged;
+        ~MainPropertiesViewModel()
+        {
+            _propertiesModel.Changed -= OnPropertiesChanged;
+            _translationService.LocalizationChanged -= OnLocalizationChanged;
+        }
+
+        private void OnLocalizationChanged() => InvokedRender?.Invoke();
+
 
         private void OnPropertiesChanged(MainProperties mainProperties)
         {

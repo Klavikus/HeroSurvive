@@ -25,7 +25,7 @@ namespace CodeBase.MVVM.Views
 
         private void Start()
         {
-            _viewModelProvider = AllServices.Container.Single<IViewModelProvider>();
+            _viewModelProvider = AllServices.Container.AsSingle<IViewModelProvider>();
             _userNameViewModel = _viewModelProvider.UserNameViewModel;
             _text.text = _userNameViewModel.Name;
             _userNameViewModel.UserNameChanged += OnNameChanged;

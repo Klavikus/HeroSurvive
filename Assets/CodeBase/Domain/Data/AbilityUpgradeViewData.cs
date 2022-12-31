@@ -9,11 +9,6 @@ namespace CodeBase.Domain.Data
         [field: SerializeField] public Sprite Icon { get; private set; }
 
         [field: SerializeField] public string Name { get; private set; }
-
-        public AbilityUpgradeViewData(Sprite icon, string name)
-        {
-            Icon = icon;
-            Name = name;
-        }
+        [field: SerializeField] public TranslatableString[] TranslatableName { get; private set; }
     }
 }

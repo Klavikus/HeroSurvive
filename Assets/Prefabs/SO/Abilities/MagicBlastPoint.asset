@@ -169,6 +169,14 @@ MonoBehaviour:
   <UpgradeViewData>k__BackingField:
     <Icon>k__BackingField: {fileID: 21300000, guid: 92482e0b3fd17834e947ef92c1555708, type: 3}
     <Name>k__BackingField: Magic Blast
+    <TranslatableName>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Magic Blast
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u0438\u0439
+        \u0412\u0437\u0440\u044B\u0432"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: Sihirli Patlama
   <AbilityModifiersMask>k__BackingField:
     <UseAmount>k__BackingField: 1
     <UseDamage>k__BackingField: 1

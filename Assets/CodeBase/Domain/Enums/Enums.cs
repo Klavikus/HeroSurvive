@@ -1,5 +1,33 @@
 ﻿namespace CodeBase.Domain.Enums
 {
+    public enum Language
+    {
+        en,
+        ru,
+        tr,
+    }
+    public enum LeanTranslationPath
+    {
+        MainMenu_Start,
+        MainMenu_Upgrades,
+        MainMenu_Leaderboard,
+        MainMenu_Options,
+        
+        Common_Back,
+        Common_Continue,
+        Common_Apply,
+        Common_Reset,
+        Common_Buy,
+        Common_MaxLevel,
+        Common_BaseAbility,
+        
+        Leaderboard_TopPlayers,
+        
+        Upgrades_Health,
+        Upgrades_Regeneration,
+        Upgrades_MoveSpeed,
+    }
+    
     public enum BaseProperty
     {
         MaxHealth,

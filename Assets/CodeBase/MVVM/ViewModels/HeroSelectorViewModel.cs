@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBase.Domain.Data;
+using CodeBase.Infrastructure.Services;
 using CodeBase.MVVM.Models;
 
 namespace CodeBase.MVVM.ViewModels
@@ -9,18 +10,27 @@ namespace CodeBase.MVVM.ViewModels
         private readonly HeroModel _heroModel;
         private readonly MenuModel _menuModel;
         private readonly GameLoopModel _gameLoopModel;
+        private readonly ITranslationService _translationService;
         public event Action<HeroData> HeroSelected;
         public event Action HeroSelectorEnabled;
         public event Action HeroSelectorDisabled;
         public HeroData CurrentSelectedHeroData { get; private set; }
 
-        public HeroSelectorViewModel(HeroModel heroModel, MenuModel menuModel, GameLoopModel gameLoopModel)
+        public HeroSelectorViewModel(HeroModel heroModel, MenuModel menuModel, GameLoopModel gameLoopModel,
+            ITranslationService translationService)
         {
             _heroModel = heroModel;
             _menuModel = menuModel;
             _gameLoopModel = gameLoopModel;
+            _translationService = translationService;
             _menuModel.OpenedHeroSelection += OnMenuModelHeroSelectorEnabled;
             _menuModel.ClosedHeroSelection += OnMenuModelHeroSelectorDisabled;
+            _translationService.LocalizationChanged += OnLocalizationChanged;
+        }
+
+        private void OnLocalizationChanged()
+        {
+            HeroSelected?.Invoke(CurrentSelectedHeroData);
         }
 
         public void SelectHero(HeroData data)

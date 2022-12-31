@@ -79,6 +79,13 @@ MonoBehaviour:
   <UpgradeViewData>k__BackingField:
     <Icon>k__BackingField: {fileID: 21300000, guid: 1249593c021f26c47b5e1f19b671d1dc, type: 3}
     <Name>k__BackingField: Sssnakes
+    <TranslatableName>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Sssnakes
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u0417\u0437\u0437\u043C\u0435\u0438"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: "Y\u0131lanlar"
   <AbilityModifiersMask>k__BackingField:
     <UseAmount>k__BackingField: 1
     <UseDamage>k__BackingField: 1

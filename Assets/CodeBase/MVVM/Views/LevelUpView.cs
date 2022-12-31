@@ -62,13 +62,13 @@ namespace CodeBase.MVVM.Views
             _continueButton.onClick.AddListener(OnContinueButtonClicked);
             _reRollButton.onClick.AddListener(OnReRollButtonClicked);
 
-            _currentLevel.text = $"Level 1";
+            _currentLevel.text = "1";
             _currentProgress.fillAmount = 0;
         }
 
         private void OnLevelChanged(int newLevel)
         {
-            _currentLevel.text = $"Level {newLevel}";
+            _currentLevel.text = newLevel.ToString();
 
             if (_levelUpViewModel.GetAvailableUpgrades().Length == 0)
                 return;

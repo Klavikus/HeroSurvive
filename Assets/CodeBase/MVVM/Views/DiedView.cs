@@ -13,7 +13,6 @@ namespace CodeBase.MVVM.Views
         [SerializeField] private Button _adsResurrectButton;
         [SerializeField] private Button _adsDoubleGoldButton;
         [SerializeField] private TMP_Text _killedCounter;
-        [SerializeField] private TMP_Text _waveCounter;
         [SerializeField] private TMP_Text _goldCounter;
 
         private GameLoopViewModel _gameLoopViewModel;
@@ -62,7 +61,7 @@ namespace CodeBase.MVVM.Views
         {
             Time.timeScale = 0;
             _killedCounter.text = _gameLoopViewModel.GetKillCount().ToString();
-            _waveCounter.text = _gameLoopViewModel.GetClearedWaveCount().ToString();
+            _goldCounter.text = _gameLoopViewModel.GetClearedWaveCount().ToString();
             _mainCanvas.enabled = true;
         }
 

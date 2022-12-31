@@ -31,13 +31,12 @@ MonoBehaviour:
   <Stagger>k__BackingField: 0.6
   <MaxAffectedEnemy>k__BackingField: 10
   <Penetration>k__BackingField: 0
-  <_isLimitedPenetration>k__BackingField: 0
+  <IsLimitedPenetration>k__BackingField: 0
   <AttackDelay>k__BackingField: 0
   <BurstCount>k__BackingField: 1
   <MaxBurstCount>k__BackingField: 1
   <BurstFireDelay>k__BackingField: 0
   <SpawnPosition>k__BackingField: 3
-  <Direction>k__BackingField: {x: 0, y: 1}
   <SpawnCount>k__BackingField: 5
   <Radius>k__BackingField: 0.01
   <Arc>k__BackingField: 90
@@ -134,6 +133,13 @@ MonoBehaviour:
   <UpgradeViewData>k__BackingField:
     <Icon>k__BackingField: {fileID: 21300000, guid: 9b69b31a64f1f38409a15962ec731f65, type: 3}
     <Name>k__BackingField: Lightning Strike
+    <TranslatableName>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Lightning Strike
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u0423\u0434\u0430\u0440 \u041C\u043E\u043B\u043D\u0438\u0438"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: "\u015Eim\u015Fek \xE7arpmas\u0131"
   <AbilityModifiersMask>k__BackingField:
     <UseAmount>k__BackingField: 1
     <UseDamage>k__BackingField: 1

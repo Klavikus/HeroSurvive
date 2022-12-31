@@ -6,10 +6,10 @@
 
         private static AllServices _instance;
 
-        public void RegisterSingle<TService>(TService implementation) where TService : IService =>
+        public void RegisterAsSingle<TService>(TService implementation) where TService : IService =>
             Implementation<TService>.ServiceInstance = implementation;
 
-        public TService Single<TService>() where TService : IService =>
+        public TService AsSingle<TService>() where TService : IService =>
             Implementation<TService>.ServiceInstance;
 
         private static class Implementation<TService> where TService : IService
