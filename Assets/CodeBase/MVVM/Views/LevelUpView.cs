@@ -14,7 +14,6 @@ namespace CodeBase.MVVM.Views
         [SerializeField] private AbilityUpgradeView[] _abilityUpgradeViews;
         [SerializeField] private Button _continueButton;
         [SerializeField] private Button _reRollButton;
-
         [SerializeField] private TMP_Text _currentLevel;
         [SerializeField] private Image _currentProgress;
 
@@ -33,11 +32,6 @@ namespace CodeBase.MVVM.Views
             _continueButton.onClick.RemoveListener(OnContinueButtonClicked);
             _reRollButton.onClick.RemoveListener(OnReRollButtonClicked);
             _levelUpViewModel.ResetLevels();
-        }
-
-        private void OnReRollButtonClicked()
-        {
-            _levelUpViewModel.Reroll();
         }
 
         public void Initialize(LevelUpViewModel levelUpViewModel, UpgradeDescriptionBuilder upgradeDescriptionBuilder)
@@ -66,6 +60,8 @@ namespace CodeBase.MVVM.Views
             _currentProgress.fillAmount = 0;
         }
 
+        private void OnReRollButtonClicked() => _levelUpViewModel.Reroll();
+
         private void OnLevelChanged(int newLevel)
         {
             _currentLevel.text = newLevel.ToString();
@@ -76,10 +72,7 @@ namespace CodeBase.MVVM.Views
             Show();
         }
 
-        private void ShowProgress(float progressPercent)
-        {
-            _currentProgress.fillAmount = progressPercent;
-        }
+        private void ShowProgress(float progressPercent) => _currentProgress.fillAmount = progressPercent;
 
         private void ShowAvailableUpgrades(AbilityUpgradeData[] abilityUpgradesData)
         {
@@ -93,17 +86,17 @@ namespace CodeBase.MVVM.Views
         private void OnUpgradeSelected(AbilityUpgradeView selectedUpgrade)
         {
             _currentSelectedUpgrade = _abilityUpgradeDataByView[selectedUpgrade];
+            
             foreach (AbilityUpgradeView abilityUpgradeView in _abilityUpgradeViews)
                 abilityUpgradeView.SetSelected(abilityUpgradeView == selectedUpgrade);
+            
+            _levelUpViewModel.SelectUpgrade(_currentSelectedUpgrade);
+            _currentSelectedUpgrade = null;
         }
 
         private void OnContinueButtonClicked()
         {
-            if (_currentSelectedUpgrade == null)
-            {
-                _currentSelectedUpgrade = _abilityUpgradeDataByView[_abilityUpgradeViews[0]];
-            }
-
+            _currentSelectedUpgrade ??= _abilityUpgradeDataByView[_abilityUpgradeViews[0]];
             _levelUpViewModel.SelectUpgrade(_currentSelectedUpgrade);
             _currentSelectedUpgrade = null;
         }
