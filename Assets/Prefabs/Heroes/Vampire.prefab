@@ -437,6 +437,9 @@ MonoBehaviour:
   _baseMoveSpeed: 3
   _rigidbody2D: {fileID: 4014900518795304657}
   _spriteRenderer: {fileID: 4014900518795304680}
+  _whatIsWall:
+    serializedVersion: 2
+    m_Bits: 16
 --- !u!114 &4014900518795304659
 MonoBehaviour:
   m_ObjectHideFlags: 0

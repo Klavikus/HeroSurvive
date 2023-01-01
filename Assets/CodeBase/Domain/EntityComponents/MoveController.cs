@@ -12,9 +12,11 @@ namespace CodeBase.Domain.EntityComponents
         [SerializeField] private float _baseMoveSpeed;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private LayerMask _whatIsWall;
 
         private readonly WaitForSeconds _directionTrackingDelay = new(GameConstants.DirectionTrackingDelay);
         private readonly float _minimumStopDistance = GameConstants.MinimumStopDistance;
+        private readonly RaycastHit2D[] _wallCheckResults = new RaycastHit2D[1];
 
         private bool _facedRight = true;
         private Vector3 _previousPosition;
@@ -47,14 +49,20 @@ namespace CodeBase.Domain.EntityComponents
         }
 
         private void OnInputUpdated(InputData inputData) =>
-            PhysicsMove(inputData.Horizontal, inputData.Vertical);
+            HandlePhysicsMove(inputData.Horizontal, inputData.Vertical);
 
-        private void PhysicsMove(float inputDataHorizontal, float inputDataVertical)
+        private void HandlePhysicsMove(float inputDataHorizontal, float inputDataVertical)
         {
             Vector3 direction = new Vector3(inputDataHorizontal, inputDataVertical, 0).normalized;
 
             if (CheckFlipNeeding(inputDataHorizontal))
                 Flip();
+
+            if (CheckWall(direction))
+            {
+                _rigidbody2D.velocity = Vector2.zero;
+                return;
+            }
 
             _rigidbody2D.velocity = direction * _resultMoveSpeed;
 
@@ -64,6 +72,9 @@ namespace CodeBase.Domain.EntityComponents
                 _previousPosition = transform.position;
             }
         }
+
+        private bool CheckWall(Vector3 direction) =>
+            Physics2D.RaycastNonAlloc(transform.position, direction, _wallCheckResults, 0.5f, _whatIsWall) > 0;
 
         private bool CheckFlipNeeding(float inputDataHorizontal) =>
             (inputDataHorizontal < 0 && _facedRight) || (inputDataHorizontal > 0 && !_facedRight);
