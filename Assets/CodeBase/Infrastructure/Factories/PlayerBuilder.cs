@@ -29,6 +29,8 @@ namespace CodeBase.Infrastructure.Factories
         private GameObject _playerPrefab;
         private InputController _inputController;
         private MoveController _moveController;
+        private CinemachineVirtualCamera _currentCamera;
+        private Camera _playerCamera;
 
         public PlayerBuilder(HeroModel heroModel,
             ConfigurationProvider configurationProvider, IPropertyProvider propertyProvider, LevelUpModel levelUpModel,
@@ -80,8 +82,12 @@ namespace CodeBase.Infrastructure.Factories
         public Vector3 GetPlayerDirection() =>
             _moveController.LastMoveVector;
 
-        public void BindCameraToPlayer() =>
-            GameObject.FindObjectOfType<CinemachineVirtualCamera>().Follow = _player.transform;
+        public void BindCameraToPlayer()
+        {
+            _currentCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
+            _currentCamera.Follow = _player.transform;
+            _playerCamera = GameObject.FindObjectOfType<Camera>();
+        }
 
         public void BindEventsHandler(PlayerEventHandler playerEventHandler)
         {
@@ -96,5 +102,7 @@ namespace CodeBase.Infrastructure.Factories
 
             _player.GetComponent<IDamageable>().RestoreHealth(1000);
         }
+
+        public Camera GetPlayerCamera() => _playerCamera;
     }
 }

@@ -24,5 +24,7 @@ namespace CodeBase.Infrastructure.Services
 
         public Vector3 GetRandomEnemyPosition() =>
             _enemyFactory.GetRandomEnemyPosition();
+
+        public Camera GetCamera() => _playerBuilder.GetPlayerCamera();
     }
 }

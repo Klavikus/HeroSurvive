@@ -5,6 +5,8 @@ using UnityEngine;
 [Serializable]
 public class Rectangle
 {
+    public override string ToString() => $"x {x} y {y} width {width} height {height}";
+
     public static bool contains(Rectangle rectA, Rectangle rectB)
     {
         return rectB.x.ContainsInInterval(rectA.x, rectA.x + rectA.width) &&
@@ -80,7 +82,7 @@ public class Rectangle
         float rectRightHeight = rectLeftHeight;
 
         float rectRightTLY = rectLeftTLY;
-      
+
         if (rectRightWidth > 0 && rectRightHeight > 0)
         {
             right = new Rectangle(rectRighTLX, rectRightTLY, rectRightWidth, rectRightHeight);
