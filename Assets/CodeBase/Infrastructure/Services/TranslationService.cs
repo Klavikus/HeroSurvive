@@ -9,11 +9,18 @@ namespace CodeBase.Infrastructure.Services
 {
     public class TranslationService : ITranslationService
     {
-        private static Dictionary<string, Language> I18nToLanguage = new()
+        private static readonly Dictionary<string, Language> I18nToLanguage = new()
         {
             {"en", Language.en},
             {"ru", Language.ru},
             {"tr", Language.tr},
+        };
+
+        private static readonly Dictionary<Language, string> LanguageToHiddenUser = new()
+        {
+            {Language.en, "Mysterious person"},
+            {Language.ru, "Таинственная личность"},
+            {Language.tr, "Gizemli kişilik"},
         };
 
         private Language _currentLanguage;
@@ -46,5 +53,7 @@ namespace CodeBase.Infrastructure.Services
             _currentLanguage = I18nToLanguage[languageKey];
             LocalizationChanged?.Invoke();
         }
+
+        public string GetLocalizedHiddenUser() => LanguageToHiddenUser[_currentLanguage];
     }
 }

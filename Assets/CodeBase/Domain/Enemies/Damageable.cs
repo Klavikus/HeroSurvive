@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using CodeBase.Configs;
 using CodeBase.Domain.Data;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace CodeBase.Domain.Enemies
         private Coroutine _regenerationCoroutine;
         private DamageableData _damageableData;
         private float _lastStagger;
+        private bool _isInvincible;
 
         public event Action<int, float> HealthChanged;
         public event Action<int, float> DamageTaken;
@@ -51,6 +53,9 @@ namespace CodeBase.Domain.Enemies
 
         public void TakeDamage(int damage, float stagger)
         {
+            if (_isInvincible)
+                return;
+
             if (damage < 0)
                 throw new ArgumentException($"{nameof(damage)} should be greater then 0");
 
@@ -79,6 +84,19 @@ namespace CodeBase.Domain.Enemies
                 _currentHealth = _maxHealth;
         }
 
+        public void Respawn()
+        {
+            RestoreHealth(_maxHealth);
+            StartCoroutine(Invincible());
+        }
+
+        private IEnumerator Invincible()
+        {
+            _isInvincible = true;
+            yield return new WaitForSeconds(GameConstants.RespawnInvincibleDuration);
+            _isInvincible = false;
+        }
+
         private IEnumerator HealthRegeneration()
         {
             while (true)
@@ -89,5 +107,7 @@ namespace CodeBase.Domain.Enemies
         }
 
         public float GetLastStagger() => _lastStagger;
+
+        public void Kill() => Died?.Invoke();
     }
 }

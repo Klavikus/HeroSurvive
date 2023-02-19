@@ -17,6 +17,5 @@ namespace CodeBase.Infrastructure.StateMachine
         [field: SerializeField] public EnemyConfigSO EnemyConfigSO { get; private set; }
         [field: SerializeField] public StageCompetitionConfigSO StageCompetitionConfigSO { get; private set; }
         [field: SerializeField] public AbilityConfigSO[] AbilityConfigsSO { get; private set; }
-        [field: SerializeField] public UserNameSetterView UserNameSetterView { get; private set; }
     }
 }

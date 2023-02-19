@@ -17,7 +17,6 @@ namespace CodeBase.Infrastructure.Factories
         UpgradeView[] CreateUpgradeViews();
         UpgradeLevelView[] CreateUpgradeLevelViews(int count);
         CurrencyView CreateCurrencyView();
-        UserNameSetterView CreateUserNameView();
         LeaderBoardScoreView[] CreateLeaderBoardScoreViews(IReadOnlyList<LeaderBoard> leaderBoards);
         LeaderBoardScoreView CreateLeaderBoardScoreView();
     }

@@ -12,5 +12,6 @@ namespace CodeBase.Domain.Enemies
         void Initialize(DamageableData damageableData);
         void TakeDamage(int damage, float stagger);
         void RestoreHealth(int healAmount);
+        void Respawn();
     }
 }

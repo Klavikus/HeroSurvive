@@ -14,7 +14,6 @@ namespace CodeBase.MVVM.Builders
 
         public void Build()
         {
-            UserNameSetterView userNameSetterView = _viewFactory.CreateUserNameView();
             StartMenuView startMenuView = _viewFactory.CreateStartMenu();
             HeroSelectorView heroSelector = _viewFactory.CreateHeroSelectorView();
             HeroView[] heroViews = _viewFactory.CreateHeroViews();

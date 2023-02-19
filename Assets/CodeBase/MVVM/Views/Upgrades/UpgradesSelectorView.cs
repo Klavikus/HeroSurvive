@@ -70,15 +70,9 @@ namespace CodeBase.MVVM.Views.Upgrades
 
             _currencyView.Initialize(_currencyViewModel, descriptionBuilder);
             _closeButton.onClick.AddListener(OnCloseButtonClicked);
-            _userNameButton.onClick.AddListener(OnUserNameButtonClicked);
             SubscribeToViewModel();
 
             Hide();
-        }
-
-        private void OnUserNameButtonClicked()
-        {
-            _menuViewModel.InvokeUserNameShow();
         }
 
         private void BindUpgradeViews()

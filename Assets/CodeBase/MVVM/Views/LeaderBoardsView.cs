@@ -21,6 +21,7 @@ namespace CodeBase.MVVM.Views
         private LeaderBoardsViewModel _leaderBoardsViewModel;
         private MenuViewModel _menuViewModel;
         private IViewFactory _viewFactory;
+        private ITranslationService _translationService;
 
         private void Start()
         {
@@ -28,6 +29,8 @@ namespace CodeBase.MVVM.Views
             _leaderBoardsViewModel = AllServices.Container.AsSingle<IViewModelProvider>().LeaderBoardsViewModel;
             _menuViewModel = AllServices.Container.AsSingle<IViewModelProvider>().MenuViewModel;
             _viewFactory = AllServices.Container.AsSingle<IViewFactory>();
+            _translationService = AllServices.Container.AsSingle<ITranslationService>();
+            _playerScoreView.Initialize(_translationService);
             _leaderBoardsViewModel.PlayerScoreUpdated += UpdatePlayerScoreView;
             _leaderBoardsViewModel.LeaderBoardUpdated += CreateScoreViews;
             _menuViewModel.ShowLeaderBordInvoked += Show;
@@ -45,7 +48,7 @@ namespace CodeBase.MVVM.Views
             if (entry == null)
                 return;
 
-            _playerScoreView.Initialize(entry.extraData, entry.score, entry.rank);
+            _playerScoreView.Render(entry.player.publicName, entry.score, entry.rank);
         }
 
         private void OnDisable()
@@ -72,7 +75,8 @@ namespace CodeBase.MVVM.Views
             foreach (LeaderboardEntryResponse entryData in entries)
             {
                 LeaderBoardScoreView scoreView = _viewFactory.CreateLeaderBoardScoreView();
-                scoreView.Initialize(entryData.extraData, entryData.score, entryData.rank);
+                scoreView.Initialize(_translationService);
+                scoreView.Render(entryData.extraData, entryData.score, entryData.rank);
                 scoreView.transform.SetParent(_scoreViewsContainer);
                 scoreView.transform.localScale = Vector3.one;
                 _leaderBoardScoreViews.Add(scoreView);

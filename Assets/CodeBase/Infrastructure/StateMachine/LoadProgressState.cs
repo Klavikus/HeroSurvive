@@ -4,7 +4,6 @@ using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Services;
 using CodeBase.MVVM.Models;
 using CodeBase.MVVM.Views;
-using UnityEngine;
 
 namespace CodeBase.Infrastructure.StateMachine
 {
@@ -24,31 +23,28 @@ namespace CodeBase.Infrastructure.StateMachine
         public void Enter()
         {
             _persistentDataService = AllServices.Container.AsSingle<IPersistentDataService>();
+            _persistentDataService.LoadOrDefaultUpgradeModelsFromLocal();
+
             _adsProvider = AllServices.Container.AsSingle<IAdsProvider>();
-            _translationService = AllServices.Container.AsSingle<ITranslationService>();
-
-            _persistentDataService.LoadOrDefaultUpgradeModels();
-            _gameStateMachine.Enter<LoadLevelState, string>(MainMenuScene);
-
             _adsProvider.Initialized += AdsProviderOnInitialized;
+            _adsProvider.Initialize();
+
+            _translationService = AllServices.Container.AsSingle<ITranslationService>();
+            _translationService.UpdateLanguage();
+
+            LeaderBoardsViewModel leaderBoardsViewModel =
+                AllServices.Container.AsSingle<IViewModelProvider>().LeaderBoardsViewModel;
+            leaderBoardsViewModel.Initialize();
         }
 
         private void AdsProviderOnInitialized()
         {
-            PlayerAccount.Authorize(onSuccessCallback: () =>
-            {
-                _translationService.UpdateLanguage();
-                _persistentDataService.LoadOrDefaultUpgradeModels();
-                _gameStateMachine.Enter<LoadLevelState, string>(MainMenuScene);
-                LeaderBoardsViewModel leaderBoardsViewModel =
-                    AllServices.Container.AsSingle<IViewModelProvider>().LeaderBoardsViewModel;
-                leaderBoardsViewModel.UpdateLocalLeaderBoards();
-                leaderBoardsViewModel.StartAutoUpdate();
-            });
+            _gameStateMachine.Enter<LoadLevelState, string>(MainMenuScene);
         }
 
         public void Exit()
         {
+            _adsProvider.Initialized -= AdsProviderOnInitialized;
         }
     }
 }

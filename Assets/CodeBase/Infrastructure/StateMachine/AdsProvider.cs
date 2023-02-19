@@ -39,6 +39,12 @@ namespace CodeBase.Infrastructure.StateMachine
 
         public void ShowAds(Action OnOpenCallback, Action OnCloseCallback, Action OnRewardCallback)
         {
+#if !UNITY_WEBGL || UNITY_EDITOR
+            OnOpenCallback?.Invoke();
+            OnRewardCallback?.Invoke();
+            OnCloseCallback?.Invoke();
+            return;
+#endif
             if (IsInitialized == false)
                 return;
 

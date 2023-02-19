@@ -77,6 +77,7 @@ namespace CodeBase.Infrastructure.Services
 
         private void SpawnNextWave()
         {
+            _enemies.Clear();
             _maxWaveId = _competitionConfig.WavesData[_currentStageId].PerStage;
 
             Enemy[] waveEnemies =
@@ -93,10 +94,7 @@ namespace CodeBase.Infrastructure.Services
             }
         }
 
-        private void OnEnemyOutOfViewTimeout(Enemy enemy)
-        {
-            _enemySpawnService.MoveCloserToPlayer(enemy);
-        }
+        private void OnEnemyOutOfViewTimeout(Enemy enemy) => _enemySpawnService.MoveCloserToPlayer(enemy);
 
         private void OnEnemyDied(Enemy enemy)
         {

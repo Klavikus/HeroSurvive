@@ -1,7 +1,6 @@
 ﻿using CodeBase.Configs;
 using CodeBase.Infrastructure.Services;
 using CodeBase.MVVM.Models;
-using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factories
 {
@@ -23,10 +22,9 @@ namespace CodeBase.Infrastructure.Factories
             _modelProvider.CurrencyModel.CurrencyChanged += SaveCurrency;
             foreach (UpgradeModel upgradeModel in _modelProvider.UpgradeModels)
                 upgradeModel.LevelChanged += SaveUpgrade;
-            _modelProvider.UserModel.NameChanged += SaveUserName;
         }
 
-        public void LoadOrDefaultUpgradeModels()
+        public void LoadOrDefaultUpgradeModelsFromLocal()
         {
             _saveLoadService.LoadPrefsToData();
             // _saveLoadService.LoadAllDataFromYandex();
@@ -49,8 +47,6 @@ namespace CodeBase.Infrastructure.Factories
 
             if (int.TryParse(_saveLoadService.GetData(GameConstants.CurrencyDataKey), out int loadedCurrency))
                 _modelProvider.CurrencyModel.SetAmount(loadedCurrency);
-
-            _modelProvider.UserModel.SetName(_saveLoadService.GetData(GameConstants.UserNameDataKey));
         }
 
         private void SaveUpgrade(UpgradeModel upgradeModel)
@@ -63,12 +59,6 @@ namespace CodeBase.Infrastructure.Factories
         {
             string dataKey = $"{GameConstants.CurrencyDataKey}";
             _saveLoadService.SaveToData(dataKey, currentCurrency.ToString());
-        }
-
-        private void SaveUserName(string userName)
-        {
-            string dataKey = $"{GameConstants.UserNameDataKey}";
-            _saveLoadService.SaveToData(dataKey, userName);
         }
     }
 }

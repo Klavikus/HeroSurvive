@@ -55,6 +55,11 @@ namespace CodeBase.Domain.Enemies
             _lootData.UpdateProgression(_enemyData.ProgressionData.Loot.Evaluate(completeProgress));
         }
 
+        public void Kill()
+        {
+            _damageable.Kill();
+        }
+
         private void InitializeStateMachine()
         {
             IdleEntityState idleEntityState = new IdleEntityState(_animationSynchronizer, _enemyAI);

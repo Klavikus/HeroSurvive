@@ -4,6 +4,6 @@ namespace CodeBase.Infrastructure.Factories
 {
     public interface IPersistentDataService : IService
     {
-        void LoadOrDefaultUpgradeModels();
+        void LoadOrDefaultUpgradeModelsFromLocal();
     }
 }

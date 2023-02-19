@@ -52,7 +52,6 @@ namespace CodeBase.Infrastructure.StateMachine
             AudioPlayerService audioPlayerService = new AudioPlayerService(_audioPlayer);
 
             AdsProvider adsProvider = new AdsProvider(_coroutineRunner);
-            adsProvider.Initialize();
 
             TranslationService translationService = new TranslationService();
             AllServices.Container.RegisterAsSingle<ITranslationService>(translationService);
@@ -68,7 +67,6 @@ namespace CodeBase.Infrastructure.StateMachine
             LevelMapFactory levelMapFactory = new LevelMapFactory(configurationProvider);
 
             //Models
-            UserModel userModel = new UserModel();
             HeroModel heroModel = new HeroModel();
             PropertiesModel propertiesModel = new PropertiesModel();
             MenuModel menuModel = new MenuModel();
@@ -79,8 +77,7 @@ namespace CodeBase.Infrastructure.StateMachine
             ModelProvider modelProvider = new ModelProvider(
                 gameLoopModel,
                 upgradeModels,
-                currencyModel,
-                userModel);
+                currencyModel);
             UpgradeService upgradeService = new UpgradeService(upgradeModels);
 
             PersistentDataService persistentDataService =
@@ -89,7 +86,6 @@ namespace CodeBase.Infrastructure.StateMachine
             AllServices.Container.RegisterAsSingle<IAdsProvider>(adsProvider);
 
             //ViewModels
-            UserNameViewModel userNameViewModel = new UserNameViewModel(userModel, menuModel);
             HeroSelectorViewModel heroSelectorViewModel =
                 new HeroSelectorViewModel(heroModel, menuModel, gameLoopModel, translationService);
             MainPropertiesViewModel propertiesViewModel =
@@ -106,8 +102,7 @@ namespace CodeBase.Infrastructure.StateMachine
                 menuViewModel,
                 upgradeViewModel,
                 currencyViewModel,
-                upgradeDescriptionBuilder,
-                userNameViewModel);
+                upgradeDescriptionBuilder);
 
             MainMenuViewBuilder mainMenuViewBuilder = new MainMenuViewBuilder(viewFactory);
 
@@ -123,12 +118,13 @@ namespace CodeBase.Infrastructure.StateMachine
             _services.RegisterAsSingle<IPropertyProvider>(propertyProvider);
             _services.RegisterAsSingle<IModelProvider>(modelProvider);
 
-            LeaderBoardsViewModel leaderBoardsViewModel = new LeaderBoardsViewModel(new[]
-                    {new LeaderBoard(GameConstants.StageTotalKillsLeaderBoardKey)},
-                userModel, _coroutineRunner);
+            AuthorizeService authorizeService = new AuthorizeService();
+            _services.RegisterAsSingle<IAuthorizeService>(authorizeService);
 
-            ViewModelProvider viewModelProvider = new ViewModelProvider(userNameViewModel,
-                leaderBoardsViewModel, menuViewModel);
+            LeaderBoardsViewModel leaderBoardsViewModel = new LeaderBoardsViewModel(authorizeService, new[]
+                    {new LeaderBoard(GameConstants.StageTotalKillsLeaderBoardKey)}, _coroutineRunner);
+
+            ViewModelProvider viewModelProvider = new ViewModelProvider(leaderBoardsViewModel, menuViewModel);
             _services.RegisterAsSingle<IViewModelProvider>(viewModelProvider);
 
             //GameLoopCompositionRoot

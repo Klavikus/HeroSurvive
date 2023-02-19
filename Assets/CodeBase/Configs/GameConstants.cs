@@ -20,5 +20,6 @@ namespace CodeBase.Configs
         public static float MinimumStopDistance = 0.2f;
         public static string BaseLanguage = "en";
         public static Vector4 SpawnRectangleRestriction = new Vector4(-61, 61, -61, 61);
+        public static float RespawnInvincibleDuration = 2f;
     }
 }

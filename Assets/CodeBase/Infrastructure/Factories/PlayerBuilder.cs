@@ -100,7 +100,7 @@ namespace CodeBase.Infrastructure.Factories
             if (_player == null)
                 return;
 
-            _player.GetComponent<IDamageable>().RestoreHealth(1000);
+            _player.GetComponent<IDamageable>().Respawn();
         }
 
         public Camera GetPlayerCamera() => _playerCamera;

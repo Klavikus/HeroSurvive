@@ -9,5 +9,6 @@ namespace CodeBase.Infrastructure.Services
         void UpdateLanguage();
         string GetLocalizedText(TranslatableString[] translatableText);
         void ChangeLanguage(string languageKey);
+        string GetLocalizedHiddenUser();
     }
 }

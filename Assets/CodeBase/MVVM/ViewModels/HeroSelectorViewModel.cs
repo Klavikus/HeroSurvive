@@ -42,7 +42,6 @@ namespace CodeBase.MVVM.ViewModels
 
         public void DisableHeroSelector() => _menuModel.DisableHeroSelector();
         public void Continue() => _gameLoopModel.InvokeStartLevel(CurrentSelectedHeroData);
-        public void InvokeUserNameShow() => _menuModel.InvokeUserNameShow();
         private void OnMenuModelHeroSelectorEnabled() => HeroSelectorEnabled?.Invoke();
         private void OnMenuModelHeroSelectorDisabled() => HeroSelectorDisabled?.Invoke();
     }

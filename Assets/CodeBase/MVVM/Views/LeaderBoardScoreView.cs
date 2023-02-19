@@ -1,3 +1,4 @@
+using CodeBase.Infrastructure.Services;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,11 +12,17 @@ namespace CodeBase.MVVM.Views
         [SerializeField] private TMP_Text _score;
         [SerializeField] private Image _positionIcon;
 
-        public void Initialize(string userName, int score, int rank)
+        private ITranslationService _translationService;
+
+        public void Initialize(ITranslationService translationService) => 
+            _translationService = translationService;
+
+        public void Render(string userName, int score, int rank)
         {
+            _name.text = string.IsNullOrEmpty(userName) ? _translationService.GetLocalizedHiddenUser() : userName;
+
             _positionIcon.gameObject.SetActive(false);
             _position.text = rank.ToString();
-            _name.text = userName;
             _score.text = score.ToString();
         }
     }

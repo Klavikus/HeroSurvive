@@ -19,7 +19,6 @@ namespace CodeBase.Infrastructure.Factories
         private readonly MenuViewModel _menuViewModel;
         private readonly UpgradeViewModel _upgradeViewModel;
         private readonly UpgradeDescriptionBuilder _descriptionBuilder;
-        private readonly UserNameViewModel _userNameViewModel;
         private readonly CurrencyViewModel _currencyViewModel;
         private readonly GameLoopViewModel _gameLoopViewModel;
 
@@ -29,8 +28,7 @@ namespace CodeBase.Infrastructure.Factories
             MenuViewModel menuViewModel,
             UpgradeViewModel upgradeViewModel,
             CurrencyViewModel currencyViewModel,
-            UpgradeDescriptionBuilder descriptionBuilder,
-            UserNameViewModel userNameViewModel)
+            UpgradeDescriptionBuilder descriptionBuilder)
         {
             _configurationProvider = configurationProvider;
             _heroSelectorViewModel = heroSelectorViewModel;
@@ -39,7 +37,6 @@ namespace CodeBase.Infrastructure.Factories
             _upgradeViewModel = upgradeViewModel;
             _currencyViewModel = currencyViewModel;
             _descriptionBuilder = descriptionBuilder;
-            _userNameViewModel = userNameViewModel;
         }
 
         public HeroSelectorView CreateHeroSelectorView()
@@ -140,14 +137,6 @@ namespace CodeBase.Infrastructure.Factories
             return currencyView;
         }
 
-        public UserNameSetterView CreateUserNameView()
-        {
-            UserNameSetterView userNameSetterView = GameObject.Instantiate(_configurationProvider.UserNameSetterView);
-
-            userNameSetterView.Initialize(_userNameViewModel);
-            return userNameSetterView;
-        }
-
         public LeaderBoardScoreView[] CreateLeaderBoardScoreViews(IReadOnlyList<LeaderBoard> leaderBoards)
         {
             LeaderBoardScoreView[] result = new LeaderBoardScoreView[leaderBoards.Count];
@@ -157,6 +146,7 @@ namespace CodeBase.Infrastructure.Factories
 
             return result;
         }
+
         public LeaderBoardScoreView CreateLeaderBoardScoreView() =>
             GameObject.Instantiate(_configurationProvider.MainMenuConfig.LeaderBoardScoreView);
     }

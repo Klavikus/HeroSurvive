@@ -1,6 +1,5 @@
-﻿using System;
-using CodeBase.Infrastructure.Services;
-using CodeBase.MVVM.ViewModels;
+﻿using CodeBase.Infrastructure.Services;
+using CodeBase.MVVM.Models;
 using TMPro;
 using UnityEngine;
 
@@ -10,27 +9,29 @@ namespace CodeBase.MVVM.Views
     {
         [SerializeField] private TMP_Text _text;
 
-        private UserNameViewModel _userNameViewModel;
-        private IViewModelProvider _viewModelProvider;
-
-        private void OnEnable()
-        {
-            if (_userNameViewModel == null)
-                return;
-            
-            _userNameViewModel.UserNameChanged += OnNameChanged;
-        }
-
-        private void OnDisable() => _userNameViewModel.UserNameChanged -= OnNameChanged;
+        private IAuthorizeService _authorizeService;
+        private ITranslationService _translationService;
 
         private void Start()
         {
-            _viewModelProvider = AllServices.Container.AsSingle<IViewModelProvider>();
-            _userNameViewModel = _viewModelProvider.UserNameViewModel;
-            _text.text = _userNameViewModel.Name;
-            _userNameViewModel.UserNameChanged += OnNameChanged;
+            _authorizeService = AllServices.Container.AsSingle<IAuthorizeService>();
+            _translationService = AllServices.Container.AsSingle<ITranslationService>();
+            
+            _text.text = _authorizeService.IsAuthorized
+                ? _authorizeService.GetUserData().Name
+                : _translationService.GetLocalizedHiddenUser();
+
+            _authorizeService.UserDataUpdated += OnUserDataUpdated;
         }
 
-        private void OnNameChanged(string newName) => _text.text = newName;
+        private void OnDestroy()
+        {
+            if (_authorizeService == null)
+                return;
+            
+            _authorizeService.UserDataUpdated -= OnUserDataUpdated;
+        }
+
+        private void OnUserDataUpdated(UserData userData) => _text.text = userData.Name;
     }
 }

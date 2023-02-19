@@ -37,7 +37,11 @@ namespace CodeBase.Infrastructure.Services
         public event Action<HeroData> LevelInvoked;
         public event Action LevelCloseInvoked;
 
-        private void OnPlayerResurrected() => _playerBuilder.RespawnPlayer();
+        private void OnPlayerResurrected()
+        {
+            _playerBuilder.RespawnPlayer();
+        }
+
         public void InvokeLevelStart(HeroData heroData) => LevelInvoked?.Invoke(heroData);
         public void InvokeLevelClose() => _gameLoopModel.InvokeLevelClose();
 

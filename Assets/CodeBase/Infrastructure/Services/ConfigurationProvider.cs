@@ -13,7 +13,6 @@ namespace CodeBase.Infrastructure.Services
         public ConfigurationProvider(ConfigurationContainer configurationContainer) =>
             _configurationContainer = configurationContainer;
 
-        public UserNameSetterView UserNameSetterView => _configurationContainer.UserNameSetterView;
         public BasePropertiesConfigSO BasePropertiesConfig => _configurationContainer.BasePropertiesConfigSO;
         public MainMenuConfigurationSO MainMenuConfig => _configurationContainer.MainMenuConfigurationSo;
         public HeroesConfigSO HeroConfig => _configurationContainer.HeroConfigSO;

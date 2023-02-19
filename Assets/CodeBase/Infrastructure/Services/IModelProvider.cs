@@ -7,6 +7,5 @@ namespace CodeBase.Infrastructure.Services
         public GameLoopModel GameLoopModel { get; }
         public UpgradeModel[] UpgradeModels { get; }
         public CurrencyModel CurrencyModel { get; }
-        public UserModel UserModel { get; }
     }
 }

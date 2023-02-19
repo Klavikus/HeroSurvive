@@ -45,7 +45,6 @@ namespace CodeBase.MVVM.Views.HeroSelector
             _currencyView.Initialize(currencyViewModel, descriptionBuilder);
             _continueButton.onClick.AddListener(OnContinueButtonClicked);
             _closeButton.onClick.AddListener(OnCloseButtonClicked);
-            _userNameButton.onClick.AddListener(OnUserNameButtonClicked);
 
             _baseAbilityView.Initialize();
             _heroDescriptionView.Initialize();
@@ -101,7 +100,5 @@ namespace CodeBase.MVVM.Views.HeroSelector
         private void OnContinueButtonClicked() => _heroSelectorViewModel.Continue();
 
         private void OnCloseButtonClicked() => _heroSelectorViewModel.DisableHeroSelector();
-
-        private void OnUserNameButtonClicked() => _heroSelectorViewModel.InvokeUserNameShow();
     }
 }

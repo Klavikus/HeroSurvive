@@ -26,7 +26,6 @@ namespace CodeBase.MVVM.ViewModels
         public void EnableHeroSelection() => _menuModel.EnableHeroSelector();
         public void EnableUpgradeSelection() => _menuModel.EnableUpgradeSelection();
         public void DisableUpgradeSelection() => _menuModel.DisableUpgradeSelection();
-        public void InvokeUserNameShow() => _menuModel.InvokeUserNameShow();
         public void InvokeLeaderBoardShow() => _menuModel.InvokeLeaderBoardShow();
         public void InvokeLeaderBoardHide() => _menuModel.InvokeLeaderBoardHide();
     }
