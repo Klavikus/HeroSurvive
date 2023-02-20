@@ -62,6 +62,9 @@ namespace CodeBase.MVVM.Models
 
         public void SetMaxScore(int currentEnemyKilled)
         {
+            if (_authorizeService.IsAuthorized==false)
+                return;
+            
             if (_playerNotInLeaderBoard)
                 SetScore(GameConstants.StageTotalKillsLeaderBoardKey, currentEnemyKilled);
 
