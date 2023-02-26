@@ -28,7 +28,6 @@ namespace CodeBase.Infrastructure.StateMachine
             _adsProvider.Initialize();
 
             _translationService = AllServices.Container.AsSingle<ITranslationService>();
-            _translationService.UpdateLanguage();
 
             LeaderBoardsViewModel leaderBoardsViewModel =
                 AllServices.Container.AsSingle<IViewModelProvider>().LeaderBoardsViewModel;
@@ -37,6 +36,7 @@ namespace CodeBase.Infrastructure.StateMachine
 
         private void AdsProviderOnInitialized()
         {
+            _translationService.UpdateLanguage();
             _gameStateMachine.Enter<LoadLevelState, string>(MainMenuScene);
         }
 
