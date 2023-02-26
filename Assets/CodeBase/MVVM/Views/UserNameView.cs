@@ -34,6 +34,11 @@ namespace CodeBase.MVVM.Views
             _authorizeService.UserDataUpdated -= OnUserDataUpdated;
         }
 
-        private void OnUserDataUpdated(UserData userData) => _text.text = userData.Name;
+        private void OnUserDataUpdated(UserData userData)
+        {
+            _text.text = string.IsNullOrEmpty(userData.Name)
+                ? _translationService.GetLocalizedHiddenUser()
+                : _authorizeService.GetUserData().Name;
+        }
     }
 }
