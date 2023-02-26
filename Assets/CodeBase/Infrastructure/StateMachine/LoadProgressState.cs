@@ -23,11 +23,11 @@ namespace CodeBase.Infrastructure.StateMachine
             _persistentDataService = AllServices.Container.AsSingle<IPersistentDataService>();
             _persistentDataService.LoadOrDefaultUpgradeModelsFromLocal();
 
+            _translationService = AllServices.Container.AsSingle<ITranslationService>();
+
             _adsProvider = AllServices.Container.AsSingle<IAdsProvider>();
             _adsProvider.Initialized += AdsProviderOnInitialized;
             _adsProvider.Initialize();
-
-            _translationService = AllServices.Container.AsSingle<ITranslationService>();
 
             LeaderBoardsViewModel leaderBoardsViewModel =
                 AllServices.Container.AsSingle<IViewModelProvider>().LeaderBoardsViewModel;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Agava.YandexGames;
 using CodeBase.Configs;
@@ -75,7 +76,13 @@ namespace CodeBase.MVVM.Views
             {
                 LeaderBoardScoreView scoreView = _viewFactory.CreateLeaderBoardScoreView();
                 scoreView.Initialize(_translationService);
-                scoreView.Render(entryData.extraData, entryData.score, entryData.rank);
+
+                string userName = entryData.player.publicName;
+
+                if (string.IsNullOrEmpty(userName)) 
+                    userName = _translationService.GetLocalizedHiddenUser();
+
+                scoreView.Render(userName, entryData.score, entryData.rank);
                 scoreView.transform.SetParent(_scoreViewsContainer);
                 scoreView.transform.localScale = Vector3.one;
                 _leaderBoardScoreViews.Add(scoreView);

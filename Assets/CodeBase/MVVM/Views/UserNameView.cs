@@ -16,9 +16,11 @@ namespace CodeBase.MVVM.Views
         {
             _authorizeService = AllServices.Container.AsSingle<IAuthorizeService>();
             _translationService = AllServices.Container.AsSingle<ITranslationService>();
-            
+
             _text.text = _authorizeService.IsAuthorized
-                ? _authorizeService.GetUserData().Name
+                ? string.IsNullOrEmpty(_authorizeService.GetUserData().Name)
+                    ? _translationService.GetLocalizedHiddenUser()
+                    : _authorizeService.GetUserData().Name
                 : _translationService.GetLocalizedHiddenUser();
 
             _authorizeService.UserDataUpdated += OnUserDataUpdated;
@@ -28,7 +30,7 @@ namespace CodeBase.MVVM.Views
         {
             if (_authorizeService == null)
                 return;
-            
+
             _authorizeService.UserDataUpdated -= OnUserDataUpdated;
         }
 

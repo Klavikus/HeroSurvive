@@ -40,7 +40,7 @@ namespace CodeBase.Infrastructure.StateMachine
         private void OnSuccessCallbackEditor()
         {
             IsAuthorized = true;
-            _userData = new UserData("Cool Man");
+            _userData = new UserData("");
             Authorized?.Invoke();
         }
 
