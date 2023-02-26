@@ -1,6 +1,4 @@
-﻿using Agava.YandexGames;
-using CodeBase.Configs;
-using CodeBase.Infrastructure.Factories;
+﻿using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Services;
 using CodeBase.MVVM.Models;
 using CodeBase.MVVM.Views;

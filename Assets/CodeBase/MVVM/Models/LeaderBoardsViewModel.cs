@@ -13,6 +13,7 @@ namespace CodeBase.MVVM.Models
         private readonly IAuthorizeService _authorizeService;
         private readonly LeaderBoard[] _leaderBoards;
         private readonly ICoroutineRunner _coroutineRunner;
+        private readonly MenuModel _menuModel;
         private readonly Dictionary<string, LeaderBoard> _leaderBoardByNames;
         private readonly WaitForSeconds _passiveUpdateDelay = new(GameConstants.LeaderBoardPassiveUpdateDelay);
 
@@ -21,20 +22,29 @@ namespace CodeBase.MVVM.Models
         private bool _playerNotInLeaderBoard;
         public event Action LeaderBoardUpdated;
         public event Action PlayerScoreUpdated;
+        public event Action ShowLeaderBordInvoked;
+        public event Action HideLeaderBordInvoked;
+        public event Action LeaderboardAuthorizeRequest;
+        public event Action<bool> LeaderboardAuthorizeRequestHandled;
 
         public LeaderBoardsViewModel(
             IAuthorizeService authorizeService,
             LeaderBoard[] leaderBoards,
-            ICoroutineRunner coroutineRunner)
+            ICoroutineRunner coroutineRunner,
+            MenuModel menuModel)
         {
             _authorizeService = authorizeService;
             _leaderBoards = leaderBoards;
             _coroutineRunner = coroutineRunner;
+            _menuModel = menuModel;
             _leaderBoardByNames = new Dictionary<string, LeaderBoard>();
         }
 
         public void Initialize()
         {
+            _menuModel.LeaderBoardShowInvoked += OnLeaderBoardShowInvoked;
+            _menuModel.LeaderBoardHideInvoked += OnLeaderBoardHideInvoked;
+
             foreach (LeaderBoard leaderBoard in _leaderBoards)
             {
                 _leaderBoardByNames.Add(leaderBoard.Name, leaderBoard);
@@ -46,6 +56,9 @@ namespace CodeBase.MVVM.Models
 
         ~LeaderBoardsViewModel()
         {
+            _menuModel.LeaderBoardShowInvoked -= OnLeaderBoardShowInvoked;
+            _menuModel.LeaderBoardHideInvoked -= OnLeaderBoardHideInvoked;
+
             foreach (LeaderBoard leaderBoard in _leaderBoards)
                 leaderBoard.Updated -= OnLocalLeaderBoardUpdated;
 
@@ -53,7 +66,15 @@ namespace CodeBase.MVVM.Models
             StopAutoUpdate();
         }
 
-        private void OnAuthorized() => StartAutoUpdate();
+        private void OnLeaderBoardShowInvoked()
+        {
+            if (_authorizeService.IsAuthorized)
+                ShowLeaderBordInvoked?.Invoke();
+            else
+                LeaderboardAuthorizeRequest?.Invoke();
+        }
+
+        public void InvokeLeaderBoardHide() => _menuModel.InvokeLeaderBoardHide();
 
         public IReadOnlyCollection<LeaderboardEntryResponse> GetLeaderboardEntries(string leaderBoardName) =>
             _leaderBoardByNames[leaderBoardName].CachedEntries;
@@ -62,15 +83,29 @@ namespace CodeBase.MVVM.Models
 
         public void SetMaxScore(int currentEnemyKilled)
         {
-            if (_authorizeService.IsAuthorized==false)
+            if (_authorizeService.IsAuthorized == false)
                 return;
-            
+
             if (_playerNotInLeaderBoard)
                 SetScore(GameConstants.StageTotalKillsLeaderBoardKey, currentEnemyKilled);
 
             if (_playerCachedEntry != null && _playerCachedEntry.score < currentEnemyKilled)
                 SetScore(GameConstants.StageTotalKillsLeaderBoardKey, currentEnemyKilled);
         }
+
+        public void ApproveAuthorizeRequest()
+        {
+            _authorizeService.Authorize();
+            LeaderboardAuthorizeRequestHandled?.Invoke(true);
+        }
+
+        public void DeclineAuthorizeRequest() => LeaderboardAuthorizeRequestHandled?.Invoke(false);
+
+        private void OnLeaderBoardHideInvoked() => HideLeaderBordInvoked?.Invoke();
+
+        private void OnLocalLeaderBoardUpdated(LeaderBoard leaderBoard) => LeaderBoardUpdated?.Invoke();
+
+        private void OnAuthorized() => StartAutoUpdate();
 
         private void StartAutoUpdate()
         {
@@ -88,6 +123,10 @@ namespace CodeBase.MVVM.Models
 
         private void UpdateLocalLeaderBoards()
         {
+#if UNITY_EDITOR
+            Debug.LogWarning("Trying to get leaderboard entries in editor!");
+            return;
+#endif
             foreach (LeaderBoard leaderBoard in _leaderBoards)
                 Leaderboard.GetEntries(leaderBoard.Name,
                     onSuccessCallback: result => leaderBoard.UpdateOrCreateEntries(result));
@@ -100,11 +139,9 @@ namespace CodeBase.MVVM.Models
 
         private IEnumerator UpdateLeaderBoardCoroutine()
         {
-            yield return _passiveUpdateDelay;
             UpdateLocalLeaderBoards();
+            yield return _passiveUpdateDelay;
         }
-
-        private void OnLocalLeaderBoardUpdated(LeaderBoard leaderBoard) => LeaderBoardUpdated?.Invoke();
 
         private void OnGetPlayerScoreSuccessCallback(LeaderboardEntryResponse response)
         {

@@ -4,7 +4,6 @@ using CodeBase.Configs;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Services;
 using CodeBase.MVVM.Models;
-using CodeBase.MVVM.ViewModels;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,10 +15,10 @@ namespace CodeBase.MVVM.Views
         [SerializeField] private Transform _scoreViewsContainer;
         [SerializeField] private Button _closeButton;
         [SerializeField] private LeaderBoardScoreView _playerScoreView;
+        [SerializeField] private LeaderBoardAuthorizeRequestView _authorizeRequestView;
 
         private List<LeaderBoardScoreView> _leaderBoardScoreViews;
         private LeaderBoardsViewModel _leaderBoardsViewModel;
-        private MenuViewModel _menuViewModel;
         private IViewFactory _viewFactory;
         private ITranslationService _translationService;
 
@@ -27,15 +26,15 @@ namespace CodeBase.MVVM.Views
         {
             Hide();
             _leaderBoardsViewModel = AllServices.Container.AsSingle<IViewModelProvider>().LeaderBoardsViewModel;
-            _menuViewModel = AllServices.Container.AsSingle<IViewModelProvider>().MenuViewModel;
             _viewFactory = AllServices.Container.AsSingle<IViewFactory>();
             _translationService = AllServices.Container.AsSingle<ITranslationService>();
             _playerScoreView.Initialize(_translationService);
+            _authorizeRequestView.Initialize(_leaderBoardsViewModel);
             _leaderBoardsViewModel.PlayerScoreUpdated += UpdatePlayerScoreView;
             _leaderBoardsViewModel.LeaderBoardUpdated += CreateScoreViews;
-            _menuViewModel.ShowLeaderBordInvoked += Show;
-            _menuViewModel.HideLeaderBordInvoked += Hide;
-            _closeButton.onClick.AddListener(_menuViewModel.InvokeLeaderBoardHide);
+            _leaderBoardsViewModel.ShowLeaderBordInvoked += Show;
+            _leaderBoardsViewModel.HideLeaderBordInvoked += Hide;
+            _closeButton.onClick.AddListener(_leaderBoardsViewModel.InvokeLeaderBoardHide);
             _leaderBoardScoreViews = new List<LeaderBoardScoreView>();
             UpdatePlayerScoreView();
             CreateScoreViews();
@@ -55,9 +54,9 @@ namespace CodeBase.MVVM.Views
         {
             _leaderBoardsViewModel.LeaderBoardUpdated -= CreateScoreViews;
             _leaderBoardsViewModel.PlayerScoreUpdated -= UpdatePlayerScoreView;
-            _menuViewModel.ShowLeaderBordInvoked -= Show;
-            _menuViewModel.HideLeaderBordInvoked -= Hide;
-            _closeButton.onClick.RemoveListener(_menuViewModel.InvokeLeaderBoardHide);
+            _leaderBoardsViewModel.ShowLeaderBordInvoked -= Show;
+            _leaderBoardsViewModel.HideLeaderBordInvoked -= Hide;
+            _closeButton.onClick.RemoveListener(_leaderBoardsViewModel.InvokeLeaderBoardHide);
         }
 
         private void CreateScoreViews()

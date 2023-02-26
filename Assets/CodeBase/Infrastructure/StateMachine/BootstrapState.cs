@@ -120,9 +120,9 @@ namespace CodeBase.Infrastructure.StateMachine
 
             AuthorizeService authorizeService = new AuthorizeService();
             _services.RegisterAsSingle<IAuthorizeService>(authorizeService);
-
+            
             LeaderBoardsViewModel leaderBoardsViewModel = new LeaderBoardsViewModel(authorizeService, new[]
-                    {new LeaderBoard(GameConstants.StageTotalKillsLeaderBoardKey)}, _coroutineRunner);
+                    {new LeaderBoard(GameConstants.StageTotalKillsLeaderBoardKey)}, _coroutineRunner, menuModel);
 
             ViewModelProvider viewModelProvider = new ViewModelProvider(leaderBoardsViewModel, menuViewModel);
             _services.RegisterAsSingle<IViewModelProvider>(viewModelProvider);
