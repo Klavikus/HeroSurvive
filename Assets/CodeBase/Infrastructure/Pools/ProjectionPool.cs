@@ -39,6 +39,7 @@ namespace CodeBase.Infrastructure.Pools
                     AbilityProjection projection = Object.Instantiate(_abilityProjection, Vector3.zero,
                         Quaternion.identity, _container);
                     _projections.Add(projection);
+                    projection.Destroed += OnProjectionDestroyed;
                     result.Add(projection);
                 }
             }
@@ -54,5 +55,8 @@ namespace CodeBase.Infrastructure.Pools
                     GameObject.Destroy(projection.gameObject);
             _projections.Clear();
         }
+
+        private void OnProjectionDestroyed(AbilityProjection abilityProjection) => 
+            _projections.Remove(abilityProjection);
     }
 }

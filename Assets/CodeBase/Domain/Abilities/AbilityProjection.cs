@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using CodeBase.Domain.Abilities.Attack;
 using CodeBase.Domain.Abilities.Movement;
@@ -26,6 +27,8 @@ namespace CodeBase.Domain.Abilities
         private WaitForSeconds _returnToPoolDelay;
         private ISizeBehaviour _sizeBehaviour;
         private AudioPlayerService _audioPlayerService;
+
+        public event Action<AbilityProjection> Destroed;
 
         public void Initialize(AudioPlayerService audioPlayerService, TargetFinderService targetFinderService,
             AbilityData abilityBaseData,
@@ -66,6 +69,8 @@ namespace CodeBase.Domain.Abilities
             // _attackBehaviour.EnemyHitted += OnEnemyHitted;
             StartCoroutine(ReturnToPool());
         }
+
+        private void OnDestroy() => Destroed?.Invoke(this);
 
         private void OnEnemyHitted()
         {

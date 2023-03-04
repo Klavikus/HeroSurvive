@@ -22,7 +22,7 @@ namespace CodeBase.Domain.Abilities
 
         private readonly WaitForSeconds _cooldownWaitForSeconds;
         private readonly WaitForSeconds _burstDelayWaitForSeconds;
-        
+
         private Transform _pivotObject;
         private bool _onCooldown;
         private bool _isInitialized;
@@ -63,6 +63,7 @@ namespace CodeBase.Domain.Abilities
         private void OnGameCloseInvoked()
         {
             _coroutineRunner.Stop(_activateProjectionCoroutine);
+            _coroutineRunner.Stop(_runCoroutine);
             _projectionPool.Clear();
         }
 
@@ -71,13 +72,14 @@ namespace CodeBase.Domain.Abilities
             if (_onCooldown || !_isInitialized)
                 return;
 
-            if (_activateProjectionCoroutine != null) 
+
+            if (_activateProjectionCoroutine != null)
                 _coroutineRunner.Stop(_activateProjectionCoroutine);
             _activateProjectionCoroutine = _coroutineRunner.Run(ActivateProjections());
-            
-            if (_runCoroutine != null) 
+
+            if (_runCoroutine != null)
                 _coroutineRunner.Stop(_runCoroutine);
-            
+
             _runCoroutine = _coroutineRunner.Run(StartCooldown());
         }
 
@@ -105,6 +107,10 @@ namespace CodeBase.Domain.Abilities
         {
             for (int i = 0; i < _abilityData.BurstCount; i++)
             {
+                //TODO: Refactor this, should use event
+                if (_pivotObject == null)
+                    yield break;
+
                 _projectionBuilder.Build(_abilityData, _pivotObject, _projectionPool);
                 yield return _burstDelayWaitForSeconds;
             }
