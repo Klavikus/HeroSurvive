@@ -11,6 +11,8 @@ namespace CodeBase.Infrastructure.Pools
         private readonly AbilityProjection _abilityProjection;
         private readonly List<AbilityProjection> _projections;
 
+        private bool _isLocked;
+        
         public ProjectionPool(Transform container, AbilityProjection abilityProjection)
         {
             _container = container;
@@ -20,6 +22,9 @@ namespace CodeBase.Infrastructure.Pools
 
         public AbilityProjection[] GetProjections(int count)
         {
+            if (_isLocked)
+                return null;
+            
             List<AbilityProjection> result = _projections
                 .Where(x => x.gameObject.activeSelf == false)
                 .Take(count)
@@ -43,6 +48,7 @@ namespace CodeBase.Infrastructure.Pools
 
         public void Clear()
         {
+            _isLocked = true;
             foreach (AbilityProjection projection in _projections)
                 if (projection)
                     GameObject.Destroy(projection.gameObject);
