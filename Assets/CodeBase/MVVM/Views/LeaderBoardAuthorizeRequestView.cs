@@ -11,6 +11,7 @@ namespace CodeBase.MVVM.Views
         [SerializeField] private Button _decline;
 
         private LeaderBoardsViewModel _leaderBoardsViewModel;
+        private bool _isInitialized;
 
         public void Initialize(LeaderBoardsViewModel leaderBoardsViewModel)
         {
@@ -21,10 +22,17 @@ namespace CodeBase.MVVM.Views
 
             _approve.onClick.AddListener(OnApproveButtonClicked);
             _decline.onClick.AddListener(OnDeclineButtonClicked);
+            _isInitialized = true;
         }
 
         private void OnDestroy()
         {
+            if (_isInitialized == false)
+            {
+                _leaderBoardsViewModel.LeaderboardAuthorizeRequest -= OnAuthorizeRequest;
+                _leaderBoardsViewModel.LeaderboardAuthorizeRequestHandled -= OnAuthorizeRequestHandled;
+            }
+
             _approve.onClick.RemoveListener(OnApproveButtonClicked);
             _decline.onClick.RemoveListener(OnDeclineButtonClicked);
         }
