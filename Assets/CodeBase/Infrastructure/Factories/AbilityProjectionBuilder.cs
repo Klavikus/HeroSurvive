@@ -80,7 +80,6 @@ namespace CodeBase.Infrastructure.Factories
                     GetSpawnData(abilityData, pivotObject, i));
             }
 
-
             return projections;
         }
 

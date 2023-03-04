@@ -1,4 +1,3 @@
-using System;
 using CodeBase.Domain.Data;
 using UnityEngine;
 
@@ -6,9 +5,6 @@ namespace CodeBase.Domain.EntityComponents
 {
     public class InputController : InputHandler
     {
-        private readonly string Horizontal = "Horizontal";
-        private readonly string Vertical = "Vertical";
-
         private PlayerInputActions _playerInputActions;
 
         public void Initialize()
