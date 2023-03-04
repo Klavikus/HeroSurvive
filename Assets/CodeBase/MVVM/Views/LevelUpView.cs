@@ -4,6 +4,8 @@ using CodeBase.MVVM.Builders;
 using CodeBase.MVVM.ViewModels;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace CodeBase.MVVM.Views
@@ -21,18 +23,9 @@ namespace CodeBase.MVVM.Views
         private Dictionary<AbilityUpgradeView, AbilityUpgradeData> _abilityUpgradeDataByView;
         private AbilityUpgradeData _currentSelectedUpgrade;
 
-        private void OnDisable()
-        {
-            _levelUpViewModel.LevelChanged -= OnLevelChanged;
-            _levelUpViewModel.InvokedViewHide -= Hide;
-            _levelUpViewModel.AvailableUpgradesChanged -= ShowAvailableUpgrades;
-            _levelUpViewModel.LevelProgressChanged -= ShowProgress;
-            _levelUpViewModel.Rerolled -= Show;
-
-            _continueButton.onClick.RemoveListener(OnContinueButtonClicked);
-            _reRollButton.onClick.RemoveListener(OnReRollButtonClicked);
-            _levelUpViewModel.ResetLevels();
-        }
+        private PlayerInputActions _playerInputActions;
+        private int _currentSelectedViewId = 0;
+        private int _maxId = 2;
 
         public void Initialize(LevelUpViewModel levelUpViewModel, UpgradeDescriptionBuilder upgradeDescriptionBuilder)
         {
@@ -58,7 +51,47 @@ namespace CodeBase.MVVM.Views
 
             _currentLevel.text = "1";
             _currentProgress.fillAmount = 0;
+
+            _playerInputActions = new PlayerInputActions();
+            _playerInputActions.UI.ScrollUp.performed += OnScrollUpPerformed;
+            _playerInputActions.UI.ScrollDown.performed += OnScrollDownPerformed;
+            _playerInputActions.UI.Apply.performed += OnApplyPerformed;
         }
+
+        private void OnDisable()
+        {
+            _levelUpViewModel.LevelChanged -= OnLevelChanged;
+            _levelUpViewModel.InvokedViewHide -= Hide;
+            _levelUpViewModel.AvailableUpgradesChanged -= ShowAvailableUpgrades;
+            _levelUpViewModel.LevelProgressChanged -= ShowProgress;
+            _levelUpViewModel.Rerolled -= Show;
+
+            _continueButton.onClick.RemoveListener(OnContinueButtonClicked);
+            _reRollButton.onClick.RemoveListener(OnReRollButtonClicked);
+            _levelUpViewModel.ResetLevels();
+
+            _playerInputActions.UI.ScrollUp.performed -= OnScrollUpPerformed;
+            _playerInputActions.UI.ScrollDown.performed -= OnScrollDownPerformed;
+            _playerInputActions.UI.Apply.performed -= OnApplyPerformed;
+        }
+
+        private void OnScrollUpPerformed(InputAction.CallbackContext context)
+        {
+            if (--_currentSelectedViewId < 0)
+                _currentSelectedViewId = _maxId;
+
+            _abilityUpgradeViews[_currentSelectedViewId].OnPointerClick(new PointerEventData(EventSystem.current));
+        }
+
+        private void OnScrollDownPerformed(InputAction.CallbackContext context)
+        {
+            if (++_currentSelectedViewId == _maxId + 1)
+                _currentSelectedViewId = 0;
+
+            _abilityUpgradeViews[_currentSelectedViewId].OnPointerClick(new PointerEventData(EventSystem.current));
+        }
+
+        private void OnApplyPerformed(InputAction.CallbackContext context) => OnContinueButtonClicked();
 
         private void OnReRollButtonClicked() => _levelUpViewModel.Reroll();
 
@@ -86,12 +119,9 @@ namespace CodeBase.MVVM.Views
         private void OnUpgradeSelected(AbilityUpgradeView selectedUpgrade)
         {
             _currentSelectedUpgrade = _abilityUpgradeDataByView[selectedUpgrade];
-            
+
             foreach (AbilityUpgradeView abilityUpgradeView in _abilityUpgradeViews)
                 abilityUpgradeView.SetSelected(abilityUpgradeView == selectedUpgrade);
-            
-            _levelUpViewModel.SelectUpgrade(_currentSelectedUpgrade);
-            _currentSelectedUpgrade = null;
         }
 
         private void OnContinueButtonClicked()
@@ -105,6 +135,9 @@ namespace CodeBase.MVVM.Views
         {
             Time.timeScale = 0f;
             _mainCanvas.enabled = true;
+
+            _currentSelectedViewId = 0;
+            _playerInputActions?.Enable();
 
             AbilityUpgradeData[] upgradesData = _levelUpViewModel.GetAvailableUpgrades();
 
@@ -129,6 +162,7 @@ namespace CodeBase.MVVM.Views
         {
             Time.timeScale = 1f;
             _mainCanvas.enabled = false;
+            _playerInputActions?.Disable();
         }
     }
 }
