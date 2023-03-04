@@ -28,7 +28,7 @@ namespace CodeBase.MVVM.Builders
         private readonly IReadOnlyDictionary<BaseProperty, MainPropertyViewData> _propertiesData;
         private readonly ColorConfigSO _colorsConfig;
 
-        public UpgradeDescriptionBuilder(ConfigurationProvider configurationProvider, ITranslationService translationService)
+        public UpgradeDescriptionBuilder(IConfigurationProvider configurationProvider, ITranslationService translationService)
         {
             _translationService = translationService;
             _colorsConfig = configurationProvider.ColorsConfig;

@@ -7,9 +7,9 @@ namespace CodeBase.MVVM.Builders
 {
     public class MainMenuViewBuilder
     {
-        private readonly ViewFactory _viewFactory;
+        private readonly IViewFactory _viewFactory;
 
-        public MainMenuViewBuilder(ViewFactory viewFactory) =>
+        public MainMenuViewBuilder(IViewFactory viewFactory) =>
             _viewFactory = viewFactory;
 
         public void Build()

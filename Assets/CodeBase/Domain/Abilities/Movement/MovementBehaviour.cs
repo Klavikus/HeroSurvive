@@ -13,10 +13,10 @@ namespace CodeBase.Domain.Abilities.Movement
         protected bool AlignRotationWithDirection;
         protected bool FlipDirectionAllowed;
         protected SpawnData SpawnData;
-        protected TargetFinderService TargetFinderService;
+        protected ITargetService TargetFinderService;
 
         public void Initialize(Transform objectForMove, SpawnData spawnData,
-            AbilityData abilityBaseDataConfig, TargetFinderService targetFinderService)
+            AbilityData abilityBaseDataConfig, ITargetService targetFinderService)
         {
             SpawnData = spawnData;
             ObjectForMove = objectForMove;

@@ -1,4 +1,5 @@
 ﻿using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.StateMachine;
 using CodeBase.MVVM.Builders;
 using CodeBase.MVVM.ViewModels;
 using CodeBase.MVVM.Views;
@@ -9,25 +10,26 @@ namespace CodeBase.Infrastructure.Factories
     public class GameLoopViewFactory
     {
         private readonly IConfigurationProvider _configurationProvider;
-        private readonly GameLoopViewModel _gameLoopViewModel;
-        private readonly LevelUpViewModel _levelUpViewModel;
+        private readonly IViewModelProvider _viewModelProvider;
         private readonly UpgradeDescriptionBuilder _upgradeDescriptionBuilder;
 
-        public GameLoopViewFactory(IConfigurationProvider configurationProvider,
-            GameLoopViewModel gameLoopViewModel,
-            LevelUpViewModel levelUpViewModel,
+        public GameLoopViewFactory(
+            IConfigurationProvider configurationProvider,
+            IViewModelProvider viewModelProvider,
             UpgradeDescriptionBuilder upgradeDescriptionBuilder)
         {
             _configurationProvider = configurationProvider;
-            _gameLoopViewModel = gameLoopViewModel;
-            _levelUpViewModel = levelUpViewModel;
+            _viewModelProvider = viewModelProvider;
             _upgradeDescriptionBuilder = upgradeDescriptionBuilder;
         }
 
         public GameLoopView CreateGameLoopView()
         {
             GameLoopView gameLoopView = GameObject.Instantiate(_configurationProvider.GameLoopConfig.GameLoopView);
-            gameLoopView.Initialize(_gameLoopViewModel, _levelUpViewModel, _upgradeDescriptionBuilder);
+            gameLoopView.Initialize(
+                _viewModelProvider.Get<GameLoopViewModel>(),
+                _viewModelProvider.Get<LevelUpViewModel>(),
+                _upgradeDescriptionBuilder);
 
             return gameLoopView;
         }

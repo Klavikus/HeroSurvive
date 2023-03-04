@@ -8,25 +8,25 @@ namespace CodeBase.MVVM.Models
     {
         private const int ExperiencePerLevelSoft = 10;
 
+        private readonly IAbilityUpgradeService _abilityUpgradeService;
+
         private AbilityUpgradeData _selectedUpgrade;
+        private CurrencyModel _currencyModel;
         private int _currentExperience;
         private int _currentLevel;
-
-        private readonly CurrencyModel _currencyModel;
-        private readonly IAbilityUpgradeService _abilityUpgradeService;
 
         public event Action<int> LevelChanged;
         public event Action<float> LevelProgressChanged;
         public event Action<AbilityUpgradeData> UpgradeSelected;
 
 
-        public LevelUpModel(CurrencyModel currencyModel,
-            IAbilityUpgradeService abilityUpgradeService)
+        public LevelUpModel(IAbilityUpgradeService abilityUpgradeService)
         {
-            _currencyModel = currencyModel;
             _abilityUpgradeService = abilityUpgradeService;
             _currentLevel = 1;
         }
+
+        public void Bind(CurrencyModel currencyModel) => _currencyModel = currencyModel;
 
         public void SelectUpgrade(AbilityUpgradeData abilityUpgradeData)
         {

@@ -13,37 +13,28 @@ namespace CodeBase.Infrastructure.Factories
 {
     public class ViewFactory : IViewFactory
     {
-        private readonly ConfigurationProvider _configurationProvider;
-        private readonly HeroSelectorViewModel _heroSelectorViewModel;
-        private readonly MainPropertiesViewModel _mainPropertiesViewModel;
-        private readonly MenuViewModel _menuViewModel;
-        private readonly UpgradeViewModel _upgradeViewModel;
+        private readonly IConfigurationProvider _configurationProvider;
         private readonly UpgradeDescriptionBuilder _descriptionBuilder;
-        private readonly CurrencyViewModel _currencyViewModel;
-        private readonly GameLoopViewModel _gameLoopViewModel;
+        private readonly IProvider _provider;
 
-        public ViewFactory(ConfigurationProvider configurationProvider,
-            HeroSelectorViewModel heroSelectorViewModel,
-            MainPropertiesViewModel mainPropertiesViewModel,
-            MenuViewModel menuViewModel,
-            UpgradeViewModel upgradeViewModel,
-            CurrencyViewModel currencyViewModel,
-            UpgradeDescriptionBuilder descriptionBuilder)
+        public ViewFactory(
+            IConfigurationProvider configurationProvider,
+            IProvider provider,
+            UpgradeDescriptionBuilder upgradeDescriptionBuilder)
         {
             _configurationProvider = configurationProvider;
-            _heroSelectorViewModel = heroSelectorViewModel;
-            _mainPropertiesViewModel = mainPropertiesViewModel;
-            _menuViewModel = menuViewModel;
-            _upgradeViewModel = upgradeViewModel;
-            _currencyViewModel = currencyViewModel;
-            _descriptionBuilder = descriptionBuilder;
+            _provider = provider;
+            _descriptionBuilder = upgradeDescriptionBuilder;
         }
 
         public HeroSelectorView CreateHeroSelectorView()
         {
             HeroSelectorView heroSelectorView =
                 GameObject.Instantiate(_configurationProvider.MainMenuConfig.HeroSelectorView);
-            heroSelectorView.Initialize(_heroSelectorViewModel, _currencyViewModel, _descriptionBuilder);
+            heroSelectorView.Initialize(
+                _provider.Get<HeroSelectorViewModel>(),
+                _provider.Get<CurrencyViewModel>(),
+                _descriptionBuilder);
             return heroSelectorView;
         }
 
@@ -56,7 +47,7 @@ namespace CodeBase.Infrastructure.Factories
             {
                 HeroData heroData = heroesData[i];
                 HeroView heroView = GameObject.Instantiate(_configurationProvider.HeroConfig.BaseHeroView);
-                heroView.Initialize(heroData, _heroSelectorViewModel);
+                heroView.Initialize(heroData, _provider.Get<HeroSelectorViewModel>());
                 result[i] = heroView;
             }
 
@@ -72,7 +63,8 @@ namespace CodeBase.Infrastructure.Factories
             for (int i = 0; i < viewData.Count; i++)
             {
                 result[i] = GameObject.Instantiate(_configurationProvider.BasePropertiesConfig.PropertyView);
-                result[i].Initialize(_mainPropertiesViewModel, viewData[i], _descriptionBuilder);
+                result[i].Initialize(_provider.Get<MainPropertiesViewModel>(), viewData[i],
+                    _descriptionBuilder);
             }
 
             return result;
@@ -82,7 +74,7 @@ namespace CodeBase.Infrastructure.Factories
         {
             StartMenuView startMenuView =
                 GameObject.Instantiate(_configurationProvider.MainMenuConfig.StartMenuView);
-            startMenuView.Initialize(_menuViewModel);
+            startMenuView.Initialize(_provider.Get<MenuViewModel>());
             return startMenuView;
         }
 
@@ -91,9 +83,9 @@ namespace CodeBase.Infrastructure.Factories
             UpgradesSelectorView upgradesSelectorView =
                 GameObject.Instantiate(_configurationProvider.MainMenuConfig.UpgradesSelectorView);
             upgradesSelectorView.Initialize(
-                _menuViewModel,
-                _upgradeViewModel,
-                _currencyViewModel,
+                _provider.Get<MenuViewModel>(),
+                _provider.Get<UpgradeViewModel>(),
+                _provider.Get<CurrencyViewModel>(),
                 viewFactory: this,
                 _descriptionBuilder);
             return upgradesSelectorView;
@@ -103,7 +95,7 @@ namespace CodeBase.Infrastructure.Factories
         {
             UpgradeView upgradeView = GameObject.Instantiate(_configurationProvider.MainMenuConfig.UpgradeView);
 
-            upgradeView.Initialize(_upgradeViewModel, upgradeData,
+            upgradeView.Initialize(_provider.Get<UpgradeViewModel>(), upgradeData,
                 CreateUpgradeLevelViews(upgradeData.Upgrades.Length));
             return upgradeView;
         }
@@ -133,7 +125,7 @@ namespace CodeBase.Infrastructure.Factories
         {
             CurrencyView currencyView = GameObject.Instantiate(_configurationProvider.MainMenuConfig.CurrencyView);
 
-            currencyView.Initialize(_currencyViewModel, _descriptionBuilder);
+            currencyView.Initialize(_provider.Get<CurrencyViewModel>(), _descriptionBuilder);
             return currencyView;
         }
 

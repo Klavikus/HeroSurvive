@@ -11,12 +11,12 @@ namespace CodeBase.Infrastructure.Factories
 {
     public class EnemyFactory
     {
-        private readonly ConfigurationProvider _configurationProvider;
+        private readonly IConfigurationProvider _configurationProvider;
         private readonly Dictionary<EnemyType, EnemyData> _enemiesData;
         private GameObject _enemyPrefab;
         private List<Enemy> _enemies;
 
-        public EnemyFactory(ConfigurationProvider configurationProvider)
+        public EnemyFactory(IConfigurationProvider configurationProvider)
         {
             _configurationProvider = configurationProvider;
             _enemiesData = new Dictionary<EnemyType, EnemyData>();
@@ -26,7 +26,7 @@ namespace CodeBase.Infrastructure.Factories
             _enemies = new List<Enemy>();
         }
 
-        public Enemy Create(Vector3 at, EnemyType enemyType, TargetFinderService targetFinderService)
+        public Enemy Create(Vector3 at, EnemyType enemyType, ITargetService targetFinderService)
         {
             Enemy enemy = GameObject.Instantiate(_enemiesData[enemyType].Prefab, at, Quaternion.identity);
             _enemies.Add(enemy);

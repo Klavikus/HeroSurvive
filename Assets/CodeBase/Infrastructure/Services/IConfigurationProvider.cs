@@ -13,5 +13,7 @@ namespace CodeBase.Infrastructure.Services
         GameLoopConfigSO GameLoopConfig { get; }
         AbilityConfigSO[] AbilityConfigs { get; }
         UpgradesConfigSO UpgradesConfig { get; }
+        ColorConfigSO ColorsConfig { get; }
+        EnemyConfigSO EnemyConfig { get; }
     }
 }

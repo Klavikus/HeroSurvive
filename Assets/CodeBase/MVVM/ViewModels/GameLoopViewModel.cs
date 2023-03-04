@@ -11,11 +11,12 @@ namespace CodeBase.MVVM.ViewModels
     public class GameLoopViewModel
     {
         private readonly GameLoopModel _gameLoopModel;
-        private readonly LeveCompetitionService _leveCompetitionService;
+        private readonly ILeveCompetitionService _leveCompetitionService;
         private readonly PlayerEventHandler _playerEventHandler;
-        private readonly CurrencyViewModel _currencyViewModel;
         private readonly IAdsProvider _adsProvider;
-        private readonly LeaderBoardsViewModel _leaderBoardsViewModel;
+
+        private CurrencyViewModel _currencyViewModel;
+        private LeaderBoardsViewModel _leaderBoardsViewModel;
 
         private int _currentEnemyKilled;
         private int _lastCompletedWave;
@@ -30,27 +31,29 @@ namespace CodeBase.MVVM.ViewModels
         public event Action PlayerResurrected;
         public event Action<int> RewardCurrencyChanged;
 
-        public GameLoopViewModel(GameLoopModel gameLoopModel,
-            LeveCompetitionService leveCompetitionService,
+        public GameLoopViewModel(
+            GameLoopModel gameLoopModel,
+            ILeveCompetitionService leveCompetitionService,
             PlayerEventHandler playerEventHandler,
-            CurrencyViewModel currencyViewModel,
-            IAdsProvider adsProvider,
-            LeaderBoardsViewModel leaderBoardsViewModel)
+            IAdsProvider adsProvider)
         {
             _gameLoopModel = gameLoopModel;
             _gameLoopModel.StartLevelInvoked += OnLevelStart;
             _gameLoopModel.PlayerResurrected += () => PlayerResurrected?.Invoke();
             _leveCompetitionService = leveCompetitionService;
             _playerEventHandler = playerEventHandler;
-            _currencyViewModel = currencyViewModel;
             _adsProvider = adsProvider;
-            _leaderBoardsViewModel = leaderBoardsViewModel;
             _lastCompletedWave = 0;
             _playerEventHandler.Died += OnPlayerDied;
             _leveCompetitionService.WaveCompleted += OnWaveCompleted;
             _leveCompetitionService.EnemyKilled += OnEnemyKilled;
             _leveCompetitionService.AllWavesCompleted += OnAllWavesCompleted;
+        }
 
+        public void Bind(LeaderBoardsViewModel leaderBoardsViewModel) => _leaderBoardsViewModel = leaderBoardsViewModel;
+        public void Bind(CurrencyViewModel currencyViewModel)
+        {
+            _currencyViewModel = currencyViewModel;
             _initialCurrency = _currencyViewModel.GetCurrentAmount();
             _gainedCurrency = 0;
             _currencyViewModel.CurrencyChanged += CurrencyChanged;
@@ -110,7 +113,7 @@ namespace CodeBase.MVVM.ViewModels
 
         private void OnRewardResurrect()
         {
-            if (_isLastAdsRewarded) 
+            if (_isLastAdsRewarded)
                 _gameLoopModel.ResurrectPlayer();
         }
 

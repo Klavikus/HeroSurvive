@@ -22,10 +22,10 @@ namespace CodeBase.Infrastructure
     {
         private const float CellSize = 1;
         private const int CellFactor = 3;
-        private readonly TargetFinderService _targetFinderService;
+        private readonly ITargetService _targetFinderService;
         private readonly EnemyFactory _enemyFactory;
 
-        public EnemySpawnService(TargetFinderService targetFinderService, EnemyFactory enemyFactory)
+        public EnemySpawnService(ITargetService targetFinderService, EnemyFactory enemyFactory)
         {
             _targetFinderService = targetFinderService;
             _enemyFactory = enemyFactory;

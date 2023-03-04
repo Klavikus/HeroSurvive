@@ -6,8 +6,6 @@ using CodeBase.Infrastructure.Services.PropertiesProviders;
 using CodeBase.Infrastructure.Services.UpgradeService;
 using CodeBase.MVVM.Builders;
 using CodeBase.MVVM.Models;
-using CodeBase.MVVM.ViewModels;
-using CodeBase.MVVM.Views;
 
 namespace CodeBase.Infrastructure.StateMachine
 {
@@ -48,130 +46,99 @@ namespace CodeBase.Infrastructure.StateMachine
 
         private void RegisterServices()
         {
-            ConfigurationProvider configurationProvider = new ConfigurationProvider(_configurationContainer);
-            AudioPlayerService audioPlayerService = new AudioPlayerService(_audioPlayer);
+            IConfigurationProvider configurationProvider = new ConfigurationProvider(_configurationContainer);
+            IViewModelProvider viewModelProvider = new ViewModelProvider();
+            IModelProvider modelProvider = new ModelProvider();
+            AbilityUpgradesProvider abilityUpgradesProvider = new AbilityUpgradesProvider(configurationProvider);
+            
+            ITranslationService translationService = new TranslationService();
 
-            AdsProvider adsProvider = new AdsProvider(_coroutineRunner);
-
-            TranslationService translationService = new TranslationService();
-            AllServices.Container.RegisterAsSingle<ITranslationService>(translationService);
-
-            SaveLoadService saveLoadService = new SaveLoadService(configurationProvider);
-
-            ModelFactory modelFactory = new ModelFactory(configurationProvider);
-
-
-            //Builders
             UpgradeDescriptionBuilder upgradeDescriptionBuilder =
                 new UpgradeDescriptionBuilder(configurationProvider, translationService);
             LevelMapFactory levelMapFactory = new LevelMapFactory(configurationProvider);
-
-            //Models
-            HeroModel heroModel = new HeroModel();
-            PropertiesModel propertiesModel = new PropertiesModel();
-            MenuModel menuModel = new MenuModel();
-            UpgradeModel[] upgradeModels = modelFactory.CreateUpgradeModels();
-            CurrencyModel currencyModel = new CurrencyModel();
-            GameLoopModel gameLoopModel = new GameLoopModel();
-
-            ModelProvider modelProvider = new ModelProvider(
-                gameLoopModel,
-                upgradeModels,
-                currencyModel);
-            
-            UpgradeService upgradeService = new UpgradeService(upgradeModels);
-
-            PersistentDataService persistentDataService =
-                new PersistentDataService(configurationProvider, saveLoadService, modelProvider);
-            AllServices.Container.RegisterAsSingle<IPersistentDataService>(persistentDataService);
-            AllServices.Container.RegisterAsSingle<IAdsProvider>(adsProvider);
-
-            //ViewModels
-            HeroSelectorViewModel heroSelectorViewModel =
-                new HeroSelectorViewModel(heroModel, menuModel, gameLoopModel, translationService);
-            MainPropertiesViewModel propertiesViewModel =
-                new MainPropertiesViewModel(propertiesModel, translationService);
-            MenuViewModel menuViewModel = new MenuViewModel(menuModel);
-            UpgradeViewModel upgradeViewModel =
-                new UpgradeViewModel(upgradeModels, currencyModel, upgradeService);
-            CurrencyViewModel currencyViewModel = new CurrencyViewModel(currencyModel);
-
-            ViewFactory viewFactory = new ViewFactory(
-                configurationProvider,
-                heroSelectorViewModel,
-                propertiesViewModel,
-                menuViewModel,
-                upgradeViewModel,
-                currencyViewModel,
-                upgradeDescriptionBuilder);
-
-            MainMenuViewBuilder mainMenuViewBuilder = new MainMenuViewBuilder(viewFactory);
-
-            PropertyProvider propertyProvider = new PropertyProvider(configurationProvider,
-                upgradeService,
-                heroModel,
-                propertiesModel);
-
-            propertyProvider.Initialize();
-
-            _services.RegisterAsSingle<IConfigurationProvider>(configurationProvider);
-            _services.RegisterAsSingle<IUpgradeService>(upgradeService);
-            _services.RegisterAsSingle<IPropertyProvider>(propertyProvider);
-            _services.RegisterAsSingle<IModelProvider>(modelProvider);
-
-            AuthorizeService authorizeService = new AuthorizeService();
-            _services.RegisterAsSingle<IAuthorizeService>(authorizeService);
-            
-            LeaderBoardsViewModel leaderBoardsViewModel = new LeaderBoardsViewModel(authorizeService, new[]
-                    {new LeaderBoard(GameConstants.StageTotalKillsLeaderBoardKey)}, _coroutineRunner, menuModel);
-
-            ViewModelProvider viewModelProvider = new ViewModelProvider(leaderBoardsViewModel, menuViewModel);
-            _services.RegisterAsSingle<IViewModelProvider>(viewModelProvider);
-
-            //GameLoopCompositionRoot
-            AbilityUpgradesProvider abilityUpgradesProvider = new AbilityUpgradesProvider(configurationProvider);
-            AbilityUpgradeService abilityUpgradeService = new AbilityUpgradeService(configurationProvider);
+            ModelFactory modelFactory = new ModelFactory(configurationProvider);
             EnemyFactory enemyFactory = new EnemyFactory(configurationProvider);
-            TargetFinderService targetFinderService = new TargetFinderService(enemyFactory);
+            IViewFactory viewFactory = new ViewFactory(
+                configurationProvider,
+                viewModelProvider,
+                upgradeDescriptionBuilder);
+            MainMenuViewBuilder mainMenuViewBuilder = new MainMenuViewBuilder(viewFactory);
+            IMainMenuFactory mainMenuFactory = new MainMenuFactory(mainMenuViewBuilder);
+            GameLoopViewFactory gameLoopViewFactory = new GameLoopViewFactory(
+                configurationProvider,
+                viewModelProvider,
+                upgradeDescriptionBuilder);
+            GameLoopViewBuilder gameLoopViewBuilder = new GameLoopViewBuilder(gameLoopViewFactory);
+            
+            AudioPlayerService audioPlayerService = new AudioPlayerService(_audioPlayer);
+            IAdsProvider adsProvider = new AdsProvider(_coroutineRunner);
+            ISaveLoadService saveLoadService = new SaveLoadService(configurationProvider);
+            IAuthorizeService authorizeService = new AuthorizeService();
+            IAbilityUpgradeService abilityUpgradeService = new AbilityUpgradeService(configurationProvider);
+            IUpgradeService upgradeService = new UpgradeService(modelProvider);
+            IPersistentDataService persistentDataService =
+                new PersistentDataService(configurationProvider, saveLoadService, modelProvider);
+            ITargetService targetFinderService = new TargetFinderService(enemyFactory);
+            IEnemySpawnService enemySpawnService = new EnemySpawnService(targetFinderService, enemyFactory);
+            ILeveCompetitionService leveCompetitionService =
+                new LeveCompetitionService(enemySpawnService, configurationProvider, modelProvider);
+            PlayerEventHandler playerEventHandler = new PlayerEventHandler();
+
+            IModelBuilder modelBuilder = new ModelBuilder(modelFactory, abilityUpgradeService);
+
+            IViewModelBuilder viewModelBuilder =
+                new ViewModelBuilder(
+                    modelProvider,
+                    translationService,
+                    upgradeService,
+                    authorizeService,
+                    _coroutineRunner,
+                    leveCompetitionService,
+                    playerEventHandler,
+                    adsProvider, 
+                    abilityUpgradeService);
+       
+            IPropertyProvider propertyProvider = new PropertyProvider(
+                configurationProvider,
+                upgradeService,
+                modelProvider);
+
             AbilityProjectionBuilder abilityProjectionBuilder =
                 new AbilityProjectionBuilder(targetFinderService, audioPlayerService);
             AbilityFactory abilityFactory =
                 new AbilityFactory(abilityProjectionBuilder, _coroutineRunner, abilityUpgradesProvider);
-
-            LevelUpModel levelUpModel = new LevelUpModel(currencyModel, abilityUpgradeService);
-
-            PlayerBuilder playerBuilder = new PlayerBuilder(heroModel, configurationProvider, propertyProvider,
-                levelUpModel, abilityUpgradeService, abilityFactory, audioPlayerService);
-            targetFinderService.BindPlayerBuilder(playerBuilder);
-            _services.RegisterAsSingle<ITargetService>(targetFinderService);
-
+            PlayerBuilder playerBuilder = new PlayerBuilder(modelProvider, configurationProvider, propertyProvider,
+                abilityUpgradeService, abilityFactory, audioPlayerService);
             AbilityBuilder abilityBuilder = new AbilityBuilder(playerBuilder);
-            MainMenuFactory mainMenuFactory = new MainMenuFactory(mainMenuViewBuilder);
-
-            EnemySpawnService enemySpawnService =
-                new EnemySpawnService(targetFinderService, enemyFactory);
-            _services.RegisterAsSingle<IEnemySpawnService>(enemySpawnService);
-
-            LeveCompetitionService leveCompetitionService =
-                new LeveCompetitionService(enemySpawnService, configurationProvider, levelUpModel);
-
-            LevelUpViewModel levelUpViewModel = new LevelUpViewModel(levelUpModel, abilityUpgradeService, adsProvider);
-
-            PlayerEventHandler playerEventHandler = new PlayerEventHandler();
-            GameLoopViewModel gameLoopViewModel =
-                new GameLoopViewModel(gameLoopModel, leveCompetitionService, playerEventHandler, currencyViewModel,
-                    adsProvider, leaderBoardsViewModel);
-            GameLoopViewFactory gameLoopViewFactory = new GameLoopViewFactory(configurationProvider, gameLoopViewModel,
-                levelUpViewModel,
-                upgradeDescriptionBuilder);
-            GameLoopViewBuilder gameLoopViewBuilder = new GameLoopViewBuilder(gameLoopViewFactory);
-            GameLoopService gameLoopService = new GameLoopService(levelMapFactory, gameLoopViewBuilder, abilityBuilder,
-                heroModel, playerBuilder, gameLoopModel, leveCompetitionService, playerEventHandler);
+            
+            IGameLoopService gameLoopService = new GameLoopService(
+                levelMapFactory,
+                gameLoopViewBuilder,
+                abilityBuilder,
+                modelProvider,
+                playerBuilder,
+                leveCompetitionService,
+                playerEventHandler);
+            
+            targetFinderService.BindPlayerBuilder(playerBuilder);
             abilityFactory.BindGameLoopService(gameLoopService);
-
-            _services.RegisterAsSingle<IGameLoopService>(gameLoopService);
-            _services.RegisterAsSingle<IViewFactory>(viewFactory);
-            _services.RegisterAsSingle<IMainMenuFactory>(mainMenuFactory);
+            
+            _services.RegisterAsSingle(viewModelBuilder);
+            _services.RegisterAsSingle(viewModelProvider);
+            _services.RegisterAsSingle(modelBuilder);
+            _services.RegisterAsSingle(modelProvider);
+            _services.RegisterAsSingle(enemySpawnService);
+            _services.RegisterAsSingle(persistentDataService);
+            _services.RegisterAsSingle(adsProvider);
+            _services.RegisterAsSingle(translationService);
+            _services.RegisterAsSingle(authorizeService);
+            _services.RegisterAsSingle(configurationProvider);
+            _services.RegisterAsSingle(upgradeService);
+            _services.RegisterAsSingle(propertyProvider);
+            _services.RegisterAsSingle(targetFinderService);
+            _services.RegisterAsSingle(gameLoopService);
+            _services.RegisterAsSingle(viewFactory);
+            _services.RegisterAsSingle(mainMenuFactory);
         }
     }
 }

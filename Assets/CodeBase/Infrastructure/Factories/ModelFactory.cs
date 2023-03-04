@@ -4,11 +4,11 @@ using CodeBase.MVVM.Models;
 
 namespace CodeBase.Infrastructure.Factories
 {
-    public class ModelFactory
+    public class ModelFactory : IModelFactory
     {
-        private readonly ConfigurationProvider _configurationProvider;
+        private readonly IConfigurationProvider _configurationProvider;
 
-        public ModelFactory(ConfigurationProvider configurationProvider)
+        public ModelFactory(IConfigurationProvider configurationProvider)
         {
             _configurationProvider = configurationProvider;
         }

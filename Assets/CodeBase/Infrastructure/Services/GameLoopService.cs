@@ -12,29 +12,34 @@ namespace CodeBase.Infrastructure.Services
         private readonly LevelMapFactory _levelMapFactory;
         private readonly GameLoopViewBuilder _gameLoopViewBuilder;
         private readonly AbilityBuilder _abilityBuilder;
-        private readonly HeroModel _heroModel;
+        private readonly IModelProvider _modelProvider;
         private readonly PlayerBuilder _playerBuilder;
-        private readonly GameLoopModel _gameLoopModel;
         private readonly PlayerEventHandler _playerEventHandler;
-        private LeveCompetitionService _levelCompetitionService;
+        private readonly ILeveCompetitionService _levelCompetitionService;
 
-        public GameLoopService(LevelMapFactory levelMapFactory, GameLoopViewBuilder gameLoopViewBuilder,
-            AbilityBuilder abilityBuilder, HeroModel heroModel, PlayerBuilder playerBuilder,
-            GameLoopModel gameLoopModel, LeveCompetitionService levelCompetitionService,
+        public GameLoopService(
+            LevelMapFactory levelMapFactory,
+            GameLoopViewBuilder gameLoopViewBuilder,
+            AbilityBuilder abilityBuilder,
+            IModelProvider modelProvider,
+            PlayerBuilder playerBuilder,
+            ILeveCompetitionService levelCompetitionService,
             PlayerEventHandler playerEventHandler)
         {
             _levelMapFactory = levelMapFactory;
             _gameLoopViewBuilder = gameLoopViewBuilder;
             _abilityBuilder = abilityBuilder;
-            _heroModel = heroModel;
+            _modelProvider = modelProvider;
             _playerBuilder = playerBuilder;
-            _gameLoopModel = gameLoopModel;
             _levelCompetitionService = levelCompetitionService;
             _playerEventHandler = playerEventHandler;
-            _gameLoopModel.PlayerResurrected += OnPlayerResurrected ;
         }
 
+        public void Initialize() => 
+            _modelProvider.Get<GameLoopModel>().PlayerResurrected += OnPlayerResurrected;
+
         public event Action<HeroData> LevelInvoked;
+
         public event Action LevelCloseInvoked;
 
         private void OnPlayerResurrected()
@@ -43,13 +48,14 @@ namespace CodeBase.Infrastructure.Services
         }
 
         public void InvokeLevelStart(HeroData heroData) => LevelInvoked?.Invoke(heroData);
-        public void InvokeLevelClose() => _gameLoopModel.InvokeLevelClose();
+
+        public void InvokeLevelClose() => _modelProvider.Get<GameLoopModel>().InvokeLevelClose();
 
         public void Start()
         {
             _levelMapFactory.Create();
             _gameLoopViewBuilder.Build();
-            _abilityBuilder.Build(_heroModel);
+            _abilityBuilder.Build( _modelProvider.Get<HeroModel>());
             _playerBuilder.BindCameraToPlayer();
             _playerBuilder.BindEventsHandler(_playerEventHandler);
 

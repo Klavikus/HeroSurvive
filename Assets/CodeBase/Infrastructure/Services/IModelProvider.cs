@@ -1,14 +1,8 @@
-﻿using CodeBase.MVVM.Models;
+﻿using CodeBase.MVVM.Views;
 
 namespace CodeBase.Infrastructure.Services
 {
-    public interface IModelProvider : IService
+    public interface IModelProvider : IProvider
     {
-        public GameLoopModel GameLoopModel { get; }
-        public UpgradeModel[] UpgradeModels { get; }
-        public CurrencyModel CurrencyModel { get; }
-        public HeroModel HeroModel { get; }
-        public MenuModel MenuModel { get; }
-        public PropertiesModel PropertiesModel { get; }
     }
 }

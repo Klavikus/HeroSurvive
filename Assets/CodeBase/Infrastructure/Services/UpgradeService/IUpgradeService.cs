@@ -1,11 +1,11 @@
 ﻿using System;
 using CodeBase.Domain;
+using CodeBase.Infrastructure.Factories;
 using CodeBase.MVVM.Models;
-using CodeBase.MVVM.Views;
 
 namespace CodeBase.Infrastructure.Services.UpgradeService
 {
-    public interface IUpgradeService : IService
+    public interface IUpgradeService : IService, IInitializeable
     {
         event Action Updated;
         MainProperties GetUpgradesPropertiesData();

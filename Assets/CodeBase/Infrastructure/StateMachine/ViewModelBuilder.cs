@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodeBase.Configs;
+using CodeBase.Domain.Additional;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.UpgradeService;
+using CodeBase.MVVM.Models;
 using CodeBase.MVVM.ViewModels;
 
 namespace CodeBase.Infrastructure.StateMachine
 {
-    class ViewModelBuilder : IViewModelBuilder
+    public class ViewModelBuilder : IViewModelBuilder
     {
-        private static readonly Dictionary<Type, Func<ViewModelBuilder, Object>> BuildStrategyByType =
+        private static readonly Dictionary<Type, Func<ViewModelBuilder, object>> BuildStrategyByType =
             new()
             {
                 [typeof(HeroSelectorViewModel)] = BuildHeroSelectorViewModel,
@@ -16,41 +19,88 @@ namespace CodeBase.Infrastructure.StateMachine
                 [typeof(MenuViewModel)] = BuildMenuViewModel,
                 [typeof(UpgradeViewModel)] = BuildUpgradeViewModel,
                 [typeof(CurrencyViewModel)] = BuildCurrencyViewModel,
+                [typeof(LeaderBoardsViewModel)] = BuildLeaderBoardsViewModel,
+                [typeof(GameLoopViewModel)] = BuildGameLoopViewModel,
+                [typeof(LevelUpViewModel)] = BuildLevelUpViewModel,
             };
 
         private readonly IModelProvider _modelProvider;
         private readonly ITranslationService _translationService;
         private readonly IUpgradeService _upgradeService;
+        private readonly IAuthorizeService _authorizeService;
+        private readonly ICoroutineRunner _coroutineRunner;
+        private readonly ILeveCompetitionService _leveCompetitionService;
+        private readonly PlayerEventHandler _playerEventHandler;
+        private readonly IAdsProvider _adsProvider;
+        private readonly IAbilityUpgradeService _abilityUpgradeService;
 
         public ViewModelBuilder(
             IModelProvider modelProvider,
             ITranslationService translationService,
-            IUpgradeService upgradeService)
+            IUpgradeService upgradeService,
+            IAuthorizeService authorizeService,
+            ICoroutineRunner coroutineRunner,
+            ILeveCompetitionService leveCompetitionService,
+            PlayerEventHandler playerEventHandler,
+            IAdsProvider adsProvider,
+            IAbilityUpgradeService abilityUpgradeService)
         {
             _modelProvider = modelProvider;
             _translationService = translationService;
             _upgradeService = upgradeService;
+            _authorizeService = authorizeService;
+            _coroutineRunner = coroutineRunner;
+            _leveCompetitionService = leveCompetitionService;
+            _playerEventHandler = playerEventHandler;
+            _adsProvider = adsProvider;
+            _abilityUpgradeService = abilityUpgradeService;
         }
 
-        public TViewModel Build<TViewModel>() where TViewModel : class =>
-            BuildStrategyByType[typeof(TViewModel)].Invoke(this) as TViewModel;
+        public T Build<T>() where T : class =>
+            BuildStrategyByType[typeof(T)].Invoke(this) as T;
 
         private static HeroSelectorViewModel BuildHeroSelectorViewModel(ViewModelBuilder builder) =>
-            new HeroSelectorViewModel(builder._modelProvider.HeroModel, builder._modelProvider.MenuModel,
-                builder._modelProvider.GameLoopModel,
+            new HeroSelectorViewModel(
+                builder._modelProvider.Get<HeroModel>(),
+                builder._modelProvider.Get<MenuModel>(),
+                builder._modelProvider.Get<GameLoopModel>(),
                 builder._translationService);
 
         private static MainPropertiesViewModel BuildMainPropertiesViewModel(ViewModelBuilder builder) =>
-            new MainPropertiesViewModel(builder._modelProvider.PropertiesModel, builder._translationService);
+            new MainPropertiesViewModel(
+                builder._modelProvider.Get<PropertiesModel>(),
+                builder._translationService);
 
         private static MenuViewModel BuildMenuViewModel(ViewModelBuilder builder) =>
-            new MenuViewModel(builder._modelProvider.MenuModel);
+            new MenuViewModel(builder._modelProvider.Get<MenuModel>());
 
         private static UpgradeViewModel BuildUpgradeViewModel(ViewModelBuilder builder) =>
-            new UpgradeViewModel(builder._modelProvider.UpgradeModels, builder._modelProvider.CurrencyModel,
+            new UpgradeViewModel(
+                builder._modelProvider.Get<UpgradeModel[]>(),
+                builder._modelProvider.Get<CurrencyModel>(),
                 builder._upgradeService);
 
         private static CurrencyViewModel BuildCurrencyViewModel(ViewModelBuilder builder) =>
-            new CurrencyViewModel(builder._modelProvider.CurrencyModel);
+            new CurrencyViewModel(builder._modelProvider.Get<CurrencyModel>());
+
+        private static LeaderBoardsViewModel BuildLeaderBoardsViewModel(ViewModelBuilder builder) =>
+            new LeaderBoardsViewModel(
+                builder._authorizeService,
+                new[] {new LeaderBoard(GameConstants.StageTotalKillsLeaderBoardKey)},
+                builder._coroutineRunner,
+                builder._modelProvider.Get<MenuModel>());
+
+        private static GameLoopViewModel BuildGameLoopViewModel(ViewModelBuilder builder) =>
+            new GameLoopViewModel(
+                builder._modelProvider.Get<GameLoopModel>(),
+                builder._leveCompetitionService,
+                builder._playerEventHandler,
+                builder._adsProvider);
+
+        private static LevelUpViewModel BuildLevelUpViewModel(ViewModelBuilder builder) =>
+            new LevelUpViewModel(
+                builder._modelProvider.Get<LevelUpModel>(),
+                builder._abilityUpgradeService,
+                builder._adsProvider);
     }
 }

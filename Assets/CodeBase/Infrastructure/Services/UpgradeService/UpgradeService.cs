@@ -9,16 +9,19 @@ namespace CodeBase.Infrastructure.Services.UpgradeService
 {
     class UpgradeService : IUpgradeService
     {
-        private readonly UpgradeModel[] _upgradeModels;
+        private readonly IModelProvider _modelProvider;
 
         private MainProperties _resultProperties;
 
         public event Action Updated;
 
-        public UpgradeService(UpgradeModel[] upgradeModels)
+        public UpgradeService(IModelProvider modelProvider)
         {
-            _upgradeModels = upgradeModels;
+            _modelProvider = modelProvider;
+        }
 
+        public void Initialize()
+        {
             Recalculate();
         }
 
@@ -26,7 +29,7 @@ namespace CodeBase.Infrastructure.Services.UpgradeService
         {
             _resultProperties = new MainProperties();
 
-            foreach (UpgradeModel upgradeModel in _upgradeModels)
+            foreach (UpgradeModel upgradeModel in _modelProvider.Get<UpgradeModel[]>())
             {
                 _resultProperties += upgradeModel.Properties;
             }
@@ -40,15 +43,7 @@ namespace CodeBase.Infrastructure.Services.UpgradeService
 
         public void AddProperties(UpgradeModel upgradeModel)
         {
-            UpgradeModel first = _upgradeModels.Where(model => model == upgradeModel).First();
-            // int levelIndex = upgradeModel.CurrentLevel;
-            // if (upgradeModel.CurrentLevel == upgradeModel.Data.Upgrades.Length)
-            // {
-            //     levelIndex--;
-            // }
-            //
-            // foreach (AdditionalHeroProperty additional in upgradeModel.GetCurrentAdditionalProperties())
-            //     _upgradeModels[upgradeModel].UpdateProperty(additional.BaseProperty, additional.Value);
+            UpgradeModel first = _modelProvider.Get<UpgradeModel[]>().First(model => model == upgradeModel);
 
             Updated?.Invoke();
         }

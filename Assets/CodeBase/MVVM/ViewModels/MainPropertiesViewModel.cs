@@ -15,7 +15,7 @@ namespace CodeBase.MVVM.ViewModels
         public event Action<IReadOnlyDictionary<BaseProperty, float>> PropertiesChanged;
         public event Action InvokedRender;
 
-        public IReadOnlyDictionary<BaseProperty, float> BaseProperties { get; private set; }
+        public IReadOnlyDictionary<BaseProperty, float> BaseProperties => _propertiesModel.MainProperties;
 
         public MainPropertiesViewModel(PropertiesModel propertiesModel, ITranslationService translationService)
         {
@@ -36,7 +36,6 @@ namespace CodeBase.MVVM.ViewModels
 
         private void OnPropertiesChanged(MainProperties mainProperties)
         {
-            BaseProperties = mainProperties.BaseProperties;
             PropertiesChanged?.Invoke(BaseProperties);
         }
     }

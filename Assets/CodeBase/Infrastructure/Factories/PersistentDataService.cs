@@ -1,6 +1,7 @@
 ﻿using CodeBase.Configs;
 using CodeBase.Infrastructure.Services;
 using CodeBase.MVVM.Models;
+using CodeBase.MVVM.Views;
 
 namespace CodeBase.Infrastructure.Factories
 {
@@ -8,31 +9,35 @@ namespace CodeBase.Infrastructure.Factories
     {
         private readonly IConfigurationProvider _configurationProvider;
         private readonly ISaveLoadService _saveLoadService;
-        private readonly ModelProvider _modelProvider;
+        private readonly IProvider _modelProvider;
+
 
         public PersistentDataService(IConfigurationProvider configurationProvider,
             ISaveLoadService saveLoadService,
-            ModelProvider modelProvider)
+            IProvider modelProvider)
         {
             _configurationProvider = configurationProvider;
             _saveLoadService = saveLoadService;
             _modelProvider = modelProvider;
+        }
+
+        public void Initialize()
+        {
             _saveLoadService.AllLoaded += SaveLoadServiceOnAllLoaded;
 
-            _modelProvider.CurrencyModel.CurrencyChanged += SaveCurrency;
-            foreach (UpgradeModel upgradeModel in _modelProvider.UpgradeModels)
+            _modelProvider.Get<CurrencyModel>().CurrencyChanged += SaveCurrency;
+            foreach (UpgradeModel upgradeModel in _modelProvider.Get<UpgradeModel[]>())
                 upgradeModel.LevelChanged += SaveUpgrade;
         }
 
         public void LoadOrDefaultUpgradeModelsFromLocal()
         {
             _saveLoadService.LoadPrefsToData();
-            // _saveLoadService.LoadAllDataFromYandex();
         }
 
         private void SaveLoadServiceOnAllLoaded()
         {
-            UpgradeModel[] result = _modelProvider.UpgradeModels;
+            UpgradeModel[] result = _modelProvider.Get<UpgradeModel[]>();
 
             for (var i = 0; i < result.Length; i++)
             {
@@ -46,7 +51,7 @@ namespace CodeBase.Infrastructure.Factories
             }
 
             if (int.TryParse(_saveLoadService.GetData(GameConstants.CurrencyDataKey), out int loadedCurrency))
-                _modelProvider.CurrencyModel.SetAmount(loadedCurrency);
+                _modelProvider.Get<CurrencyModel>().SetAmount(loadedCurrency);
         }
 
         private void SaveUpgrade(UpgradeModel upgradeModel)

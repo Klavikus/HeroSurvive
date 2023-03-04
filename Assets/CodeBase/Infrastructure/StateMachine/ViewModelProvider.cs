@@ -1,18 +1,18 @@
-﻿using CodeBase.MVVM.Models;
-using CodeBase.MVVM.ViewModels;
-using CodeBase.MVVM.Views;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CodeBase.Infrastructure.StateMachine
 {
     public class ViewModelProvider : IViewModelProvider
     {
-        public ViewModelProvider(LeaderBoardsViewModel leaderBoardsViewModel, MenuViewModel menuViewModel)
+        private readonly Dictionary<Type, object> _viewModelByType = new Dictionary<Type, object>();
+
+        public void Bind<TModel>(TModel model) where TModel : class
         {
-            LeaderBoardsViewModel = leaderBoardsViewModel;
-            MenuViewModel = menuViewModel;
+            _viewModelByType[typeof(TModel)] = model;
         }
 
-        public LeaderBoardsViewModel LeaderBoardsViewModel { get; }
-        public MenuViewModel MenuViewModel { get; }
+        public TModel Get<TModel>() where TModel : class =>
+            _viewModelByType[typeof(TModel)] as TModel;
     }
 }

@@ -14,7 +14,7 @@ namespace CodeBase.Infrastructure.Factories
 {
     public class AbilityProjectionBuilder
     {
-        private readonly TargetFinderService _targetFinderService;
+        private readonly ITargetService _targetFinderService;
         private readonly AudioPlayerService _audioPlayerService;
         private readonly ProjectionPool _projectionPool;
         private readonly Transform _poolContainer;
@@ -44,9 +44,9 @@ namespace CodeBase.Infrastructure.Factories
         private readonly Dictionary<AbilityData, ProjectionPool> _projectionPools =
             new Dictionary<AbilityData, ProjectionPool>();
 
-        public AbilityProjectionBuilder(TargetFinderService targetFinderService, AudioPlayerService audioPlayerService)
+        public AbilityProjectionBuilder(ITargetService targetService, AudioPlayerService audioPlayerService)
         {
-            _targetFinderService = targetFinderService;
+            _targetFinderService = targetService;
             _audioPlayerService = audioPlayerService;
             _poolContainer = GameObject.Instantiate(new GameObject("poolContainer")).transform;
         }

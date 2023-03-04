@@ -14,10 +14,9 @@ namespace CodeBase.Infrastructure.Factories
 {
     public class PlayerBuilder
     {
-        private readonly ConfigurationProvider _configurationProvider;
+        private readonly IConfigurationProvider _configurationProvider;
         private readonly IPropertyProvider _propertyProvider;
-        private readonly HeroModel _heroModel;
-        private readonly LevelUpModel _levelUpModel;
+        private readonly IModelProvider _modelProvider;
         private readonly IAbilityUpgradeService _abilityUpgradeService;
         private readonly AbilityFactory _abilityFactory;
         private readonly AudioPlayerService _audioPlayerService;
@@ -32,15 +31,17 @@ namespace CodeBase.Infrastructure.Factories
         private CinemachineVirtualCamera _currentCamera;
         private Camera _playerCamera;
 
-        public PlayerBuilder(HeroModel heroModel,
-            ConfigurationProvider configurationProvider, IPropertyProvider propertyProvider, LevelUpModel levelUpModel,
-            IAbilityUpgradeService abilityUpgradeService, AbilityFactory abilityFactory,
+        public PlayerBuilder(
+            IModelProvider modelProvider,
+            IConfigurationProvider configurationProvider,
+            IPropertyProvider propertyProvider,
+            IAbilityUpgradeService abilityUpgradeService,
+            AbilityFactory abilityFactory,
             AudioPlayerService audioPlayerService)
         {
-            _heroModel = heroModel;
+            _modelProvider = modelProvider;
             _configurationProvider = configurationProvider;
             _propertyProvider = propertyProvider;
-            _levelUpModel = levelUpModel;
             _abilityUpgradeService = abilityUpgradeService;
             _abilityFactory = abilityFactory;
             _audioPlayerService = audioPlayerService;
@@ -48,7 +49,8 @@ namespace CodeBase.Infrastructure.Factories
 
         public Player Build(AbilityConfigSO initialAbilityConfigSO)
         {
-            _player = GameObject.Instantiate(_heroModel.CurrentSelectedHero.Prefab, Vector3.zero, Quaternion.identity);
+            _player = GameObject.Instantiate(_modelProvider.Get<HeroModel>().CurrentSelectedHero.Prefab, Vector3.zero,
+                Quaternion.identity);
             _inputController = _player.GetComponent<InputController>();
             _inputController.Initialize();
             _moveController = _player.GetComponent<MoveController>();

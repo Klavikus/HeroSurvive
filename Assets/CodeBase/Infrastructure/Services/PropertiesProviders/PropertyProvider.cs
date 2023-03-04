@@ -5,9 +5,7 @@ using CodeBase.Domain;
 using CodeBase.Domain.Data;
 using CodeBase.Infrastructure.Services.UpgradeService;
 using CodeBase.MVVM.Models;
-using CodeBase.MVVM.Views;
 using CodeBase.MVVM.Views.HeroSelector;
-using UnityEngine;
 
 namespace CodeBase.Infrastructure.Services.PropertiesProviders
 {
@@ -15,8 +13,7 @@ namespace CodeBase.Infrastructure.Services.PropertiesProviders
     {
         private readonly IConfigurationProvider _configurationProvider;
         private readonly IUpgradeService _upgradeService;
-        private readonly HeroModel _heroModel;
-        private readonly PropertiesModel _propertiesModel;
+        private readonly IModelProvider _modelProvider;
 
         private MainProperties _baseData;
         private MainProperties _upgradesData;
@@ -25,26 +22,25 @@ namespace CodeBase.Infrastructure.Services.PropertiesProviders
 
         public event Action PropertiesUpdated;
 
-        public PropertyProvider(IConfigurationProvider configurationProvider,
+        public PropertyProvider(
+            IConfigurationProvider configurationProvider,
             IUpgradeService upgradeService,
-            HeroModel heroModel,
-            PropertiesModel propertiesViewModel)
+            IModelProvider modelProvider)
         {
             _configurationProvider = configurationProvider;
             _upgradeService = upgradeService;
-            _heroModel = heroModel;
-            _propertiesModel = propertiesViewModel;
+            _modelProvider = modelProvider;
         }
 
         public void Initialize()
         {
             _baseData = _configurationProvider.BasePropertiesConfig.GetPropertiesData();
             _upgradesData = _upgradeService.GetUpgradesPropertiesData();
-            _heroData = _heroModel.GetMainPropertiesData();
+            _heroData = _modelProvider.Get<HeroModel>().GetMainPropertiesData();
             RecalculateData();
             
             _upgradeService.Updated += OnUpgradesUpdated;
-            _heroModel.Changed += OnHeroChanged;
+            _modelProvider.Get<HeroModel>().Changed += OnHeroChanged;
         }
 
         public MainProperties GetResultProperties() => _resultData;
@@ -68,7 +64,7 @@ namespace CodeBase.Infrastructure.Services.PropertiesProviders
 
         private void OnHeroChanged(HeroData heroData)
         {
-            _heroData = _heroModel.GetMainPropertiesData();
+            _heroData = _modelProvider.Get<HeroModel>().GetMainPropertiesData();
             RecalculateData();
         }
 
@@ -81,7 +77,7 @@ namespace CodeBase.Infrastructure.Services.PropertiesProviders
         private void RecalculateData()
         {
             _resultData = _baseData + _upgradesData + _heroData;
-            _propertiesModel.SetResultProperties(_resultData);
+            _modelProvider.Get<PropertiesModel>().SetResultProperties(_resultData);
             PropertiesUpdated?.Invoke();
         }
     }

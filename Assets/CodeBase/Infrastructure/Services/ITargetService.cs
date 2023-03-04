@@ -9,5 +9,7 @@ namespace CodeBase.Infrastructure.Services
         Vector3 GetPlayerDirection();
         Vector3 GetClosestEnemyToPlayer();
         void BindPlayerBuilder(PlayerBuilder playerBuilder);
+        Camera GetCamera();
+        Vector3 GetRandomEnemyPosition();
     }
 }

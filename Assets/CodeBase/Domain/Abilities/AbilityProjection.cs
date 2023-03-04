@@ -21,7 +21,7 @@ namespace CodeBase.Domain.Abilities
         private AbilityData _abilityBaseData;
         private IAttackBehaviour _attackBehaviour;
         private IMovementBehaviour _movementBehaviour;
-        private TargetFinderService _targetFinderService;
+        private ITargetService _targetFinderService;
 
         private List<Coroutine> _coroutineHandlers;
         private WaitForSeconds _returnToPoolDelay;
@@ -30,7 +30,7 @@ namespace CodeBase.Domain.Abilities
 
         public event Action<AbilityProjection> Destroed;
 
-        public void Initialize(AudioPlayerService audioPlayerService, TargetFinderService targetFinderService,
+        public void Initialize(AudioPlayerService audioPlayerService, ITargetService targetFinderService,
             AbilityData abilityBaseData,
             IAttackBehaviour attackBehaviour,
             IMovementBehaviour movementBehaviour,

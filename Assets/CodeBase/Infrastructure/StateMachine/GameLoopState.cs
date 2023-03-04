@@ -1,6 +1,7 @@
 ﻿using CodeBase.Configs;
 using CodeBase.Domain.Data;
 using CodeBase.Infrastructure.Services;
+using CodeBase.MVVM.Models;
 
 namespace CodeBase.Infrastructure.StateMachine
 {
@@ -17,17 +18,18 @@ namespace CodeBase.Infrastructure.StateMachine
             _sceneLoader = sceneLoader;
             _modelProvider = AllServices.Container.AsSingle<IModelProvider>();
             _gameLoopService = AllServices.Container.AsSingle<IGameLoopService>();
-            _modelProvider.GameLoopModel.CloseLevelInvoked += OnLevelCloseInvoked;
         }
 
         public void Enter(HeroData heroData)
         {
+            _modelProvider.Get<GameLoopModel>().CloseLevelInvoked += OnLevelCloseInvoked;
             _sceneLoader.Load(GameConstants.GameLoopScene, OnLoaded);
         }
 
         public void Exit()
         {
             _gameLoopService.Stop();
+            _modelProvider.Get<GameLoopModel>().CloseLevelInvoked -= OnLevelCloseInvoked;
         }
 
         private void OnLoaded()

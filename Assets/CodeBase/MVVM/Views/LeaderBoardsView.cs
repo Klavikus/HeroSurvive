@@ -4,6 +4,7 @@ using Agava.YandexGames;
 using CodeBase.Configs;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.StateMachine;
 using CodeBase.MVVM.Models;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,7 +27,7 @@ namespace CodeBase.MVVM.Views
         private void Start()
         {
             Hide();
-            _leaderBoardsViewModel = AllServices.Container.AsSingle<IViewModelProvider>().LeaderBoardsViewModel;
+            _leaderBoardsViewModel = AllServices.Container.AsSingle<IViewModelProvider>().Get<LeaderBoardsViewModel>();
             _viewFactory = AllServices.Container.AsSingle<IViewFactory>();
             _translationService = AllServices.Container.AsSingle<ITranslationService>();
             _playerScoreView.Initialize(_translationService);

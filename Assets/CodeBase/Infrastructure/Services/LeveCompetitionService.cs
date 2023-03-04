@@ -6,10 +6,10 @@ using CodeBase.MVVM.Models;
 
 namespace CodeBase.Infrastructure.Services
 {
-    public class LeveCompetitionService
+    public class LeveCompetitionService : ILeveCompetitionService
     {
         private IEnemySpawnService _enemySpawnService;
-        private readonly LevelUpModel _levelUpModel;
+        private readonly IModelProvider _modelProvider;
         private readonly StageCompetitionConfigSO _competitionConfig;
 
         private int _currentWaveId;
@@ -29,10 +29,10 @@ namespace CodeBase.Infrastructure.Services
         public event Action<Enemy> EnemyKilled;
 
         public LeveCompetitionService(IEnemySpawnService enemySpawnService,
-            IConfigurationProvider configurationProvider, LevelUpModel levelUpModel)
+            IConfigurationProvider configurationProvider, IModelProvider modelProvider)
         {
             _enemySpawnService = enemySpawnService;
-            _levelUpModel = levelUpModel;
+            _modelProvider = modelProvider;
             _competitionConfig = configurationProvider.StageCompetitionConfig;
             _enemies = new List<Enemy>();
         }
@@ -98,7 +98,7 @@ namespace CodeBase.Infrastructure.Services
 
         private void OnEnemyDied(Enemy enemy)
         {
-            _levelUpModel.HandleRewardedKill(enemy);
+            _modelProvider.Get<LevelUpModel>().HandleRewardedKill(enemy);
 
             enemy.Died -= OnEnemyDied;
             enemy.OutOfViewTimeout -= OnEnemyOutOfViewTimeout;
