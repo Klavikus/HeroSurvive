@@ -13,7 +13,7 @@ namespace CodeBase.Infrastructure.StateMachine
 {
     public class BootstrapState : IState
     {
-        private const string InitialScene = "Initial";
+        private const string InitialScene = GameConstants.InitialSceneName;
 
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
@@ -78,6 +78,7 @@ namespace CodeBase.Infrastructure.StateMachine
                 gameLoopModel,
                 upgradeModels,
                 currencyModel);
+            
             UpgradeService upgradeService = new UpgradeService(upgradeModels);
 
             PersistentDataService persistentDataService =

@@ -15,6 +15,7 @@ namespace CodeBase.Configs
         public const int MaxNameLength = 15;
         public const float LeaderBoardPassiveUpdateDelay = 60f;
         public const float AIMinimumStaggerDelay = 0.01f;
+        public const string InitialSceneName = "Initial";
         public static float RegenerationDelay = 1f;
         public static float DirectionTrackingDelay = 0.35f;
         public static float MinimumStopDistance = 0.2f;
