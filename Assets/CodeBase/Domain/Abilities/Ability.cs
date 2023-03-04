@@ -20,11 +20,15 @@ namespace CodeBase.Domain.Abilities
         private readonly AbilityUpgradeData[] _abilityUpgradesData;
         private readonly IGameLoopService _gameLoopService;
 
+        private readonly WaitForSeconds _cooldownWaitForSeconds;
+        private readonly WaitForSeconds _burstDelayWaitForSeconds;
+        
         private Transform _pivotObject;
         private bool _onCooldown;
         private bool _isInitialized;
         private int _currentUpgradeLevel;
         private Coroutine _activateProjectionCoroutine;
+        private Coroutine _runCoroutine;
 
         public Ability(
             AbilityProjectionBuilder projectionBuilder,
@@ -41,15 +45,11 @@ namespace CodeBase.Domain.Abilities
             _abilityUpgradesData = abilityUpgradesData;
             _gameLoopService = gameLoopService;
             _gameLoopService.LevelCloseInvoked += OnGameCloseInvoked;
+            _cooldownWaitForSeconds = new WaitForSeconds(_abilityData.Cooldown);
+            _burstDelayWaitForSeconds = new WaitForSeconds(_abilityData.BurstFireDelay);
         }
 
         ~Ability() => _gameLoopService.LevelCloseInvoked -= OnGameCloseInvoked;
-
-        private void OnGameCloseInvoked()
-        {
-            _coroutineRunner.Stop(_activateProjectionCoroutine);
-            _projectionPool.Clear();
-        }
 
         public bool CanUpgrade => _currentUpgradeLevel < _abilityUpgradesData.Length;
         public AbilityUpgradeData AvailableUpgrade => _abilityUpgradesData[_currentUpgradeLevel];
@@ -60,13 +60,25 @@ namespace CodeBase.Domain.Abilities
             _isInitialized = true;
         }
 
+        private void OnGameCloseInvoked()
+        {
+            _coroutineRunner.Stop(_activateProjectionCoroutine);
+            _projectionPool.Clear();
+        }
+
         public void Execute()
         {
             if (_onCooldown || !_isInitialized)
                 return;
 
+            if (_activateProjectionCoroutine != null) 
+                _coroutineRunner.Stop(_activateProjectionCoroutine);
             _activateProjectionCoroutine = _coroutineRunner.Run(ActivateProjections());
-            _coroutineRunner.Run(StartCooldown());
+            
+            if (_runCoroutine != null) 
+                _coroutineRunner.Stop(_runCoroutine);
+            
+            _runCoroutine = _coroutineRunner.Run(StartCooldown());
         }
 
         public void UpdatePlayerModifiers(IReadOnlyDictionary<BaseProperty, float> stats) =>
@@ -94,14 +106,14 @@ namespace CodeBase.Domain.Abilities
             for (int i = 0; i < _abilityData.BurstCount; i++)
             {
                 _projectionBuilder.Build(_abilityData, _pivotObject, _projectionPool);
-                yield return new WaitForSeconds(_abilityData.BurstFireDelay);
+                yield return _burstDelayWaitForSeconds;
             }
         }
 
         private IEnumerator StartCooldown()
         {
             _onCooldown = true;
-            yield return new WaitForSeconds(_abilityData.Cooldown);
+            yield return _cooldownWaitForSeconds;
             _onCooldown = false;
         }
 
