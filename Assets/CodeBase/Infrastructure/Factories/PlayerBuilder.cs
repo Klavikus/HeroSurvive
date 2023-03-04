@@ -50,6 +50,7 @@ namespace CodeBase.Infrastructure.Factories
         {
             _player = GameObject.Instantiate(_heroModel.CurrentSelectedHero.Prefab, Vector3.zero, Quaternion.identity);
             _inputController = _player.GetComponent<InputController>();
+            _inputController.Initialize();
             _moveController = _player.GetComponent<MoveController>();
             _inputController.InputUpdated += OnPlayerInputUpdated;
             _player.Initialize(_propertyProvider, initialAbilityConfigSO, _abilityFactory,
