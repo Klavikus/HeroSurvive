@@ -29,6 +29,7 @@ public class SelectedTweener : MonoBehaviour
 
         _tweenTrigger.Showed -= OnTriggerShowed;
         _tweenTrigger.Hided -= OnTriggerHided;
+        KillCurrentTween();
     }
 
     private void OnTriggerShowed()

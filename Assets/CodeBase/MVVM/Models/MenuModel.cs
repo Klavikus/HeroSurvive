@@ -10,14 +10,40 @@ namespace CodeBase.MVVM.Models
         public event Action ClosedUpgradeSelection;
         public event Action LeaderBoardShowInvoked;
         public event Action LeaderBoardHideInvoked;
+        public event Action InvokedMainMenuShow;
+        public event Action InvokedMainMenuHide;
 
+        public bool IsMenuShowing { get; private set; }
+        public bool IsHeroSelectionShowing { get; private set; }
+        public bool IsUpgradeSelectionShowing { get; private set; }
 
-        public void EnableHeroSelector() => OpenedHeroSelection?.Invoke();
-        public void DisableHeroSelector() => ClosedHeroSelection?.Invoke();
-        public void EnableUpgradeSelection() => OpenedUpgradeSelection?.Invoke();
-        public void DisableUpgradeSelection() => ClosedUpgradeSelection?.Invoke();
+        public void EnableHeroSelector()
+        {
+            InvokedMainMenuHide?.Invoke();
+            OpenedHeroSelection?.Invoke();
+        }
+
+        public void DisableHeroSelector()
+        {
+            InvokedMainMenuShow?.Invoke();
+            ClosedHeroSelection?.Invoke();
+        }
+
+        public void EnableUpgradeSelection()
+        {
+            InvokedMainMenuHide?.Invoke();
+            OpenedUpgradeSelection?.Invoke();
+        }
+
+        public void DisableUpgradeSelection()
+        {
+            InvokedMainMenuShow?.Invoke();
+            ClosedUpgradeSelection?.Invoke();
+        }
 
         public void InvokeLeaderBoardShow() => LeaderBoardShowInvoked?.Invoke();
         public void InvokeLeaderBoardHide() => LeaderBoardHideInvoked?.Invoke();
+        public void InvokeMainMenuShow() => InvokedMainMenuShow?.Invoke();
+        public void InvokeMainMenuHide() => InvokedMainMenuHide?.Invoke();
     }
 }

@@ -10,13 +10,6 @@ public class TweenTrigger : MonoBehaviour, ITweenTrigger, IPointerEnterHandler, 
     public void InvokeShow() => Showed?.Invoke();
     public void InvokeHide() => Hided?.Invoke();
     
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        InvokeShow();
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        InvokeHide();
-    }
+    public void OnPointerEnter(PointerEventData eventData) => InvokeShow();
+    public void OnPointerExit(PointerEventData eventData) => InvokeHide();
 }

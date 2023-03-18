@@ -185,14 +185,14 @@ namespace CodeBase.MVVM.Views
         {
             if (_currentActiveButtonId == 0)
             {
-                _continueButton.Select();
+                // _continueButton.Select();
                 _continueButtonTweenTrigger.InvokeShow();
                 _reRollButtonTweenTrigger.InvokeHide();
             }
 
             if (_currentActiveButtonId == 1)
             {
-                _reRollButton.Select();
+                // _reRollButton.Select();
                 _continueButtonTweenTrigger.InvokeHide();
                 _reRollButtonTweenTrigger.InvokeShow();
             }

@@ -13,23 +13,46 @@ namespace CodeBase.MVVM.Views
         [SerializeField] private Button _openOptions;
 
         private MenuViewModel _menuViewModel;
+        private bool _isInitialized;
 
         public void Initialize(MenuViewModel menuViewModel)
         {
             _menuViewModel = menuViewModel;
+            _menuViewModel.InvokedMainMenuShow += Show;
+            _menuViewModel.InvokedMainMenuHide += Hide;
 
             _openHeroSelection.onClick.AddListener(ShowHeroSelection);
             _openUpgradeSelection.onClick.AddListener(ShowUpgradeSelection);
             _openLeaderBoard.onClick.AddListener(ShowLeaderBoard);
 
+            Show();
+
+            _isInitialized = true;
+        }
+
+        private void Show()
+        {
             _baseCanvas.enabled = true;
         }
 
-        private void OnDisable()
+        private void Hide()
         {
+            _baseCanvas.enabled = false;
+        }
+
+        private void OnDestroy()
+        {
+            if (_isInitialized == false)
+                return;
+            
+            _isInitialized = false;
+            
             _openHeroSelection.onClick.RemoveListener(ShowHeroSelection);
             _openUpgradeSelection.onClick.RemoveListener(ShowUpgradeSelection);
             _openLeaderBoard.onClick.RemoveListener(ShowLeaderBoard);
+
+            _menuViewModel.InvokedMainMenuShow -= Show;
+            _menuViewModel.InvokedMainMenuHide -= Hide;
         }
 
         private void ShowHeroSelection() => _menuViewModel.EnableHeroSelection();
