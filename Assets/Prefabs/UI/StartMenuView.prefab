@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 294631628}
   - component: {fileID: 294631627}
   - component: {fileID: 294631626}
+  - component: {fileID: 7829378823483594387}
+  - component: {fileID: 1790240287882924581}
   m_Layer: 5
   m_Name: Leaderboard
   m_TagString: Untagged
@@ -122,6 +124,33 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7829378823483594387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294631624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728746d7f4e9479ebcc3825d7485077b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1790240287882924581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294631624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330b36e946cccef48b17491accfa330d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tweenTriggerContainer: {fileID: 294631624}
+  _tweenTarget: {fileID: 294631624}
+  _tweenStrategy: {fileID: 11400000, guid: a8492e5431991fc42981bd0653994234, type: 2}
 --- !u!1 &406809801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,6 +1125,8 @@ GameObject:
   - component: {fileID: 1591248066}
   - component: {fileID: 1591248065}
   - component: {fileID: 1591248064}
+  - component: {fileID: 3050703395173347222}
+  - component: {fileID: 3483879019208587336}
   m_Layer: 5
   m_Name: Upgrades
   m_TagString: Untagged
@@ -1206,6 +1237,33 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3050703395173347222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591248062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728746d7f4e9479ebcc3825d7485077b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3483879019208587336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591248062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330b36e946cccef48b17491accfa330d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tweenTriggerContainer: {fileID: 1591248062}
+  _tweenTarget: {fileID: 1591248062}
+  _tweenStrategy: {fileID: 11400000, guid: a8492e5431991fc42981bd0653994234, type: 2}
 --- !u!1 &1721986606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,6 +1918,8 @@ GameObject:
   - component: {fileID: 1811968121410368538}
   - component: {fileID: 1811968121410368541}
   - component: {fileID: 1811968121410368540}
+  - component: {fileID: 1094448276537852581}
+  - component: {fileID: 1416231031626561414}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -1970,6 +2030,33 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1094448276537852581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811968121410368542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728746d7f4e9479ebcc3825d7485077b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1416231031626561414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811968121410368542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330b36e946cccef48b17491accfa330d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tweenTriggerContainer: {fileID: 1811968121410368542}
+  _tweenTarget: {fileID: 1811968121410368542}
+  _tweenStrategy: {fileID: 11400000, guid: a8492e5431991fc42981bd0653994234, type: 2}
 --- !u!1 &4380283291103801444
 GameObject:
   m_ObjectHideFlags: 0
