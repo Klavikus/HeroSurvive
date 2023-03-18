@@ -19,8 +19,8 @@ namespace CodeBase.MVVM.Models
 
         public void EnableHeroSelector()
         {
-            InvokedMainMenuHide?.Invoke();
             OpenedHeroSelection?.Invoke();
+            InvokedMainMenuHide?.Invoke();
         }
 
         public void DisableHeroSelector()

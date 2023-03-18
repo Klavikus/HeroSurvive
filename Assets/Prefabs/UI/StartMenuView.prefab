@@ -1653,6 +1653,10 @@ MonoBehaviour:
   _openUpgradeSelection: {fileID: 1591248064}
   _openLeaderBoard: {fileID: 294631626}
   _openOptions: {fileID: 712837397}
+  _tweenTriggers:
+  - {fileID: 1094448276537852581}
+  - {fileID: 3050703395173347222}
+  - {fileID: 7829378823483594387}
 --- !u!1 &1811968120898049873
 GameObject:
   m_ObjectHideFlags: 0

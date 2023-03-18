@@ -238,21 +238,5 @@ namespace CodeBase.MVVM.Views
             _playerInputActions?.Disable();
             _defaultInputActions?.Disable();
         }
-
-        public void OnHover(BaseEventData eventData)
-        {
-            if (gameObject == _continueButton.gameObject)
-            {
-                _currentActiveButtonId = 0;
-                ActivateSelectedTween();
-                return;
-            }
-            if (gameObject == _reRollButton.gameObject)
-            {
-                _currentActiveButtonId = 1;
-                ActivateSelectedTween();
-                return;
-            }
-        }
     }
 }

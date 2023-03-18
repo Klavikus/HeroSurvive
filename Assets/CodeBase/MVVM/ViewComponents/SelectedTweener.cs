@@ -32,7 +32,7 @@ public class SelectedTweener : MonoBehaviour
         KillCurrentTween();
     }
 
-    private void OnTriggerShowed()
+    private void OnTriggerShowed(ITweenTrigger tweenTrigger)
     {
         KillCurrentTween();
         _currentTween = _tweenTarget.transform
@@ -48,7 +48,7 @@ public class SelectedTweener : MonoBehaviour
         _tweenTarget.transform.localScale = _initialScale;
     }
 
-    private void OnTriggerHided()
+    private void OnTriggerHided(ITweenTrigger tweenTrigger)
     {
         KillCurrentTween();
         _tweenTarget.transform.localScale = _initialScale;

@@ -2,8 +2,8 @@ using System;
 
 public interface ITweenTrigger
 {
-    event Action Showed;
-    event Action Hided;
+    event Action<ITweenTrigger> Showed;
+    event Action<ITweenTrigger> Hided;
 
     public void InvokeShow();
     public void InvokeHide();
