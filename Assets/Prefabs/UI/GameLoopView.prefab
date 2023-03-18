@@ -231,7 +231,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1306133799}
-  - {fileID: 656834362}
+  - {fileID: 4824281796990655730}
   - {fileID: 645511894}
   - {fileID: 1204006022}
   m_Father: {fileID: 2084146238}
@@ -2663,6 +2663,8 @@ GameObject:
   - component: {fileID: 645511897}
   - component: {fileID: 645511896}
   - component: {fileID: 645511895}
+  - component: {fileID: 6510498410950628129}
+  - component: {fileID: 8427961473097761069}
   m_Layer: 5
   m_Name: Button_Reroll
   m_TagString: Untagged
@@ -2688,11 +2690,11 @@ RectTransform:
   m_Father: {fileID: 41431097}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -50, y: 53}
-  m_SizeDelta: {x: 250, y: 80}
-  m_Pivot: {x: 1, y: 0}
+  m_AnchorMin: {x: 0.521, y: 0.066250004}
+  m_AnchorMax: {x: 0.92, y: 0.16625}
+  m_AnchoredPosition: {x: -0.4999237, y: -0.000091552734}
+  m_SizeDelta: {x: 1, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &645511897
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2775,6 +2777,33 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6510498410950628129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645511893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330b36e946cccef48b17491accfa330d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tweenTriggerContainer: {fileID: 645511893}
+  _tweenTarget: {fileID: 645511893}
+  _tweenStrategy: {fileID: 11400000, guid: a8492e5431991fc42981bd0653994234, type: 2}
+--- !u!114 &8427961473097761069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645511893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728746d7f4e9479ebcc3825d7485077b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &651102662
 GameObject:
   m_ObjectHideFlags: 0
@@ -2943,6 +2972,8 @@ GameObject:
   - component: {fileID: 656834365}
   - component: {fileID: 656834364}
   - component: {fileID: 656834363}
+  - component: {fileID: 3245041279533950447}
+  - component: {fileID: 3499123383095668303}
   m_Layer: 5
   m_Name: Button_Continue
   m_TagString: Untagged
@@ -2963,14 +2994,14 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2141276591}
-  m_Father: {fileID: 41431097}
-  m_RootOrder: 1
+  m_Father: {fileID: 4824281796990655730}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 50, y: 53}
-  m_SizeDelta: {x: 250, y: 80}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.28105164, y: -0.30004883}
+  m_SizeDelta: {x: 250.23398, y: 80}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &656834365
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3053,6 +3084,33 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3245041279533950447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656834361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330b36e946cccef48b17491accfa330d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tweenTriggerContainer: {fileID: 656834361}
+  _tweenTarget: {fileID: 656834361}
+  _tweenStrategy: {fileID: 11400000, guid: a8492e5431991fc42981bd0653994234, type: 2}
+--- !u!114 &3499123383095668303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656834361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728746d7f4e9479ebcc3825d7485077b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &699321850
 GameObject:
   m_ObjectHideFlags: 0
@@ -9451,6 +9509,52 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4441039251764445062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4824281796990655730}
+  - component: {fileID: 5115644410807659626}
+  m_Layer: 5
+  m_Name: Button_ContinueContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4824281796990655730
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4441039251764445062}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 656834362}
+  m_Father: {fileID: 41431097}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 50, y: 53}
+  m_SizeDelta: {x: 250, y: 80}
+  m_Pivot: {x: 0, y: 0}
+--- !u!222 &5115644410807659626
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4441039251764445062}
+  m_CullTransparentMesh: 0
 --- !u!1 &5432994746288198193
 GameObject:
   m_ObjectHideFlags: 0
@@ -10061,6 +10165,8 @@ MonoBehaviour:
   _reRollButton: {fileID: 645511895}
   _currentLevel: {fileID: 5790501683305087444}
   _currentProgress: {fileID: 324373443}
+  _continueButtonTweenTrigger: {fileID: 3499123383095668303}
+  _reRollButtonTweenTrigger: {fileID: 8427961473097761069}
 --- !u!114 &2067330061667110476
 MonoBehaviour:
   m_ObjectHideFlags: 0

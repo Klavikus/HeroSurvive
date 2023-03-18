@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CodeBase.Domain.Data;
 using CodeBase.MVVM.Builders;
@@ -19,13 +20,21 @@ namespace CodeBase.MVVM.Views
         [SerializeField] private TMP_Text _currentLevel;
         [SerializeField] private Image _currentProgress;
 
+        [SerializeField] private TweenTrigger _continueButtonTweenTrigger;
+        [SerializeField] private TweenTrigger _reRollButtonTweenTrigger;
+
+
         private LevelUpViewModel _levelUpViewModel;
         private Dictionary<AbilityUpgradeView, AbilityUpgradeData> _abilityUpgradeDataByView;
         private AbilityUpgradeData _currentSelectedUpgrade;
 
         private PlayerInputActions _playerInputActions;
+        private DefaultInputActions _defaultInputActions;
         private int _currentSelectedViewId = 0;
         private int _maxId = 2;
+
+        private int _currentActiveButtonId;
+        private int _maxButtonId = 1;
 
         public void Initialize(LevelUpViewModel levelUpViewModel, UpgradeDescriptionBuilder upgradeDescriptionBuilder)
         {
@@ -49,6 +58,7 @@ namespace CodeBase.MVVM.Views
             _continueButton.onClick.AddListener(OnContinueButtonClicked);
             _reRollButton.onClick.AddListener(OnReRollButtonClicked);
 
+
             _currentLevel.text = "1";
             _currentProgress.fillAmount = 0;
 
@@ -56,6 +66,9 @@ namespace CodeBase.MVVM.Views
             _playerInputActions.UI.ScrollUp.performed += OnScrollUpPerformed;
             _playerInputActions.UI.ScrollDown.performed += OnScrollDownPerformed;
             _playerInputActions.UI.Apply.performed += OnApplyPerformed;
+
+            _defaultInputActions = new DefaultInputActions();
+            _defaultInputActions.UI.Navigate.performed += NavigateOnPerformed;
         }
 
         private void OnDisable()
@@ -73,6 +86,32 @@ namespace CodeBase.MVVM.Views
             _playerInputActions.UI.ScrollUp.performed -= OnScrollUpPerformed;
             _playerInputActions.UI.ScrollDown.performed -= OnScrollDownPerformed;
             _playerInputActions.UI.Apply.performed -= OnApplyPerformed;
+
+            _defaultInputActions.Disable();
+            _defaultInputActions.UI.Navigate.performed -= NavigateOnPerformed;
+        }
+
+        private void NavigateOnPerformed(InputAction.CallbackContext context)
+        {
+            if (context.ReadValue<Vector2>().x < 0)
+            {
+                if (_currentActiveButtonId == 0)
+                    return;
+
+                _currentActiveButtonId--;
+
+                ActivateSelectedTween();
+            }
+
+            if (context.ReadValue<Vector2>().x > 0)
+            {
+                if (_currentActiveButtonId == 1)
+                    return;
+
+                _currentActiveButtonId++;
+
+                ActivateSelectedTween();
+            }
         }
 
         private void OnScrollUpPerformed(InputAction.CallbackContext context)
@@ -91,9 +130,19 @@ namespace CodeBase.MVVM.Views
             _abilityUpgradeViews[_currentSelectedViewId].OnPointerClick(new PointerEventData(EventSystem.current));
         }
 
-        private void OnApplyPerformed(InputAction.CallbackContext context) => OnContinueButtonClicked();
+        private void OnApplyPerformed(InputAction.CallbackContext context)
+        {
+            if (_currentActiveButtonId == 0)
+                OnContinueButtonClicked();
+            else
+                OnReRollButtonClicked();
+        }
 
-        private void OnReRollButtonClicked() => _levelUpViewModel.Reroll();
+        private void OnReRollButtonClicked()
+        {
+            _currentActiveButtonId = 1;
+            _levelUpViewModel.Reroll();
+        }
 
         private void OnLevelChanged(int newLevel)
         {
@@ -126,18 +175,39 @@ namespace CodeBase.MVVM.Views
 
         private void OnContinueButtonClicked()
         {
+            _currentActiveButtonId = 0;
             _currentSelectedUpgrade ??= _abilityUpgradeDataByView[_abilityUpgradeViews[0]];
             _levelUpViewModel.SelectUpgrade(_currentSelectedUpgrade);
             _currentSelectedUpgrade = null;
         }
 
+        private void ActivateSelectedTween()
+        {
+            if (_currentActiveButtonId == 0)
+            {
+                _continueButton.Select();
+                _continueButtonTweenTrigger.InvokeShow();
+                _reRollButtonTweenTrigger.InvokeHide();
+            }
+
+            if (_currentActiveButtonId == 1)
+            {
+                _reRollButton.Select();
+                _continueButtonTweenTrigger.InvokeHide();
+                _reRollButtonTweenTrigger.InvokeShow();
+            }
+        }
+
         private void Show()
         {
+            ActivateSelectedTween();
+
             Time.timeScale = 0f;
             _mainCanvas.enabled = true;
 
             _currentSelectedViewId = 0;
             _playerInputActions?.Enable();
+            _defaultInputActions?.Enable();
 
             AbilityUpgradeData[] upgradesData = _levelUpViewModel.GetAvailableUpgrades();
 
@@ -160,9 +230,29 @@ namespace CodeBase.MVVM.Views
 
         private void Hide()
         {
+            _continueButtonTweenTrigger.InvokeShow();
+            _reRollButtonTweenTrigger.InvokeHide();
+
             Time.timeScale = 1f;
             _mainCanvas.enabled = false;
             _playerInputActions?.Disable();
+            _defaultInputActions?.Disable();
+        }
+
+        public void OnHover(BaseEventData eventData)
+        {
+            if (gameObject == _continueButton.gameObject)
+            {
+                _currentActiveButtonId = 0;
+                ActivateSelectedTween();
+                return;
+            }
+            if (gameObject == _reRollButton.gameObject)
+            {
+                _currentActiveButtonId = 1;
+                ActivateSelectedTween();
+                return;
+            }
         }
     }
 }
