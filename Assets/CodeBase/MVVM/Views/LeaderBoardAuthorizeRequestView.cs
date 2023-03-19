@@ -28,11 +28,11 @@ namespace CodeBase.MVVM.Views
         private void OnDestroy()
         {
             if (_isInitialized == false)
-            {
-                _leaderBoardsViewModel.LeaderboardAuthorizeRequest -= OnAuthorizeRequest;
-                _leaderBoardsViewModel.LeaderboardAuthorizeRequestHandled -= OnAuthorizeRequestHandled;
-            }
+                return;
 
+            _leaderBoardsViewModel.LeaderboardAuthorizeRequest -= OnAuthorizeRequest;
+            _leaderBoardsViewModel.LeaderboardAuthorizeRequestHandled -= OnAuthorizeRequestHandled;
+            
             _approve.onClick.RemoveListener(OnApproveButtonClicked);
             _decline.onClick.RemoveListener(OnDeclineButtonClicked);
         }
