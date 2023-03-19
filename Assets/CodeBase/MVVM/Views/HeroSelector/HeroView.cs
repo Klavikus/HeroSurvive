@@ -42,7 +42,5 @@ namespace CodeBase.MVVM.Views.HeroSelector
         private void OnHeroSelected(HeroData selectedHeroData) => _selectionBorder.enabled = _data == selectedHeroData;
 
         public void OnPointerClick(PointerEventData eventData) => _heroSelectorViewModel.SelectHero(_data);
-
-        public void SelectAsInitial() => _heroSelectorViewModel.SelectHero(_data);
     }
 }

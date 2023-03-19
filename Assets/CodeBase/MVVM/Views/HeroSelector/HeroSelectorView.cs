@@ -1,6 +1,7 @@
 ﻿using CodeBase.MVVM.Builders;
 using CodeBase.MVVM.ViewModels;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace CodeBase.MVVM.Views.HeroSelector
@@ -18,21 +19,32 @@ namespace CodeBase.MVVM.Views.HeroSelector
         [SerializeField] private CurrencyView _currencyView;
 
         private HeroSelectorViewModel _heroSelectorViewModel;
+        private PlayerInputActions _playerInputActions;
+
+        private int _columnCount = 3;
+        private int _currentSelectedHeroId;
+        private int _maxX;
+        private int _currentX;
+        private int _maxY;
+        private int _currentY;
+        private bool _isInitialized;
 
         private void OnEnable()
         {
-            if (_heroSelectorViewModel == null)
+            if (_isInitialized == false)
                 return;
 
             SubscribeToViewModel();
+            SubscribeToInputActions();
         }
 
         private void OnDisable()
         {
-            if (_heroSelectorViewModel == null)
+            if (_isInitialized == false)
                 return;
 
             UnsubscribeToViewModel();
+            UnsubscribeToInputActions();
         }
 
         public void Initialize(HeroSelectorViewModel heroSelectorViewModel,
@@ -40,21 +52,28 @@ namespace CodeBase.MVVM.Views.HeroSelector
             UpgradeDescriptionBuilder descriptionBuilder)
         {
             _heroSelectorViewModel = heroSelectorViewModel;
-            SubscribeToViewModel();
 
             _currencyView.Initialize(currencyViewModel, descriptionBuilder);
-            _continueButton.onClick.AddListener(OnContinueButtonClicked);
-            _closeButton.onClick.AddListener(OnCloseButtonClicked);
-
             _baseAbilityView.Initialize();
             _heroDescriptionView.Initialize();
+
+            _continueButton.onClick.AddListener(OnContinueButtonClicked);
+            _closeButton.onClick.AddListener(OnCloseButtonClicked);
+            SubscribeToViewModel();
+
+            _playerInputActions = new PlayerInputActions();
+            SubscribeToInputActions();
+
+            _maxX = _columnCount - 1;
+            _maxY = (int) Mathf.Ceil((float) (_heroSelectorViewModel.MaxHeroId + 1) / _columnCount);
 
             if (_heroSelectorViewModel.CurrentSelectedHeroData != null)
                 _heroDescriptionView.Render(_heroSelectorViewModel.CurrentSelectedHeroData);
 
+            _isInitialized = true;
+
             Hide();
         }
-
 
         public void SetHeroViews(HeroView[] heroViews)
         {
@@ -64,7 +83,7 @@ namespace CodeBase.MVVM.Views.HeroSelector
                 heroView.transform.localScale = Vector3.one;
             }
 
-            heroViews[0].SelectAsInitial();
+            _heroSelectorViewModel.SelectHero(_currentSelectedHeroId);
         }
 
         public void SetPropertyViews(PropertyView[] propertiesViews)
@@ -92,10 +111,89 @@ namespace CodeBase.MVVM.Views.HeroSelector
             _heroSelectorViewModel.HeroSelectorDisabled -= Hide;
         }
 
+        private void SubscribeToInputActions()
+        {
+            _playerInputActions.UI.Apply.performed += OnApplyPerformed;
+            _playerInputActions.UI.Cancel.performed += OnCancelPerformed;
 
-        private void Show() => _baseCanvas.enabled = true;
+            _playerInputActions.UI.ScrollUp.performed += OnScrollUpPerformed;
+            _playerInputActions.UI.ScrollDown.performed += OnScrollDownPerformed;
+            _playerInputActions.UI.ScrollLeft.performed += OnScrollLeftPerformed;
+            _playerInputActions.UI.ScrollRight.performed += OnScrollRightPerformed;
+        }
 
-        private void Hide() => _baseCanvas.enabled = false;
+        private void UnsubscribeToInputActions()
+        {
+            _playerInputActions.UI.Apply.performed -= OnApplyPerformed;
+            _playerInputActions.UI.Cancel.performed -= OnCancelPerformed;
+            _playerInputActions.UI.ScrollUp.performed -= OnScrollUpPerformed;
+            _playerInputActions.UI.ScrollDown.performed -= OnScrollDownPerformed;
+            _playerInputActions.UI.ScrollLeft.performed -= OnScrollLeftPerformed;
+            _playerInputActions.UI.ScrollRight.performed -= OnScrollRightPerformed;
+        }
+
+        private void OnScrollUpPerformed(InputAction.CallbackContext context)
+        {
+            _currentSelectedHeroId = CalculateNewId(0, 1);
+            _heroSelectorViewModel.SelectHero(_currentSelectedHeroId);
+        }
+
+        private int CalculateNewId(int dx, int dy)
+        {
+            do
+            {
+                _currentY += dy;
+                if (_currentY > _maxY)
+                    _currentY = 0;
+                if (_currentY < 0)
+                    _currentY = _maxY;
+
+                _currentX += dx;
+                if (_currentX > _maxX)
+                    _currentX = 0;
+                if (_currentX < 0)
+                    _currentX = _maxX;
+            } while (GetHeroIdFromHeroViewCoordinates(_currentX, _currentY) > _heroSelectorViewModel.MaxHeroId);
+
+            return GetHeroIdFromHeroViewCoordinates(_currentX, _currentY);
+        }
+
+        private int GetHeroIdFromHeroViewCoordinates(int x, int y) =>
+            y * _columnCount + x;
+
+        private void OnScrollDownPerformed(InputAction.CallbackContext context)
+        {
+            _currentSelectedHeroId = CalculateNewId(0, -1);
+            _heroSelectorViewModel.SelectHero(_currentSelectedHeroId);
+        }
+
+        private void OnScrollLeftPerformed(InputAction.CallbackContext context)
+        {
+            _currentSelectedHeroId = CalculateNewId(-1, 0);
+            _heroSelectorViewModel.SelectHero(_currentSelectedHeroId);
+        }
+
+        private void OnScrollRightPerformed(InputAction.CallbackContext context)
+        {
+            _currentSelectedHeroId = CalculateNewId(1, 0);
+            _heroSelectorViewModel.SelectHero(_currentSelectedHeroId);
+        }
+
+        private void OnApplyPerformed(InputAction.CallbackContext context) => OnContinueButtonClicked();
+        private void OnCancelPerformed(InputAction.CallbackContext context) => OnCloseButtonClicked();
+
+
+        private void Show()
+        {
+            _baseCanvas.enabled = true;
+            _playerInputActions.Enable();
+        }
+
+        private void Hide()
+        {
+            _baseCanvas.enabled = false;
+            _playerInputActions.Disable();
+        }
 
         private void OnContinueButtonClicked() => _heroSelectorViewModel.Continue();
 

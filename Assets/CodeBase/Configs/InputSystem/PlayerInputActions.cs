@@ -171,6 +171,24 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""ScrollLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""d954a93f-75b3-4eaa-a273-22862fde189d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ScrollRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""ef296a2c-9123-4564-8b43-bd3a097f12d5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Apply"",
                     ""type"": ""Button"",
                     ""id"": ""5e7c64cb-60bd-4a12-a7d4-0c9a457e2eb6"",
@@ -299,6 +317,50 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f6e21b57-22e8-4a66-986f-54893ce7d3a1"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3db4bc6e-6c65-464b-b2ca-d22c0572cec2"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f521edab-5f87-4f62-b63e-5b8549d8513b"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7fe2f1e-bfd5-4439-8e82-b33148efbdc2"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -330,6 +392,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
         m_UI_ScrollUp = m_UI.FindAction("ScrollUp", throwIfNotFound: true);
         m_UI_ScrollDown = m_UI.FindAction("ScrollDown", throwIfNotFound: true);
+        m_UI_ScrollLeft = m_UI.FindAction("ScrollLeft", throwIfNotFound: true);
+        m_UI_ScrollRight = m_UI.FindAction("ScrollRight", throwIfNotFound: true);
         m_UI_Apply = m_UI.FindAction("Apply", throwIfNotFound: true);
         m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
     }
@@ -427,6 +491,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Pause;
     private readonly InputAction m_UI_ScrollUp;
     private readonly InputAction m_UI_ScrollDown;
+    private readonly InputAction m_UI_ScrollLeft;
+    private readonly InputAction m_UI_ScrollRight;
     private readonly InputAction m_UI_Apply;
     private readonly InputAction m_UI_Cancel;
     public struct UIActions
@@ -436,6 +502,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_UI_Pause;
         public InputAction @ScrollUp => m_Wrapper.m_UI_ScrollUp;
         public InputAction @ScrollDown => m_Wrapper.m_UI_ScrollDown;
+        public InputAction @ScrollLeft => m_Wrapper.m_UI_ScrollLeft;
+        public InputAction @ScrollRight => m_Wrapper.m_UI_ScrollRight;
         public InputAction @Apply => m_Wrapper.m_UI_Apply;
         public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
@@ -456,6 +524,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @ScrollDown.started -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollDown;
                 @ScrollDown.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollDown;
                 @ScrollDown.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollDown;
+                @ScrollLeft.started -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollLeft;
+                @ScrollLeft.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollLeft;
+                @ScrollLeft.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollLeft;
+                @ScrollRight.started -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollRight;
+                @ScrollRight.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollRight;
+                @ScrollRight.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollRight;
                 @Apply.started -= m_Wrapper.m_UIActionsCallbackInterface.OnApply;
                 @Apply.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnApply;
                 @Apply.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnApply;
@@ -475,6 +549,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @ScrollDown.started += instance.OnScrollDown;
                 @ScrollDown.performed += instance.OnScrollDown;
                 @ScrollDown.canceled += instance.OnScrollDown;
+                @ScrollLeft.started += instance.OnScrollLeft;
+                @ScrollLeft.performed += instance.OnScrollLeft;
+                @ScrollLeft.canceled += instance.OnScrollLeft;
+                @ScrollRight.started += instance.OnScrollRight;
+                @ScrollRight.performed += instance.OnScrollRight;
+                @ScrollRight.canceled += instance.OnScrollRight;
                 @Apply.started += instance.OnApply;
                 @Apply.performed += instance.OnApply;
                 @Apply.canceled += instance.OnApply;
@@ -503,6 +583,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnScrollUp(InputAction.CallbackContext context);
         void OnScrollDown(InputAction.CallbackContext context);
+        void OnScrollLeft(InputAction.CallbackContext context);
+        void OnScrollRight(InputAction.CallbackContext context);
         void OnApply(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
     }

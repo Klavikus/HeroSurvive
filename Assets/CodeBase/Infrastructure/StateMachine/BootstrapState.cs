@@ -50,7 +50,7 @@ namespace CodeBase.Infrastructure.StateMachine
             IViewModelProvider viewModelProvider = new ViewModelProvider();
             IModelProvider modelProvider = new ModelProvider();
             AbilityUpgradesProvider abilityUpgradesProvider = new AbilityUpgradesProvider(configurationProvider);
-            
+
             ITranslationService translationService = new TranslationService();
 
             UpgradeDescriptionBuilder upgradeDescriptionBuilder =
@@ -69,7 +69,7 @@ namespace CodeBase.Infrastructure.StateMachine
                 viewModelProvider,
                 upgradeDescriptionBuilder);
             GameLoopViewBuilder gameLoopViewBuilder = new GameLoopViewBuilder(gameLoopViewFactory);
-            
+
             AudioPlayerService audioPlayerService = new AudioPlayerService(_audioPlayer);
             IAdsProvider adsProvider = new AdsProvider(_coroutineRunner);
             ISaveLoadService saveLoadService = new SaveLoadService(configurationProvider);
@@ -88,6 +88,7 @@ namespace CodeBase.Infrastructure.StateMachine
 
             IViewModelBuilder viewModelBuilder =
                 new ViewModelBuilder(
+                    configurationProvider,
                     modelProvider,
                     translationService,
                     upgradeService,
@@ -95,9 +96,9 @@ namespace CodeBase.Infrastructure.StateMachine
                     _coroutineRunner,
                     leveCompetitionService,
                     playerEventHandler,
-                    adsProvider, 
+                    adsProvider,
                     abilityUpgradeService);
-       
+
             IPropertyProvider propertyProvider = new PropertyProvider(
                 configurationProvider,
                 upgradeService,
@@ -110,7 +111,7 @@ namespace CodeBase.Infrastructure.StateMachine
             PlayerBuilder playerBuilder = new PlayerBuilder(modelProvider, configurationProvider, propertyProvider,
                 abilityUpgradeService, abilityFactory, audioPlayerService);
             AbilityBuilder abilityBuilder = new AbilityBuilder(playerBuilder);
-            
+
             IGameLoopService gameLoopService = new GameLoopService(
                 levelMapFactory,
                 gameLoopViewBuilder,
@@ -119,10 +120,10 @@ namespace CodeBase.Infrastructure.StateMachine
                 playerBuilder,
                 leveCompetitionService,
                 playerEventHandler);
-            
+
             targetFinderService.BindPlayerBuilder(playerBuilder);
             abilityFactory.BindGameLoopService(gameLoopService);
-            
+
             _services.RegisterAsSingle(viewModelBuilder);
             _services.RegisterAsSingle(viewModelProvider);
             _services.RegisterAsSingle(modelBuilder);

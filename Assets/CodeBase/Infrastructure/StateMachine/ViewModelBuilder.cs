@@ -24,6 +24,7 @@ namespace CodeBase.Infrastructure.StateMachine
                 [typeof(LevelUpViewModel)] = BuildLevelUpViewModel,
             };
 
+        private readonly IConfigurationProvider _configurationProvider;
         private readonly IModelProvider _modelProvider;
         private readonly ITranslationService _translationService;
         private readonly IUpgradeService _upgradeService;
@@ -35,6 +36,7 @@ namespace CodeBase.Infrastructure.StateMachine
         private readonly IAbilityUpgradeService _abilityUpgradeService;
 
         public ViewModelBuilder(
+            IConfigurationProvider configurationProvider,
             IModelProvider modelProvider,
             ITranslationService translationService,
             IUpgradeService upgradeService,
@@ -45,6 +47,7 @@ namespace CodeBase.Infrastructure.StateMachine
             IAdsProvider adsProvider,
             IAbilityUpgradeService abilityUpgradeService)
         {
+            _configurationProvider = configurationProvider;
             _modelProvider = modelProvider;
             _translationService = translationService;
             _upgradeService = upgradeService;
@@ -64,7 +67,8 @@ namespace CodeBase.Infrastructure.StateMachine
                 builder._modelProvider.Get<HeroModel>(),
                 builder._modelProvider.Get<MenuModel>(),
                 builder._modelProvider.Get<GameLoopModel>(),
-                builder._translationService);
+                builder._translationService,
+                builder._configurationProvider);
 
         private static MainPropertiesViewModel BuildMainPropertiesViewModel(ViewModelBuilder builder) =>
             new MainPropertiesViewModel(
