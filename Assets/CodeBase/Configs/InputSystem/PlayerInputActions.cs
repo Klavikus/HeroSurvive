@@ -178,6 +178,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""1f4060e0-db55-4e16-ba80-72e56cc9629d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -257,6 +266,39 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""ScrollDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""983caf79-856e-4f3a-90be-e90ce7888391"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f5635e6-efba-4f87-89df-ec209d159623"",
+                    ""path"": ""*/{Back}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d785c4d-9893-431e-a67b-f9080a9e7d55"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -289,6 +331,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_UI_ScrollUp = m_UI.FindAction("ScrollUp", throwIfNotFound: true);
         m_UI_ScrollDown = m_UI.FindAction("ScrollDown", throwIfNotFound: true);
         m_UI_Apply = m_UI.FindAction("Apply", throwIfNotFound: true);
+        m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -385,6 +428,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_ScrollUp;
     private readonly InputAction m_UI_ScrollDown;
     private readonly InputAction m_UI_Apply;
+    private readonly InputAction m_UI_Cancel;
     public struct UIActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -393,6 +437,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @ScrollUp => m_Wrapper.m_UI_ScrollUp;
         public InputAction @ScrollDown => m_Wrapper.m_UI_ScrollDown;
         public InputAction @Apply => m_Wrapper.m_UI_Apply;
+        public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -414,6 +459,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Apply.started -= m_Wrapper.m_UIActionsCallbackInterface.OnApply;
                 @Apply.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnApply;
                 @Apply.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnApply;
+                @Cancel.started -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
+                @Cancel.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
+                @Cancel.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -430,6 +478,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Apply.started += instance.OnApply;
                 @Apply.performed += instance.OnApply;
                 @Apply.canceled += instance.OnApply;
+                @Cancel.started += instance.OnCancel;
+                @Cancel.performed += instance.OnCancel;
+                @Cancel.canceled += instance.OnCancel;
             }
         }
     }
@@ -453,5 +504,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnScrollUp(InputAction.CallbackContext context);
         void OnScrollDown(InputAction.CallbackContext context);
         void OnApply(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
     }
 }
