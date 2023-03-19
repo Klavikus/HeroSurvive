@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = System.Random;
 
 namespace CodeBase.Extensions
@@ -17,7 +18,8 @@ namespace CodeBase.Extensions
                 int k = rng.Next(n + 1);
                 (list[k], list[n]) = (list[n], list[k]);
             }
-        }        
+        }
+
         public static float AsPercentFactor(this float value) => value / 100;
 
         public static bool ContainsInInterval(this float value, float min, float max) => value >= min && value <= max;

@@ -1,4 +1,6 @@
-﻿using CodeBase.MVVM.Builders;
+﻿using CodeBase.Domain.Data;
+using CodeBase.Extensions;
+using CodeBase.MVVM.Builders;
 using CodeBase.MVVM.ViewModels;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,17 +19,15 @@ namespace CodeBase.MVVM.Views.HeroSelector
         [SerializeField] private HeroDescriptionView _heroDescriptionView;
         [SerializeField] private BaseAbilityView _baseAbilityView;
         [SerializeField] private CurrencyView _currencyView;
-
+        [SerializeField] private int _rowCount = 2;
+        [SerializeField] private int _colCount = 3;
+        
         private HeroSelectorViewModel _heroSelectorViewModel;
         private PlayerInputActions _playerInputActions;
 
-        private int _columnCount = 3;
         private int _currentSelectedHeroId;
-        private int _maxX;
-        private int _currentX;
-        private int _maxY;
-        private int _currentY;
         private bool _isInitialized;
+
 
         private void OnEnable()
         {
@@ -64,9 +64,6 @@ namespace CodeBase.MVVM.Views.HeroSelector
             _playerInputActions = new PlayerInputActions();
             SubscribeToInputActions();
 
-            _maxX = _columnCount - 1;
-            _maxY = (int) Mathf.Ceil((float) (_heroSelectorViewModel.MaxHeroId + 1) / _columnCount);
-
             if (_heroSelectorViewModel.CurrentSelectedHeroData != null)
                 _heroDescriptionView.Render(_heroSelectorViewModel.CurrentSelectedHeroData);
 
@@ -97,16 +94,21 @@ namespace CodeBase.MVVM.Views.HeroSelector
 
         private void SubscribeToViewModel()
         {
-            _heroSelectorViewModel.HeroSelected += _heroDescriptionView.Render;
-            _heroSelectorViewModel.HeroSelected += _baseAbilityView.Render;
+            _heroSelectorViewModel.HeroSelected += OnHeroSelected;
             _heroSelectorViewModel.HeroSelectorEnabled += Show;
             _heroSelectorViewModel.HeroSelectorDisabled += Hide;
         }
 
+        private void OnHeroSelected(HeroData heroData)
+        {
+            _currentSelectedHeroId = _heroSelectorViewModel.CurrentSelectedHeroId;
+            _heroDescriptionView.Render(heroData);
+            _baseAbilityView.Render(heroData);
+        }
+
         private void UnsubscribeToViewModel()
         {
-            _heroSelectorViewModel.HeroSelected -= _heroDescriptionView.Render;
-            _heroSelectorViewModel.HeroSelected -= _baseAbilityView.Render;
+            _heroSelectorViewModel.HeroSelected -= OnHeroSelected;
             _heroSelectorViewModel.HeroSelectorEnabled -= Show;
             _heroSelectorViewModel.HeroSelectorDisabled -= Hide;
         }
@@ -115,73 +117,21 @@ namespace CodeBase.MVVM.Views.HeroSelector
         {
             _playerInputActions.UI.Apply.performed += OnApplyPerformed;
             _playerInputActions.UI.Cancel.performed += OnCancelPerformed;
-
-            _playerInputActions.UI.ScrollUp.performed += OnScrollUpPerformed;
-            _playerInputActions.UI.ScrollDown.performed += OnScrollDownPerformed;
             _playerInputActions.UI.ScrollLeft.performed += OnScrollLeftPerformed;
             _playerInputActions.UI.ScrollRight.performed += OnScrollRightPerformed;
+            _playerInputActions.UI.ScrollUp.performed += OnScrollUpPerformed;
+            _playerInputActions.UI.ScrollDown.performed += OnScrollDownPerformed;
         }
 
         private void UnsubscribeToInputActions()
         {
             _playerInputActions.UI.Apply.performed -= OnApplyPerformed;
             _playerInputActions.UI.Cancel.performed -= OnCancelPerformed;
-            _playerInputActions.UI.ScrollUp.performed -= OnScrollUpPerformed;
-            _playerInputActions.UI.ScrollDown.performed -= OnScrollDownPerformed;
             _playerInputActions.UI.ScrollLeft.performed -= OnScrollLeftPerformed;
             _playerInputActions.UI.ScrollRight.performed -= OnScrollRightPerformed;
+            _playerInputActions.UI.ScrollUp.performed -= OnScrollUpPerformed;
+            _playerInputActions.UI.ScrollDown.performed -= OnScrollDownPerformed;
         }
-
-        private void OnScrollUpPerformed(InputAction.CallbackContext context)
-        {
-            _currentSelectedHeroId = CalculateNewId(0, 1);
-            _heroSelectorViewModel.SelectHero(_currentSelectedHeroId);
-        }
-
-        private int CalculateNewId(int dx, int dy)
-        {
-            do
-            {
-                _currentY += dy;
-                if (_currentY > _maxY)
-                    _currentY = 0;
-                if (_currentY < 0)
-                    _currentY = _maxY;
-
-                _currentX += dx;
-                if (_currentX > _maxX)
-                    _currentX = 0;
-                if (_currentX < 0)
-                    _currentX = _maxX;
-            } while (GetHeroIdFromHeroViewCoordinates(_currentX, _currentY) > _heroSelectorViewModel.MaxHeroId);
-
-            return GetHeroIdFromHeroViewCoordinates(_currentX, _currentY);
-        }
-
-        private int GetHeroIdFromHeroViewCoordinates(int x, int y) =>
-            y * _columnCount + x;
-
-        private void OnScrollDownPerformed(InputAction.CallbackContext context)
-        {
-            _currentSelectedHeroId = CalculateNewId(0, -1);
-            _heroSelectorViewModel.SelectHero(_currentSelectedHeroId);
-        }
-
-        private void OnScrollLeftPerformed(InputAction.CallbackContext context)
-        {
-            _currentSelectedHeroId = CalculateNewId(-1, 0);
-            _heroSelectorViewModel.SelectHero(_currentSelectedHeroId);
-        }
-
-        private void OnScrollRightPerformed(InputAction.CallbackContext context)
-        {
-            _currentSelectedHeroId = CalculateNewId(1, 0);
-            _heroSelectorViewModel.SelectHero(_currentSelectedHeroId);
-        }
-
-        private void OnApplyPerformed(InputAction.CallbackContext context) => OnContinueButtonClicked();
-        private void OnCancelPerformed(InputAction.CallbackContext context) => OnCloseButtonClicked();
-
 
         private void Show()
         {
@@ -198,5 +148,21 @@ namespace CodeBase.MVVM.Views.HeroSelector
         private void OnContinueButtonClicked() => _heroSelectorViewModel.Continue();
 
         private void OnCloseButtonClicked() => _heroSelectorViewModel.DisableHeroSelector();
+
+        private void OnApplyPerformed(InputAction.CallbackContext context) => OnContinueButtonClicked();
+
+        private void OnCancelPerformed(InputAction.CallbackContext context) => OnCloseButtonClicked();
+
+        private void OnScrollUpPerformed(InputAction.CallbackContext context) =>
+            _heroSelectorViewModel.HandleMove(0, -1, _rowCount, _colCount);
+
+        private void OnScrollDownPerformed(InputAction.CallbackContext context) =>
+            _heroSelectorViewModel.HandleMove(0, 1, _rowCount, _colCount);
+
+        private void OnScrollLeftPerformed(InputAction.CallbackContext context) =>
+            _heroSelectorViewModel.HandleMove(-1, 0, _rowCount, _colCount);
+
+        private void OnScrollRightPerformed(InputAction.CallbackContext context) =>
+            _heroSelectorViewModel.HandleMove(1, 0, _rowCount, _colCount);
     }
 }
