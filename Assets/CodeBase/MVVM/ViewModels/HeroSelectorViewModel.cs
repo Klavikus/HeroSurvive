@@ -80,7 +80,7 @@ namespace CodeBase.MVVM.ViewModels
         {
             int[] currentPosition = CurrentSelectedHeroId.ConvertIndexFromLinear(rowCount, colCount);
 
-            int newLinearIndex = new[] {currentPosition[1], currentPosition[0] + dY}.ConvertIndexToLinear(colCount);
+            int newLinearIndex = new[] {currentPosition[0] + dY, currentPosition[1]}.ConvertIndexToLinear(colCount);
 
             if (newLinearIndex.ContainsInInterval(0, MaxHeroId))
                 SelectHero(newLinearIndex);

@@ -2500,6 +2500,8 @@ MonoBehaviour:
   _upgradeFocusView: {fileID: 6971569455533525891}
   _currencyViewContainer: {fileID: 5014801563017505648}
   _currencyView: {fileID: 7664527200502291342}
+  _rowCount: 3
+  _colCount: 4
 --- !u!114 &1555114182
 MonoBehaviour:
   m_ObjectHideFlags: 0

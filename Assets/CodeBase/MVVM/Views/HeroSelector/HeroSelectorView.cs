@@ -18,8 +18,8 @@ namespace CodeBase.MVVM.Views.HeroSelector
         [SerializeField] private HeroDescriptionView _heroDescriptionView;
         [SerializeField] private BaseAbilityView _baseAbilityView;
         [SerializeField] private CurrencyView _currencyView;
-        [SerializeField] private int _rowCount = 2;
-        [SerializeField] private int _colCount = 3;
+        [SerializeField] private int _rowCount;
+        [SerializeField] private int _colCount;
         
         private HeroSelectorViewModel _heroSelectorViewModel;
         private PlayerInputActions _playerInputActions;
@@ -91,18 +91,18 @@ namespace CodeBase.MVVM.Views.HeroSelector
             }
         }
 
-        private void SubscribeToViewModel()
-        {
-            _heroSelectorViewModel.HeroSelected += OnHeroSelected;
-            _heroSelectorViewModel.HeroSelectorEnabled += Show;
-            _heroSelectorViewModel.HeroSelectorDisabled += Hide;
-        }
-
         private void OnHeroSelected(HeroData heroData)
         {
             _currentSelectedHeroId = _heroSelectorViewModel.CurrentSelectedHeroId;
             _heroDescriptionView.Render(heroData);
             _baseAbilityView.Render(heroData);
+        }
+
+        private void SubscribeToViewModel()
+        {
+            _heroSelectorViewModel.HeroSelected += OnHeroSelected;
+            _heroSelectorViewModel.HeroSelectorEnabled += Show;
+            _heroSelectorViewModel.HeroSelectorDisabled += Hide;
         }
 
         private void UnsubscribeToViewModel()

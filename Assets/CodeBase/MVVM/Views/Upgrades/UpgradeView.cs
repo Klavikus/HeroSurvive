@@ -20,7 +20,7 @@ namespace CodeBase.MVVM.Views.Upgrades
 
         private UpgradeData _upgradeData;
         private ITranslationService _translationService;
-        
+
         private void OnDisable()
         {
             if (_upgradeViewModel == null)
@@ -39,7 +39,7 @@ namespace CodeBase.MVVM.Views.Upgrades
             _upgradeViewModel = upgradeViewModel;
             _upgradeData = upgradeData;
             _levelUpgradeViews = levelUpgradeViews;
-           
+
             _upgradeViewModel.Upgraded += OnUpgraded;
             _upgradeViewModel.UpgradeSelected += OnUpgradedSelected;
             _translationService.LocalizationChanged += OnLocalizationChanged;
@@ -54,14 +54,13 @@ namespace CodeBase.MVVM.Views.Upgrades
 
             _name.text = _translationService.GetLocalizedText(upgradeData.TranslatableNames);
             _icon.sprite = upgradeData.Icon;
-        }
 
-        private void OnLocalizationChanged()
-        {
-            _name.text = _translationService.GetLocalizedText(_upgradeData.TranslatableNames);
         }
 
         public void OnPointerClick(PointerEventData eventData) => _upgradeViewModel.SelectUpgrade(_upgradeData);
+
+        private void OnLocalizationChanged() =>
+            _name.text = _translationService.GetLocalizedText(_upgradeData.TranslatableNames);
 
         private void OnUpgradedSelected(UpgradeData upgradeData, int currentLevel) =>
             _selectBorder.enabled = upgradeData == _upgradeData;

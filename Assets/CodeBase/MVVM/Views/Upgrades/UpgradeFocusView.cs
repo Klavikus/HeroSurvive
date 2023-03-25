@@ -68,6 +68,14 @@ namespace CodeBase.MVVM.Views.Upgrades
             _sellButton.onClick.AddListener(OnResetButtonClicked);
         }
 
+        public void OnBuyButtonClicked()
+        {
+            if (_upgradeButton.interactable == false)
+                return;
+            
+            _upgradeViewModel.Upgrade(_upgradeData);
+        }
+
         private void OnUpgraded(UpgradeData upgradeData, int currentLevel)
         {
             for (int i = 0; i < currentLevel; i++)
@@ -123,7 +131,6 @@ namespace CodeBase.MVVM.Views.Upgrades
             _sellPrice.text = _descriptionBuilder.BuildSellPriceText(upgradesData, currentLevel, canReset);
         }
 
-        private void OnBuyButtonClicked() => _upgradeViewModel.Upgrade(_upgradeData);
         private void OnResetButtonClicked() => _upgradeViewModel.Reset(_upgradeData);
 
         private void ShowCurrentLevel(int currentLevel)
