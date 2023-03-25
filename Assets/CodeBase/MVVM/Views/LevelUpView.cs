@@ -87,15 +87,15 @@ namespace CodeBase.MVVM.Views
             _playerInputActions.UI.ScrollDown.performed -= OnScrollDownPerformed;
             _playerInputActions.UI.Apply.performed -= OnApplyPerformed;
 
-            _defaultInputActions.Disable();
             _defaultInputActions.UI.Navigate.performed -= NavigateOnPerformed;
+            _defaultInputActions.Disable();
         }
 
         private void NavigateOnPerformed(InputAction.CallbackContext context)
         {
             if (context.ReadValue<Vector2>().x < 0)
             {
-                if (_currentActiveButtonId == 0)
+                if (context.control.IsPressed() == false || _currentActiveButtonId == 0)
                     return;
 
                 _currentActiveButtonId--;
@@ -105,7 +105,7 @@ namespace CodeBase.MVVM.Views
 
             if (context.ReadValue<Vector2>().x > 0)
             {
-                if (_currentActiveButtonId == 1)
+                if (context.control.IsPressed() == false || _currentActiveButtonId == 1)
                     return;
 
                 _currentActiveButtonId++;
@@ -200,12 +200,13 @@ namespace CodeBase.MVVM.Views
 
         private void Show()
         {
+            _currentSelectedViewId = 0;
+
             ActivateSelectedTween();
 
             Time.timeScale = 0f;
             _mainCanvas.enabled = true;
 
-            _currentSelectedViewId = 0;
             _playerInputActions?.Enable();
             _defaultInputActions?.Enable();
 
