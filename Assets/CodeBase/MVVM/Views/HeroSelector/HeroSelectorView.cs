@@ -1,5 +1,4 @@
 ﻿using CodeBase.Domain.Data;
-using CodeBase.Extensions;
 using CodeBase.MVVM.Builders;
 using CodeBase.MVVM.ViewModels;
 using UnityEngine;

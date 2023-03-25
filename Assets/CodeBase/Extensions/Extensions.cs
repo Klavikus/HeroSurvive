@@ -38,5 +38,18 @@ namespace CodeBase.Extensions
 
             return true;
         }
+
+        public static int[] ConvertIndexFromLinear(this int index, int numRows, int numCols)
+        {
+            if (index == 0)
+                return new[] {0, 0};
+
+            int col = index % numCols;
+            int row = (index - col) / numRows;
+
+            return new[] {row, col};
+        }
+
+        public static int ConvertIndexToLinear(this int[] yx, int numCols) => yx[0] * numCols + yx[1];
     }
 }
