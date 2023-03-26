@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using CodeBase.Infrastructure;
 using UnityEngine;
 
-namespace CodeBase.Domain.Data
+namespace CodeBase.Domain
 {
     [Serializable]
     public class StageData

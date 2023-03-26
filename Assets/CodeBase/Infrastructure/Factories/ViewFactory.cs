@@ -1,15 +1,9 @@
-﻿using System.Collections.Generic;
-using CodeBase.Domain.Data;
-using CodeBase.Infrastructure.Services;
-using CodeBase.MVVM.Builders;
-using CodeBase.MVVM.Models;
-using CodeBase.MVVM.ViewModels;
-using CodeBase.MVVM.Views;
-using CodeBase.MVVM.Views.HeroSelector;
-using CodeBase.MVVM.Views.Upgrades;
+using System.Collections.Generic;
+using CodeBase.Domain;
+using CodeBase.Presentation;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.Factories
+namespace CodeBase.Infrastructure
 {
     public class ViewFactory : IViewFactory
     {

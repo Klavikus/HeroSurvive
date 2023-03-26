@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections;
 using UnityEngine;
 
-namespace CodeBase.Domain.Abilities.Views
+namespace CodeBase.Domain
 {
     [Serializable]
     public sealed class View

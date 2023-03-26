@@ -1,10 +1,9 @@
-﻿using System;
+using System;
 using CodeBase.Configs;
-using CodeBase.Domain.Enums;
 using CodeBase.Extensions;
 using UnityEngine;
 
-namespace CodeBase.Domain.Data
+namespace CodeBase.Domain
 {
     [Serializable]
     public struct DamageableData

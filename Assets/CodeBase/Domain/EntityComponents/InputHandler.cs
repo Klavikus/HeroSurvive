@@ -1,8 +1,7 @@
-﻿using System;
-using CodeBase.Domain.Data;
+using System;
 using UnityEngine;
 
-namespace CodeBase.Domain.EntityComponents
+namespace CodeBase.Domain
 {
     public abstract class InputHandler : MonoBehaviour
     {

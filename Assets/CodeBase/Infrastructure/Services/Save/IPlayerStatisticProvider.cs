@@ -1,4 +1,4 @@
-﻿namespace CodeBase.Infrastructure.Services.Save
+namespace CodeBase.Infrastructure
 {
     public enum PlayerStatistic
     {

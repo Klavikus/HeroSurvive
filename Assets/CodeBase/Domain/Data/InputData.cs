@@ -1,4 +1,4 @@
-﻿namespace CodeBase.Domain.Data
+namespace CodeBase.Domain
 {
     public struct InputData
     {

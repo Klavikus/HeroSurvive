@@ -1,10 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using CodeBase.Domain.Data;
-using CodeBase.Domain.Enemies;
-using CodeBase.MVVM.Models;
+using CodeBase.Domain;
 
-namespace CodeBase.Infrastructure.Services
+namespace CodeBase.Infrastructure
 {
     public class LeveCompetitionService : ILeveCompetitionService
     {

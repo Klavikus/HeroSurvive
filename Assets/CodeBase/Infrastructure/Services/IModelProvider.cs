@@ -1,6 +1,6 @@
-﻿using CodeBase.MVVM.Views;
+﻿using CodeBase.Presentation;
 
-namespace CodeBase.Infrastructure.Services
+namespace CodeBase.Infrastructure
 {
     public interface IModelProvider : IProvider
     {

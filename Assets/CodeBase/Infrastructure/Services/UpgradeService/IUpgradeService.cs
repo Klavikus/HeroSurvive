@@ -1,9 +1,7 @@
-﻿using System;
+using System;
 using CodeBase.Domain;
-using CodeBase.Infrastructure.Factories;
-using CodeBase.MVVM.Models;
 
-namespace CodeBase.Infrastructure.Services.UpgradeService
+namespace CodeBase.Infrastructure
 {
     public interface IUpgradeService : IService, IInitializeable
     {

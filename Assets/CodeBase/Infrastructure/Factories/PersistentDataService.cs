@@ -1,9 +1,8 @@
-﻿using CodeBase.Configs;
-using CodeBase.Infrastructure.Services;
-using CodeBase.MVVM.Models;
-using CodeBase.MVVM.Views;
+using CodeBase.Configs;
+using CodeBase.Domain;
+using CodeBase.Presentation;
 
-namespace CodeBase.Infrastructure.Factories
+namespace CodeBase.Infrastructure
 {
     public class PersistentDataService : IPersistentDataService
     {

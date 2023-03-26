@@ -1,9 +1,7 @@
 ﻿using CodeBase.Configs;
-using CodeBase.Infrastructure.Services;
-using CodeBase.Infrastructure.StateMachine;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.Factories
+namespace CodeBase.Infrastructure
 {
     public class LevelMapFactory
     {

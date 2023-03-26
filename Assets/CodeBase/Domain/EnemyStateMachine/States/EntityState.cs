@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CodeBase.Domain.EnemyStateMachine.Transitions;
 
-namespace CodeBase.Domain.EnemyStateMachine.States
+namespace CodeBase.Domain
 {
     abstract class EntityState : IEntityState
     {

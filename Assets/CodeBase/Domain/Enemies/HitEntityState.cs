@@ -1,8 +1,4 @@
-﻿using CodeBase.Domain.Data;
-using CodeBase.Domain.EntityComponents;
-using EntityState = CodeBase.Domain.EnemyStateMachine.States.EntityState;
-
-namespace CodeBase.Domain.Enemies
+namespace CodeBase.Domain
 {
     internal class HitEntityState : EntityState
     {
@@ -16,12 +12,12 @@ namespace CodeBase.Domain.Enemies
             _enemyAI = enemyAI;
             _damageable = damageable;
         }
-        
+
         public override void Enter()
         {
             base.Enter();
             _enemyAI.Stagger(_damageable.GetLastStagger());
-            _animationSynchronizer.ChangeState(ForSort.EntityState.Hitted);
+            _animationSynchronizer.ChangeState(EntityAnimatorState.Hitted);
         }
     }
 }

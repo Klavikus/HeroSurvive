@@ -1,12 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Agava.YandexGames;
 using CodeBase.Configs;
-using CodeBase.Domain.Data;
-using CodeBase.Infrastructure.Services;
+using CodeBase.Domain;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.Factories
+namespace CodeBase.Infrastructure
 {
     public class SaveLoadService : ISaveLoadService
     {

@@ -1,10 +1,8 @@
-﻿using System;
+using System;
 using CodeBase.Domain;
-using CodeBase.Domain.Data;
-using CodeBase.MVVM.Views;
-using CodeBase.MVVM.Views.HeroSelector;
+using CodeBase.Presentation;
 
-namespace CodeBase.Infrastructure.Services.PropertiesProviders
+namespace CodeBase.Infrastructure
 {
     public interface IPropertyProvider : IService
     {

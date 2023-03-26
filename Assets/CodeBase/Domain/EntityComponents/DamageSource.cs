@@ -1,8 +1,6 @@
-using CodeBase.Domain.Data;
-using CodeBase.Domain.Enemies;
 using UnityEngine;
 
-namespace CodeBase.Domain.EntityComponents
+namespace CodeBase.Domain
 {
     public class DamageSource
     {

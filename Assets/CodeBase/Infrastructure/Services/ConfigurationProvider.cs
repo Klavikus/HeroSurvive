@@ -1,10 +1,7 @@
-﻿using CodeBase.Configs;
-using CodeBase.Infrastructure.Factories;
-using CodeBase.Infrastructure.StateMachine;
-using CodeBase.MVVM.Models;
-using CodeBase.MVVM.Views;
+using CodeBase.Configs;
+using CodeBase.Domain;
 
-namespace CodeBase.Infrastructure.Services
+namespace CodeBase.Infrastructure
 {
     public class ConfigurationProvider : IConfigurationProvider
     {

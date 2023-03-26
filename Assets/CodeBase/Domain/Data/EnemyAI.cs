@@ -1,11 +1,10 @@
-﻿using System;
+using System;
 using System.Collections;
 using CodeBase.Configs;
-using CodeBase.Domain.Enemies;
-using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure;
 using UnityEngine;
 
-namespace CodeBase.Domain.Data
+namespace CodeBase.Domain
 {
     public class EnemyAI : MonoBehaviour
     {

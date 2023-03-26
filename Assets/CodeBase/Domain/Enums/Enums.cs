@@ -1,4 +1,4 @@
-﻿namespace CodeBase.Domain.Enums
+namespace CodeBase.Domain
 {
     public enum Language
     {

@@ -1,7 +1,6 @@
-﻿using System;
+using System;
 using System.Linq;
-using CodeBase.Domain.Data;
-using CodeBase.Domain.Enums;
+using CodeBase.Domain;
 using NaughtyAttributes;
 using UnityEngine;
 

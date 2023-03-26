@@ -1,13 +1,7 @@
-﻿using System.Collections.Generic;
 using CodeBase.Configs;
-using CodeBase.Domain.Abilities;
-using CodeBase.Domain.Additional;
-using CodeBase.Domain.Data;
-using CodeBase.Infrastructure.Pools;
-using CodeBase.Infrastructure.Services;
-using CodeBase.Infrastructure.StateMachine;
+using CodeBase.Domain;
 
-namespace CodeBase.Infrastructure.Factories
+namespace CodeBase.Infrastructure
 {
     public class AbilityFactory
     {

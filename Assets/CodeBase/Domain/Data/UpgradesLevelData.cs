@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace CodeBase.Domain.Data
+namespace CodeBase.Domain
 {
     [Serializable]
     public class UpgradesLevelData

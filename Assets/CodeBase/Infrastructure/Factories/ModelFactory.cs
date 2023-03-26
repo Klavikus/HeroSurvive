@@ -1,8 +1,7 @@
-﻿using CodeBase.Configs;
-using CodeBase.Infrastructure.Services;
-using CodeBase.MVVM.Models;
+using CodeBase.Configs;
+using CodeBase.Domain;
 
-namespace CodeBase.Infrastructure.Factories
+namespace CodeBase.Infrastructure
 {
     public class ModelFactory : IModelFactory
     {

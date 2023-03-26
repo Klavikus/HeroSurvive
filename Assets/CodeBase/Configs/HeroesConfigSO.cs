@@ -1,5 +1,5 @@
-using CodeBase.Domain.Data;
-using CodeBase.MVVM.Views.HeroSelector;
+using CodeBase.Domain;
+using CodeBase.Presentation;
 using UnityEngine;
 
 namespace CodeBase.Configs

@@ -1,6 +1,5 @@
 using System.Collections;
-using CodeBase.Domain.Additional;
-using CodeBase.Infrastructure.StateMachine;
+using CodeBase.Domain;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure

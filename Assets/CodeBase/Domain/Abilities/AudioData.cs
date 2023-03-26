@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CodeBase.Domain.Abilities
+namespace CodeBase.Domain
 {
     [Serializable]
     public class AudioData

@@ -1,7 +1,4 @@
-﻿using CodeBase.Domain.Abilities;
-using CodeBase.Domain.Abilities.Size;
-using CodeBase.Domain.Data;
-using CodeBase.Domain.Enums;
+using CodeBase.Domain;
 using UnityEngine;
 
 namespace CodeBase.Configs

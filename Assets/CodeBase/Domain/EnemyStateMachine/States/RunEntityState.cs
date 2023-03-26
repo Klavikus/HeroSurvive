@@ -1,7 +1,4 @@
-using CodeBase.Domain.Data;
-using CodeBase.Domain.EntityComponents;
-
-namespace CodeBase.Domain.EnemyStateMachine.States
+namespace CodeBase.Domain
 {
     class RunEntityState : EntityState
     {
@@ -19,7 +16,7 @@ namespace CodeBase.Domain.EnemyStateMachine.States
             base.Enter();
 
             _enemyAI.enabled = true;
-            _animationSynchronizer.ChangeState(ForSort.EntityState.Walk);
+            _animationSynchronizer.ChangeState(EntityAnimatorState.Walk);
         }
     }
 }

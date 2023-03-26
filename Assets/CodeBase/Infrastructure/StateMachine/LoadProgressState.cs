@@ -1,12 +1,8 @@
-﻿using CodeBase.Configs;
-using CodeBase.Infrastructure.Factories;
-using CodeBase.Infrastructure.Services;
-using CodeBase.Infrastructure.Services.PropertiesProviders;
-using CodeBase.MVVM.Models;
-using CodeBase.MVVM.ViewModels;
-using CodeBase.MVVM.Views;
+using CodeBase.Configs;
+using CodeBase.Domain;
+using CodeBase.Presentation;
 
-namespace CodeBase.Infrastructure.StateMachine
+namespace CodeBase.Infrastructure
 {
     public class LoadProgressState : IState
     {
@@ -29,7 +25,7 @@ namespace CodeBase.Infrastructure.StateMachine
             _propertyProvider = AllServices.Container.AsSingle<IPropertyProvider>();
             _adsProvider = AllServices.Container.AsSingle<IAdsProvider>();
             IGameLoopService gameLoopService = AllServices.Container.AsSingle<IGameLoopService>();
-            
+
             IBuilder modelBuilder = AllServices.Container.AsSingle<IModelBuilder>();
             IProvider modelProvider = AllServices.Container.AsSingle<IModelProvider>();
 
@@ -45,7 +41,7 @@ namespace CodeBase.Infrastructure.StateMachine
 
             _adsProvider.Initialized += AdsProviderOnInitialized;
             _adsProvider.Initialize();
-            
+
             gameLoopService.Initialize();
         }
 
@@ -69,7 +65,7 @@ namespace CodeBase.Infrastructure.StateMachine
             modelProvider.Bind(modelBuilder.Build<CurrencyModel>());
             modelProvider.Bind(modelBuilder.Build<GameLoopModel>());
             modelProvider.Bind(modelBuilder.Build<LevelUpModel>());
-            
+
             modelProvider.Get<LevelUpModel>().Bind(modelProvider.Get<CurrencyModel>());
         }
 

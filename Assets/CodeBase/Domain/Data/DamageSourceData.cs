@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace CodeBase.Domain.Data
+namespace CodeBase.Domain
 {
     [Serializable]
     public struct DamageSourceData
@@ -11,7 +11,7 @@ namespace CodeBase.Domain.Data
         [field: SerializeField] public int AttackRadius { get; private set; }
         [field: SerializeField] public int MaxAffectedTargets { get; private set; }
 
-        public void UpdateProgression(float stageProgressionModifier) => 
+        public void UpdateProgression(float stageProgressionModifier) =>
             Damage = (int) (Damage * stageProgressionModifier);
     }
 }

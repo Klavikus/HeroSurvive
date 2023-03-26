@@ -1,5 +1,4 @@
-﻿using CodeBase.Domain.Additional;
-using CodeBase.Infrastructure.StateMachine;
+using CodeBase.Domain;
 
 namespace CodeBase.Infrastructure
 {

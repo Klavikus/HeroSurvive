@@ -1,7 +1,6 @@
-﻿using CodeBase.Infrastructure.Factories;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace CodeBase.Infrastructure.Services
+namespace CodeBase.Infrastructure
 {
     public interface ITargetService : IService
     {

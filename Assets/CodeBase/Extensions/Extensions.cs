@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using CodeBase.Domain;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = System.Random;
 
 namespace CodeBase.Extensions

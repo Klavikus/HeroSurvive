@@ -1,13 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using CodeBase.Configs;
-using CodeBase.Domain.Data;
-using CodeBase.Domain.Enums;
-using CodeBase.Infrastructure.Factories;
-using CodeBase.Infrastructure.StateMachine;
+using CodeBase.Infrastructure;
 using UnityEngine;
 
-namespace CodeBase.Domain.Abilities
+namespace CodeBase.Domain
 {
     public class AbilityHandler : MonoBehaviour, IAbilityHandler
     {

@@ -1,7 +1,6 @@
-﻿using System;
-using CodeBase.Domain.Data;
+using System;
 
-namespace CodeBase.Domain.Enemies
+namespace CodeBase.Domain
 {
     public interface IDamageable
     {

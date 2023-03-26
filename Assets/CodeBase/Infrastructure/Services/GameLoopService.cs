@@ -1,11 +1,7 @@
-﻿using System;
-using CodeBase.Domain.Data;
-using CodeBase.Infrastructure.Factories;
-using CodeBase.Infrastructure.StateMachine;
-using CodeBase.MVVM.Builders;
-using CodeBase.MVVM.Models;
+using System;
+using CodeBase.Domain;
 
-namespace CodeBase.Infrastructure.Services
+namespace CodeBase.Infrastructure
 {
     public class GameLoopService : IGameLoopService
     {

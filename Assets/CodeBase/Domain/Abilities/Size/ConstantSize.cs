@@ -1,7 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
-namespace CodeBase.Domain.Abilities.Size
+namespace CodeBase.Domain
 {
     public class ConstantSize : ISizeBehaviour
     {

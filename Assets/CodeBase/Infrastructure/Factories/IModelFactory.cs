@@ -1,6 +1,6 @@
-using CodeBase.MVVM.Models;
+using CodeBase.Domain;
 
-namespace CodeBase.Infrastructure.Factories
+namespace CodeBase.Infrastructure
 {
     public interface IModelFactory
     {

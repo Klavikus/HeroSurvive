@@ -1,6 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using CodeBase.Domain.Enums;
 
 namespace CodeBase.Domain
 {

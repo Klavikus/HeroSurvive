@@ -1,7 +1,4 @@
-﻿using CodeBase.Domain.Data;
-using CodeBase.Domain.EnemyStateMachine.States;
-
-namespace CodeBase.Domain.EnemyStateMachine.Transitions
+namespace CodeBase.Domain
 {
     class HitToRunTransition : Transition
     {

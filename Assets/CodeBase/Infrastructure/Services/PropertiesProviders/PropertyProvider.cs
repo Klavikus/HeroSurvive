@@ -1,13 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using CodeBase.Configs;
 using CodeBase.Domain;
-using CodeBase.Domain.Data;
-using CodeBase.Infrastructure.Services.UpgradeService;
-using CodeBase.MVVM.Models;
-using CodeBase.MVVM.Views.HeroSelector;
+using CodeBase.Presentation;
 
-namespace CodeBase.Infrastructure.Services.PropertiesProviders
+namespace CodeBase.Infrastructure
 {
     public class PropertyProvider : IPropertyProvider
     {

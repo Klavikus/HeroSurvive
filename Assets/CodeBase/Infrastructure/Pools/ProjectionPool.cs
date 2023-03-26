@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
-using CodeBase.Domain.Abilities;
+using CodeBase.Domain;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.Pools
+namespace CodeBase.Infrastructure
 {
     public class ProjectionPool
     {

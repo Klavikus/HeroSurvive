@@ -1,11 +1,7 @@
-﻿using CodeBase.Infrastructure.Services;
-using CodeBase.Infrastructure.StateMachine;
-using CodeBase.MVVM.Builders;
-using CodeBase.MVVM.ViewModels;
-using CodeBase.MVVM.Views;
+﻿using CodeBase.Presentation;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.Factories
+namespace CodeBase.Infrastructure
 {
     public class GameLoopViewFactory
     {

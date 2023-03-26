@@ -1,7 +1,4 @@
-using CodeBase.Domain.Data;
-using CodeBase.Domain.EntityComponents;
-
-namespace CodeBase.Domain.EnemyStateMachine.States
+namespace CodeBase.Domain
 {
     internal class IdleEntityState : EntityState
     {

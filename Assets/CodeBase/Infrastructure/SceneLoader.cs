@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using System.Collections;
-using CodeBase.Domain.Additional;
+using CodeBase.Domain;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

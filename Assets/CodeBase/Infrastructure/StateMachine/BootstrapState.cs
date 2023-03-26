@@ -1,13 +1,7 @@
-﻿using CodeBase.Configs;
-using CodeBase.Domain.Additional;
-using CodeBase.Infrastructure.Factories;
-using CodeBase.Infrastructure.Services;
-using CodeBase.Infrastructure.Services.PropertiesProviders;
-using CodeBase.Infrastructure.Services.UpgradeService;
-using CodeBase.MVVM.Builders;
-using CodeBase.MVVM.Models;
+using CodeBase.Configs;
+using CodeBase.Domain;
 
-namespace CodeBase.Infrastructure.StateMachine
+namespace CodeBase.Infrastructure
 {
     public class BootstrapState : IState
     {

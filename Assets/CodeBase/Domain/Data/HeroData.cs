@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using CodeBase.Configs;
-using CodeBase.Domain.EntityComponents;
-using CodeBase.Domain.Enums;
 using UnityEngine;
 
-namespace CodeBase.Domain.Data
+namespace CodeBase.Domain
 {
     [Serializable]
     public class TranslatableString

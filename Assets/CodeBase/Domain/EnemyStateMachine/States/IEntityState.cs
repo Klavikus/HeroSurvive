@@ -1,6 +1,6 @@
 using System;
 
-namespace CodeBase.Domain.EnemyStateMachine.States
+namespace CodeBase.Domain
 {
     public interface IEntityState
     {

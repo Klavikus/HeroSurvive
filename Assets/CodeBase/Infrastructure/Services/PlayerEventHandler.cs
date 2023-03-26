@@ -1,8 +1,7 @@
-﻿using System;
-using CodeBase.Domain.Enemies;
-using UnityEngine;
+using System;
+using CodeBase.Domain;
 
-namespace CodeBase.Infrastructure.Services
+namespace CodeBase.Infrastructure
 {
     public class PlayerEventHandler
     {

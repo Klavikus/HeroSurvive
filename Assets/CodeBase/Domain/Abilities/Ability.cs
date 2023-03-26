@@ -1,15 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using CodeBase.Configs;
-using CodeBase.Domain.Additional;
-using CodeBase.Domain.Data;
-using CodeBase.Domain.Enums;
-using CodeBase.Infrastructure.Factories;
-using CodeBase.Infrastructure.Pools;
-using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure;
 using UnityEngine;
 
-namespace CodeBase.Domain.Abilities
+namespace CodeBase.Domain
 {
     public class Ability
     {

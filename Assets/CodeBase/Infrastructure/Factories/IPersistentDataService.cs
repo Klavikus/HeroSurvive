@@ -1,6 +1,4 @@
-using CodeBase.Infrastructure.Services;
-
-namespace CodeBase.Infrastructure.Factories
+namespace CodeBase.Infrastructure
 {
     public interface IPersistentDataService : IInitializeable, IService
     {

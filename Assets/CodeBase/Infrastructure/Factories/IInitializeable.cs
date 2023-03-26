@@ -1,4 +1,4 @@
-namespace CodeBase.Infrastructure.Factories
+namespace CodeBase.Infrastructure
 {
     public interface IInitializeable
     {

@@ -1,9 +1,8 @@
 using CodeBase.Configs;
-using CodeBase.Infrastructure.Factories;
-using CodeBase.MVVM.Views;
+using CodeBase.Domain;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.StateMachine
+namespace CodeBase.Infrastructure
 {
     [CreateAssetMenu(menuName = "Create ConfigurationContainer", fileName = "ConfigurationContainer", order = 0)]
     public class ConfigurationContainer : ScriptableObject

@@ -1,13 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Configs;
-using CodeBase.Domain.Enemies;
+using CodeBase.Domain;
 using CodeBase.Extensions;
-using CodeBase.Infrastructure.Factories;
-using CodeBase.Infrastructure.Services;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace CodeBase.Infrastructure
 {

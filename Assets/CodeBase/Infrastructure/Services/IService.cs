@@ -1,6 +1,4 @@
-﻿using CodeBase.MVVM.Models;
-
-namespace CodeBase.Infrastructure.Services
+namespace CodeBase.Infrastructure
 {
     public interface IService
     {

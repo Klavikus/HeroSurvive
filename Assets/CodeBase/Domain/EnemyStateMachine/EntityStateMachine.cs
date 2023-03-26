@@ -1,6 +1,4 @@
-using CodeBase.Domain.EnemyStateMachine.States;
-
-namespace CodeBase.Domain.EnemyStateMachine
+namespace CodeBase.Domain
 {
     public class EntityStateMachine
     {

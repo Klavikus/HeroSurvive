@@ -1,6 +1,4 @@
-﻿using CodeBase.MVVM.Builders;
-
-namespace CodeBase.Infrastructure.Factories
+﻿namespace CodeBase.Infrastructure
 {
     public class MainMenuFactory : IMainMenuFactory
     {

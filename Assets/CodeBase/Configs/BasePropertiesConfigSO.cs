@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Domain;
-using CodeBase.Domain.Data;
-using CodeBase.Domain.Enums;
-using CodeBase.MVVM.Views.HeroSelector;
+using CodeBase.Presentation;
 using UnityEngine;
 
 namespace CodeBase.Configs

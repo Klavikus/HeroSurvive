@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using CodeBase.Configs;
-using CodeBase.Infrastructure.Factories;
+﻿using CodeBase.Configs;
+using CodeBase.Domain;
 
-namespace CodeBase.Infrastructure.Services
+namespace CodeBase.Infrastructure
 {
     public interface IConfigurationProvider : IService
     {

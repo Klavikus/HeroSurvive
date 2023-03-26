@@ -1,14 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using CodeBase.Domain.Data;
-using CodeBase.Domain.EnemyStateMachine;
-using CodeBase.Domain.EnemyStateMachine.States;
-using CodeBase.Domain.EnemyStateMachine.Transitions;
-using CodeBase.Domain.EntityComponents;
-using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure;
 using UnityEngine;
 
-namespace CodeBase.Domain.Enemies
+namespace CodeBase.Domain
 {
     public class Enemy : MonoBehaviour
     {

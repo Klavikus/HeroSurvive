@@ -1,7 +1,7 @@
 using System;
 using CodeBase.SO.MoveStrategy;
 
-namespace CodeBase.Domain.Data
+namespace CodeBase.Domain
 {
     [Serializable]
     public struct EnemyAIData
@@ -13,9 +13,6 @@ namespace CodeBase.Domain.Data
         public float ObstacleCheckDistance;
         public float StaggerResist;
 
-        public void CalculateWithProgression(float progressionModifier)
-        {
-            Speed *= progressionModifier;
-        }
+        public void CalculateWithProgression(float progressionModifier) => Speed *= progressionModifier;
     }
 }

@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using CodeBase.Configs;
-using CodeBase.Domain.Enums;
-using CodeBase.Infrastructure.Factories;
-using CodeBase.Infrastructure.StateMachine;
+using CodeBase.Infrastructure;
 
-namespace CodeBase.Domain.Abilities
+namespace CodeBase.Domain
 {
     public interface IAbilityHandler
     {

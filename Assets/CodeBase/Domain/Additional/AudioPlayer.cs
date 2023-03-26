@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using CodeBase.Domain.Enums;
 using UnityEngine;
 
-namespace CodeBase.Domain.Additional
+namespace CodeBase.Domain
 {
     public class AudioPlayer : MonoBehaviour
     {

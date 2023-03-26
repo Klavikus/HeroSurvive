@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using CodeBase.Domain;
-using CodeBase.MVVM.Models;
-using CodeBase.MVVM.Views;
 
-namespace CodeBase.Infrastructure.Services.UpgradeService
+namespace CodeBase.Infrastructure
 {
     class UpgradeService : IUpgradeService
     {

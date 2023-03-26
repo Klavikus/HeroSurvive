@@ -1,16 +1,9 @@
-﻿using Cinemachine;
+using Cinemachine;
 using CodeBase.Configs;
-using CodeBase.Domain.Abilities;
-using CodeBase.Domain.Data;
-using CodeBase.Domain.Enemies;
-using CodeBase.Domain.EntityComponents;
-using CodeBase.Infrastructure.Services;
-using CodeBase.Infrastructure.Services.PropertiesProviders;
-using CodeBase.Infrastructure.StateMachine;
-using CodeBase.MVVM.Models;
+using CodeBase.Domain;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.Factories
+namespace CodeBase.Infrastructure
 {
     public class PlayerBuilder
     {

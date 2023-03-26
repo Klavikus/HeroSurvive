@@ -1,8 +1,7 @@
-﻿using System;
-using CodeBase.Domain.Enums;
+using System;
 using UnityEngine;
 
-namespace CodeBase.Domain.Abilities.Size
+namespace CodeBase.Domain
 {
     [Serializable]
     public class SizeBehaviourData

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CodeBase.Domain.Additional
+namespace CodeBase.Domain
 {
     public class CameraMover : MonoBehaviour
     {

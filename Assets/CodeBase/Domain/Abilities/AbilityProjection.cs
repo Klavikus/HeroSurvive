@@ -1,16 +1,10 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using CodeBase.Domain.Abilities.Attack;
-using CodeBase.Domain.Abilities.Movement;
-using CodeBase.Domain.Abilities.Size;
-using CodeBase.Domain.Abilities.Views;
-using CodeBase.Infrastructure.Factories;
-using CodeBase.Infrastructure.Services;
-using CodeBase.Infrastructure.StateMachine;
+using CodeBase.Infrastructure;
 using UnityEngine;
 
-namespace CodeBase.Domain.Abilities
+namespace CodeBase.Domain
 {
     public class AbilityProjection : MonoBehaviour
     {

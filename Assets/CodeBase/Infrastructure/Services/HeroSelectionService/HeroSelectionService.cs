@@ -1,9 +1,8 @@
-﻿using System;
+using System;
 using CodeBase.Domain;
-using CodeBase.Domain.Data;
-using CodeBase.MVVM.ViewModels;
+using CodeBase.Presentation;
 
-namespace CodeBase.Infrastructure.Services.HeroSelectionService
+namespace CodeBase.Infrastructure
 {
     class HeroSelectionService : IHeroSelectionService
     {

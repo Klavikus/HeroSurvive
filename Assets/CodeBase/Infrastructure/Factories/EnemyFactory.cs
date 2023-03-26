@@ -1,13 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
-using CodeBase.Domain.Data;
-using CodeBase.Domain.Enemies;
-using CodeBase.Domain.Enums;
-using CodeBase.Infrastructure.Services;
+using CodeBase.Domain;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-namespace CodeBase.Infrastructure.Factories
+namespace CodeBase.Infrastructure
 {
     public class EnemyFactory
     {

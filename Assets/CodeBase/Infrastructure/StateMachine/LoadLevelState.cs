@@ -1,9 +1,6 @@
-﻿using CodeBase.Domain.Data;
-using CodeBase.Infrastructure.Factories;
-using CodeBase.Infrastructure.Services;
-using CodeBase.MVVM.Models;
+using CodeBase.Domain;
 
-namespace CodeBase.Infrastructure.StateMachine
+namespace CodeBase.Infrastructure
 {
     public class LoadLevelState : IPayloadedState<string>
     {

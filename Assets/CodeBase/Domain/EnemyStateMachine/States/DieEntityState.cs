@@ -1,8 +1,6 @@
-using CodeBase.Domain.Data;
-using CodeBase.Domain.EntityComponents;
 using UnityEngine;
 
-namespace CodeBase.Domain.EnemyStateMachine.States
+namespace CodeBase.Domain
 {
     class DieEntityState : EntityState
     {
@@ -18,7 +16,7 @@ namespace CodeBase.Domain.EnemyStateMachine.States
         public override void Enter()
         {
             base.Enter();
-            _animationSynchronizer.ChangeState(ForSort.EntityState.Died);
+            _animationSynchronizer.ChangeState(EntityAnimatorState.Died);
             _enemyAI.enabled = false;
 
             //TODO: change Destroy for BackToPool

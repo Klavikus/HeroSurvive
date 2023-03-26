@@ -1,16 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using CodeBase.Domain.Abilities;
-using CodeBase.Domain.Abilities.Attack;
-using CodeBase.Domain.Abilities.Movement;
-using CodeBase.Domain.Abilities.Size;
-using CodeBase.Domain.Enums;
-using CodeBase.Infrastructure.Pools;
-using CodeBase.Infrastructure.Services;
-using CodeBase.Infrastructure.StateMachine;
+using CodeBase.Domain;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.Factories
+namespace CodeBase.Infrastructure
 {
     public class AbilityProjectionBuilder
     {

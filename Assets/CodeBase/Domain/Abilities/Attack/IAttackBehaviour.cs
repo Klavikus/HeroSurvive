@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections;
 using UnityEngine;
 
-namespace CodeBase.Domain.Abilities.Attack
+namespace CodeBase.Domain
 {
     public interface IAttackBehaviour
     {
