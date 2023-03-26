@@ -2984,6 +2984,8 @@ MonoBehaviour:
   _heroDescriptionView: {fileID: 7638257530875824782}
   _baseAbilityView: {fileID: 7638257530875824787}
   _currencyView: {fileID: 1434241424260493903}
+  _rowCount: 2
+  _colCount: 3
 --- !u!114 &7638257530875824782
 MonoBehaviour:
   m_ObjectHideFlags: 0
