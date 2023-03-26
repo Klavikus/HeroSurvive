@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.SO.MoveStrategy
+namespace CodeBase.Domain
 {
     [CreateAssetMenu(menuName = "SO/MoveStrategy/OnlyForwardObstacle", fileName = "MoveOnlyForwardObstacle", order = 51)]
     public sealed class MoveOnlyForwardObstacle : MoveStrategy
