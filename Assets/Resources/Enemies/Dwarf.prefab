@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8585566137270250800}
   - component: {fileID: 7100351150944641831}
   m_Layer: 7
-  m_Name: Dworf
+  m_Name: Dwarf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

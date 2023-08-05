@@ -21,14 +21,25 @@ namespace CodeBase.Domain
         public event Action<Enemy> Died;
         public event Action<Enemy> Destroyed;
         public event Action<Enemy> OutOfViewTimeout;
+        public event Action<Enemy> InvokedBackToPool;
 
         public bool CanReceiveDamage => _damageable.CanReceiveDamage;
         public int KillExperience => _lootData.Experience;
         public int KillCurrency => _lootData.Currency;
+        public EnemyType Type => _enemyData.Type;
         private void OnDestroy() => Destroyed?.Invoke(this);
+
+        public void InvokeBackToPool()
+        {
+            _damageable.Died -= OnDied;
+            _enemyAI.AttackDistanceReached -= _damageSource.HandleAttack;
+            InvokedBackToPool?.Invoke(this);
+            gameObject.SetActive(false);
+        }
 
         public void Initialize(ITargetService targetService, EnemyData enemyData)
         {
+            gameObject.SetActive(true);
             _enemyData = enemyData;
             _lootData = enemyData.LootData;
             _enemyAI.Initialize(enemyData.AIData, targetService);
@@ -36,11 +47,15 @@ namespace CodeBase.Domain
             _animationSynchronizer = new AnimationSynchronizer(_animator);
 
             _damageable.Initialize(enemyData.DamageableData);
-            _damageable.Died += () => Died?.Invoke(this);
             //TODO: Move _damageSource.HandleAttack into enemyStateMachine
+            _damageable.Died += OnDied;
             _enemyAI.AttackDistanceReached += _damageSource.HandleAttack;
+
+            _enemyAI.enabled = true;
             InitializeStateMachine();
         }
+
+        private void OnDied() => Died?.Invoke(this);
 
         public void UpdateProgression(float completeProgress)
         {
@@ -50,16 +65,11 @@ namespace CodeBase.Domain
             _lootData.UpdateProgression(_enemyData.ProgressionData.Loot.Evaluate(completeProgress));
         }
 
-        public void Kill()
-        {
-            _damageable.Kill();
-        }
-
         private void InitializeStateMachine()
         {
             IdleEntityState idleEntityState = new IdleEntityState(_animationSynchronizer, _enemyAI);
             RunEntityState runEntityState = new RunEntityState(_animationSynchronizer, _enemyAI);
-            DieEntityState dieEntityState = new DieEntityState(_animationSynchronizer, _enemyAI);
+            DieEntityState dieEntityState = new DieEntityState(_animationSynchronizer, _enemyAI, this);
             HitEntityState hitEntityState = new HitEntityState(_animationSynchronizer, _enemyAI, _damageable);
 
             IdleToRunTransition idleToRunTransition = new IdleToRunTransition(runEntityState, _enemyAI);

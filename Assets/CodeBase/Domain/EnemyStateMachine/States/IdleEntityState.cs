@@ -16,7 +16,7 @@ namespace CodeBase.Domain
             base.Enter();
             
             _enemyAI.enabled = true;
-            // _animationSynchronizer.ChangeState(ForSort.EntityState.Idle);
+            _animationSynchronizer.ChangeState(EntityAnimatorState.Idle);
         }
     }
 }

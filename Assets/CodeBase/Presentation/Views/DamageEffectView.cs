@@ -24,8 +24,8 @@ namespace CodeBase.Presentation
 
         private void OnDisable()
         {
-            _initialColor = _spriteRenderer.color;
             _damageable.DamageTaken -= OnDamageTaken;
+            _spriteRenderer.color = _initialColor;
         }
 
         private void OnDamageTaken(int damage, float stagger)

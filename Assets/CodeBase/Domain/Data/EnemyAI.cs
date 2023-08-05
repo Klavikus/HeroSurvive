@@ -43,6 +43,7 @@ namespace CodeBase.Domain
             _staggerDelay = new WaitForSeconds(GameConstants.AIMinimumStaggerDelay);
             _isWaitingForInitialize = false;
             _staggerResist = enemyAIData.StaggerResist;
+            _isStaggered = false;
         }
 
         public void UpdateProgression(float progressionModifier) =>
@@ -52,7 +53,7 @@ namespace CodeBase.Domain
         {
             stagger -= stagger * _staggerResist;
             stagger = Mathf.Max(stagger, 0);
-            
+
             if (stagger == 0 && _isStaggered == false)
             {
                 StaggerOut?.Invoke();

@@ -67,7 +67,6 @@ namespace CodeBase.Domain
             if (_onCooldown || !_isInitialized)
                 return;
 
-
             if (_activateProjectionCoroutine != null)
                 _coroutineRunner.Stop(_activateProjectionCoroutine);
             _activateProjectionCoroutine = _coroutineRunner.Run(ActivateProjections());
@@ -120,5 +119,14 @@ namespace CodeBase.Domain
 
         public bool CheckConfig(AbilityConfigSO abilityConfigSO) =>
             _abilityUpgradesData[0].BaseConfigSO == abilityConfigSO;
+
+        public void Disable()
+        {
+            if (_activateProjectionCoroutine != null)
+                _coroutineRunner.Stop(_activateProjectionCoroutine);
+
+            if (_runCoroutine != null)
+                _coroutineRunner.Stop(_runCoroutine);
+        }
     }
 }

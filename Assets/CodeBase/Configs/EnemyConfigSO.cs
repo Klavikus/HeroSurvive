@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Domain;
 using NaughtyAttributes;
@@ -10,13 +11,37 @@ namespace CodeBase.Configs
     public class EnemyConfigSO : ScriptableObject
     {
         //TODO: Вынести в отдельный монобех для левелдизайна
+        [SerializeField] private DamageableData _damageableData;
+        [SerializeField] private DamageSourceData _damageSourceData;
+        [SerializeField] private LootData _lootData;
+        [SerializeField] private EnemyAIData _enemyAIData;
         [SerializeField] private ProgressionData _baseProgressionData;
 
         [Button(nameof(SetBaseProgressionToAll))]
         public void SetBaseProgressionToAll()
         {
-            foreach (EnemyData enemyData in EnemiesData) 
+            foreach (EnemyData enemyData in EnemiesData)
                 enemyData.SetProgressionData(_baseProgressionData);
+        }
+
+        [Button(nameof(SetBaseDataToAll))]
+        public void SetBaseDataToAll()
+        {
+            foreach (EnemyData enemyData in EnemiesData)
+                enemyData.SetData(_damageableData, _damageSourceData, _lootData, _enemyAIData, _baseProgressionData);
+        }
+
+        [Button(nameof(CreateDefault))]
+        public void CreateDefault()
+        {
+            var result = new List<EnemyData>();
+            foreach (EnemyType type in Enum.GetValues(typeof(EnemyType)))
+            {
+                Enemy prefab = Resources.Load<Enemy>($"Enemies/{type.ToString()}");
+                result.Add(new EnemyData(type, prefab));
+            }
+
+            EnemiesData = result.ToArray();
         }
 
         [field: SerializeField] public EnemyData[] EnemiesData { get; private set; }

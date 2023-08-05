@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Domain;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace CodeBase.Infrastructure
 {
@@ -12,10 +14,17 @@ namespace CodeBase.Infrastructure
         private GameObject _enemyPrefab;
         private List<Enemy> _enemies;
 
+        private readonly Dictionary<EnemyType, Queue<Enemy>> _enemyPoolByType;
+
         public EnemyFactory(IConfigurationProvider configurationProvider)
         {
             _configurationProvider = configurationProvider;
             _enemiesData = new Dictionary<EnemyType, EnemyData>();
+
+            _enemyPoolByType = new Dictionary<EnemyType, Queue<Enemy>>();
+            foreach (EnemyType enemyType in Enum.GetValues(typeof(EnemyType)))
+                _enemyPoolByType.Add(enemyType, new Queue<Enemy>());
+
             foreach (EnemyData enemyData in _configurationProvider.EnemyConfig.EnemiesData)
                 _enemiesData.Add(enemyData.Type, enemyData);
 
@@ -24,18 +33,35 @@ namespace CodeBase.Infrastructure
 
         public Enemy Create(Vector3 at, EnemyType enemyType, ITargetService targetFinderService)
         {
-            Enemy enemy = GameObject.Instantiate(_enemiesData[enemyType].Prefab, at, Quaternion.identity);
-            _enemies.Add(enemy);
-            enemy.Destroyed += OnEnemyDied;
+            Enemy enemy = GetFromPool(enemyType);
+
+            if (enemy == null)
+            {
+                enemy = GameObject.Instantiate(_enemiesData[enemyType].Prefab, at, Quaternion.identity);
+                _enemies.Add(enemy);
+                enemy.InvokedBackToPool += OnBackToPoolInvoked;
+            }
+            else
+            {
+                enemy.transform.SetPositionAndRotation(at, Quaternion.identity);
+            }
+
             enemy.Initialize(targetFinderService, _enemiesData[enemyType]);
             return enemy;
         }
 
-        //TODO: Handle Died and Destroyed events
-        private void OnEnemyDied(Enemy enemyAI)
+        private Enemy GetFromPool(EnemyType enemyType)
         {
-            _enemies.Remove(enemyAI);
-            enemyAI.Destroyed -= OnEnemyDied;
+            if (_enemyPoolByType[enemyType].Count == 0)
+                return null;
+
+            return _enemyPoolByType[enemyType].Dequeue();
+        }
+
+        //TODO: Handle Died and Destroyed events
+        private void OnBackToPoolInvoked(Enemy enemy)
+        {
+            _enemyPoolByType[enemy.Type].Enqueue(enemy);
         }
 
         public Vector3 GetClosestEnemy(Vector3 to)
@@ -76,9 +102,9 @@ namespace CodeBase.Infrastructure
         public void ClearEnemies()
         {
             foreach (Enemy enemy in _enemies)
-            {
                 GameObject.Destroy(enemy);
-            }
+
+            _enemies.Clear();
         }
     }
 }

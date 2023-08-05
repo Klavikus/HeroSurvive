@@ -66,5 +66,11 @@ namespace CodeBase.Domain
             foreach (Ability ability in _abilities)
                 ability.Execute();
         }
+
+        private void OnDestroy()
+        {
+            foreach (Ability ability in _abilities) 
+                ability.Disable();
+        }
     }
 }

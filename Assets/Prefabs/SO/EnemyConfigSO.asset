@@ -12,6 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6977e3fef624db1ae12416770b0612f, type: 3}
   m_Name: EnemyConfigSO
   m_EditorClassIdentifier: 
+  _damageableData:
+    <MaxHealth>k__BackingField: 3
+    <HealthRegenerationPercent>k__BackingField: 0
+    <RegenerationDelayInSeconds>k__BackingField: 1
+  _damageSourceData:
+    <WhatIsTarget>k__BackingField:
+      useTriggers: 0
+      useLayerMask: 0
+      useDepth: 0
+      useOutsideDepth: 0
+      useNormalAngle: 0
+      useOutsideNormalAngle: 0
+      layerMask:
+        serializedVersion: 2
+        m_Bits: 256
+      minDepth: 0
+      maxDepth: 0
+      minNormalAngle: 0
+      maxNormalAngle: 0
+    <Damage>k__BackingField: 1
+    <AttackRadius>k__BackingField: 1
+    <MaxAffectedTargets>k__BackingField: 5
+  _lootData:
+    <Experience>k__BackingField: 1
+    <Currency>k__BackingField: 1
+  _enemyAIData:
+    MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
+    Speed: 1
+    AttackRange: 1
+    AttackCheckInterval: 1
+    ObstacleCheckDistance: 1
+    StaggerResist: 0
   _baseProgressionData:
     <EnemyAI>k__BackingField:
       serializedVersion: 2
@@ -19,20 +51,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: 1.5
-        outSlope: 1.5
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.33333334
+        outWeight: 0
       - serializedVersion: 3
         time: 1
-        value: 2.5
-        inSlope: 1.5
-        outSlope: 1.5
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -43,20 +75,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: 29
-        outSlope: 29
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.33333334
+        outWeight: 0
       - serializedVersion: 3
         time: 1
-        value: 30
-        inSlope: 29
-        outSlope: 29
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -67,20 +99,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: 4
-        outSlope: 4
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.33333334
+        outWeight: 0
       - serializedVersion: 3
         time: 1
-        value: 5
-        inSlope: 4
-        outSlope: 4
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -91,42 +123,43 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: 9
-        outSlope: 9
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.33333334
+        outWeight: 0
       - serializedVersion: 3
         time: 1
-        value: 10
-        inSlope: 9
-        outSlope: 9
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
   <EnemiesData>k__BackingField:
-  - <Type>k__BackingField: 0
+  - <Name>k__BackingField: Ghost
+    <Type>k__BackingField: 0
     <Prefab>k__BackingField: {fileID: 7336016358369244030, guid: da74fb8ad7daddf46bf7bb382861951c, type: 3}
     <AIData>k__BackingField:
       MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
-      Speed: 2
-      AttackRange: 0.4
-      AttackCheckInterval: 2
-      ObstacleCheckDistance: 0.2
-      StaggerResist: 0.5
+      Speed: 1
+      AttackRange: 1
+      AttackCheckInterval: 1
+      ObstacleCheckDistance: 1
+      StaggerResist: 0
     <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 20
+      <MaxHealth>k__BackingField: 3
       <HealthRegenerationPercent>k__BackingField: 0
-      <RegenerationDelayInSeconds>k__BackingField: 0
+      <RegenerationDelayInSeconds>k__BackingField: 1
     <DamageSourceData>k__BackingField:
       <WhatIsTarget>k__BackingField:
-        useTriggers: 1
-        useLayerMask: 1
+        useTriggers: 0
+        useLayerMask: 0
         useDepth: 0
         useOutsideDepth: 0
         useNormalAngle: 0
@@ -138,9 +171,9 @@ MonoBehaviour:
         maxDepth: 0
         minNormalAngle: 0
         maxNormalAngle: 0
-      <Damage>k__BackingField: 10
+      <Damage>k__BackingField: 1
       <AttackRadius>k__BackingField: 1
-      <MaxAffectedTargets>k__BackingField: 55
+      <MaxAffectedTargets>k__BackingField: 5
     <LootData>k__BackingField:
       <Experience>k__BackingField: 1
       <Currency>k__BackingField: 1
@@ -151,20 +184,20 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 1.5
-          outSlope: 1.5
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 2.5
-          inSlope: 1.5
-          outSlope: 1.5
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -175,20 +208,20 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 29
-          outSlope: 29
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 30
-          inSlope: 29
-          outSlope: 29
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -199,20 +232,20 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 4
-          outSlope: 4
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 5
-          inSlope: 4
-          outSlope: 4
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -223,696 +256,42 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 9
-          outSlope: 9
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 10
-          inSlope: 9
-          outSlope: 9
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-  - <Type>k__BackingField: 5
-    <Prefab>k__BackingField: {fileID: 449000661209318700, guid: 93f08a3b07edbc64b875858e5ebf5200, type: 3}
-    <AIData>k__BackingField:
-      MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
-      Speed: 2.2
-      AttackRange: 1
-      AttackCheckInterval: 2
-      ObstacleCheckDistance: 0.2
-      StaggerResist: 0.85
-    <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 100
-      <HealthRegenerationPercent>k__BackingField: 0
-      <RegenerationDelayInSeconds>k__BackingField: 0
-    <DamageSourceData>k__BackingField:
-      <WhatIsTarget>k__BackingField:
-        useTriggers: 1
-        useLayerMask: 1
-        useDepth: 0
-        useOutsideDepth: 0
-        useNormalAngle: 0
-        useOutsideNormalAngle: 0
-        layerMask:
-          serializedVersion: 2
-          m_Bits: 256
-        minDepth: 0
-        maxDepth: 0
-        minNormalAngle: 0
-        maxNormalAngle: 0
-      <Damage>k__BackingField: 20
-      <AttackRadius>k__BackingField: 1
-      <MaxAffectedTargets>k__BackingField: 55
-    <LootData>k__BackingField:
-      <Experience>k__BackingField: 10
-      <Currency>k__BackingField: 5
-    <ProgressionData>k__BackingField:
-      <EnemyAI>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
           value: 1
-          inSlope: 1.5
-          outSlope: 1.5
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 2.5
-          inSlope: 1.5
-          outSlope: 1.5
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      <Damageable>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 29
-          outSlope: 29
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 30
-          inSlope: 29
-          outSlope: 29
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <DamageSource>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 4
-          outSlope: 4
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 5
-          inSlope: 4
-          outSlope: 4
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <Loot>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 9
-          outSlope: 9
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 10
-          inSlope: 9
-          outSlope: 9
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-  - <Type>k__BackingField: 4
-    <Prefab>k__BackingField: {fileID: 1351416590070361936, guid: 1308d5539be56a641a1b5cd15f2b4854, type: 3}
-    <AIData>k__BackingField:
-      MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
-      Speed: 2
-      AttackRange: 0.5
-      AttackCheckInterval: 2
-      ObstacleCheckDistance: 0.2
-      StaggerResist: 0
-    <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 10
-      <HealthRegenerationPercent>k__BackingField: 0
-      <RegenerationDelayInSeconds>k__BackingField: 0
-    <DamageSourceData>k__BackingField:
-      <WhatIsTarget>k__BackingField:
-        useTriggers: 1
-        useLayerMask: 1
-        useDepth: 0
-        useOutsideDepth: 0
-        useNormalAngle: 0
-        useOutsideNormalAngle: 0
-        layerMask:
-          serializedVersion: 2
-          m_Bits: 256
-        minDepth: 0
-        maxDepth: 0
-        minNormalAngle: 0
-        maxNormalAngle: 0
-      <Damage>k__BackingField: 5
-      <AttackRadius>k__BackingField: 1
-      <MaxAffectedTargets>k__BackingField: 55
-    <LootData>k__BackingField:
-      <Experience>k__BackingField: 2
-      <Currency>k__BackingField: 1
-    <ProgressionData>k__BackingField:
-      <EnemyAI>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 1.5
-          outSlope: 1.5
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 2.5
-          inSlope: 1.5
-          outSlope: 1.5
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <Damageable>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 29
-          outSlope: 29
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 30
-          inSlope: 29
-          outSlope: 29
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <DamageSource>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 4
-          outSlope: 4
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 5
-          inSlope: 4
-          outSlope: 4
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <Loot>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 9
-          outSlope: 9
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 10
-          inSlope: 9
-          outSlope: 9
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-  - <Type>k__BackingField: 6
-    <Prefab>k__BackingField: {fileID: 9113672291535343680, guid: 61a6b8b12b0b1d948b6b9c2f4135fb80, type: 3}
-    <AIData>k__BackingField:
-      MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
-      Speed: 1.6
-      AttackRange: 1
-      AttackCheckInterval: 1
-      ObstacleCheckDistance: 0.2
-      StaggerResist: 0.5
-    <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 60
-      <HealthRegenerationPercent>k__BackingField: 0
-      <RegenerationDelayInSeconds>k__BackingField: 0
-    <DamageSourceData>k__BackingField:
-      <WhatIsTarget>k__BackingField:
-        useTriggers: 1
-        useLayerMask: 1
-        useDepth: 0
-        useOutsideDepth: 0
-        useNormalAngle: 0
-        useOutsideNormalAngle: 0
-        layerMask:
-          serializedVersion: 2
-          m_Bits: 256
-        minDepth: 0
-        maxDepth: 0
-        minNormalAngle: 0
-        maxNormalAngle: 0
-      <Damage>k__BackingField: 15
-      <AttackRadius>k__BackingField: 2
-      <MaxAffectedTargets>k__BackingField: 55
-    <LootData>k__BackingField:
-      <Experience>k__BackingField: 5
-      <Currency>k__BackingField: 3
-    <ProgressionData>k__BackingField:
-      <EnemyAI>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 1.5
-          outSlope: 1.5
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 2.5
-          inSlope: 1.5
-          outSlope: 1.5
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <Damageable>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 29
-          outSlope: 29
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 30
-          inSlope: 29
-          outSlope: 29
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <DamageSource>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 4
-          outSlope: 4
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 5
-          inSlope: 4
-          outSlope: 4
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <Loot>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 9
-          outSlope: 9
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 10
-          inSlope: 9
-          outSlope: 9
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-  - <Type>k__BackingField: 2
-    <Prefab>k__BackingField: {fileID: 311095494002752099, guid: 7a292ac9f30981c4db4d0720cd923222, type: 3}
-    <AIData>k__BackingField:
-      MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
-      Speed: 2
-      AttackRange: 0.4
-      AttackCheckInterval: 1
-      ObstacleCheckDistance: 0.2
-      StaggerResist: 0
-    <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 50
-      <HealthRegenerationPercent>k__BackingField: 0
-      <RegenerationDelayInSeconds>k__BackingField: 0
-    <DamageSourceData>k__BackingField:
-      <WhatIsTarget>k__BackingField:
-        useTriggers: 1
-        useLayerMask: 1
-        useDepth: 0
-        useOutsideDepth: 0
-        useNormalAngle: 0
-        useOutsideNormalAngle: 0
-        layerMask:
-          serializedVersion: 2
-          m_Bits: 256
-        minDepth: 0
-        maxDepth: 0
-        minNormalAngle: 0
-        maxNormalAngle: 0
-      <Damage>k__BackingField: 12
-      <AttackRadius>k__BackingField: 2
-      <MaxAffectedTargets>k__BackingField: 55
-    <LootData>k__BackingField:
-      <Experience>k__BackingField: 3
-      <Currency>k__BackingField: 2
-    <ProgressionData>k__BackingField:
-      <EnemyAI>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 1.5
-          outSlope: 1.5
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 2.5
-          inSlope: 1.5
-          outSlope: 1.5
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <Damageable>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 29
-          outSlope: 29
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 30
-          inSlope: 29
-          outSlope: 29
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <DamageSource>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 4
-          outSlope: 4
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 5
-          inSlope: 4
-          outSlope: 4
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <Loot>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 9
-          outSlope: 9
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 10
-          inSlope: 9
-          outSlope: 9
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-  - <Type>k__BackingField: 3
-    <Prefab>k__BackingField: {fileID: 2867851720287480136, guid: 9fc0d13df5b133f449cc863554f645d3, type: 3}
-    <AIData>k__BackingField:
-      MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
-      Speed: 1.6
-      AttackRange: 0.4
-      AttackCheckInterval: 1
-      ObstacleCheckDistance: 0.2
-      StaggerResist: 0
-    <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 30
-      <HealthRegenerationPercent>k__BackingField: 0
-      <RegenerationDelayInSeconds>k__BackingField: 0
-    <DamageSourceData>k__BackingField:
-      <WhatIsTarget>k__BackingField:
-        useTriggers: 1
-        useLayerMask: 1
-        useDepth: 0
-        useOutsideDepth: 0
-        useNormalAngle: 0
-        useOutsideNormalAngle: 0
-        layerMask:
-          serializedVersion: 2
-          m_Bits: 256
-        minDepth: 0
-        maxDepth: 0
-        minNormalAngle: 0
-        maxNormalAngle: 0
-      <Damage>k__BackingField: 8
-      <AttackRadius>k__BackingField: 2
-      <MaxAffectedTargets>k__BackingField: 55
-    <LootData>k__BackingField:
-      <Experience>k__BackingField: 2
-      <Currency>k__BackingField: 1
-    <ProgressionData>k__BackingField:
-      <EnemyAI>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 1.5
-          outSlope: 1.5
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 2.5
-          inSlope: 1.5
-          outSlope: 1.5
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <Damageable>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 29
-          outSlope: 29
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 30
-          inSlope: 29
-          outSlope: 29
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <DamageSource>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 4
-          outSlope: 4
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 5
-          inSlope: 4
-          outSlope: 4
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <Loot>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 9
-          outSlope: 9
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 10
-          inSlope: 9
-          outSlope: 9
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-  - <Type>k__BackingField: 1
+  - <Name>k__BackingField: Skeleton
+    <Type>k__BackingField: 1
     <Prefab>k__BackingField: {fileID: 6780291456287123084, guid: 5d502197bca22a64fae4f027f0e8a363, type: 3}
     <AIData>k__BackingField:
       MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
-      Speed: 1.5
-      AttackRange: 0.5
+      Speed: 1
+      AttackRange: 1
       AttackCheckInterval: 1
-      ObstacleCheckDistance: 0.2
-      StaggerResist: 0.25
+      ObstacleCheckDistance: 1
+      StaggerResist: 0
     <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 40
+      <MaxHealth>k__BackingField: 3
       <HealthRegenerationPercent>k__BackingField: 0
-      <RegenerationDelayInSeconds>k__BackingField: 0
+      <RegenerationDelayInSeconds>k__BackingField: 1
     <DamageSourceData>k__BackingField:
       <WhatIsTarget>k__BackingField:
-        useTriggers: 1
-        useLayerMask: 1
+        useTriggers: 0
+        useLayerMask: 0
         useDepth: 0
         useOutsideDepth: 0
         useNormalAngle: 0
@@ -924,9 +303,9 @@ MonoBehaviour:
         maxDepth: 0
         minNormalAngle: 0
         maxNormalAngle: 0
-      <Damage>k__BackingField: 8
+      <Damage>k__BackingField: 1
       <AttackRadius>k__BackingField: 1
-      <MaxAffectedTargets>k__BackingField: 1
+      <MaxAffectedTargets>k__BackingField: 5
     <LootData>k__BackingField:
       <Experience>k__BackingField: 1
       <Currency>k__BackingField: 1
@@ -937,20 +316,20 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 1.5
-          outSlope: 1.5
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 2.5
-          inSlope: 1.5
-          outSlope: 1.5
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -961,20 +340,20 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 29
-          outSlope: 29
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 30
-          inSlope: 29
-          outSlope: 29
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -985,20 +364,20 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 4
-          outSlope: 4
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 5
-          inSlope: 4
-          outSlope: 4
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1009,41 +388,702 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 9
-          outSlope: 9
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 10
-          inSlope: 9
-          outSlope: 9
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  - <Type>k__BackingField: 7
+  - <Name>k__BackingField: Hound
+    <Type>k__BackingField: 2
+    <Prefab>k__BackingField: {fileID: 311095494002752099, guid: 7a292ac9f30981c4db4d0720cd923222, type: 3}
+    <AIData>k__BackingField:
+      MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
+      Speed: 1
+      AttackRange: 1
+      AttackCheckInterval: 1
+      ObstacleCheckDistance: 1
+      StaggerResist: 0
+    <DamageableData>k__BackingField:
+      <MaxHealth>k__BackingField: 3
+      <HealthRegenerationPercent>k__BackingField: 0
+      <RegenerationDelayInSeconds>k__BackingField: 1
+    <DamageSourceData>k__BackingField:
+      <WhatIsTarget>k__BackingField:
+        useTriggers: 0
+        useLayerMask: 0
+        useDepth: 0
+        useOutsideDepth: 0
+        useNormalAngle: 0
+        useOutsideNormalAngle: 0
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 256
+        minDepth: 0
+        maxDepth: 0
+        minNormalAngle: 0
+        maxNormalAngle: 0
+      <Damage>k__BackingField: 1
+      <AttackRadius>k__BackingField: 1
+      <MaxAffectedTargets>k__BackingField: 5
+    <LootData>k__BackingField:
+      <Experience>k__BackingField: 1
+      <Currency>k__BackingField: 1
+    <ProgressionData>k__BackingField:
+      <EnemyAI>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <Damageable>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <DamageSource>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <Loot>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  - <Name>k__BackingField: Imp
+    <Type>k__BackingField: 3
+    <Prefab>k__BackingField: {fileID: 2867851720287480136, guid: 9fc0d13df5b133f449cc863554f645d3, type: 3}
+    <AIData>k__BackingField:
+      MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
+      Speed: 1
+      AttackRange: 1
+      AttackCheckInterval: 1
+      ObstacleCheckDistance: 1
+      StaggerResist: 0
+    <DamageableData>k__BackingField:
+      <MaxHealth>k__BackingField: 3
+      <HealthRegenerationPercent>k__BackingField: 0
+      <RegenerationDelayInSeconds>k__BackingField: 1
+    <DamageSourceData>k__BackingField:
+      <WhatIsTarget>k__BackingField:
+        useTriggers: 0
+        useLayerMask: 0
+        useDepth: 0
+        useOutsideDepth: 0
+        useNormalAngle: 0
+        useOutsideNormalAngle: 0
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 256
+        minDepth: 0
+        maxDepth: 0
+        minNormalAngle: 0
+        maxNormalAngle: 0
+      <Damage>k__BackingField: 1
+      <AttackRadius>k__BackingField: 1
+      <MaxAffectedTargets>k__BackingField: 5
+    <LootData>k__BackingField:
+      <Experience>k__BackingField: 1
+      <Currency>k__BackingField: 1
+    <ProgressionData>k__BackingField:
+      <EnemyAI>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <Damageable>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <DamageSource>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <Loot>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  - <Name>k__BackingField: Bird
+    <Type>k__BackingField: 4
+    <Prefab>k__BackingField: {fileID: 1351416590070361936, guid: 1308d5539be56a641a1b5cd15f2b4854, type: 3}
+    <AIData>k__BackingField:
+      MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
+      Speed: 1
+      AttackRange: 1
+      AttackCheckInterval: 1
+      ObstacleCheckDistance: 1
+      StaggerResist: 0
+    <DamageableData>k__BackingField:
+      <MaxHealth>k__BackingField: 3
+      <HealthRegenerationPercent>k__BackingField: 0
+      <RegenerationDelayInSeconds>k__BackingField: 1
+    <DamageSourceData>k__BackingField:
+      <WhatIsTarget>k__BackingField:
+        useTriggers: 0
+        useLayerMask: 0
+        useDepth: 0
+        useOutsideDepth: 0
+        useNormalAngle: 0
+        useOutsideNormalAngle: 0
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 256
+        minDepth: 0
+        maxDepth: 0
+        minNormalAngle: 0
+        maxNormalAngle: 0
+      <Damage>k__BackingField: 1
+      <AttackRadius>k__BackingField: 1
+      <MaxAffectedTargets>k__BackingField: 5
+    <LootData>k__BackingField:
+      <Experience>k__BackingField: 1
+      <Currency>k__BackingField: 1
+    <ProgressionData>k__BackingField:
+      <EnemyAI>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <Damageable>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <DamageSource>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <Loot>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  - <Name>k__BackingField: Bear
+    <Type>k__BackingField: 5
+    <Prefab>k__BackingField: {fileID: 449000661209318700, guid: 93f08a3b07edbc64b875858e5ebf5200, type: 3}
+    <AIData>k__BackingField:
+      MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
+      Speed: 1
+      AttackRange: 1
+      AttackCheckInterval: 1
+      ObstacleCheckDistance: 1
+      StaggerResist: 0
+    <DamageableData>k__BackingField:
+      <MaxHealth>k__BackingField: 3
+      <HealthRegenerationPercent>k__BackingField: 0
+      <RegenerationDelayInSeconds>k__BackingField: 1
+    <DamageSourceData>k__BackingField:
+      <WhatIsTarget>k__BackingField:
+        useTriggers: 0
+        useLayerMask: 0
+        useDepth: 0
+        useOutsideDepth: 0
+        useNormalAngle: 0
+        useOutsideNormalAngle: 0
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 256
+        minDepth: 0
+        maxDepth: 0
+        minNormalAngle: 0
+        maxNormalAngle: 0
+      <Damage>k__BackingField: 1
+      <AttackRadius>k__BackingField: 1
+      <MaxAffectedTargets>k__BackingField: 5
+    <LootData>k__BackingField:
+      <Experience>k__BackingField: 1
+      <Currency>k__BackingField: 1
+    <ProgressionData>k__BackingField:
+      <EnemyAI>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <Damageable>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <DamageSource>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <Loot>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  - <Name>k__BackingField: FireKnight
+    <Type>k__BackingField: 6
+    <Prefab>k__BackingField: {fileID: 9113672291535343680, guid: 61a6b8b12b0b1d948b6b9c2f4135fb80, type: 3}
+    <AIData>k__BackingField:
+      MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
+      Speed: 1
+      AttackRange: 1
+      AttackCheckInterval: 1
+      ObstacleCheckDistance: 1
+      StaggerResist: 0
+    <DamageableData>k__BackingField:
+      <MaxHealth>k__BackingField: 3
+      <HealthRegenerationPercent>k__BackingField: 0
+      <RegenerationDelayInSeconds>k__BackingField: 1
+    <DamageSourceData>k__BackingField:
+      <WhatIsTarget>k__BackingField:
+        useTriggers: 0
+        useLayerMask: 0
+        useDepth: 0
+        useOutsideDepth: 0
+        useNormalAngle: 0
+        useOutsideNormalAngle: 0
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 256
+        minDepth: 0
+        maxDepth: 0
+        minNormalAngle: 0
+        maxNormalAngle: 0
+      <Damage>k__BackingField: 1
+      <AttackRadius>k__BackingField: 1
+      <MaxAffectedTargets>k__BackingField: 5
+    <LootData>k__BackingField:
+      <Experience>k__BackingField: 1
+      <Currency>k__BackingField: 1
+    <ProgressionData>k__BackingField:
+      <EnemyAI>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <Damageable>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <DamageSource>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <Loot>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  - <Name>k__BackingField: Dragon
+    <Type>k__BackingField: 7
     <Prefab>k__BackingField: {fileID: 6971075670438352617, guid: be6a584408df1e34cb2576883927ec7a, type: 3}
     <AIData>k__BackingField:
       MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
-      Speed: 2.4
-      AttackRange: 0.5
+      Speed: 1
+      AttackRange: 1
       AttackCheckInterval: 1
-      ObstacleCheckDistance: 0.2
-      StaggerResist: 0.98
+      ObstacleCheckDistance: 1
+      StaggerResist: 0
     <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 300
+      <MaxHealth>k__BackingField: 3
       <HealthRegenerationPercent>k__BackingField: 0
-      <RegenerationDelayInSeconds>k__BackingField: 0
+      <RegenerationDelayInSeconds>k__BackingField: 1
     <DamageSourceData>k__BackingField:
       <WhatIsTarget>k__BackingField:
-        useTriggers: 1
-        useLayerMask: 1
+        useTriggers: 0
+        useLayerMask: 0
         useDepth: 0
         useOutsideDepth: 0
         useNormalAngle: 0
@@ -1055,12 +1095,12 @@ MonoBehaviour:
         maxDepth: 0
         minNormalAngle: 0
         maxNormalAngle: 0
-      <Damage>k__BackingField: 30
+      <Damage>k__BackingField: 1
       <AttackRadius>k__BackingField: 1
-      <MaxAffectedTargets>k__BackingField: 1
+      <MaxAffectedTargets>k__BackingField: 5
     <LootData>k__BackingField:
-      <Experience>k__BackingField: 50
-      <Currency>k__BackingField: 50
+      <Experience>k__BackingField: 1
+      <Currency>k__BackingField: 1
     <ProgressionData>k__BackingField:
       <EnemyAI>k__BackingField:
         serializedVersion: 2
@@ -1068,20 +1108,20 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 1.5
-          outSlope: 1.5
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 2.5
-          inSlope: 1.5
-          outSlope: 1.5
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1092,20 +1132,20 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 29
-          outSlope: 29
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 30
-          inSlope: 29
-          outSlope: 29
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1116,20 +1156,20 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 4
-          outSlope: 4
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 5
-          inSlope: 4
-          outSlope: 4
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1140,41 +1180,42 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 9
-          outSlope: 9
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 10
-          inSlope: 9
-          outSlope: 9
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  - <Type>k__BackingField: 8
-    <Prefab>k__BackingField: {fileID: 8585566137270250800, guid: 6967732d02369214e8a006b8215bd00e, type: 3}
+  - <Name>k__BackingField: Dwarf
+    <Type>k__BackingField: 8
+    <Prefab>k__BackingField: {fileID: 0}
     <AIData>k__BackingField:
       MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
-      Speed: 1.5
-      AttackRange: 0.5
+      Speed: 1
+      AttackRange: 1
       AttackCheckInterval: 1
-      ObstacleCheckDistance: 0.2
-      StaggerResist: 0.6
+      ObstacleCheckDistance: 1
+      StaggerResist: 0
     <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 70
+      <MaxHealth>k__BackingField: 3
       <HealthRegenerationPercent>k__BackingField: 0
-      <RegenerationDelayInSeconds>k__BackingField: 0
+      <RegenerationDelayInSeconds>k__BackingField: 1
     <DamageSourceData>k__BackingField:
       <WhatIsTarget>k__BackingField:
-        useTriggers: 1
-        useLayerMask: 1
+        useTriggers: 0
+        useLayerMask: 0
         useDepth: 0
         useOutsideDepth: 0
         useNormalAngle: 0
@@ -1186,12 +1227,12 @@ MonoBehaviour:
         maxDepth: 0
         minNormalAngle: 0
         maxNormalAngle: 0
-      <Damage>k__BackingField: 12
+      <Damage>k__BackingField: 1
       <AttackRadius>k__BackingField: 1
-      <MaxAffectedTargets>k__BackingField: 1
+      <MaxAffectedTargets>k__BackingField: 5
     <LootData>k__BackingField:
-      <Experience>k__BackingField: 5
-      <Currency>k__BackingField: 7
+      <Experience>k__BackingField: 1
+      <Currency>k__BackingField: 1
     <ProgressionData>k__BackingField:
       <EnemyAI>k__BackingField:
         serializedVersion: 2
@@ -1199,20 +1240,20 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 1.5
-          outSlope: 1.5
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 2.5
-          inSlope: 1.5
-          outSlope: 1.5
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1223,20 +1264,20 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 29
-          outSlope: 29
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 30
-          inSlope: 29
-          outSlope: 29
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1247,20 +1288,20 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 4
-          outSlope: 4
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 5
-          inSlope: 4
-          outSlope: 4
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1271,41 +1312,42 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 9
-          outSlope: 9
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 10
-          inSlope: 9
-          outSlope: 9
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  - <Type>k__BackingField: 9
+  - <Name>k__BackingField: Orc
+    <Type>k__BackingField: 9
     <Prefab>k__BackingField: {fileID: 2720400476232767639, guid: 9f0fe6ac269e2d3429d0fa1aabbbc88e, type: 3}
     <AIData>k__BackingField:
       MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
-      Speed: 1.3
-      AttackRange: 0.5
+      Speed: 1
+      AttackRange: 1
       AttackCheckInterval: 1
-      ObstacleCheckDistance: 0.2
-      StaggerResist: 0.7
+      ObstacleCheckDistance: 1
+      StaggerResist: 0
     <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 150
+      <MaxHealth>k__BackingField: 3
       <HealthRegenerationPercent>k__BackingField: 0
-      <RegenerationDelayInSeconds>k__BackingField: 0
+      <RegenerationDelayInSeconds>k__BackingField: 1
     <DamageSourceData>k__BackingField:
       <WhatIsTarget>k__BackingField:
-        useTriggers: 1
-        useLayerMask: 1
+        useTriggers: 0
+        useLayerMask: 0
         useDepth: 0
         useOutsideDepth: 0
         useNormalAngle: 0
@@ -1317,12 +1359,12 @@ MonoBehaviour:
         maxDepth: 0
         minNormalAngle: 0
         maxNormalAngle: 0
-      <Damage>k__BackingField: 20
+      <Damage>k__BackingField: 1
       <AttackRadius>k__BackingField: 1
-      <MaxAffectedTargets>k__BackingField: 1
+      <MaxAffectedTargets>k__BackingField: 5
     <LootData>k__BackingField:
-      <Experience>k__BackingField: 15
-      <Currency>k__BackingField: 5
+      <Experience>k__BackingField: 1
+      <Currency>k__BackingField: 1
     <ProgressionData>k__BackingField:
       <EnemyAI>k__BackingField:
         serializedVersion: 2
@@ -1330,20 +1372,20 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 1.5
-          outSlope: 1.5
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 2.5
-          inSlope: 1.5
-          outSlope: 1.5
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1354,20 +1396,20 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 29
-          outSlope: 29
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 30
-          inSlope: 29
-          outSlope: 29
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1378,20 +1420,20 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 4
-          outSlope: 4
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 5
-          inSlope: 4
-          outSlope: 4
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1402,20 +1444,20 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 9
-          outSlope: 9
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 10
-          inSlope: 9
-          outSlope: 9
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2

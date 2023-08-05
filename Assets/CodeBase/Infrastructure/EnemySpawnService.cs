@@ -38,6 +38,7 @@ namespace CodeBase.Infrastructure
             foreach (EnemySpawnData spawnData in enemiesSpawnData)
             {
                 Vector2[] subset = points.Take(spawnData.Count).ToArray();
+                
                 for (int i = 0; i < spawnData.Count; i++)
                 {
                     Vector3 spawnPosition = subset[i];
@@ -59,7 +60,6 @@ namespace CodeBase.Infrastructure
         {
             _enemyFactory.ClearEnemies();
         }
-
 
         private List<Vector2> CalculateAvailableSpawnPoints(float cellSizeX, int minCellCount, Camera mainCamera,
             Vector2 pivotPosition)

@@ -1,0 +1,1326 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f69d5a85adc5f43b1fd5e408f7f900, type: 3}
+  m_Name: ConfigurationContainer
+  m_EditorClassIdentifier: 
+  <SceneNamePrefix>k__BackingField: LVL
+  <InitialSceneName>k__BackingField: Bootstrapper
+  <MainMenuSceneName>k__BackingField: MenuDev2
+  <DataSaveKey>k__BackingField: JostkieGonki
+  <LoadingCurtain>k__BackingField: {fileID: 5052622977263510311, guid: 02aa513ed52c7bf469c5544f9099537b, type: 3}
+  <AdsReward>k__BackingField: 250
+  <CarsData>k__BackingField:
+  - Name: 1
+    Prefab: {fileID: 3103277204023018062, guid: 3243137ce76ca3d47b743af952d87a0e, type: 3}
+    Price: 0
+    UpgradeData:
+      Name: 
+      Type: 0
+      Color: {r: 0, g: 0, b: 0, a: 0}
+      Icon: {fileID: 0}
+      Price: 0
+      WheelMesh: {fileID: 0}
+      WheelMaterial: {fileID: 0}
+    IsFree: 1
+    CarId: 0
+    MaxSpeed: 3
+    Acceleration: 2
+    Handling: 4
+    CombatProperties:
+      <BaseAttackDamage>k__BackingField: 10
+      <BaseAttackDefence>k__BackingField: 0
+      <CriticalAttackModifier>k__BackingField: 3
+      <CriticalAttackDefence>k__BackingField: 0
+      <TotalDamageModifier>k__BackingField: 0
+      <TotalDefenceModifier>k__BackingField: 0
+  - Name: 2
+    Prefab: {fileID: 5828852682899871442, guid: d63a6b8f07267ac47bad2944ba477e22, type: 3}
+    Price: 2000
+    UpgradeData:
+      Name: 
+      Type: 0
+      Color: {r: 0, g: 0, b: 0, a: 0}
+      Icon: {fileID: 0}
+      Price: 0
+      WheelMesh: {fileID: 0}
+      WheelMaterial: {fileID: 0}
+    IsFree: 0
+    CarId: 1
+    MaxSpeed: 3
+    Acceleration: 3
+    Handling: 3
+    CombatProperties:
+      <BaseAttackDamage>k__BackingField: 10
+      <BaseAttackDefence>k__BackingField: 0.25
+      <CriticalAttackModifier>k__BackingField: 4
+      <CriticalAttackDefence>k__BackingField: 0
+      <TotalDamageModifier>k__BackingField: 0
+      <TotalDefenceModifier>k__BackingField: 0.25
+  - Name: 3
+    Prefab: {fileID: 6468125816806914052, guid: 0fafa0e793529584a9433380eeb4a680, type: 3}
+    Price: 4500
+    UpgradeData:
+      Name: Lover
+      Type: 0
+      Color: {r: 0, g: 0, b: 0, a: 0}
+      Icon: {fileID: 0}
+      Price: 0
+      WheelMesh: {fileID: 0}
+      WheelMaterial: {fileID: 0}
+    IsFree: 0
+    CarId: 2
+    MaxSpeed: 3
+    Acceleration: 4
+    Handling: 3
+    CombatProperties:
+      <BaseAttackDamage>k__BackingField: 5
+      <BaseAttackDefence>k__BackingField: -0.25
+      <CriticalAttackModifier>k__BackingField: 10
+      <CriticalAttackDefence>k__BackingField: -0.25
+      <TotalDamageModifier>k__BackingField: 0
+      <TotalDefenceModifier>k__BackingField: -0.25
+  - Name: 4
+    Prefab: {fileID: 3426206971928420736, guid: 256ad72583fef5f4d90d3c2f3e7a5c84, type: 3}
+    Price: 8000
+    UpgradeData:
+      Name: 
+      Type: 0
+      Color: {r: 0, g: 0, b: 0, a: 0}
+      Icon: {fileID: 0}
+      Price: 0
+      WheelMesh: {fileID: 0}
+      WheelMaterial: {fileID: 0}
+    IsFree: 0
+    CarId: 3
+    MaxSpeed: 4
+    Acceleration: 3
+    Handling: 3
+    CombatProperties:
+      <BaseAttackDamage>k__BackingField: 10
+      <BaseAttackDefence>k__BackingField: 0
+      <CriticalAttackModifier>k__BackingField: 3
+      <CriticalAttackDefence>k__BackingField: 0
+      <TotalDamageModifier>k__BackingField: 0
+      <TotalDefenceModifier>k__BackingField: 0
+  - Name: 5
+    Prefab: {fileID: 7312085424110960751, guid: 1697c910c5ca6dc4fa0cc00ba02161aa, type: 3}
+    Price: 11000
+    UpgradeData:
+      Name: 
+      Type: 0
+      Color: {r: 0, g: 0, b: 0, a: 0}
+      Icon: {fileID: 0}
+      Price: 0
+      WheelMesh: {fileID: 0}
+      WheelMaterial: {fileID: 0}
+    IsFree: 0
+    CarId: 4
+    MaxSpeed: 5
+    Acceleration: 4
+    Handling: 5
+    CombatProperties:
+      <BaseAttackDamage>k__BackingField: 10
+      <BaseAttackDefence>k__BackingField: 0
+      <CriticalAttackModifier>k__BackingField: 3
+      <CriticalAttackDefence>k__BackingField: 0
+      <TotalDamageModifier>k__BackingField: 0
+      <TotalDefenceModifier>k__BackingField: 0
+  - Name: 6
+    Prefab: {fileID: 8824012715753641027, guid: 1d3c04c72af966d408b14811137f137e, type: 3}
+    Price: 16000
+    UpgradeData:
+      Name: 
+      Type: 0
+      Color: {r: 0, g: 0, b: 0, a: 0}
+      Icon: {fileID: 0}
+      Price: 0
+      WheelMesh: {fileID: 0}
+      WheelMaterial: {fileID: 0}
+    IsFree: 0
+    CarId: 5
+    MaxSpeed: 5
+    Acceleration: 5
+    Handling: 6
+    CombatProperties:
+      <BaseAttackDamage>k__BackingField: 10
+      <BaseAttackDefence>k__BackingField: 0
+      <CriticalAttackModifier>k__BackingField: 3
+      <CriticalAttackDefence>k__BackingField: 0
+      <TotalDamageModifier>k__BackingField: 0
+      <TotalDefenceModifier>k__BackingField: 0
+  - Name: 7
+    Prefab: {fileID: 196710012886549708, guid: c0e77cae88af1a4488454f500f2bebaa, type: 3}
+    Price: 23000
+    UpgradeData:
+      Name: 
+      Type: 0
+      Color: {r: 0, g: 0, b: 0, a: 0}
+      Icon: {fileID: 0}
+      Price: 0
+      WheelMesh: {fileID: 0}
+      WheelMaterial: {fileID: 0}
+    IsFree: 0
+    CarId: 6
+    MaxSpeed: 6
+    Acceleration: 6
+    Handling: 4
+    CombatProperties:
+      <BaseAttackDamage>k__BackingField: 10
+      <BaseAttackDefence>k__BackingField: 0
+      <CriticalAttackModifier>k__BackingField: 3
+      <CriticalAttackDefence>k__BackingField: 0
+      <TotalDamageModifier>k__BackingField: 0
+      <TotalDefenceModifier>k__BackingField: 0
+  - Name: 8
+    Prefab: {fileID: 5091043396909895947, guid: 7f7b9e8797b9ba44b8cf1853a9b5509c, type: 3}
+    Price: 28000
+    UpgradeData:
+      Name: 
+      Type: 0
+      Color: {r: 0, g: 0, b: 0, a: 0}
+      Icon: {fileID: 0}
+      Price: 0
+      WheelMesh: {fileID: 0}
+      WheelMaterial: {fileID: 0}
+    IsFree: 0
+    CarId: 7
+    MaxSpeed: 7
+    Acceleration: 6
+    Handling: 8
+    CombatProperties:
+      <BaseAttackDamage>k__BackingField: 10
+      <BaseAttackDefence>k__BackingField: 0
+      <CriticalAttackModifier>k__BackingField: 3
+      <CriticalAttackDefence>k__BackingField: 0
+      <TotalDamageModifier>k__BackingField: 0
+      <TotalDefenceModifier>k__BackingField: 0
+  - Name: 9
+    Prefab: {fileID: 1022938858265445388, guid: 7fd6f07380e820b4989d7e1a0a8bc473, type: 3}
+    Price: 32000
+    UpgradeData:
+      Name: 
+      Type: 0
+      Color: {r: 0, g: 0, b: 0, a: 0}
+      Icon: {fileID: 0}
+      Price: 0
+      WheelMesh: {fileID: 0}
+      WheelMaterial: {fileID: 0}
+    IsFree: 0
+    CarId: 8
+    MaxSpeed: 7
+    Acceleration: 8
+    Handling: 5
+    CombatProperties:
+      <BaseAttackDamage>k__BackingField: 10
+      <BaseAttackDefence>k__BackingField: 0
+      <CriticalAttackModifier>k__BackingField: 3
+      <CriticalAttackDefence>k__BackingField: 0
+      <TotalDamageModifier>k__BackingField: 0
+      <TotalDefenceModifier>k__BackingField: 0
+  - Name: 10
+    Prefab: {fileID: 5869106973036185209, guid: e143807afdf07b34d85c0dd61f479028, type: 3}
+    Price: 37000
+    UpgradeData:
+      Name: Lightning
+      Type: 0
+      Color: {r: 0, g: 0, b: 0, a: 0}
+      Icon: {fileID: 0}
+      Price: 0
+      WheelMesh: {fileID: 0}
+      WheelMaterial: {fileID: 0}
+    IsFree: 0
+    CarId: 9
+    MaxSpeed: 12
+    Acceleration: 8
+    Handling: 8
+    CombatProperties:
+      <BaseAttackDamage>k__BackingField: 10
+      <BaseAttackDefence>k__BackingField: 0
+      <CriticalAttackModifier>k__BackingField: 3
+      <CriticalAttackDefence>k__BackingField: 0
+      <TotalDamageModifier>k__BackingField: 0
+      <TotalDefenceModifier>k__BackingField: 0
+  - Name: 11
+    Prefab: {fileID: 6886260841023876695, guid: bcef93c57c809f34888d4c38460e2287, type: 3}
+    Price: 45000
+    UpgradeData:
+      Name: 
+      Type: 0
+      Color: {r: 0, g: 0, b: 0, a: 0}
+      Icon: {fileID: 0}
+      Price: 0
+      WheelMesh: {fileID: 0}
+      WheelMaterial: {fileID: 0}
+    IsFree: 0
+    CarId: 10
+    MaxSpeed: 9
+    Acceleration: 11
+    Handling: 11
+    CombatProperties:
+      <BaseAttackDamage>k__BackingField: 10
+      <BaseAttackDefence>k__BackingField: 0
+      <CriticalAttackModifier>k__BackingField: 3
+      <CriticalAttackDefence>k__BackingField: 0
+      <TotalDamageModifier>k__BackingField: 0
+      <TotalDefenceModifier>k__BackingField: 0
+  - Name: 12
+    Prefab: {fileID: 8470207113295608072, guid: 9f86ce1ec7636504284b127bdcd51ff5, type: 3}
+    Price: 52000
+    UpgradeData:
+      Name: 
+      Type: 0
+      Color: {r: 0, g: 0, b: 0, a: 0}
+      Icon: {fileID: 0}
+      Price: 0
+      WheelMesh: {fileID: 0}
+      WheelMaterial: {fileID: 0}
+    IsFree: 0
+    CarId: 11
+    MaxSpeed: 12
+    Acceleration: 12
+    Handling: 6
+    CombatProperties:
+      <BaseAttackDamage>k__BackingField: 10
+      <BaseAttackDefence>k__BackingField: 0
+      <CriticalAttackModifier>k__BackingField: 3
+      <CriticalAttackDefence>k__BackingField: 0
+      <TotalDamageModifier>k__BackingField: 0
+      <TotalDefenceModifier>k__BackingField: 0
+  <EnemyCarAIPrefab>k__BackingField: {fileID: 1085566105589618325, guid: 663990af30b2c3347b12f5a1b5699722, type: 3}
+  <FocusedRaceView>k__BackingField: {fileID: 5706118222036320797, guid: af775468e629540489d3969bdaf0c263, type: 3}
+  <RaceView>k__BackingField: {fileID: 8672914934646092689, guid: d450272bb81a01545858f470d721febf, type: 3}
+  <RacesData>k__BackingField:
+  - <Name>k__BackingField: Desert Race 1
+    <RewardData>k__BackingField: e8030000ee02000058020000f40100002c010000fa0000009600000032000000
+    <RaceType>k__BackingField: 1
+    <Screenshot>k__BackingField: {fileID: 21300000, guid: 1cbe6b7a72e9bff448a9698c8c368d2f, type: 3}
+    <Title>k__BackingField: Desert Race 1
+    <Price>k__BackingField: 50
+    <IsFree>k__BackingField: 1
+    <RaceSceneName>k__BackingField: LVL1SandS
+    <EnemySpawnData>k__BackingField:
+      <SpawnableCar>k__BackingField: 00000000050000000300000007000000
+    <LoopCount>k__BackingField: 1
+    <DerbyDuration>k__BackingField: 120
+    <AttackProfileData>k__BackingField:
+      PlayerDamageMultiplayer: 0.5
+      PlayerDamageResistanceMultiplayer: 0.5
+    <ScoreResolveStrategy>k__BackingField: {fileID: 11400000, guid: fcd4ce9f7e43ba0489c7ea49d11dd6c6, type: 2}
+  - <Name>k__BackingField: Desert Race 2
+    <RewardData>k__BackingField: dc0500006504000084030000ee020000c201000077010000e10000004b000000
+    <RaceType>k__BackingField: 1
+    <Screenshot>k__BackingField: {fileID: 21300000, guid: 1cbe6b7a72e9bff448a9698c8c368d2f, type: 3}
+    <Title>k__BackingField: Desert Race 2
+    <Price>k__BackingField: 50
+    <IsFree>k__BackingField: 1
+    <RaceSceneName>k__BackingField: LVL2SandS
+    <EnemySpawnData>k__BackingField:
+      <SpawnableCar>k__BackingField: 01000000050000000400000007000000
+    <LoopCount>k__BackingField: 1
+    <DerbyDuration>k__BackingField: 120
+    <AttackProfileData>k__BackingField:
+      PlayerDamageMultiplayer: 0.5
+      PlayerDamageResistanceMultiplayer: 0.5
+    <ScoreResolveStrategy>k__BackingField: {fileID: 11400000, guid: fcd4ce9f7e43ba0489c7ea49d11dd6c6, type: 2}
+  - <Name>k__BackingField: Desert Race 3
+    <RewardData>k__BackingField: d0070000dc050000b0040000e803000058020000f40100002c01000064000000
+    <RaceType>k__BackingField: 1
+    <Screenshot>k__BackingField: {fileID: 21300000, guid: 1cbe6b7a72e9bff448a9698c8c368d2f, type: 3}
+    <Title>k__BackingField: Desert Race 3
+    <Price>k__BackingField: 50
+    <IsFree>k__BackingField: 1
+    <RaceSceneName>k__BackingField: LVL3SandS
+    <EnemySpawnData>k__BackingField:
+      <SpawnableCar>k__BackingField: 02000000060000000300000008000000
+    <LoopCount>k__BackingField: 2
+    <DerbyDuration>k__BackingField: 120
+    <AttackProfileData>k__BackingField:
+      PlayerDamageMultiplayer: 0.5
+      PlayerDamageResistanceMultiplayer: 0.5
+    <ScoreResolveStrategy>k__BackingField: {fileID: 11400000, guid: fcd4ce9f7e43ba0489c7ea49d11dd6c6, type: 2}
+  - <Name>k__BackingField: Desert Race 4
+    <RewardData>k__BackingField: c409000053070000dc050000e2040000ee02000071020000770100007d000000
+    <RaceType>k__BackingField: 1
+    <Screenshot>k__BackingField: {fileID: 21300000, guid: 1cbe6b7a72e9bff448a9698c8c368d2f, type: 3}
+    <Title>k__BackingField: Desert Race 4
+    <Price>k__BackingField: 50
+    <IsFree>k__BackingField: 1
+    <RaceSceneName>k__BackingField: LVL4SandS
+    <EnemySpawnData>k__BackingField:
+      <SpawnableCar>k__BackingField: 04000000070000000800000009000000
+    <LoopCount>k__BackingField: 2
+    <DerbyDuration>k__BackingField: 120
+    <AttackProfileData>k__BackingField:
+      PlayerDamageMultiplayer: 0.5
+      PlayerDamageResistanceMultiplayer: 0.5
+    <ScoreResolveStrategy>k__BackingField: {fileID: 11400000, guid: fcd4ce9f7e43ba0489c7ea49d11dd6c6, type: 2}
+  - <Name>k__BackingField: Desert Race 5
+    <RewardData>k__BackingField: b80b0000ca08000008070000dc05000084030000ee020000c201000096000000
+    <RaceType>k__BackingField: 1
+    <Screenshot>k__BackingField: {fileID: 21300000, guid: 1cbe6b7a72e9bff448a9698c8c368d2f, type: 3}
+    <Title>k__BackingField: Desert Race 5
+    <Price>k__BackingField: 50
+    <IsFree>k__BackingField: 1
+    <RaceSceneName>k__BackingField: LVL5SandL
+    <EnemySpawnData>k__BackingField:
+      <SpawnableCar>k__BackingField: 0800000009000000030000000500000007000000090000000a0000000b000000
+    <LoopCount>k__BackingField: 3
+    <DerbyDuration>k__BackingField: 0
+    <AttackProfileData>k__BackingField:
+      PlayerDamageMultiplayer: 2
+      PlayerDamageResistanceMultiplayer: 2
+    <ScoreResolveStrategy>k__BackingField: {fileID: 11400000, guid: fcd4ce9f7e43ba0489c7ea49d11dd6c6, type: 2}
+  - <Name>k__BackingField: City Race 1
+    <RewardData>k__BackingField: 2003000058020000e001000090010000f0000000c80000007800000028000000
+    <RaceType>k__BackingField: 1
+    <Screenshot>k__BackingField: {fileID: 21300000, guid: 1cbe6b7a72e9bff448a9698c8c368d2f, type: 3}
+    <Title>k__BackingField: City Race 1
+    <Price>k__BackingField: 50
+    <IsFree>k__BackingField: 1
+    <RaceSceneName>k__BackingField: LVL6CityS
+    <EnemySpawnData>k__BackingField:
+      <SpawnableCar>k__BackingField: 00000000050000000300000007000000
+    <LoopCount>k__BackingField: 1
+    <DerbyDuration>k__BackingField: 0
+    <AttackProfileData>k__BackingField:
+      PlayerDamageMultiplayer: 2
+      PlayerDamageResistanceMultiplayer: 2
+    <ScoreResolveStrategy>k__BackingField: {fileID: 11400000, guid: fcd4ce9f7e43ba0489c7ea49d11dd6c6, type: 2}
+  - <Name>k__BackingField: City Race 2
+    <RewardData>k__BackingField: b004000084030000d002000058020000680100002c010000b40000003c000000
+    <RaceType>k__BackingField: 1
+    <Screenshot>k__BackingField: {fileID: 21300000, guid: 1cbe6b7a72e9bff448a9698c8c368d2f, type: 3}
+    <Title>k__BackingField: City Race 2
+    <Price>k__BackingField: 50
+    <IsFree>k__BackingField: 1
+    <RaceSceneName>k__BackingField: LVL7CityL
+    <EnemySpawnData>k__BackingField:
+      <SpawnableCar>k__BackingField: 01000000050000000400000007000000
+    <LoopCount>k__BackingField: 1
+    <DerbyDuration>k__BackingField: 120
+    <AttackProfileData>k__BackingField:
+      PlayerDamageMultiplayer: 0.5
+      PlayerDamageResistanceMultiplayer: 0.5
+    <ScoreResolveStrategy>k__BackingField: {fileID: 11400000, guid: fcd4ce9f7e43ba0489c7ea49d11dd6c6, type: 2}
+  - <Name>k__BackingField: City Race 3
+    <RewardData>k__BackingField: 40060000b0040000c003000020030000e001000090010000f000000050000000
+    <RaceType>k__BackingField: 1
+    <Screenshot>k__BackingField: {fileID: 21300000, guid: 1cbe6b7a72e9bff448a9698c8c368d2f, type: 3}
+    <Title>k__BackingField: City Race 3
+    <Price>k__BackingField: 50
+    <IsFree>k__BackingField: 1
+    <RaceSceneName>k__BackingField: LVL8CityS
+    <EnemySpawnData>k__BackingField:
+      <SpawnableCar>k__BackingField: 02000000060000000300000008000000
+    <LoopCount>k__BackingField: 2
+    <DerbyDuration>k__BackingField: 120
+    <AttackProfileData>k__BackingField:
+      PlayerDamageMultiplayer: 0.5
+      PlayerDamageResistanceMultiplayer: 0.5
+    <ScoreResolveStrategy>k__BackingField: {fileID: 11400000, guid: fcd4ce9f7e43ba0489c7ea49d11dd6c6, type: 2}
+  - <Name>k__BackingField: City Race 4
+    <RewardData>k__BackingField: d0070000dc050000b0040000e803000058020000f40100002c01000064000000
+    <RaceType>k__BackingField: 1
+    <Screenshot>k__BackingField: {fileID: 21300000, guid: 1cbe6b7a72e9bff448a9698c8c368d2f, type: 3}
+    <Title>k__BackingField: City Race 4
+    <Price>k__BackingField: 50
+    <IsFree>k__BackingField: 1
+    <RaceSceneName>k__BackingField: LVL9CityS
+    <EnemySpawnData>k__BackingField:
+      <SpawnableCar>k__BackingField: 04000000070000000800000009000000
+    <LoopCount>k__BackingField: 2
+    <DerbyDuration>k__BackingField: 120
+    <AttackProfileData>k__BackingField:
+      PlayerDamageMultiplayer: 0.5
+      PlayerDamageResistanceMultiplayer: 0.5
+    <ScoreResolveStrategy>k__BackingField: {fileID: 11400000, guid: fcd4ce9f7e43ba0489c7ea49d11dd6c6, type: 2}
+  - <Name>k__BackingField: City Race 5
+    <RewardData>k__BackingField: 6009000008070000a0050000b0040000d0020000580200006801000078000000
+    <RaceType>k__BackingField: 1
+    <Screenshot>k__BackingField: {fileID: 21300000, guid: 1cbe6b7a72e9bff448a9698c8c368d2f, type: 3}
+    <Title>k__BackingField: City Race 5
+    <Price>k__BackingField: 50
+    <IsFree>k__BackingField: 1
+    <RaceSceneName>k__BackingField: LVL10CityS
+    <EnemySpawnData>k__BackingField:
+      <SpawnableCar>k__BackingField: 0800000009000000030000000500000007000000090000000a0000000b000000
+    <LoopCount>k__BackingField: 3
+    <DerbyDuration>k__BackingField: 120
+    <AttackProfileData>k__BackingField:
+      PlayerDamageMultiplayer: 0.5
+      PlayerDamageResistanceMultiplayer: 0.5
+    <ScoreResolveStrategy>k__BackingField: {fileID: 11400000, guid: fcd4ce9f7e43ba0489c7ea49d11dd6c6, type: 2}
+  - <Name>k__BackingField: Arena Easy
+    <RewardData>k__BackingField: dc0500006504000084030000ee020000c201000077010000e10000004b000000
+    <RaceType>k__BackingField: 1
+    <Screenshot>k__BackingField: {fileID: 21300000, guid: 1cbe6b7a72e9bff448a9698c8c368d2f, type: 3}
+    <Title>k__BackingField: Arena Easy
+    <Price>k__BackingField: 50
+    <IsFree>k__BackingField: 1
+    <RaceSceneName>k__BackingField: LVL16Derbu
+    <EnemySpawnData>k__BackingField:
+      <SpawnableCar>k__BackingField: 0000000001000000020000000300000004000000050000000600000007000000
+    <LoopCount>k__BackingField: 0
+    <DerbyDuration>k__BackingField: 120
+    <AttackProfileData>k__BackingField:
+      PlayerDamageMultiplayer: 2
+      PlayerDamageResistanceMultiplayer: 2
+    <ScoreResolveStrategy>k__BackingField: {fileID: 11400000, guid: fcd4ce9f7e43ba0489c7ea49d11dd6c6, type: 2}
+  - <Name>k__BackingField: Arena Normal
+    <RewardData>k__BackingField: dc0500006504000084030000ee020000c201000077010000e10000004b000000
+    <RaceType>k__BackingField: 1
+    <Screenshot>k__BackingField: {fileID: 21300000, guid: 1cbe6b7a72e9bff448a9698c8c368d2f, type: 3}
+    <Title>k__BackingField: Arena Normal
+    <Price>k__BackingField: 50
+    <IsFree>k__BackingField: 1
+    <RaceSceneName>k__BackingField: LVL16Derbu
+    <EnemySpawnData>k__BackingField:
+      <SpawnableCar>k__BackingField: 0000000001000000020000000300000004000000050000000600000007000000
+    <LoopCount>k__BackingField: 0
+    <DerbyDuration>k__BackingField: 120
+    <AttackProfileData>k__BackingField:
+      PlayerDamageMultiplayer: 1
+      PlayerDamageResistanceMultiplayer: 1
+    <ScoreResolveStrategy>k__BackingField: {fileID: 11400000, guid: fcd4ce9f7e43ba0489c7ea49d11dd6c6, type: 2}
+  - <Name>k__BackingField: Arena Hard
+    <RewardData>k__BackingField: dc0500006504000084030000ee020000c201000077010000e10000004b000000
+    <RaceType>k__BackingField: 1
+    <Screenshot>k__BackingField: {fileID: 21300000, guid: 1cbe6b7a72e9bff448a9698c8c368d2f, type: 3}
+    <Title>k__BackingField: Arena Hard
+    <Price>k__BackingField: 50
+    <IsFree>k__BackingField: 1
+    <RaceSceneName>k__BackingField: LVL16Derbu
+    <EnemySpawnData>k__BackingField:
+      <SpawnableCar>k__BackingField: 0000000001000000020000000300000004000000050000000600000007000000
+    <LoopCount>k__BackingField: 0
+    <DerbyDuration>k__BackingField: 120
+    <AttackProfileData>k__BackingField:
+      PlayerDamageMultiplayer: 0.5
+      PlayerDamageResistanceMultiplayer: 0.5
+    <ScoreResolveStrategy>k__BackingField: {fileID: 11400000, guid: fcd4ce9f7e43ba0489c7ea49d11dd6c6, type: 2}
+  <UpgradeTabsViewData>k__BackingField:
+  - SelectButton: {fileID: 2848147991688589494, guid: 3986d3bdba47d384496bd77c0dc9c894, type: 3}
+    TweenButton: {fileID: 2848147991688589496, guid: 3986d3bdba47d384496bd77c0dc9c894, type: 3}
+    _upgradeTabView: {fileID: 4527904071596626771, guid: 7ab3a3922351d434d91cad10ba074a12, type: 3}
+    Type: 0
+    UpgradeElementsData:
+      UpgradeElementView: {fileID: 7492328765251991296, guid: 7fd8d6fefd7bcb6489ccdd75c0b8af7a, type: 3}
+  - SelectButton: {fileID: 5886379657296382682, guid: ddfe6ecd875aba943baecd9d07678253, type: 3}
+    TweenButton: {fileID: 5886379657296382676, guid: ddfe6ecd875aba943baecd9d07678253, type: 3}
+    _upgradeTabView: {fileID: 4527904071596626771, guid: 7ab3a3922351d434d91cad10ba074a12, type: 3}
+    Type: 3
+    UpgradeElementsData:
+      UpgradeElementView: {fileID: 7492328765251991296, guid: 7fd8d6fefd7bcb6489ccdd75c0b8af7a, type: 3}
+  - SelectButton: {fileID: 6334593788705065779, guid: ffa5b3b6152193b4f90512c63a2b98e8, type: 3}
+    TweenButton: {fileID: 6334593788705065781, guid: ffa5b3b6152193b4f90512c63a2b98e8, type: 3}
+    _upgradeTabView: {fileID: 4527904071596626771, guid: 7ab3a3922351d434d91cad10ba074a12, type: 3}
+    Type: 2
+    UpgradeElementsData:
+      UpgradeElementView: {fileID: 7492328765251991296, guid: 53cda8b8070a7a848be7c2db17cc6fff, type: 3}
+  - SelectButton: {fileID: 770524111231977359, guid: e50dd6cc075a35c4aa4ee65d19b5464b, type: 3}
+    TweenButton: {fileID: 770524111231977353, guid: e50dd6cc075a35c4aa4ee65d19b5464b, type: 3}
+    _upgradeTabView: {fileID: 4527904071596626771, guid: 7ab3a3922351d434d91cad10ba074a12, type: 3}
+    Type: 1
+    UpgradeElementsData:
+      UpgradeElementView: {fileID: 7492328765251991296, guid: 7fd8d6fefd7bcb6489ccdd75c0b8af7a, type: 3}
+  <UpgradeData>k__BackingField:
+  - Name: Base
+    Type: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 0}
+    Price: 0
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Gold
+    Type: 0
+    Color: {r: 1, g: 0.80750406, b: 0, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Emerald
+    Type: 0
+    Color: {r: 0.1253114, g: 0.9056604, b: 0.2244971, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Blue
+    Type: 0
+    Color: {r: 0.29028708, g: 0.70064646, b: 0.9716981, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Pink
+    Type: 0
+    Color: {r: 0.972549, g: 0.2901961, b: 0.5790952, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Purple
+    Type: 0
+    Color: {r: 0.8946298, g: 0.2901961, b: 0.972549, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: H3SUV
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 927f19eb0cd9ead46bf4de74b71b5558, type: 3}
+    Price: 300
+    WheelMesh: {fileID: -4535117491804361950, guid: f6021a3ebb94c7e4f97646f57796a7b9, type: 3}
+    WheelMaterial: {fileID: 0}
+  - Name: 1969
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: d9c1add1b204e9742b8e3b42b37ba6b6, type: 3}
+    Price: 300
+    WheelMesh: {fileID: 7469638808451818509, guid: 5e7363d1abf6a5146bf455585efec9bc, type: 3}
+    WheelMaterial: {fileID: 0}
+  - Name: 350
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 764f25e73d716f04583c9701668ceb9e, type: 3}
+    Price: 300
+    WheelMesh: {fileID: -4295178554571340164, guid: cdc8c62d09dac4f40ae0f8debb586891, type: 3}
+    WheelMaterial: {fileID: 0}
+  - Name: RX
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 75d296e22b722b34e99334cc67f3b961, type: 3}
+    Price: 300
+    WheelMesh: {fileID: 5813563600696449033, guid: be61b392fd4bb154a845664b206b1499, type: 3}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass1
+    Type: 3
+    Color: {r: 0, g: 1, b: 0.7208004, a: 0.5529412}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass2
+    Type: 3
+    Color: {r: 1, g: 0.8639384, b: 0.19496846, a: 0.5254902}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass3
+    Type: 3
+    Color: {r: 0.50232565, g: 1, b: 0, a: 0.5294118}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Nitro1
+    Type: 1
+    Color: {r: 0.24894106, g: 0.08879193, b: 0.6886792, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Nitro3
+    Type: 1
+    Color: {r: 0.3882786, g: 1, b: 0.28930813, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Nitro4
+    Type: 1
+    Color: {r: 1, g: 0.6834669, b: 0.29019606, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Nitro5
+    Type: 1
+    Color: {r: 1, g: 0.29019606, b: 0.7364229, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Black
+    Type: 0
+    Color: {r: 0, g: 0, b: 0, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Baklazan
+    Type: 0
+    Color: {r: 0.4245283, g: 0, b: 0.39215687, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Grey
+    Type: 0
+    Color: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Orange
+    Type: 0
+    Color: {r: 1, g: 0.3698832, b: 0, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Blue2
+    Type: 0
+    Color: {r: 0, g: 0.034677982, b: 1, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass4
+    Type: 3
+    Color: {r: 0, g: 0.034677982, b: 1, a: 0.53333336}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass5
+    Type: 3
+    Color: {r: 1, g: 0, b: 0.090577126, a: 0.53333336}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass6
+    Type: 3
+    Color: {r: 1, g: 0, b: 0.84480953, a: 0.53333336}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass7
+    Type: 3
+    Color: {r: 0, g: 0, b: 0, a: 0.53333336}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Nitro6
+    Type: 1
+    Color: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Nitro7
+    Type: 1
+    Color: {r: 1, g: 0, b: 0, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Nitro8
+    Type: 1
+    Color: {r: 0, g: 0.820076, b: 1, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Nitro9
+    Type: 1
+    Color: {r: 0, g: 0.8867924, b: 0.0012436182, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Wheel
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: aa6cf28a7bac44e4d818b76a0509ee0b, type: 3}
+    Price: 300
+    WheelMesh: {fileID: 2792202744111323544, guid: 9cb48c858f7ac454486ff092b6ca7931, type: 3}
+    WheelMaterial: {fileID: 0}
+  - Name: Wheel1
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 31a53bcd0ee8854448f6bf3f1edfcb49, type: 3}
+    Price: 300
+    WheelMesh: {fileID: -2807803314153831861, guid: 224e75aaacefacc4886ba439c9f133eb, type: 3}
+    WheelMaterial: {fileID: 0}
+  - Name: Rim01_L_Mate
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 31a53bcd0ee8854448f6bf3f1edfcb49, type: 3}
+    Price: 1
+    WheelMesh: {fileID: 4300000, guid: 93686e54cc066d2478137ed14b6e0a83, type: 2}
+    WheelMaterial: {fileID: 2100000, guid: 3e8838204a324e04fba6d2171b731918, type: 2}
+  - Name: Rim02_L_Mate
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 31a53bcd0ee8854448f6bf3f1edfcb49, type: 3}
+    Price: 1
+    WheelMesh: {fileID: 4300018, guid: 15573f4518ba1bd428032f7402dfc731, type: 3}
+    WheelMaterial: {fileID: 2100000, guid: be608daa77426a04793f949e8a083403, type: 2}
+  - Name: Rim03_L_Mate
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 31a53bcd0ee8854448f6bf3f1edfcb49, type: 3}
+    Price: 1
+    WheelMesh: {fileID: 4300018, guid: 2bd48eae8b4439742ae581b89719b988, type: 3}
+    WheelMaterial: {fileID: 2100000, guid: b09774254789b6d439027d3b1f3daf67, type: 2}
+  - Name: Rim04_L_Mate
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 31a53bcd0ee8854448f6bf3f1edfcb49, type: 3}
+    Price: 1
+    WheelMesh: {fileID: 4300018, guid: e7c7fdd8e0b4c5340a91879799e9a6f2, type: 3}
+    WheelMaterial: {fileID: 2100000, guid: b9ab7b41c21e0a54bb27a35b7b998a1a, type: 2}
+  - Name: Rim05_L_Mate
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 31a53bcd0ee8854448f6bf3f1edfcb49, type: 3}
+    Price: 1
+    WheelMesh: {fileID: 4300018, guid: faef0403d87113d4b834fa031eaf3256, type: 3}
+    WheelMaterial: {fileID: 2100000, guid: 0b0f06cd6ef78a04699bce98129b67bc, type: 2}
+  - Name: Rim06_L_Mate
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 31a53bcd0ee8854448f6bf3f1edfcb49, type: 3}
+    Price: 1
+    WheelMesh: {fileID: 4300018, guid: 819afe58fd26608419710e9ac54d4ee3, type: 3}
+    WheelMaterial: {fileID: 2100000, guid: dfe7369ee6a82da44aec65444d6f891b, type: 2}
+  <BodyColorUpgradesData>k__BackingField:
+  - Name: Ivory
+    Type: 0
+    Color: {r: 0.9411765, g: 0.91764706, b: 0.8392157, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Silver
+    Type: 0
+    Color: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Slate Gray
+    Type: 0
+    Color: {r: 0.4392157, g: 0.5019608, b: 0.5647059, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Deep Ocean
+    Type: 0
+    Color: {r: 0.101960786, g: 0.10980392, b: 0.15294118, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Powder Blue
+    Type: 0
+    Color: {r: 0.6901961, g: 0.8784314, b: 0.9019608, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Electric Blue
+    Type: 0
+    Color: {r: 0.49019608, g: 0.9764706, b: 1, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Turquoise
+    Type: 0
+    Color: {r: 0.2509804, g: 0.8784314, b: 0.8156863, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Tiffany
+    Type: 0
+    Color: {r: 0, g: 0.7058824, b: 0.6627451, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Deep Blue
+    Type: 0
+    Color: {r: 0.13656996, g: 0.22423737, b: 0.8773585, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Midnight Blue
+    Type: 0
+    Color: {r: 0.09803922, g: 0.09803922, b: 0.4392157, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Pastel Orange
+    Type: 0
+    Color: {r: 1, g: 0.627451, b: 0.47843137, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Saffron
+    Type: 0
+    Color: {r: 0.9716981, g: 0.6256452, b: 0.27959237, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Mandarin
+    Type: 0
+    Color: {r: 1, g: 0.64705884, b: 0, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Lemon
+    Type: 0
+    Color: {r: 0.9607843, g: 0.8156863, b: 0.2, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Hot Red
+    Type: 0
+    Color: {r: 0.9245283, g: 0.10902455, b: 0.12378577, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Maroon
+    Type: 0
+    Color: {r: 0.5019608, g: 0, b: 0, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Carmine
+    Type: 0
+    Color: {r: 0.8627451, g: 0.078431375, b: 0.23529412, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Burgundy
+    Type: 0
+    Color: {r: 0.5019608, g: 0, b: 0.1254902, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Mauve
+    Type: 0
+    Color: {r: 0.8784314, g: 0.6901961, b: 1, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Lilac
+    Type: 0
+    Color: {r: 0.78431374, g: 0.63529414, b: 0.78431374, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Purmeric
+    Type: 0
+    Color: {r: 0.7710027, g: 0.40574938, b: 0.8867924, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Royal Purple
+    Type: 0
+    Color: {r: 0.47058824, g: 0.31764707, b: 0.6627451, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Aubergine
+    Type: 0
+    Color: {r: 0.6, g: 0.2, b: 0.4, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Olive Green
+    Type: 0
+    Color: {r: 0.5019608, g: 0.5019608, b: 0, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Light Green
+    Type: 0
+    Color: {r: 0.18405126, g: 0.8301887, b: 0.18405126, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Emerald
+    Type: 0
+    Color: {r: 0.07289071, g: 0.735849, b: 0.34353274, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Forest Green
+    Type: 0
+    Color: {r: 0.13333334, g: 0.54509807, b: 0.13333334, a: 0}
+    Icon: {fileID: 0}
+    Price: 500
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  <NitroColorUpgradesData>k__BackingField:
+  - Name: Nitro1
+    Type: 1
+    Color: {r: 0.24894106, g: 0.08879193, b: 0.6886792, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Nitro3
+    Type: 1
+    Color: {r: 0.3882786, g: 1, b: 0.28930813, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Nitro4
+    Type: 1
+    Color: {r: 1, g: 0.6834669, b: 0.29019606, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Nitro5
+    Type: 1
+    Color: {r: 1, g: 0.29019606, b: 0.7364229, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Nitro6
+    Type: 1
+    Color: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Nitro7
+    Type: 1
+    Color: {r: 1, g: 0, b: 0, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Nitro8
+    Type: 1
+    Color: {r: 0, g: 0.820076, b: 1, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Nitro9
+    Type: 1
+    Color: {r: 0, g: 0.8867924, b: 0.0012436182, a: 1}
+    Icon: {fileID: 0}
+    Price: 300
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  <GlassColorUpgradesData>k__BackingField:
+  - Name: Glass7
+    Type: 3
+    Color: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.53333336}
+    Icon: {fileID: 0}
+    Price: 650
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass1
+    Type: 3
+    Color: {r: 0.41960785, g: 0.47843137, b: 0.56078434, a: 0.5529412}
+    Icon: {fileID: 0}
+    Price: 650
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass3
+    Type: 3
+    Color: {r: 0.41568628, g: 0.49803922, b: 0.7764706, a: 0.5294118}
+    Icon: {fileID: 0}
+    Price: 650
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass2
+    Type: 3
+    Color: {r: 0.10980392, g: 0.10980392, b: 0.10980392, a: 0.5254902}
+    Icon: {fileID: 0}
+    Price: 650
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass4
+    Type: 3
+    Color: {r: 0.40784314, g: 0.5568628, b: 0.13725491, a: 0.53333336}
+    Icon: {fileID: 0}
+    Price: 650
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass7
+    Type: 3
+    Color: {r: 0, g: 0.39215687, b: 0, a: 0.53333336}
+    Icon: {fileID: 0}
+    Price: 650
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass5
+    Type: 3
+    Color: {r: 0.56078434, g: 0.2784314, b: 0.7019608, a: 0.53333336}
+    Icon: {fileID: 0}
+    Price: 650
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass7
+    Type: 3
+    Color: {r: 1, g: 0.7529412, b: 0.79607844, a: 0.53333336}
+    Icon: {fileID: 0}
+    Price: 650
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass6
+    Type: 3
+    Color: {r: 0.69803923, g: 0.13333334, b: 0.13333334, a: 0.53333336}
+    Icon: {fileID: 0}
+    Price: 650
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass7
+    Type: 3
+    Color: {r: 0.54509807, g: 0, b: 0, a: 0.53333336}
+    Icon: {fileID: 0}
+    Price: 650
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass7
+    Type: 3
+    Color: {r: 1, g: 1, b: 0, a: 0.53333336}
+    Icon: {fileID: 0}
+    Price: 650
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  - Name: Glass7
+    Type: 3
+    Color: {r: 1, g: 0.64705884, b: 0, a: 0.53333336}
+    Icon: {fileID: 0}
+    Price: 650
+    WheelMesh: {fileID: 0}
+    WheelMaterial: {fileID: 0}
+  <WheelUpgradesData>k__BackingField:
+  - Name: Rim03_L_Mate
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 216e9b0b1d38f9a47b9c19dd3ac2c09c, type: 3}
+    Price: 700
+    WheelMesh: {fileID: 4300018, guid: 2bd48eae8b4439742ae581b89719b988, type: 3}
+    WheelMaterial: {fileID: 2100000, guid: b09774254789b6d439027d3b1f3daf67, type: 2}
+  - Name: Rim19_L_Mate
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 398c694d4e56156498e4032430975881, type: 3}
+    Price: 700
+    WheelMesh: {fileID: 4300000, guid: 939c57a11b5c498469662ed563fa6c5f, type: 2}
+    WheelMaterial: {fileID: 2100000, guid: f8bfde9566e02a24ebb4f7154a82bb63, type: 2}
+  - Name: Rim01_L_Mate
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 427c2da73dfe6de4fb35d9dfad7df36c, type: 3}
+    Price: 700
+    WheelMesh: {fileID: 4300000, guid: 93686e54cc066d2478137ed14b6e0a83, type: 2}
+    WheelMaterial: {fileID: 2100000, guid: 3598dcc88753c9840bf2d9a19912e0bc, type: 2}
+  - Name: Rim02_L_Mate
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: a041d7510a96e234fa78ec45a8b4796a, type: 3}
+    Price: 700
+    WheelMesh: {fileID: 4300018, guid: 15573f4518ba1bd428032f7402dfc731, type: 3}
+    WheelMaterial: {fileID: 2100000, guid: 0138e3fb4f71b854aab569bf7e1bf114, type: 2}
+  - Name: Rim07_L_Mate
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 78516cd016e669044adbb7b096e3eab5, type: 3}
+    Price: 700
+    WheelMesh: {fileID: 4300000, guid: 8088b3ef285a4234094f76902160d417, type: 2}
+    WheelMaterial: {fileID: 2100000, guid: 7083dac5570fca64a86b08eef50b3aa1, type: 2}
+  - Name: Rim18_L_Mate
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: a8a590170f5f8244ca4c24b92480b893, type: 3}
+    Price: 700
+    WheelMesh: {fileID: 4300000, guid: 2a5278f167eedec4198aa0e2fee7b4b8, type: 2}
+    WheelMaterial: {fileID: 2100000, guid: 0caab931f2c5da642bff84c7f2704c30, type: 2}
+  - Name: Rim06_L_Mate
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 84d395098619ebf4481bd3d6065d3e36, type: 3}
+    Price: 700
+    WheelMesh: {fileID: 4300018, guid: 819afe58fd26608419710e9ac54d4ee3, type: 3}
+    WheelMaterial: {fileID: 2100000, guid: dfe7369ee6a82da44aec65444d6f891b, type: 2}
+  - Name: Rim04_L_Mate
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 03492ca394f5bd64f96273e582a1ade7, type: 3}
+    Price: 700
+    WheelMesh: {fileID: 4300018, guid: e7c7fdd8e0b4c5340a91879799e9a6f2, type: 3}
+    WheelMaterial: {fileID: 2100000, guid: c6d13a4a1d943c54a88809975258bc23, type: 2}
+  - Name: Rim16_L_Mate
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: e8c7943b330962c4e9b7fc9acc6991e1, type: 3}
+    Price: 700
+    WheelMesh: {fileID: 4300000, guid: 899b786135544a143adc2b117367eb67, type: 2}
+    WheelMaterial: {fileID: 2100000, guid: 59d7b9b24c36e38468eef2b1e3943c20, type: 2}
+  - Name: Rim05_L_Mate
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 7e139187df8969b49881d864eca01dce, type: 3}
+    Price: 700
+    WheelMesh: {fileID: 4300018, guid: faef0403d87113d4b834fa031eaf3256, type: 3}
+    WheelMaterial: {fileID: 2100000, guid: 7572989bc9c78964d8b5447cf6e5c30a, type: 2}
+  - Name: Rim08_L_Mate
+    Type: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: 63587b06056ff4a44ad06b14eff18723, type: 3}
+    Price: 700
+    WheelMesh: {fileID: 4300000, guid: 708f9dd79f3c8444ca5d5ee0d7f60628, type: 2}
+    WheelMaterial: {fileID: 2100000, guid: 2faa1ee31f954734c918c9c179aa8aff, type: 2}
+  <UpgradeElementViewPrefab>k__BackingField: {fileID: 0}
+  <MobileInputPrefab>k__BackingField: {fileID: 405843685402493310, guid: 0f8f4352bfc903f48a66719aef7821b5, type: 3}
+  <AudioData>k__BackingField:
+    _vfxData:
+    - Type: 0
+      Clip: {fileID: 8300000, guid: 4147c85ec77859447adc2e0f0264c8da, type: 3}
+    - Type: 1
+      Clip: {fileID: 8300000, guid: cd561ab15b11be348a3afa25afd68970, type: 3}
+    <Background>k__BackingField: {fileID: 8300000, guid: fe47555d2aa9c5148817d81e2873d18f, type: 3}
+  <ViewData>k__BackingField:
+    PlayerNameColor: {r: 0.22172773, g: 0.9528302, b: 0.33957085, a: 1}
+    EnemyNameColor: {r: 1, g: 1, b: 1, a: 1}
+    EnemyPointer: {fileID: 8731849346516572047, guid: 7a85c19a7b6572b4da6be6a63109882f, type: 3}
+  <StartRaceTipData>k__BackingField:
+    Desktop: {fileID: 2932185927855725260, guid: 7dcfbccdbb0c64c4d840c67f2bfa6eb7, type: 3}
+    Mobile: {fileID: 2932185927855725260, guid: ea9693b9a72cc3547bf22fcad339c620, type: 3}
+  <LeaderboardEntryView>k__BackingField: {fileID: 6470777537284341970, guid: ce6609880bdb77e489bbc48bacef4e90, type: 3}
+  <NormalAI>k__BackingField: {fileID: 11400000, guid: 3739c6a6444a4ad4aae750f8780e80ed, type: 2}
+  <LeaderAI>k__BackingField: {fileID: 11400000, guid: 3739c6a6444a4ad4aae750f8780e80ed, type: 2}
+  <DerbyAiData>k__BackingField:
+    Standart: {fileID: 0}
+  <PhysicUpgradesConfig>k__BackingField:
+    <MaxSpeedUpgradesConfigs>k__BackingField:
+    - Name: T0
+      Order: 0
+      Multiplayer: 1
+      IsDefault: 1
+      Price: 0
+    - Name: T1
+      Order: 1
+      Multiplayer: 1.05
+      IsDefault: 0
+      Price: 400
+    - Name: T2
+      Order: 2
+      Multiplayer: 1.1
+      IsDefault: 0
+      Price: 700
+    - Name: T3
+      Order: 3
+      Multiplayer: 1.2
+      IsDefault: 0
+      Price: 1000
+    - Name: T4
+      Order: 4
+      Multiplayer: 1.3
+      IsDefault: 0
+      Price: 1300
+    - Name: T5
+      Order: 4
+      Multiplayer: 1.35
+      IsDefault: 0
+      Price: 1600
+    <HandlingUpgradesConfigs>k__BackingField:
+    - Name: T0
+      Order: 0
+      Multiplayer: 1
+      IsDefault: 1
+      Price: 0
+    - Name: T1
+      Order: 1
+      Multiplayer: 1.05
+      IsDefault: 0
+      Price: 400
+    - Name: T2
+      Order: 2
+      Multiplayer: 1.1
+      IsDefault: 0
+      Price: 700
+    - Name: T3
+      Order: 3
+      Multiplayer: 1.2
+      IsDefault: 0
+      Price: 1000
+    - Name: T4
+      Order: 4
+      Multiplayer: 1.3
+      IsDefault: 0
+      Price: 1300
+    - Name: T5
+      Order: 4
+      Multiplayer: 1.35
+      IsDefault: 0
+      Price: 1600
+    <AccelerationUpgradesConfigs>k__BackingField:
+    - Name: T0
+      Order: 0
+      Multiplayer: 1
+      IsDefault: 1
+      Price: 0
+    - Name: T1
+      Order: 1
+      Multiplayer: 1.05
+      IsDefault: 0
+      Price: 400
+    - Name: T2
+      Order: 2
+      Multiplayer: 1.1
+      IsDefault: 0
+      Price: 700
+    - Name: T3
+      Order: 3
+      Multiplayer: 1.2
+      IsDefault: 0
+      Price: 1000
+    - Name: T4
+      Order: 4
+      Multiplayer: 1.3
+      IsDefault: 0
+      Price: 1300
+    - Name: T5
+      Order: 4
+      Multiplayer: 1.35
+      IsDefault: 0
+      Price: 1600

@@ -18,9 +18,8 @@ MonoBehaviour:
   <UpgradesConfigSO>k__BackingField: {fileID: 11400000, guid: 905ec28cdae7f0146b556df896ede51a, type: 2}
   <ColorConfigSO>k__BackingField: {fileID: 11400000, guid: 06899f7aed917de478989ad5ec56feab, type: 2}
   <GameLoopConfigSO>k__BackingField: {fileID: 11400000, guid: ecad34a8a998d3c4889b2737c90f6907, type: 2}
-  <EnemyConfigSO>k__BackingField: {fileID: 11400000, guid: b50750cd67eec974fa6ec33ac26d748a, type: 2}
+  <EnemyConfigSO>k__BackingField: {fileID: 11400000, guid: 011aa37703f9c2a46bc25264e445e35b, type: 2}
   <StageCompetitionConfigSO>k__BackingField: {fileID: 11400000, guid: 060f5b2f9e9bfdc4391b029b3a176bfa, type: 2}
-  <CoroutineRunner>k__BackingField: {fileID: 0}
   <AbilityConfigsSO>k__BackingField:
   - {fileID: 11400000, guid: 479d7d8d154415f44a78f1af7609db75, type: 2}
   - {fileID: 11400000, guid: 0b4fb934f2791c840a6a63ca7003e87e, type: 2}
@@ -32,5 +31,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cdd1e97618e39154885cb23035acd33e, type: 2}
   - {fileID: 11400000, guid: 27a845af8e95a0544a5bd555c2deba1b, type: 2}
   - {fileID: 11400000, guid: 4522a27ac6764bd4794fd6e03a1a9e34, type: 2}
-  <UserNameSetterView>k__BackingField: {fileID: 8882913479696794962, guid: f09de9787ada1f145996e27055ecf6b6, type: 3}
-  <AudioPlayer>k__BackingField: {fileID: 0}

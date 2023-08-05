@@ -6,11 +6,13 @@ namespace CodeBase.Domain
     {
         private readonly AnimationSynchronizer _animationSynchronizer;
         private readonly EnemyAI _enemyAI;
+        private readonly Enemy _enemy;
 
-        public DieEntityState(AnimationSynchronizer animationSynchronizer, EnemyAI enemyAI)
+        public DieEntityState(AnimationSynchronizer animationSynchronizer, EnemyAI enemyAI, Enemy enemy)
         {
             _animationSynchronizer = animationSynchronizer;
             _enemyAI = enemyAI;
+            _enemy = enemy;
         }
 
         public override void Enter()
@@ -20,7 +22,8 @@ namespace CodeBase.Domain
             _enemyAI.enabled = false;
 
             //TODO: change Destroy for BackToPool
-            GameObject.Destroy(_enemyAI.gameObject, 0.5f);
+            _enemy.InvokeBackToPool();
+            // GameObject.Destroy(_enemyAI.gameObject, 0.5f);
         }
     }
 }
