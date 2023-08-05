@@ -1,5 +1,6 @@
 ﻿using CodeBase.Configs;
 using CodeBase.Domain;
+using CodeBase.Infrastructure.Services;
 
 namespace CodeBase.Infrastructure
 {
@@ -14,5 +15,6 @@ namespace CodeBase.Infrastructure
         UpgradesConfigSO UpgradesConfig { get; }
         ColorConfigSO ColorsConfig { get; }
         EnemyConfigSO EnemyConfig { get; }
+        VfxConfig VfxConfig { get; }
     }
 }

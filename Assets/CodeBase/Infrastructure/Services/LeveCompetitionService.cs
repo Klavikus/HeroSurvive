@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CodeBase.Domain;
+using CodeBase.Infrastructure.Services;
 
 namespace CodeBase.Infrastructure
 {
@@ -8,6 +9,7 @@ namespace CodeBase.Infrastructure
     {
         private IEnemySpawnService _enemySpawnService;
         private readonly IModelProvider _modelProvider;
+        private readonly IVfxService _vfxService;
         private readonly StageCompetitionConfigSO _competitionConfig;
 
         private int _currentWaveId;
@@ -26,11 +28,17 @@ namespace CodeBase.Infrastructure
         public event Action AllWavesCompleted;
         public event Action<Enemy> EnemyKilled;
 
-        public LeveCompetitionService(IEnemySpawnService enemySpawnService,
-            IConfigurationProvider configurationProvider, IModelProvider modelProvider)
+        public LeveCompetitionService
+        (
+            IEnemySpawnService enemySpawnService,
+            IConfigurationProvider configurationProvider,
+            IModelProvider modelProvider,
+            IVfxService vfxService
+        )
         {
             _enemySpawnService = enemySpawnService;
             _modelProvider = modelProvider;
+            _vfxService = vfxService;
             _competitionConfig = configurationProvider.StageCompetitionConfig;
             _enemies = new List<Enemy>();
         }
@@ -98,6 +106,8 @@ namespace CodeBase.Infrastructure
         {
             _modelProvider.Get<LevelUpModel>().HandleRewardedKill(enemy);
 
+            _vfxService.HandleKill(enemy.transform.position);
+
             enemy.Died -= OnEnemyDied;
             enemy.OutOfViewTimeout -= OnEnemyOutOfViewTimeout;
             EnemyKilled?.Invoke(enemy);
@@ -129,7 +139,6 @@ namespace CodeBase.Infrastructure
                     SpawnNextWave();
                 }
             }
-            
         }
     }
 }

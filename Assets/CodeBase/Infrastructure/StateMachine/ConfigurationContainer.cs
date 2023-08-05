@@ -1,5 +1,6 @@
 using CodeBase.Configs;
 using CodeBase.Domain;
+using CodeBase.Infrastructure.Services;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure
@@ -16,5 +17,6 @@ namespace CodeBase.Infrastructure
         [field: SerializeField] public EnemyConfigSO EnemyConfigSO { get; private set; }
         [field: SerializeField] public StageCompetitionConfigSO StageCompetitionConfigSO { get; private set; }
         [field: SerializeField] public AbilityConfigSO[] AbilityConfigsSO { get; private set; }
+        [field: SerializeField] public VfxConfig VfxConfig { get; private set; }
     }
 }

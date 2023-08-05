@@ -1,5 +1,6 @@
 using CodeBase.Configs;
 using CodeBase.Domain;
+using CodeBase.Infrastructure.Services;
 
 namespace CodeBase.Infrastructure
 {
@@ -74,8 +75,9 @@ namespace CodeBase.Infrastructure
                 new PersistentDataService(configurationProvider, saveLoadService, modelProvider);
             ITargetService targetFinderService = new TargetFinderService(enemyFactory);
             IEnemySpawnService enemySpawnService = new EnemySpawnService(targetFinderService, enemyFactory);
+            IVfxService vfxService = new VfxService(configurationProvider);
             ILeveCompetitionService leveCompetitionService =
-                new LeveCompetitionService(enemySpawnService, configurationProvider, modelProvider);
+                new LeveCompetitionService(enemySpawnService, configurationProvider, modelProvider, vfxService);
             PlayerEventHandler playerEventHandler = new PlayerEventHandler();
 
             IModelBuilder modelBuilder = new ModelBuilder(modelFactory, abilityUpgradeService);

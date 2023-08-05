@@ -44,6 +44,11 @@ namespace CodeBase.Domain
             _isWaitingForInitialize = false;
             _staggerResist = enemyAIData.StaggerResist;
             _isStaggered = false;
+            _isPreviousMoving = false;
+            _isAttackOnCooldown = false;
+            
+            if (_attackCoroutine != null)
+                StopCoroutine(_attackCoroutine);
         }
 
         public void UpdateProgression(float progressionModifier) =>

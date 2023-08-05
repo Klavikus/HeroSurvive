@@ -1200,7 +1200,7 @@ MonoBehaviour:
         m_RotationOrder: 4
   - <Name>k__BackingField: Dwarf
     <Type>k__BackingField: 8
-    <Prefab>k__BackingField: {fileID: 0}
+    <Prefab>k__BackingField: {fileID: 8585566137270250800, guid: 6967732d02369214e8a006b8215bd00e, type: 3}
     <AIData>k__BackingField:
       MoveStrategy: {fileID: 11400000, guid: 0e190e5de8cf18f49989220b9c4b0e92, type: 2}
       Speed: 1
