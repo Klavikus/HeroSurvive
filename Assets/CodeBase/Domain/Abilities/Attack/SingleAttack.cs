@@ -24,8 +24,13 @@ namespace CodeBase.Domain
             if (count > 0)
             {
                 for (var i = 0; i < count; i++)
+                {
                     if (Results[i].collider.TryGetComponent(out Damageable damageable))
+                    {
+                        InvokeEnemyHitted(damageable.transform);
                         damageable.TakeDamage(AbilityConfig.Damage, AbilityConfig.Stagger);
+                    }
+                }
             }
         }
     }

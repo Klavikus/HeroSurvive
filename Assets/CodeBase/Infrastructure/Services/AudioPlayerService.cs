@@ -1,27 +1,18 @@
-using CodeBase.Domain;
+using FMODUnity;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure
 {
-    public class AudioPlayerService
+    public class AudioPlayerService : IAudioPlayerService
     {
-        private readonly AudioPlayer _audioPlayer;
+        private readonly IConfigurationProvider _configurationProvider;
 
-        public AudioPlayerService(AudioPlayer audioPlayer)
+        public AudioPlayerService(IConfigurationProvider configurationProvider)
         {
-            _audioPlayer = audioPlayer;
+            _configurationProvider = configurationProvider;
         }
 
-        public void PlayVFXAudio(AudioClip audioDataHitAfx, bool oneShot = false)
-        {
-            if (oneShot)
-            {
-                _audioPlayer.PlayOneShot(audioDataHitAfx, AudioSourceType.Secondary);
-            }
-            else
-            {
-                _audioPlayer.Play(audioDataHitAfx, AudioSourceType.Secondary);
-            }
-        }
+        public void PlayHit(Vector3 position) =>
+            RuntimeManager.PlayOneShot(_configurationProvider.FMOD_HitReference, position);
     }
 }

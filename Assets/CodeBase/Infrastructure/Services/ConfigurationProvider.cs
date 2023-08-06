@@ -1,6 +1,7 @@
 using CodeBase.Configs;
 using CodeBase.Domain;
 using CodeBase.Infrastructure.Services;
+using FMODUnity;
 
 namespace CodeBase.Infrastructure
 {
@@ -19,6 +20,7 @@ namespace CodeBase.Infrastructure
         public GameLoopConfigSO GameLoopConfig => _configurationContainer.GameLoopConfigSO;
         public EnemyConfigSO EnemyConfig => _configurationContainer.EnemyConfigSO;
         public VfxConfig VfxConfig => _configurationContainer.VfxConfig;
+        public EventReference FMOD_HitReference => _configurationContainer.FMOD_HitReference;
         public StageCompetitionConfigSO StageCompetitionConfig => _configurationContainer.StageCompetitionConfigSO;
         public AbilityConfigSO[] AbilityConfigs => _configurationContainer.AbilityConfigsSO;
     }

@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3aea3a6fc0471ca658b0f5253bee1e, type: 3}
   m_Name: ConfigurationContainer
   m_EditorClassIdentifier: 
+  <FMOD_HitReference>k__BackingField:
+    Guid:
+      Data1: -349235796
+      Data2: 1150741416
+      Data3: -519333958
+      Data4: -1099204818
+    Path: event:/EnemyHitted
   <HeroConfigSO>k__BackingField: {fileID: 11400000, guid: 00206a69e21d5a04abf958bf369478e3, type: 2}
   <BasePropertiesConfigSO>k__BackingField: {fileID: 11400000, guid: c04a4fb8e84240d4482f46b42c00c1f6, type: 2}
   <MainMenuConfigurationSo>k__BackingField: {fileID: 11400000, guid: 33f7d89f62822134d91b29955e7495e1, type: 2}

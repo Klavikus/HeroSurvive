@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using CodeBase.Infrastructure;
+using FMODUnity;
 using UnityEngine;
 
 namespace CodeBase.Domain
@@ -20,11 +21,11 @@ namespace CodeBase.Domain
         private List<Coroutine> _coroutineHandlers;
         private WaitForSeconds _returnToPoolDelay;
         private ISizeBehaviour _sizeBehaviour;
-        private AudioPlayerService _audioPlayerService;
+        private IAudioPlayerService _audioPlayerService;
 
         public event Action<AbilityProjection> Destroed;
 
-        public void Initialize(AudioPlayerService audioPlayerService, ITargetService targetFinderService,
+        public void Initialize(IAudioPlayerService audioPlayerService, ITargetService targetFinderService,
             AbilityData abilityBaseData,
             IAttackBehaviour attackBehaviour,
             IMovementBehaviour movementBehaviour,
@@ -58,17 +59,17 @@ namespace CodeBase.Domain
                 StartCoroutine(_movementBehaviour.Run()),
             };
 
-            _audioPlayerService.PlayVFXAudio(_abilityBaseData.AudioData.StartAFX);
+            // _audioPlayerService.PlayVFXAudio(_abilityBaseData.AudioData.StartAFX);
             _attackBehaviour.PenetrationLimit += OnAttackExpired;
-            // _attackBehaviour.EnemyHitted += OnEnemyHitted;
+            _attackBehaviour.EnemyHitted += OnEnemyHitted;
             StartCoroutine(ReturnToPool());
         }
 
         private void OnDestroy() => Destroed?.Invoke(this);
 
-        private void OnEnemyHitted()
+        private void OnEnemyHitted(Transform enemy)
         {
-            _audioPlayerService.PlayVFXAudio(_abilityBaseData.AudioData.HitAFX);
+            _audioPlayerService.PlayHit(enemy.position);
         }
 
         private void OnAttackExpired()

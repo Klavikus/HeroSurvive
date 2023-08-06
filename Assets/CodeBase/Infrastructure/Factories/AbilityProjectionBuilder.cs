@@ -8,7 +8,7 @@ namespace CodeBase.Infrastructure
     public class AbilityProjectionBuilder
     {
         private readonly ITargetService _targetFinderService;
-        private readonly AudioPlayerService _audioPlayerService;
+        private readonly IAudioPlayerService _audioPlayerService;
         private readonly ProjectionPool _projectionPool;
         private readonly Transform _poolContainer;
 
@@ -37,7 +37,7 @@ namespace CodeBase.Infrastructure
         private readonly Dictionary<AbilityData, ProjectionPool> _projectionPools =
             new Dictionary<AbilityData, ProjectionPool>();
 
-        public AbilityProjectionBuilder(ITargetService targetService, AudioPlayerService audioPlayerService)
+        public AbilityProjectionBuilder(ITargetService targetService, IAudioPlayerService audioPlayerService)
         {
             _targetFinderService = targetService;
             _audioPlayerService = audioPlayerService;

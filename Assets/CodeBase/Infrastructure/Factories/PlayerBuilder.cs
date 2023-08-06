@@ -1,6 +1,7 @@
 using Cinemachine;
 using CodeBase.Configs;
 using CodeBase.Domain;
+using FMODUnity;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure
@@ -12,7 +13,7 @@ namespace CodeBase.Infrastructure
         private readonly IModelProvider _modelProvider;
         private readonly IAbilityUpgradeService _abilityUpgradeService;
         private readonly AbilityFactory _abilityFactory;
-        private readonly AudioPlayerService _audioPlayerService;
+        private readonly IAudioPlayerService _audioPlayerService;
 
         private Player _player;
 
@@ -30,7 +31,7 @@ namespace CodeBase.Infrastructure
             IPropertyProvider propertyProvider,
             IAbilityUpgradeService abilityUpgradeService,
             AbilityFactory abilityFactory,
-            AudioPlayerService audioPlayerService)
+            IAudioPlayerService audioPlayerService)
         {
             _modelProvider = modelProvider;
             _configurationProvider = configurationProvider;
@@ -83,6 +84,9 @@ namespace CodeBase.Infrastructure
             _currentCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
             _currentCamera.Follow = _player.transform;
             _playerCamera = GameObject.FindObjectOfType<Camera>();
+            var listener = GameObject.FindObjectOfType<StudioListener>();
+            listener.enabled = false;
+            _player.gameObject.AddComponent<StudioListener>().BindAttenuation(_player.gameObject);
         }
 
         public void BindEventsHandler(PlayerEventHandler playerEventHandler)

@@ -62,6 +62,7 @@ namespace CodeBase.Infrastructure
             //TODO: Fix spawn on die when game close in Editor
             _enemySpawnService.ClearEnemies();
             UnsubscribeFromEnemies();
+            _vfxService.Clear();
         }
 
         public int GetAllWavesCount()
@@ -105,9 +106,7 @@ namespace CodeBase.Infrastructure
         private void OnEnemyDied(Enemy enemy)
         {
             _modelProvider.Get<LevelUpModel>().HandleRewardedKill(enemy);
-
-            _vfxService.HandleKill(enemy.transform.position);
-
+            
             enemy.Died -= OnEnemyDied;
             enemy.OutOfViewTimeout -= OnEnemyOutOfViewTimeout;
             EnemyKilled?.Invoke(enemy);

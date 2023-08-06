@@ -36,15 +36,13 @@ namespace CodeBase.Domain
                 foreach (Damageable newDamageable in CurrentEnemies.Except(PreviousEnemies))
                 {
                     newDamageable.TakeDamage(AbilityConfig.Damage, AbilityConfig.Stagger);
+                    InvokeEnemyHitted(newDamageable.transform);
                     if (AbilityConfig.IsLimitedPenetration && --Penetration == 0)
                     {
                         CanRun = false;
                         InvokePenetrationLimit();
                     }
                 }
-
-                if (CurrentEnemies.Except(PreviousEnemies).Any())
-                    InvokeEnemyHitted();
             }
 
             PreviousEnemies.Clear();

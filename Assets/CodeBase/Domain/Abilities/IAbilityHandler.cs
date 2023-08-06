@@ -6,7 +6,7 @@ namespace CodeBase.Domain
 {
     public interface IAbilityHandler
     {
-        void Initialize(AbilityFactory abilityFactory, AudioPlayerService audioPlayerService);
+        void Initialize(AbilityFactory abilityFactory, IAudioPlayerService audioPlayerService);
         void AddAbility(AbilityConfigSO newAbility);
         void UpdatePlayerModifiers(IReadOnlyDictionary<BaseProperty, float> stats);
     }

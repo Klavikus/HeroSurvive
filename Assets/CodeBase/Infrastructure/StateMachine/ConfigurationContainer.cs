@@ -1,6 +1,7 @@
 using CodeBase.Configs;
 using CodeBase.Domain;
 using CodeBase.Infrastructure.Services;
+using FMODUnity;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure
@@ -8,6 +9,7 @@ namespace CodeBase.Infrastructure
     [CreateAssetMenu(menuName = "Create ConfigurationContainer", fileName = "ConfigurationContainer", order = 0)]
     public class ConfigurationContainer : ScriptableObject
     {
+        [field: SerializeField] public EventReference FMOD_HitReference { get; private set; }
         [field: SerializeField] public HeroesConfigSO HeroConfigSO { get; private set; }
         [field: SerializeField] public BasePropertiesConfigSO BasePropertiesConfigSO { get; private set; }
         [field: SerializeField] public MainMenuConfigurationSO MainMenuConfigurationSo { get; private set; }

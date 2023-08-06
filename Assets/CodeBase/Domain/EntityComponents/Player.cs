@@ -12,13 +12,13 @@ namespace CodeBase.Domain
 
         private IPropertyProvider _propertyProvider;
         private MainProperties _currentProperties;
-        private AudioPlayerService _audioPlayerService;
+        private IAudioPlayerService _audioPlayerService;
 
         public bool IsFreeSlotAvailable => _abilityHandler.IsFreeSlotAvailable;
         public AbilityHandler AbilityHandler => _abilityHandler;
 
         public void Initialize(IPropertyProvider propertyProvider, AbilityConfigSO initialAbilityConfigSO,
-            AbilityFactory abilityFactory, AudioPlayerService audioPlayerService)
+            AbilityFactory abilityFactory, IAudioPlayerService audioPlayerService)
         {
             _propertyProvider = propertyProvider;
             _audioPlayerService = audioPlayerService;

@@ -65,7 +65,7 @@ namespace CodeBase.Infrastructure
                 upgradeDescriptionBuilder);
             GameLoopViewBuilder gameLoopViewBuilder = new GameLoopViewBuilder(gameLoopViewFactory);
 
-            AudioPlayerService audioPlayerService = new AudioPlayerService(_audioPlayer);
+            IAudioPlayerService audioPlayerService = new AudioPlayerService(configurationProvider);
             IAdsProvider adsProvider = new AdsProvider(_coroutineRunner);
             ISaveLoadService saveLoadService = new SaveLoadService(configurationProvider);
             IAuthorizeService authorizeService = new AuthorizeService();
@@ -136,6 +136,8 @@ namespace CodeBase.Infrastructure
             _services.RegisterAsSingle(gameLoopService);
             _services.RegisterAsSingle(viewFactory);
             _services.RegisterAsSingle(mainMenuFactory);
+            _services.RegisterAsSingle(audioPlayerService);
+            _services.RegisterAsSingle(vfxService);
         }
     }
 }

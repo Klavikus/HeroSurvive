@@ -21,7 +21,7 @@ namespace CodeBase.Domain
         public bool IsFreeSlotAvailable => MaxAbilitySlots > _currentAbilitySlots;
         public IReadOnlyList<Ability> CurrentAbilities => _abilities;
 
-        public void Initialize(AbilityFactory abilityFactory, AudioPlayerService audioPlayerService)
+        public void Initialize(AbilityFactory abilityFactory, IAudioPlayerService audioPlayerService)
         {
             _abilityFactory = abilityFactory;
             _initialized = true;

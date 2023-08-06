@@ -18,10 +18,10 @@ namespace CodeBase.Domain
         protected bool CanRun;
 
         public event Action PenetrationLimit;
-        public event Action EnemyHitted;
+        public event Action<Transform> EnemyHitted;
 
         protected void InvokePenetrationLimit() => PenetrationLimit?.Invoke();
-        protected void InvokeEnemyHitted() => EnemyHitted?.Invoke();
+        protected void InvokeEnemyHitted(Transform enemy) => EnemyHitted?.Invoke(enemy);
 
         protected AttackBehaviour(AbilityData abilityConfig)
         {

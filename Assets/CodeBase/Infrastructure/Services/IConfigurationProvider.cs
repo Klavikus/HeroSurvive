@@ -1,6 +1,7 @@
 ﻿using CodeBase.Configs;
 using CodeBase.Domain;
 using CodeBase.Infrastructure.Services;
+using FMODUnity;
 
 namespace CodeBase.Infrastructure
 {
@@ -16,5 +17,6 @@ namespace CodeBase.Infrastructure
         ColorConfigSO ColorsConfig { get; }
         EnemyConfigSO EnemyConfig { get; }
         VfxConfig VfxConfig { get; }
+        EventReference FMOD_HitReference { get; }
     }
 }
