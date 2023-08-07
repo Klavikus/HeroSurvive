@@ -1,6 +1,9 @@
+using System.Collections;
+using System.Threading.Tasks;
 using CodeBase.Configs;
 using CodeBase.Domain;
 using CodeBase.Presentation;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure
 {
@@ -42,6 +45,7 @@ namespace CodeBase.Infrastructure
             _adsProvider.Initialized += AdsProviderOnInitialized;
             _adsProvider.Initialize();
 
+
             gameLoopService.Initialize();
         }
 
@@ -53,7 +57,31 @@ namespace CodeBase.Infrastructure
         private void AdsProviderOnInitialized()
         {
             _translationService.UpdateLanguage();
+
+            var result = FMODUnity.RuntimeManager.CoreSystem.mixerSuspend();
+            Debug.Log(result);
+            result = FMODUnity.RuntimeManager.CoreSystem.mixerResume();
+            Debug.Log(result);
+
+            var runner = new GameObject().AddComponent<CoroutineRunner>();
+            runner.StartCoroutine(FmodLoad(runner));
+        }
+
+        //TODO: Refactor this
+        private IEnumerator FmodLoad(CoroutineRunner coroutineRunner)
+        {
+            Debug.LogWarning("StartCheck ");
+
+            while (FMODUnity.RuntimeManager.HaveAllBanksLoaded == false)
+            {
+                Debug.LogWarning("HaveAllBanksLoaded = false");
+                yield return null;
+            }
+
+            Debug.LogWarning("EndCheck ");
             _gameStateMachine.Enter<LoadLevelState, string>(MainMenuScene);
+
+            GameObject.Destroy(coroutineRunner.gameObject);
         }
 
         private void PrepareModels(IBuilder modelBuilder, IProvider modelProvider)
