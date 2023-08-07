@@ -38,7 +38,7 @@ namespace CodeBase.Presentation
         {
             _gameLoopModel = gameLoopModel;
             _gameLoopModel.StartLevelInvoked += OnLevelStart;
-            _gameLoopModel.PlayerResurrected += () => PlayerResurrected?.Invoke();
+            _gameLoopModel.PlayerResurrected += OnPlayerResurrected;
             _leveCompetitionService = leveCompetitionService;
             _playerEventHandler = playerEventHandler;
             _adsProvider = adsProvider;
@@ -51,6 +51,7 @@ namespace CodeBase.Presentation
         }
 
         public void Bind(LeaderBoardsViewModel leaderBoardsViewModel) => _leaderBoardsViewModel = leaderBoardsViewModel;
+
         public void Bind(CurrencyViewModel currencyViewModel)
         {
             _currencyViewModel = currencyViewModel;
@@ -65,6 +66,7 @@ namespace CodeBase.Presentation
             _gainedCurrency = 0;
             _currentEnemyKilled = 0;
             _lastCompletedWave = 0;
+            _sfxService.PlayAmbient();
         }
 
         private void CurrencyChanged(int currentCurrency)
@@ -76,6 +78,8 @@ namespace CodeBase.Presentation
         private void OnPlayerDied()
         {
             _sfxService.PlayPlayerDied();
+            _sfxService.StopAmbient();
+
             PlayerDied?.Invoke();
         }
 
@@ -89,6 +93,7 @@ namespace CodeBase.Presentation
 
         public void CloseLevel()
         {
+            _sfxService.StopAmbient();
             Time.timeScale = 1;
             // _leaderBoardsViewModel.SetMaxScore(_currentEnemyKilled);
             _leaderBoardsViewModel.SetMaxScore(_lastCompletedWave);
@@ -126,6 +131,12 @@ namespace CodeBase.Presentation
             _adsProvider.ShowAds(
                 onRewardCallback: () => _currencyViewModel.AdditionalReward(_gainedCurrency),
                 onCloseCallback: CloseLevel);
+        }
+
+        private void OnPlayerResurrected()
+        {
+            PlayerResurrected?.Invoke();
+            _sfxService.PlayAmbient();
         }
     }
 }

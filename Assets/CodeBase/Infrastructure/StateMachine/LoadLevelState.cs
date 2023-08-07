@@ -26,11 +26,13 @@ namespace CodeBase.Infrastructure
         public void Exit()
         {
             _modelProvider.Get<GameLoopModel>().StartLevelInvoked -= OnLevelInvoked;
+            AllServices.Container.AsSingle<IAudioPlayerService>().StopMainMenuAmbient();
         }
 
         private void OnLoaded()
         {
             _mainMenuFactory.Initialization();
+            AllServices.Container.AsSingle<IAudioPlayerService>().StartMainMenuAmbient();
         }
 
         private void OnLevelInvoked(HeroData heroData) => _gameStateMachine.Enter<GameLoopState, HeroData>(heroData);

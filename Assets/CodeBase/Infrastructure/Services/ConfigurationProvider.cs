@@ -23,6 +23,9 @@ namespace CodeBase.Infrastructure
         public EventReference FMOD_HitReference => _configurationContainer.FMOD_HitReference;
         public EventReference FMOD_UpgradeBuyReference => _configurationContainer.FMOD_UpgradeBuyReference;
         public EventReference FMOD_PlayerDiedReference => _configurationContainer.FMOD_PlayerDiedReference;
+        public EventReference FMOD_StartLevelReference => _configurationContainer.FMOD_StartLevelReference;
+        public EventReference FMOD_GameLoopAmbientReference => _configurationContainer.FMOD_GameLoopAmbientReference;
+        public EventReference FMOD_MainMenuAmbientReference => _configurationContainer.FMOD_MainMenuAmbientReference;
         public StageCompetitionConfigSO StageCompetitionConfig => _configurationContainer.StageCompetitionConfigSO;
         public AbilityConfigSO[] AbilityConfigs => _configurationContainer.AbilityConfigsSO;
     }

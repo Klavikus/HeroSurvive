@@ -14,6 +14,7 @@ namespace CodeBase.Presentation
         private readonly ITranslationService _translationService;
         private readonly IConfigurationProvider _configurationProvider;
         private readonly HeroData[] _availableHeroesData;
+        private IAudioPlayerService _sfxService;
         public event Action<HeroData> HeroSelected;
         public event Action HeroSelectorEnabled;
         public event Action HeroSelectorDisabled;
@@ -29,7 +30,8 @@ namespace CodeBase.Presentation
             MenuModel menuModel,
             GameLoopModel gameLoopModel,
             ITranslationService translationService,
-            IConfigurationProvider configurationProvider
+            IConfigurationProvider configurationProvider,
+            IAudioPlayerService sfxService
         )
         {
             _heroModel = heroModel;
@@ -37,6 +39,7 @@ namespace CodeBase.Presentation
             _gameLoopModel = gameLoopModel;
             _translationService = translationService;
             _configurationProvider = configurationProvider;
+            _sfxService = sfxService;
             _availableHeroesData = _configurationProvider.HeroConfig.HeroesData.Select(heroData => heroData).ToArray();
             _menuModel.OpenedHeroSelection += OnMenuModelHeroSelectorEnabled;
             _menuModel.ClosedHeroSelection += OnMenuModelHeroSelectorDisabled;
@@ -59,7 +62,11 @@ namespace CodeBase.Presentation
 
         public void DisableHeroSelector() => _menuModel.DisableHeroSelector();
 
-        public void Continue() => _gameLoopModel.InvokeStartLevel(CurrentSelectedHeroData);
+        public void Continue()
+        {
+            _sfxService.PlayStartLevel();
+            _gameLoopModel.InvokeStartLevel(CurrentSelectedHeroData);
+        }
 
         private void OnMenuModelHeroSelectorEnabled() => HeroSelectorEnabled?.Invoke();
 

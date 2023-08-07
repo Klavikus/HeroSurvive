@@ -19,6 +19,9 @@ namespace CodeBase.Infrastructure
         VfxConfig VfxConfig { get; }
         EventReference FMOD_HitReference { get; }
         EventReference FMOD_UpgradeBuyReference { get; }
-        EventReference FMOD_PlayerDiedReference { get;  }
+        EventReference FMOD_PlayerDiedReference { get; }
+        EventReference FMOD_StartLevelReference { get; }
+        EventReference FMOD_GameLoopAmbientReference { get; }
+        EventReference FMOD_MainMenuAmbientReference { get; }
     }
 }

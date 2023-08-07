@@ -12,6 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3aea3a6fc0471ca658b0f5253bee1e, type: 3}
   m_Name: ConfigurationContainer
   m_EditorClassIdentifier: 
+  <FMOD_MainMenuAmbientReference>k__BackingField:
+    Guid:
+      Data1: 707678931
+      Data2: 1336464989
+      Data3: -1754209093
+      Data4: -1532825303
+    Path: event:/MainMenuMusic
+  <FMOD_GameLoopAmbientReference>k__BackingField:
+    Guid:
+      Data1: 474038832
+      Data2: 1332184248
+      Data3: -1172042354
+      Data4: -612106570
+    Path: event:/BattleMusic
+  <FMOD_StartLevelReference>k__BackingField:
+    Guid:
+      Data1: -1770848749
+      Data2: 1270757978
+      Data3: 1231208344
+      Data4: 851202207
+    Path: event:/StartLevel
   <FMOD_PlayerDiedReference>k__BackingField:
     Guid:
       Data1: -324358503

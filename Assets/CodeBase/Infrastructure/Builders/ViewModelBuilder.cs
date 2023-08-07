@@ -69,7 +69,8 @@ namespace CodeBase.Infrastructure
                 builder._modelProvider.Get<MenuModel>(),
                 builder._modelProvider.Get<GameLoopModel>(),
                 builder._translationService,
-                builder._configurationProvider);
+                builder._configurationProvider,
+                builder._sfxService);
 
         private static MainPropertiesViewModel BuildMainPropertiesViewModel(ViewModelBuilder builder) =>
             new MainPropertiesViewModel(
