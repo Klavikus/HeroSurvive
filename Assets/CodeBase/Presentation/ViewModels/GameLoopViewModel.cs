@@ -20,6 +20,7 @@ namespace CodeBase.Presentation
         private int _initialCurrency;
         private int _gainedCurrency;
         private bool _isLastAdsRewarded;
+        private IAudioPlayerService _sfxService;
 
         public event Action<int> WaveCompleted;
         public event Action<int> KilledChanged;
@@ -32,7 +33,8 @@ namespace CodeBase.Presentation
             GameLoopModel gameLoopModel,
             ILeveCompetitionService leveCompetitionService,
             PlayerEventHandler playerEventHandler,
-            IAdsProvider adsProvider)
+            IAdsProvider adsProvider,
+            IAudioPlayerService sfxService)
         {
             _gameLoopModel = gameLoopModel;
             _gameLoopModel.StartLevelInvoked += OnLevelStart;
@@ -40,6 +42,7 @@ namespace CodeBase.Presentation
             _leveCompetitionService = leveCompetitionService;
             _playerEventHandler = playerEventHandler;
             _adsProvider = adsProvider;
+            _sfxService = sfxService;
             _lastCompletedWave = 0;
             _playerEventHandler.Died += OnPlayerDied;
             _leveCompetitionService.WaveCompleted += OnWaveCompleted;
@@ -70,7 +73,11 @@ namespace CodeBase.Presentation
             RewardCurrencyChanged?.Invoke(_gainedCurrency);
         }
 
-        private void OnPlayerDied() => PlayerDied?.Invoke();
+        private void OnPlayerDied()
+        {
+            _sfxService.PlayPlayerDied();
+            PlayerDied?.Invoke();
+        }
 
         private void OnAllWavesCompleted() => AllWavesCompleted?.Invoke();
 

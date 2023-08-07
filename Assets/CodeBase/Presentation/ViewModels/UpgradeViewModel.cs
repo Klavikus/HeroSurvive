@@ -15,15 +15,18 @@ namespace CodeBase.Presentation
         private readonly IUpgradeService _upgradeService;
 
         private UpgradeData _currentSelected;
+        private IAudioPlayerService _sfxService;
 
         public UpgradeViewModel(
             UpgradeModel[] upgrades,
             CurrencyModel currencyModel,
-            IUpgradeService upgradeService)
+            IUpgradeService upgradeService,
+            IAudioPlayerService sfxService)
         {
             _upgrades = upgrades;
             _currencyModel = currencyModel;
             _upgradeService = upgradeService;
+            _sfxService = sfxService;
 
             _upgradeModels = new Dictionary<UpgradeData, UpgradeModel>();
 
@@ -59,6 +62,7 @@ namespace CodeBase.Presentation
 
         public void Upgrade(UpgradeData upgradeData)
         {
+            _sfxService.PlayUpgradeBuy();
             _currencyModel.Pay(_upgradeModels[upgradeData].GetUpgradeCost());
             _upgradeModels[upgradeData].LevelUp();
         }

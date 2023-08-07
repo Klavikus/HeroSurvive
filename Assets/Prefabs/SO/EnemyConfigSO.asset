@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemyConfigSO
   m_EditorClassIdentifier: 
   _damageableData:
-    <MaxHealth>k__BackingField: 3
+    <MaxHealth>k__BackingField: 30
     <HealthRegenerationPercent>k__BackingField: 0
     <RegenerationDelayInSeconds>k__BackingField: 1
   _damageSourceData:
@@ -31,7 +31,7 @@ MonoBehaviour:
       maxDepth: 0
       minNormalAngle: 0
       maxNormalAngle: 0
-    <Damage>k__BackingField: 1
+    <Damage>k__BackingField: 30
     <AttackRadius>k__BackingField: 1
     <MaxAffectedTargets>k__BackingField: 5
   _lootData:
@@ -153,7 +153,7 @@ MonoBehaviour:
       ObstacleCheckDistance: 1
       StaggerResist: 0
     <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 3
+      <MaxHealth>k__BackingField: 30
       <HealthRegenerationPercent>k__BackingField: 0
       <RegenerationDelayInSeconds>k__BackingField: 1
     <DamageSourceData>k__BackingField:
@@ -171,7 +171,7 @@ MonoBehaviour:
         maxDepth: 0
         minNormalAngle: 0
         maxNormalAngle: 0
-      <Damage>k__BackingField: 1
+      <Damage>k__BackingField: 30
       <AttackRadius>k__BackingField: 1
       <MaxAffectedTargets>k__BackingField: 5
     <LootData>k__BackingField:
@@ -285,7 +285,7 @@ MonoBehaviour:
       ObstacleCheckDistance: 1
       StaggerResist: 0
     <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 3
+      <MaxHealth>k__BackingField: 30
       <HealthRegenerationPercent>k__BackingField: 0
       <RegenerationDelayInSeconds>k__BackingField: 1
     <DamageSourceData>k__BackingField:
@@ -303,7 +303,7 @@ MonoBehaviour:
         maxDepth: 0
         minNormalAngle: 0
         maxNormalAngle: 0
-      <Damage>k__BackingField: 1
+      <Damage>k__BackingField: 30
       <AttackRadius>k__BackingField: 1
       <MaxAffectedTargets>k__BackingField: 5
     <LootData>k__BackingField:
@@ -417,7 +417,7 @@ MonoBehaviour:
       ObstacleCheckDistance: 1
       StaggerResist: 0
     <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 3
+      <MaxHealth>k__BackingField: 30
       <HealthRegenerationPercent>k__BackingField: 0
       <RegenerationDelayInSeconds>k__BackingField: 1
     <DamageSourceData>k__BackingField:
@@ -435,7 +435,7 @@ MonoBehaviour:
         maxDepth: 0
         minNormalAngle: 0
         maxNormalAngle: 0
-      <Damage>k__BackingField: 1
+      <Damage>k__BackingField: 30
       <AttackRadius>k__BackingField: 1
       <MaxAffectedTargets>k__BackingField: 5
     <LootData>k__BackingField:
@@ -549,7 +549,7 @@ MonoBehaviour:
       ObstacleCheckDistance: 1
       StaggerResist: 0
     <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 3
+      <MaxHealth>k__BackingField: 30
       <HealthRegenerationPercent>k__BackingField: 0
       <RegenerationDelayInSeconds>k__BackingField: 1
     <DamageSourceData>k__BackingField:
@@ -567,7 +567,7 @@ MonoBehaviour:
         maxDepth: 0
         minNormalAngle: 0
         maxNormalAngle: 0
-      <Damage>k__BackingField: 1
+      <Damage>k__BackingField: 30
       <AttackRadius>k__BackingField: 1
       <MaxAffectedTargets>k__BackingField: 5
     <LootData>k__BackingField:
@@ -681,7 +681,7 @@ MonoBehaviour:
       ObstacleCheckDistance: 1
       StaggerResist: 0
     <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 3
+      <MaxHealth>k__BackingField: 30
       <HealthRegenerationPercent>k__BackingField: 0
       <RegenerationDelayInSeconds>k__BackingField: 1
     <DamageSourceData>k__BackingField:
@@ -699,7 +699,7 @@ MonoBehaviour:
         maxDepth: 0
         minNormalAngle: 0
         maxNormalAngle: 0
-      <Damage>k__BackingField: 1
+      <Damage>k__BackingField: 30
       <AttackRadius>k__BackingField: 1
       <MaxAffectedTargets>k__BackingField: 5
     <LootData>k__BackingField:
@@ -813,7 +813,7 @@ MonoBehaviour:
       ObstacleCheckDistance: 1
       StaggerResist: 0
     <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 3
+      <MaxHealth>k__BackingField: 30
       <HealthRegenerationPercent>k__BackingField: 0
       <RegenerationDelayInSeconds>k__BackingField: 1
     <DamageSourceData>k__BackingField:
@@ -831,7 +831,7 @@ MonoBehaviour:
         maxDepth: 0
         minNormalAngle: 0
         maxNormalAngle: 0
-      <Damage>k__BackingField: 1
+      <Damage>k__BackingField: 30
       <AttackRadius>k__BackingField: 1
       <MaxAffectedTargets>k__BackingField: 5
     <LootData>k__BackingField:
@@ -945,7 +945,7 @@ MonoBehaviour:
       ObstacleCheckDistance: 1
       StaggerResist: 0
     <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 3
+      <MaxHealth>k__BackingField: 30
       <HealthRegenerationPercent>k__BackingField: 0
       <RegenerationDelayInSeconds>k__BackingField: 1
     <DamageSourceData>k__BackingField:
@@ -963,7 +963,7 @@ MonoBehaviour:
         maxDepth: 0
         minNormalAngle: 0
         maxNormalAngle: 0
-      <Damage>k__BackingField: 1
+      <Damage>k__BackingField: 30
       <AttackRadius>k__BackingField: 1
       <MaxAffectedTargets>k__BackingField: 5
     <LootData>k__BackingField:
@@ -1077,7 +1077,7 @@ MonoBehaviour:
       ObstacleCheckDistance: 1
       StaggerResist: 0
     <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 3
+      <MaxHealth>k__BackingField: 30
       <HealthRegenerationPercent>k__BackingField: 0
       <RegenerationDelayInSeconds>k__BackingField: 1
     <DamageSourceData>k__BackingField:
@@ -1095,7 +1095,7 @@ MonoBehaviour:
         maxDepth: 0
         minNormalAngle: 0
         maxNormalAngle: 0
-      <Damage>k__BackingField: 1
+      <Damage>k__BackingField: 30
       <AttackRadius>k__BackingField: 1
       <MaxAffectedTargets>k__BackingField: 5
     <LootData>k__BackingField:
@@ -1209,7 +1209,7 @@ MonoBehaviour:
       ObstacleCheckDistance: 1
       StaggerResist: 0
     <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 3
+      <MaxHealth>k__BackingField: 30
       <HealthRegenerationPercent>k__BackingField: 0
       <RegenerationDelayInSeconds>k__BackingField: 1
     <DamageSourceData>k__BackingField:
@@ -1227,7 +1227,7 @@ MonoBehaviour:
         maxDepth: 0
         minNormalAngle: 0
         maxNormalAngle: 0
-      <Damage>k__BackingField: 1
+      <Damage>k__BackingField: 30
       <AttackRadius>k__BackingField: 1
       <MaxAffectedTargets>k__BackingField: 5
     <LootData>k__BackingField:
@@ -1341,7 +1341,7 @@ MonoBehaviour:
       ObstacleCheckDistance: 1
       StaggerResist: 0
     <DamageableData>k__BackingField:
-      <MaxHealth>k__BackingField: 3
+      <MaxHealth>k__BackingField: 30
       <HealthRegenerationPercent>k__BackingField: 0
       <RegenerationDelayInSeconds>k__BackingField: 1
     <DamageSourceData>k__BackingField:
@@ -1359,7 +1359,7 @@ MonoBehaviour:
         maxDepth: 0
         minNormalAngle: 0
         maxNormalAngle: 0
-      <Damage>k__BackingField: 1
+      <Damage>k__BackingField: 30
       <AttackRadius>k__BackingField: 1
       <MaxAffectedTargets>k__BackingField: 5
     <LootData>k__BackingField:

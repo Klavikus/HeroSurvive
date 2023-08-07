@@ -12,6 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3aea3a6fc0471ca658b0f5253bee1e, type: 3}
   m_Name: ConfigurationContainer
   m_EditorClassIdentifier: 
+  <FMOD_PlayerDiedReference>k__BackingField:
+    Guid:
+      Data1: -324358503
+      Data2: 1134022982
+      Data3: 1014423475
+      Data4: 2024186393
+    Path: event:/Died
+  <FMOD_UpgradeBuyReference>k__BackingField:
+    Guid:
+      Data1: -1974874719
+      Data2: 1260626009
+      Data3: 1349293726
+      Data4: 910228622
+    Path: event:/Upgraded
   <FMOD_HitReference>k__BackingField:
     Guid:
       Data1: -349235796

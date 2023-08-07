@@ -83,7 +83,8 @@ namespace CodeBase.Infrastructure
             IModelBuilder modelBuilder = new ModelBuilder(modelFactory, abilityUpgradeService);
 
             IViewModelBuilder viewModelBuilder =
-                new ViewModelBuilder(
+                new ViewModelBuilder
+                (
                     configurationProvider,
                     modelProvider,
                     translationService,
@@ -93,7 +94,9 @@ namespace CodeBase.Infrastructure
                     leveCompetitionService,
                     playerEventHandler,
                     adsProvider,
-                    abilityUpgradeService);
+                    abilityUpgradeService,
+                    audioPlayerService
+                );
 
             IPropertyProvider propertyProvider = new PropertyProvider(
                 configurationProvider,

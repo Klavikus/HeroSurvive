@@ -21,6 +21,8 @@ namespace CodeBase.Infrastructure
         public EnemyConfigSO EnemyConfig => _configurationContainer.EnemyConfigSO;
         public VfxConfig VfxConfig => _configurationContainer.VfxConfig;
         public EventReference FMOD_HitReference => _configurationContainer.FMOD_HitReference;
+        public EventReference FMOD_UpgradeBuyReference => _configurationContainer.FMOD_UpgradeBuyReference;
+        public EventReference FMOD_PlayerDiedReference => _configurationContainer.FMOD_PlayerDiedReference;
         public StageCompetitionConfigSO StageCompetitionConfig => _configurationContainer.StageCompetitionConfigSO;
         public AbilityConfigSO[] AbilityConfigs => _configurationContainer.AbilityConfigsSO;
     }

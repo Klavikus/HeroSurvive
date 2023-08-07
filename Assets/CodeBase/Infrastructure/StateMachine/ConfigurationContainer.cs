@@ -9,6 +9,8 @@ namespace CodeBase.Infrastructure
     [CreateAssetMenu(menuName = "Create ConfigurationContainer", fileName = "ConfigurationContainer", order = 0)]
     public class ConfigurationContainer : ScriptableObject
     {
+        [field: SerializeField] public EventReference FMOD_PlayerDiedReference { get; private set; }
+        [field: SerializeField] public EventReference FMOD_UpgradeBuyReference { get; private set; }
         [field: SerializeField] public EventReference FMOD_HitReference { get; private set; }
         [field: SerializeField] public HeroesConfigSO HeroConfigSO { get; private set; }
         [field: SerializeField] public BasePropertiesConfigSO BasePropertiesConfigSO { get; private set; }

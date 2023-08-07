@@ -18,5 +18,7 @@ namespace CodeBase.Infrastructure
         EnemyConfigSO EnemyConfig { get; }
         VfxConfig VfxConfig { get; }
         EventReference FMOD_HitReference { get; }
+        EventReference FMOD_UpgradeBuyReference { get; }
+        EventReference FMOD_PlayerDiedReference { get;  }
     }
 }

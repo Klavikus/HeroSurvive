@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using CodeBase.Configs;
 using CodeBase.Domain;
+using CodeBase.Infrastructure.Services;
 using CodeBase.Presentation;
 
 namespace CodeBase.Infrastructure
@@ -31,6 +32,7 @@ namespace CodeBase.Infrastructure
         private readonly PlayerEventHandler _playerEventHandler;
         private readonly IAdsProvider _adsProvider;
         private readonly IAbilityUpgradeService _abilityUpgradeService;
+        private readonly IAudioPlayerService _sfxService;
 
         public ViewModelBuilder(
             IConfigurationProvider configurationProvider,
@@ -42,7 +44,8 @@ namespace CodeBase.Infrastructure
             ILeveCompetitionService leveCompetitionService,
             PlayerEventHandler playerEventHandler,
             IAdsProvider adsProvider,
-            IAbilityUpgradeService abilityUpgradeService)
+            IAbilityUpgradeService abilityUpgradeService,
+            IAudioPlayerService sfxService)
         {
             _configurationProvider = configurationProvider;
             _modelProvider = modelProvider;
@@ -54,6 +57,7 @@ namespace CodeBase.Infrastructure
             _playerEventHandler = playerEventHandler;
             _adsProvider = adsProvider;
             _abilityUpgradeService = abilityUpgradeService;
+            _sfxService = sfxService;
         }
 
         public T Build<T>() where T : class =>
@@ -79,7 +83,8 @@ namespace CodeBase.Infrastructure
             new UpgradeViewModel(
                 builder._modelProvider.Get<UpgradeModel[]>(),
                 builder._modelProvider.Get<CurrencyModel>(),
-                builder._upgradeService);
+                builder._upgradeService, 
+                builder._sfxService);
 
         private static CurrencyViewModel BuildCurrencyViewModel(ViewModelBuilder builder) =>
             new CurrencyViewModel(builder._modelProvider.Get<CurrencyModel>());
@@ -96,7 +101,8 @@ namespace CodeBase.Infrastructure
                 builder._modelProvider.Get<GameLoopModel>(),
                 builder._leveCompetitionService,
                 builder._playerEventHandler,
-                builder._adsProvider);
+                builder._adsProvider,
+                builder._sfxService);
 
         private static LevelUpViewModel BuildLevelUpViewModel(ViewModelBuilder builder) =>
             new LevelUpViewModel(
