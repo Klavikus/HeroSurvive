@@ -2430,11 +2430,11 @@ MonoBehaviour:
   _tmpText: {fileID: 8122449528017928102}
   _translatableStrings:
   - <Language>k__BackingField: 0
-    <Text>k__BackingField: Top Players
+    <Text>k__BackingField: Settings
   - <Language>k__BackingField: 1
-    <Text>k__BackingField: "\u041B\u0443\u0447\u0448\u0438\u0435 \u0418\u0433\u0440\u043E\u043A\u0438"
+    <Text>k__BackingField: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
   - <Language>k__BackingField: 2
-    <Text>k__BackingField: 'En Iyi Oyuncular '
+    <Text>k__BackingField: Ayarlar
 --- !u!1 &8122449528644156031
 GameObject:
   m_ObjectHideFlags: 0

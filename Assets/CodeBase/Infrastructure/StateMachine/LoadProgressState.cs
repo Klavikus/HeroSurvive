@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Threading.Tasks;
 using CodeBase.Configs;
 using CodeBase.Domain;
 using CodeBase.Presentation;
-using UnityEngine;
 
 namespace CodeBase.Infrastructure
 {
@@ -27,6 +24,7 @@ namespace CodeBase.Infrastructure
             _translationService = AllServices.Container.AsSingle<ITranslationService>();
             _propertyProvider = AllServices.Container.AsSingle<IPropertyProvider>();
             _adsProvider = AllServices.Container.AsSingle<IAdsProvider>();
+
             IGameLoopService gameLoopService = AllServices.Container.AsSingle<IGameLoopService>();
 
             IBuilder modelBuilder = AllServices.Container.AsSingle<IModelBuilder>();
@@ -64,32 +62,7 @@ namespace CodeBase.Infrastructure
         private void AdsProviderOnInitialized()
         {
             _translationService.UpdateLanguage();
-
-            var result = FMODUnity.RuntimeManager.CoreSystem.mixerSuspend();
-            Debug.Log(result);
-            result = FMODUnity.RuntimeManager.CoreSystem.mixerResume();
-            Debug.Log(result);
-
-            var runner = new GameObject().AddComponent<CoroutineRunner>();
-            runner.StartCoroutine(FmodLoad(runner));
-        }
-
-        //TODO: Refactor this
-        private IEnumerator FmodLoad(CoroutineRunner coroutineRunner)
-        {
-            Debug.LogWarning("StartCheck ");
-
-            while (FMODUnity.RuntimeManager.HaveAllBanksLoaded == false)
-            {
-                Debug.LogWarning("HaveAllBanksLoaded = false");
-                yield return null;
-            }
-
-            Debug.LogWarning("EndCheck ");
-            AllServices.Container.AsSingle<IAudioPlayerService>().Initialize();
             _gameStateMachine.Enter<LoadLevelState, string>(MainMenuScene);
-
-            GameObject.Destroy(coroutineRunner.gameObject);
         }
 
         private void PrepareModels(IBuilder modelBuilder, IProvider modelProvider)

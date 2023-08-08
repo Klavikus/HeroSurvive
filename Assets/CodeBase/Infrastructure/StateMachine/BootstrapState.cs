@@ -1,6 +1,8 @@
+using System.Collections;
 using CodeBase.Configs;
 using CodeBase.Domain;
 using CodeBase.Infrastructure.Services;
+using FMODUnity;
 
 namespace CodeBase.Infrastructure
 {
@@ -29,6 +31,16 @@ namespace CodeBase.Infrastructure
 
         public void Enter()
         {
+            _coroutineRunner.StartCoroutine(PrepareFmod());
+        }
+
+        //TODO: Refactor this
+        private IEnumerator PrepareFmod()
+        {
+            while (RuntimeManager.HaveAllBanksLoaded == false)
+                yield return null;
+
+            AllServices.Container.AsSingle<IAudioPlayerService>().Initialize();
             _sceneLoader.Load(InitialScene, onLoaded: EnterLoadLevel);
         }
 
