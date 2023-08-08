@@ -65,7 +65,7 @@ namespace CodeBase.Infrastructure
                 upgradeDescriptionBuilder);
             GameLoopViewBuilder gameLoopViewBuilder = new GameLoopViewBuilder(gameLoopViewFactory);
 
-            IAudioPlayerService audioPlayerService = new AudioPlayerService(configurationProvider);
+            IAudioPlayerService audioPlayerService = new AudioPlayerService(configurationProvider, _coroutineRunner);
             IAdsProvider adsProvider = new AdsProvider(_coroutineRunner);
             ISaveLoadService saveLoadService = new SaveLoadService(configurationProvider);
             IAuthorizeService authorizeService = new AuthorizeService();
@@ -118,7 +118,8 @@ namespace CodeBase.Infrastructure
                 modelProvider,
                 playerBuilder,
                 leveCompetitionService,
-                playerEventHandler);
+                playerEventHandler,
+                audioPlayerService);
 
             targetFinderService.BindPlayerBuilder(playerBuilder);
             abilityFactory.BindGameLoopService(gameLoopService);

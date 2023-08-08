@@ -79,6 +79,7 @@ namespace CodeBase.Infrastructure
             }
 
             Debug.LogWarning("EndCheck ");
+            AllServices.Container.AsSingle<IAudioPlayerService>().Initialize();
             _gameStateMachine.Enter<LoadLevelState, string>(MainMenuScene);
 
             GameObject.Destroy(coroutineRunner.gameObject);

@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using CodeBase.Domain;
 
 namespace CodeBase.Infrastructure
@@ -12,6 +13,7 @@ namespace CodeBase.Infrastructure
         private readonly PlayerBuilder _playerBuilder;
         private readonly PlayerEventHandler _playerEventHandler;
         private readonly ILeveCompetitionService _levelCompetitionService;
+        private readonly IAudioPlayerService _sfxService;
 
         public GameLoopService(
             LevelMapFactory levelMapFactory,
@@ -20,7 +22,8 @@ namespace CodeBase.Infrastructure
             IModelProvider modelProvider,
             PlayerBuilder playerBuilder,
             ILeveCompetitionService levelCompetitionService,
-            PlayerEventHandler playerEventHandler)
+            PlayerEventHandler playerEventHandler,
+            IAudioPlayerService sfxService)
         {
             _levelMapFactory = levelMapFactory;
             _gameLoopViewBuilder = gameLoopViewBuilder;
@@ -29,9 +32,10 @@ namespace CodeBase.Infrastructure
             _playerBuilder = playerBuilder;
             _levelCompetitionService = levelCompetitionService;
             _playerEventHandler = playerEventHandler;
+            _sfxService = sfxService;
         }
 
-        public void Initialize() => 
+        public void Initialize() =>
             _modelProvider.Get<GameLoopModel>().PlayerResurrected += OnPlayerResurrected;
 
         public event Action<HeroData> LevelInvoked;
@@ -51,13 +55,20 @@ namespace CodeBase.Infrastructure
         {
             _levelMapFactory.Create();
             _gameLoopViewBuilder.Build();
-            _abilityBuilder.Build( _modelProvider.Get<HeroModel>());
+            _abilityBuilder.Build(_modelProvider.Get<HeroModel>());
             _playerBuilder.BindCameraToPlayer();
             _playerBuilder.BindEventsHandler(_playerEventHandler);
 
             _levelCompetitionService.StartCompetition();
+
+            _sfxService.PlayAmbient();
         }
 
-        public void Stop() => _levelCompetitionService.Stop();
+        public void Stop()
+        {
+            _levelCompetitionService.Stop();
+
+            _sfxService.StopAmbient();
+        }
     }
 }

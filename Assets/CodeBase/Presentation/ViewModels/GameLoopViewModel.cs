@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using CodeBase.Domain;
 using CodeBase.Infrastructure;
 using UnityEngine;
@@ -66,7 +67,6 @@ namespace CodeBase.Presentation
             _gainedCurrency = 0;
             _currentEnemyKilled = 0;
             _lastCompletedWave = 0;
-            _sfxService.PlayAmbient();
         }
 
         private void CurrencyChanged(int currentCurrency)

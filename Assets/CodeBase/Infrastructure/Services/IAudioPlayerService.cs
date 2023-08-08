@@ -12,5 +12,6 @@ namespace CodeBase.Infrastructure
         void StopAmbient();
         void StartMainMenuAmbient();
         void StopMainMenuAmbient();
+        void Initialize();
     }
 }

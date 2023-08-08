@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using CodeBase.Domain;
+using FMODUnity;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure
@@ -20,5 +22,12 @@ namespace CodeBase.Infrastructure
 
         public Coroutine Run(IEnumerator coroutine) => StartCoroutine(coroutine);
         public void Stop(Coroutine coroutine) => StopCoroutine(coroutine);
+
+        //TODO: Refactor this
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            RuntimeManager.PauseAllEvents(hasFocus == false);
+            RuntimeManager.MuteAllEvents(hasFocus == false);
+        }
     }
 }
