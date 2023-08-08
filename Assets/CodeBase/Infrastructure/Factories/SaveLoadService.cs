@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Agava.YandexGames;
 using CodeBase.Configs;
 using CodeBase.Domain;
@@ -61,6 +62,11 @@ namespace CodeBase.Infrastructure
                 : GameConstants.BaseUserName;
             SaveToData(GameConstants.UserNameDataKey, userName);
             
+            string musicVolume = PlayerPrefs.HasKey(GameConstants.MusicVolume)
+                ? PlayerPrefs.GetString(GameConstants.MusicVolume)
+                : GameConstants.BaseMusicVolume.ToString(CultureInfo.InvariantCulture);
+            SaveToData(GameConstants.MusicVolume, musicVolume);
+
             AllLoaded?.Invoke();
         }
 

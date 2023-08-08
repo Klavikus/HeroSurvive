@@ -1,12 +1,19 @@
+using System;
+using System.Collections.Generic;
+
 namespace CodeBase.Domain
 {
-    public class EntityStateMachine
+    public class EntityStateMachine : IDisposable
     {
         private readonly IEntityState _startEntityState;
+        private readonly List<Transition> _transitions;
         private IEntityState _currentEntityState;
 
-        public EntityStateMachine(IEntityState startEntityState) => 
+        public EntityStateMachine(IEntityState startEntityState, List<Transition> transitions)
+        {
             _startEntityState = startEntityState;
+            _transitions = transitions;
+        }
 
         public void Reset() => ChangeEntityState(_startEntityState);
 
@@ -26,6 +33,14 @@ namespace CodeBase.Domain
             _currentEntityState = nextEntityState;
             _currentEntityState.Enter();
             _currentEntityState.NeedChangeState += ChangeEntityState;
+        }
+
+        public void Dispose()
+        {
+            foreach (Transition transition in _transitions)
+            {
+                transition.Dispose();
+            }
         }
     }
 }

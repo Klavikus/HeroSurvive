@@ -22,6 +22,10 @@ namespace CodeBase.Domain
         public override void Enter()
         {
             base.Enter();
+
+            if (_enemy == null)
+                return;
+
             _animationSynchronizer.ChangeState(EntityAnimatorState.Died);
             _vfxService.HandleKill(_enemy.transform.position);
             _enemyAI.enabled = false;

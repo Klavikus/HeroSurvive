@@ -58,7 +58,6 @@ namespace CodeBase.Infrastructure
             _abilityBuilder.Build(_modelProvider.Get<HeroModel>());
             _playerBuilder.BindCameraToPlayer();
             _playerBuilder.BindEventsHandler(_playerEventHandler);
-
             _levelCompetitionService.StartCompetition();
 
             _sfxService.PlayAmbient();

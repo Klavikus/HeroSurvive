@@ -10,6 +10,7 @@ namespace CodeBase.Presentation
         [SerializeField] private Button _openHeroSelection;
         [SerializeField] private Button _openUpgradeSelection;
         [SerializeField] private Button _openLeaderBoard;
+        [SerializeField] private Button _openSettings;
         [SerializeField] private Button _openOptions;
         [SerializeField] private TweenTrigger[] _tweenTriggers;
 
@@ -28,6 +29,7 @@ namespace CodeBase.Presentation
             _openHeroSelection.onClick.AddListener(ShowHeroSelection);
             _openUpgradeSelection.onClick.AddListener(ShowUpgradeSelection);
             _openLeaderBoard.onClick.AddListener(ShowLeaderBoard);
+            _openSettings.onClick.AddListener(ShowSettings);
 
             foreach (TweenTrigger tweenTrigger in _tweenTriggers)
                 tweenTrigger.Showed += OnTweenShowed;
@@ -56,6 +58,9 @@ namespace CodeBase.Presentation
                     break;
                 case 2:
                     ShowLeaderBoard();
+                    break;               
+                case 3:
+                    ShowSettings();
                     break;
             }
         }
@@ -141,7 +146,11 @@ namespace CodeBase.Presentation
         }
 
         private void ShowHeroSelection() => _menuViewModel.EnableHeroSelection();
+
         private void ShowUpgradeSelection() => _menuViewModel.EnableUpgradeSelection();
+
         private void ShowLeaderBoard() => _menuViewModel.InvokeLeaderBoardShow();
+
+        private void ShowSettings() => _menuViewModel.InvokeSettingsShow();
     }
 }

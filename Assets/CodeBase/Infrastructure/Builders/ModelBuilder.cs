@@ -19,6 +19,7 @@ namespace CodeBase.Infrastructure
                 [typeof(CurrencyModel)] = BuildCurrencyModel,
                 [typeof(GameLoopModel)] = BuildGameLoopModel,
                 [typeof(LevelUpModel)] = BuildLevelUpModel,
+                [typeof(SettingsModel)] = BuildSettingsModel,
             };
 
         public ModelBuilder(IModelFactory modelFactory, IAbilityUpgradeService abilityUpgradeService)
@@ -50,5 +51,8 @@ namespace CodeBase.Infrastructure
 
         private static object BuildLevelUpModel(ModelBuilder builder) => 
             new LevelUpModel(builder._abilityUpgradeService);
+
+        private static object BuildSettingsModel(ModelBuilder arg) => 
+            new SettingsModel();
     }
 }

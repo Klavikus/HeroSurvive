@@ -27,7 +27,11 @@ namespace CodeBase.Domain
         public int KillExperience => _lootData.Experience;
         public int KillCurrency => _lootData.Currency;
         public EnemyType Type => _enemyData.Type;
-        private void OnDestroy() => Destroyed?.Invoke(this);
+        private void OnDestroy()
+        {
+            _stateMachine.Dispose();
+            Destroyed?.Invoke(this);
+        }
 
         public void InvokeBackToPool()
         {
@@ -93,7 +97,7 @@ namespace CodeBase.Domain
                 hitToRunTransition,
             };
 
-            _stateMachine = new EntityStateMachine(idleEntityState);
+            _stateMachine = new EntityStateMachine(idleEntityState, _transitions);
             _stateMachine.Reset();
         }
 

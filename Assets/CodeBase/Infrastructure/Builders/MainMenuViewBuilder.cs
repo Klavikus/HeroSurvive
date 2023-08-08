@@ -17,6 +17,8 @@ namespace CodeBase.Infrastructure
             PropertyView[] propertyViews = _viewFactory.CreatePropertyViews();
             UpgradesSelectorView upgradesSelectorView = _viewFactory.CreateUpgradesSelectorView();
 
+            SettingsView settingsView = _viewFactory.CreateSettingsView();
+            
             heroSelector.SetHeroViews(heroViews);
             heroSelector.SetPropertyViews(propertyViews);
         }

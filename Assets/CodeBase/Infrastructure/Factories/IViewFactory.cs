@@ -16,5 +16,6 @@ namespace CodeBase.Infrastructure
         CurrencyView CreateCurrencyView();
         LeaderBoardScoreView[] CreateLeaderBoardScoreViews(IReadOnlyList<LeaderBoard> leaderBoards);
         LeaderBoardScoreView CreateLeaderBoardScoreView();
+        SettingsView CreateSettingsView();
     }
 }

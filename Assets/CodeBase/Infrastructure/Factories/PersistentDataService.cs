@@ -22,7 +22,7 @@ namespace CodeBase.Infrastructure
 
         public void Initialize()
         {
-            _saveLoadService.AllLoaded += SaveLoadServiceOnAllLoaded;
+            _saveLoadService.AllLoaded += ConvertSaveDataToModels;
 
             _modelProvider.Get<CurrencyModel>().CurrencyChanged += SaveCurrency;
             foreach (UpgradeModel upgradeModel in _modelProvider.Get<UpgradeModel[]>())
@@ -34,7 +34,7 @@ namespace CodeBase.Infrastructure
             _saveLoadService.LoadPrefsToData();
         }
 
-        private void SaveLoadServiceOnAllLoaded()
+        private void ConvertSaveDataToModels()
         {
             UpgradeModel[] result = _modelProvider.Get<UpgradeModel[]>();
 

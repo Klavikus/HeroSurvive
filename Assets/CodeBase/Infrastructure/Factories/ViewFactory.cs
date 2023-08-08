@@ -9,15 +9,15 @@ namespace CodeBase.Infrastructure
     {
         private readonly IConfigurationProvider _configurationProvider;
         private readonly UpgradeDescriptionBuilder _descriptionBuilder;
-        private readonly IProvider _provider;
+        private readonly IProvider _viewModelProvider;
 
         public ViewFactory(
             IConfigurationProvider configurationProvider,
-            IProvider provider,
+            IProvider viewModelProvider,
             UpgradeDescriptionBuilder upgradeDescriptionBuilder)
         {
             _configurationProvider = configurationProvider;
-            _provider = provider;
+            _viewModelProvider = viewModelProvider;
             _descriptionBuilder = upgradeDescriptionBuilder;
         }
 
@@ -26,8 +26,8 @@ namespace CodeBase.Infrastructure
             HeroSelectorView heroSelectorView =
                 GameObject.Instantiate(_configurationProvider.MainMenuConfig.HeroSelectorView);
             heroSelectorView.Initialize(
-                _provider.Get<HeroSelectorViewModel>(),
-                _provider.Get<CurrencyViewModel>(),
+                _viewModelProvider.Get<HeroSelectorViewModel>(),
+                _viewModelProvider.Get<CurrencyViewModel>(),
                 _descriptionBuilder);
             return heroSelectorView;
         }
@@ -41,7 +41,7 @@ namespace CodeBase.Infrastructure
             {
                 HeroData heroData = heroesData[i];
                 HeroView heroView = GameObject.Instantiate(_configurationProvider.HeroConfig.BaseHeroView);
-                heroView.Initialize(heroData, _provider.Get<HeroSelectorViewModel>());
+                heroView.Initialize(heroData, _viewModelProvider.Get<HeroSelectorViewModel>());
                 result[i] = heroView;
             }
 
@@ -57,7 +57,7 @@ namespace CodeBase.Infrastructure
             for (int i = 0; i < viewData.Count; i++)
             {
                 result[i] = GameObject.Instantiate(_configurationProvider.BasePropertiesConfig.PropertyView);
-                result[i].Initialize(_provider.Get<MainPropertiesViewModel>(), viewData[i],
+                result[i].Initialize(_viewModelProvider.Get<MainPropertiesViewModel>(), viewData[i],
                     _descriptionBuilder);
             }
 
@@ -68,7 +68,7 @@ namespace CodeBase.Infrastructure
         {
             StartMenuView startMenuView =
                 GameObject.Instantiate(_configurationProvider.MainMenuConfig.StartMenuView);
-            startMenuView.Initialize(_provider.Get<MenuViewModel>());
+            startMenuView.Initialize(_viewModelProvider.Get<MenuViewModel>());
             return startMenuView;
         }
 
@@ -77,9 +77,9 @@ namespace CodeBase.Infrastructure
             UpgradesSelectorView upgradesSelectorView =
                 GameObject.Instantiate(_configurationProvider.MainMenuConfig.UpgradesSelectorView);
             upgradesSelectorView.Initialize(
-                _provider.Get<MenuViewModel>(),
-                _provider.Get<UpgradeViewModel>(),
-                _provider.Get<CurrencyViewModel>(),
+                _viewModelProvider.Get<MenuViewModel>(),
+                _viewModelProvider.Get<UpgradeViewModel>(),
+                _viewModelProvider.Get<CurrencyViewModel>(),
                 viewFactory: this,
                 _descriptionBuilder);
             return upgradesSelectorView;
@@ -89,7 +89,7 @@ namespace CodeBase.Infrastructure
         {
             UpgradeView upgradeView = GameObject.Instantiate(_configurationProvider.MainMenuConfig.UpgradeView);
 
-            upgradeView.Initialize(_provider.Get<UpgradeViewModel>(), upgradeData,
+            upgradeView.Initialize(_viewModelProvider.Get<UpgradeViewModel>(), upgradeData,
                 CreateUpgradeLevelViews(upgradeData.Upgrades.Length));
             return upgradeView;
         }
@@ -119,7 +119,7 @@ namespace CodeBase.Infrastructure
         {
             CurrencyView currencyView = GameObject.Instantiate(_configurationProvider.MainMenuConfig.CurrencyView);
 
-            currencyView.Initialize(_provider.Get<CurrencyViewModel>(), _descriptionBuilder);
+            currencyView.Initialize(_viewModelProvider.Get<CurrencyViewModel>(), _descriptionBuilder);
             return currencyView;
         }
 
@@ -135,5 +135,14 @@ namespace CodeBase.Infrastructure
 
         public LeaderBoardScoreView CreateLeaderBoardScoreView() =>
             GameObject.Instantiate(_configurationProvider.MainMenuConfig.LeaderBoardScoreView);
+
+        public SettingsView CreateSettingsView()
+        {
+            SettingsView settingsView = GameObject.Instantiate(_configurationProvider.MainMenuConfig.SettingsView);
+
+            settingsView.Initialize(_viewModelProvider.Get<SettingsViewModel>());
+
+            return settingsView;
+        }
     }
 }

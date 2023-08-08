@@ -36,6 +36,13 @@ namespace CodeBase.Infrastructure
             IProvider viewModelProvider = AllServices.Container.AsSingle<IViewModelProvider>();
 
             PrepareModels(modelBuilder, modelProvider);
+
+            //TODO: Refactor this
+            modelProvider.Get<SettingsModel>().SetMasterVolume(70);
+            modelProvider.Get<SettingsModel>().SetMusicVolume(50);
+            modelProvider.Get<SettingsModel>().SetSfxVolume(70);
+            modelProvider.Get<SettingsModel>().SetMute(false);
+
             PrepareViewModels(viewModelBuilder, viewModelProvider);
 
             _persistentDataService.Initialize();
@@ -94,6 +101,7 @@ namespace CodeBase.Infrastructure
             modelProvider.Bind(modelBuilder.Build<CurrencyModel>());
             modelProvider.Bind(modelBuilder.Build<GameLoopModel>());
             modelProvider.Bind(modelBuilder.Build<LevelUpModel>());
+            modelProvider.Bind(modelBuilder.Build<SettingsModel>());
 
             modelProvider.Get<LevelUpModel>().Bind(modelProvider.Get<CurrencyModel>());
         }
@@ -108,6 +116,7 @@ namespace CodeBase.Infrastructure
             viewModelProvider.Bind(viewModelBuilder.Build<LeaderBoardsViewModel>());
             viewModelProvider.Bind(viewModelBuilder.Build<GameLoopViewModel>());
             viewModelProvider.Bind(viewModelBuilder.Build<LevelUpViewModel>());
+            viewModelProvider.Bind(viewModelBuilder.Build<SettingsViewModel>());
 
             viewModelProvider.Get<LeaderBoardsViewModel>().Initialize();
             viewModelProvider.Get<GameLoopViewModel>().Bind(viewModelProvider.Get<LeaderBoardsViewModel>());

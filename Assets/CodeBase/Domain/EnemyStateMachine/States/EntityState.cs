@@ -25,7 +25,7 @@ namespace CodeBase.Domain
             if (_transitions == null)
                 return;
 
-            foreach (Transition transition in _transitions) 
+            foreach (Transition transition in _transitions)
                 transition.NeedChangeState += ChangeState;
         }
 
@@ -34,10 +34,16 @@ namespace CodeBase.Domain
             if (_transitions == null)
                 return;
 
-            foreach (Transition transition in _transitions) 
+            foreach (Transition transition in _transitions)
                 transition.NeedChangeState -= ChangeState;
         }
 
         private void ChangeState(IEntityState nextEntityState) => NeedChangeState?.Invoke(nextEntityState);
+
+        public void Dispose()
+        {
+            UnsubscribeOnTransitions();
+            GC.SuppressFinalize(this);
+        }
     }
 }

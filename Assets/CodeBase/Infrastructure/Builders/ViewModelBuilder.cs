@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using CodeBase.Configs;
 using CodeBase.Domain;
-using CodeBase.Infrastructure.Services;
 using CodeBase.Presentation;
 
 namespace CodeBase.Infrastructure
@@ -20,18 +19,29 @@ namespace CodeBase.Infrastructure
                 [typeof(LeaderBoardsViewModel)] = BuildLeaderBoardsViewModel,
                 [typeof(GameLoopViewModel)] = BuildGameLoopViewModel,
                 [typeof(LevelUpViewModel)] = BuildLevelUpViewModel,
+                [typeof(SettingsViewModel)] = BuildSettingsViewModel,
             };
 
         private readonly IConfigurationProvider _configurationProvider;
+
         private readonly IModelProvider _modelProvider;
+
         private readonly ITranslationService _translationService;
+
         private readonly IUpgradeService _upgradeService;
+
         private readonly IAuthorizeService _authorizeService;
+
         private readonly ICoroutineRunner _coroutineRunner;
+
         private readonly ILeveCompetitionService _leveCompetitionService;
+
         private readonly PlayerEventHandler _playerEventHandler;
+
         private readonly IAdsProvider _adsProvider;
+
         private readonly IAbilityUpgradeService _abilityUpgradeService;
+
         private readonly IAudioPlayerService _sfxService;
 
         public ViewModelBuilder(
@@ -84,7 +94,7 @@ namespace CodeBase.Infrastructure
             new UpgradeViewModel(
                 builder._modelProvider.Get<UpgradeModel[]>(),
                 builder._modelProvider.Get<CurrencyModel>(),
-                builder._upgradeService, 
+                builder._upgradeService,
                 builder._sfxService);
 
         private static CurrencyViewModel BuildCurrencyViewModel(ViewModelBuilder builder) =>
@@ -110,5 +120,8 @@ namespace CodeBase.Infrastructure
                 builder._modelProvider.Get<LevelUpModel>(),
                 builder._abilityUpgradeService,
                 builder._adsProvider);
+
+        private static object BuildSettingsViewModel(ViewModelBuilder builder) =>
+            new SettingsViewModel(builder._modelProvider.Get<SettingsModel>(), builder._modelProvider.Get<MenuModel>());
     }
 }

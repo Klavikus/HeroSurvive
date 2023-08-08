@@ -2,7 +2,7 @@ using System;
 
 namespace CodeBase.Domain
 {
-    public interface IEntityState
+    public interface IEntityState : IDisposable
     {
         event Action<IEntityState> NeedChangeState;
         void Enter();

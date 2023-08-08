@@ -15,5 +15,6 @@ namespace CodeBase.Domain
         public UpgradeLevelView UpgradeLevelView;
         public CurrencyView CurrencyView;
         public LeaderBoardScoreView LeaderBoardScoreView;
+        public SettingsView SettingsView;
     }
 }

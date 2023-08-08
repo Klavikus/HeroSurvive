@@ -12,6 +12,8 @@ namespace CodeBase.Domain
         public event Action LeaderBoardHideInvoked;
         public event Action InvokedMainMenuShow;
         public event Action InvokedMainMenuHide;
+        public event Action InvokedSettingsShow;
+        public event Action InvokedSettingsHide;
 
         public bool IsMenuShowing { get; private set; }
         public bool IsHeroSelectionShowing { get; private set; }
@@ -45,5 +47,7 @@ namespace CodeBase.Domain
         public void InvokeLeaderBoardHide() => LeaderBoardHideInvoked?.Invoke();
         public void InvokeMainMenuShow() => InvokedMainMenuShow?.Invoke();
         public void InvokeMainMenuHide() => InvokedMainMenuHide?.Invoke();
+        public void InvokeSettingsShow() => InvokedSettingsShow?.Invoke();
+        public void InvokeSettingsHide() => InvokedSettingsHide?.Invoke();
     }
 }

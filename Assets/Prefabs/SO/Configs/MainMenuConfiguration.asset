@@ -21,3 +21,4 @@ MonoBehaviour:
   UpgradeLevelView: {fileID: 2622214659853327643, guid: f8a614f8aae216d43a798034a8cf2545, type: 3}
   CurrencyView: {fileID: 7772495651174236389, guid: 0538b073f06c98c4bae6a2f67cf632b6, type: 3}
   LeaderBoardScoreView: {fileID: 7307628228114190066, guid: 533f402451f1f5746ac602e49f330c40, type: 3}
+  SettingsView: {fileID: 8122449528005956277, guid: 66779e547de6d294cafd821652e5d1da, type: 3}

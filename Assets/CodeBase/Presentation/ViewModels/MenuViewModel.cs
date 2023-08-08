@@ -27,7 +27,7 @@ namespace CodeBase.Presentation
             _menuModel.InvokedMainMenuShow -= OnInvokedMainMenuShow;
             _menuModel.InvokedMainMenuHide -= OnInvokedMainMenuHide;
         }
-        
+
         public event Action OpenedUpgradeSelection;
         public event Action DisabledUpgradeSelection;
         public event Action ShowLeaderBordInvoked;
@@ -41,6 +41,8 @@ namespace CodeBase.Presentation
         public void DisableUpgradeSelection() => _menuModel.DisableUpgradeSelection();
         public void InvokeLeaderBoardShow() => _menuModel.InvokeLeaderBoardShow();
         public void InvokeLeaderBoardHide() => _menuModel.InvokeLeaderBoardHide();
+        public void InvokeSettingsShow() => _menuModel.InvokeSettingsShow();
+
         private void OnModelOpenedUpgradeSelection() => OpenedUpgradeSelection?.Invoke();
         private void OnModelClosedUpgradeSelection() => DisabledUpgradeSelection?.Invoke();
         private void OnLeaderBoardShowInvoked() => ShowLeaderBordInvoked?.Invoke();

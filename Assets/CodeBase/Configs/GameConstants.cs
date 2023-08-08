@@ -11,6 +11,7 @@ namespace CodeBase.Configs
         public const string UserNameDataKey = "UserName";
         public const string BaseUserName = "Stranger";
         public const string StageTotalKillsLeaderBoardKey = "StageCompleted";
+        public const string MusicVolume = "MusicVolume";
 
         public const int MaxNameLength = 15;
         public const float LeaderBoardPassiveUpdateDelay = 60f;
@@ -22,5 +23,6 @@ namespace CodeBase.Configs
         public static string BaseLanguage = "en";
         public static Vector4 SpawnRectangleRestriction = new Vector4(-61, 61, -61, 61);
         public static float RespawnInvincibleDuration = 2f;
+        public static float BaseMusicVolume = 0.5f;
     }
 }
