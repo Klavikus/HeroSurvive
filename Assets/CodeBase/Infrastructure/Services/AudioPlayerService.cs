@@ -17,11 +17,6 @@ namespace CodeBase.Infrastructure
         private EventInstance _ambientInstance;
         private EventInstance _mainMenuAmbientInstance;
 
-        private bool _isMutedByUser;
-        private Bus _masterBus;
-        private Bus _musicBus;
-        private Bus _sfxBus;
-
         public AudioPlayerService
         (
             IConfigurationProvider configurationProvider,
@@ -36,16 +31,9 @@ namespace CodeBase.Infrastructure
 
         public void Initialize(IPersistentDataService persistentDataService)
         {
-            ISaveLoadService saveLoadService = AllServices.Container.AsSingle<ISaveLoadService>();
             _ambientInstance = RuntimeManager.CreateInstance(_configurationProvider.FMOD_GameLoopAmbientReference);
             _mainMenuAmbientInstance =
                 RuntimeManager.CreateInstance(_configurationProvider.FMOD_MainMenuAmbientReference);
-
-            _isMutedByUser = bool.Parse(saveLoadService.GetData(GameConstants.MuteStatus.ToString(), "False"));
-
-            _masterBus = RuntimeManager.GetBus("bus:/");
-            _musicBus = RuntimeManager.GetBus("bus:/Music");
-            _sfxBus = RuntimeManager.GetBus("bus:/SFX");
 
             _gamePauseService.PauseStarted += OnPauseStarted;
             _gamePauseService.PauseEnded += OnPauseEnded;
@@ -53,18 +41,14 @@ namespace CodeBase.Infrastructure
 
         private void OnPauseStarted()
         {
-            _masterBus.setPaused(true);
-            _musicBus.setPaused(true);
-            _sfxBus.setPaused(true);
+            RuntimeManager.PauseAllEvents(true);
+            RuntimeManager.CoreSystem.mixerSuspend();
         }
 
         private void OnPauseEnded()
         {
-            // if (_isMutedByUser)
-            //     return;
-            _masterBus.setPaused(false);
-            _musicBus.setPaused(false);
-            _sfxBus.setPaused(false);
+            RuntimeManager.PauseAllEvents(false);
+            RuntimeManager.CoreSystem.mixerResume();
         }
 
         public void PlayHit(Vector3 position) =>
@@ -81,25 +65,21 @@ namespace CodeBase.Infrastructure
 
         public void PlayAmbient()
         {
-            // _ambientInstance.start();
             _coroutineRunner.StartCoroutine(DelayedStartGameLoop());
         }
 
         public void StopAmbient()
         {
-            // _ambientInstance.stop(STOP_MODE.ALLOWFADEOUT);
             _coroutineRunner.StartCoroutine(DelayedStopGameLoop());
         }
 
         public void StartMainMenuAmbient()
         {
-            // _mainMenuAmbientInstance.start();
             _coroutineRunner.StartCoroutine(DelayedStartMainMenu());
         }
 
         public void StopMainMenuAmbient()
         {
-            // _mainMenuAmbientInstance.stop(STOP_MODE.ALLOWFADEOUT);
             _coroutineRunner.StartCoroutine(DelayedStopMainMenu());
         }
 

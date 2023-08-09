@@ -1,4 +1,5 @@
 ﻿using System;
+using Agava.WebUtility;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Services
@@ -14,13 +15,13 @@ namespace CodeBase.Infrastructure.Services
         public GamePauseService()
         {
             Application.focusChanged += OnFocusChanged;
-            // WebApplication.InBackgroundChangeEvent += OnBackgroundChanged;
+            WebApplication.InBackgroundChangeEvent += OnBackgroundChanged;
         }
 
         ~GamePauseService()
         {
             Application.focusChanged -= OnFocusChanged;
-            // WebApplication.InBackgroundChangeEvent -= OnBackgroundChanged;
+            WebApplication.InBackgroundChangeEvent -= OnBackgroundChanged;
         }
 
         public event Action PauseStarted;

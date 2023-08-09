@@ -1,11 +1,18 @@
 {
   "dependencies": {
+    "com.agava.webutility": {
+      "version": "https://github.com/forcepusher/com.agava.webutility.git#3.0.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "8b3ff533346e27727613880171be328b15cb4e84"
+    },
     "com.agava.yandexgames": {
       "version": "https://github.com/forcepusher/com.agava.yandexgames.git#11.0.0",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "51d2698d5aaa609e1679da6546bbb49148c4909c"
+      "hash": "fe9ac9236b998e5d311928492accaba3df180db5"
     },
     "com.h8man.2d.navmeshplus": {
       "version": "https://github.com/h8man/NavMeshPlus.git",

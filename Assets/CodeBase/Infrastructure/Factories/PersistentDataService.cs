@@ -1,6 +1,5 @@
 using CodeBase.Configs;
 using CodeBase.Domain;
-using CodeBase.Presentation;
 
 namespace CodeBase.Infrastructure
 {
