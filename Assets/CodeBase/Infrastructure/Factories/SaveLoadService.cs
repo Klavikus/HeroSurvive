@@ -22,7 +22,8 @@ namespace CodeBase.Infrastructure
 
         public bool ContainData(string dataKey) => _data.ContainsKey(dataKey);
 
-        public string GetData(string dattaKey) => _data[dattaKey];
+        public string GetData(string dattaKey, string defaultValue) => 
+            _data.ContainsKey(dattaKey) ? _data[dattaKey] : defaultValue;
 
         public void SaveToData(string dattaKey, string json)
         {
@@ -40,8 +41,6 @@ namespace CodeBase.Infrastructure
                 PlayerPrefs.SetString(keyValuePair.Key, keyValuePair.Value);
 
             PlayerPrefs.Save();
-
-            // SaveAllDataOnYandex();
         }
 
         public void LoadPrefsToData()
@@ -51,7 +50,7 @@ namespace CodeBase.Infrastructure
                 string upgradeDataKey = $"{GameConstants.UpgradeModelPrefix}_{upgradeData.KeyName}";
                 SaveToData(upgradeDataKey, PlayerPrefs.GetString(upgradeDataKey, "0"));
             }
-        
+
             string currencyValue = PlayerPrefs.HasKey(GameConstants.CurrencyDataKey)
                 ? PlayerPrefs.GetString(GameConstants.CurrencyDataKey)
                 : "300000";
@@ -61,7 +60,7 @@ namespace CodeBase.Infrastructure
                 ? PlayerPrefs.GetString(GameConstants.UserNameDataKey)
                 : GameConstants.BaseUserName;
             SaveToData(GameConstants.UserNameDataKey, userName);
-            
+
             string musicVolume = PlayerPrefs.HasKey(GameConstants.MusicVolume)
                 ? PlayerPrefs.GetString(GameConstants.MusicVolume)
                 : GameConstants.BaseMusicVolume.ToString(CultureInfo.InvariantCulture);

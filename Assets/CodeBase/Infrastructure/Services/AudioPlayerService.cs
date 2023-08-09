@@ -1,5 +1,7 @@
 using System.Collections;
+using CodeBase.Configs;
 using CodeBase.Domain;
+using CodeBase.Infrastructure.Services;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
@@ -9,21 +11,60 @@ namespace CodeBase.Infrastructure
 {
     public class AudioPlayerService : IAudioPlayerService
     {
+        private IGamePauseService _gamePauseService;
         private readonly IConfigurationProvider _configurationProvider;
         private readonly ICoroutineRunner _coroutineRunner;
         private EventInstance _ambientInstance;
         private EventInstance _mainMenuAmbientInstance;
 
-        public AudioPlayerService(IConfigurationProvider configurationProvider, ICoroutineRunner coroutineRunner)
+        private bool _isMutedByUser;
+        private Bus _masterBus;
+        private Bus _musicBus;
+        private Bus _sfxBus;
+
+        public AudioPlayerService
+        (
+            IConfigurationProvider configurationProvider,
+            ICoroutineRunner coroutineRunner,
+            IGamePauseService gamePauseService
+        )
         {
+            _gamePauseService = gamePauseService;
             _configurationProvider = configurationProvider;
             _coroutineRunner = coroutineRunner;
         }
 
-        public void Initialize()
+        public void Initialize(IPersistentDataService persistentDataService)
         {
+            ISaveLoadService saveLoadService = AllServices.Container.AsSingle<ISaveLoadService>();
             _ambientInstance = RuntimeManager.CreateInstance(_configurationProvider.FMOD_GameLoopAmbientReference);
-            _mainMenuAmbientInstance = RuntimeManager.CreateInstance(_configurationProvider.FMOD_MainMenuAmbientReference);
+            _mainMenuAmbientInstance =
+                RuntimeManager.CreateInstance(_configurationProvider.FMOD_MainMenuAmbientReference);
+
+            _isMutedByUser = bool.Parse(saveLoadService.GetData(GameConstants.MuteStatus.ToString(), "False"));
+
+            _masterBus = RuntimeManager.GetBus("bus:/");
+            _musicBus = RuntimeManager.GetBus("bus:/Music");
+            _sfxBus = RuntimeManager.GetBus("bus:/SFX");
+
+            _gamePauseService.PauseStarted += OnPauseStarted;
+            _gamePauseService.PauseEnded += OnPauseEnded;
+        }
+
+        private void OnPauseStarted()
+        {
+            _masterBus.setPaused(true);
+            _musicBus.setPaused(true);
+            _sfxBus.setPaused(true);
+        }
+
+        private void OnPauseEnded()
+        {
+            // if (_isMutedByUser)
+            //     return;
+            _masterBus.setPaused(false);
+            _musicBus.setPaused(false);
+            _sfxBus.setPaused(false);
         }
 
         public void PlayHit(Vector3 position) =>

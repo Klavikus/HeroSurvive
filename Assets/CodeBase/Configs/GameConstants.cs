@@ -24,5 +24,6 @@ namespace CodeBase.Configs
         public static Vector4 SpawnRectangleRestriction = new Vector4(-61, 61, -61, 61);
         public static float RespawnInvincibleDuration = 2f;
         public static float BaseMusicVolume = 0.5f;
+        public static bool MuteStatus = false;
     }
 }

@@ -40,7 +40,8 @@ namespace CodeBase.Infrastructure
             while (RuntimeManager.HaveAllBanksLoaded == false)
                 yield return null;
 
-            AllServices.Container.AsSingle<IAudioPlayerService>().Initialize();
+            AllServices.Container.AsSingle<IAudioPlayerService>()
+                .Initialize(_services.AsSingle<IPersistentDataService>());
             _sceneLoader.Load(InitialScene, onLoaded: EnterLoadLevel);
         }
 
@@ -77,7 +78,10 @@ namespace CodeBase.Infrastructure
                 upgradeDescriptionBuilder);
             GameLoopViewBuilder gameLoopViewBuilder = new GameLoopViewBuilder(gameLoopViewFactory);
 
-            IAudioPlayerService audioPlayerService = new AudioPlayerService(configurationProvider, _coroutineRunner);
+            IGamePauseService gamePauseService = new GamePauseService();
+
+            IAudioPlayerService audioPlayerService =
+                new AudioPlayerService(configurationProvider, _coroutineRunner, gamePauseService);
             IAdsProvider adsProvider = new AdsProvider(_coroutineRunner);
             ISaveLoadService saveLoadService = new SaveLoadService(configurationProvider);
             IAuthorizeService authorizeService = new AuthorizeService();
@@ -154,6 +158,8 @@ namespace CodeBase.Infrastructure
             _services.RegisterAsSingle(mainMenuFactory);
             _services.RegisterAsSingle(audioPlayerService);
             _services.RegisterAsSingle(vfxService);
+            _services.RegisterAsSingle(saveLoadService);
+            _services.RegisterAsSingle(gamePauseService);
         }
     }
 }
