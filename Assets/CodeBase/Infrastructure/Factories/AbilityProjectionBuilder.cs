@@ -105,8 +105,8 @@ namespace CodeBase.Infrastructure
 
         private SpawnData GetSpawnData(AbilityData abilityData, Transform pivotObject, int i)
         {
-            Vector3 directionToTarget = _targetFinderService.GetClosestEnemyToPlayer();
-            Vector3 directionToClosest = (directionToTarget - pivotObject.position).normalized;
+            Vector3 enemyPositionFromTargetService = _targetFinderService.GetClosestEnemyToPlayer();
+            Vector3 directionToClosest = (enemyPositionFromTargetService - pivotObject.position).normalized;
             Vector3 enemyPosition = Vector3.zero;
 
             if (abilityData.TargetingType == TargetingType.ByDirection)
@@ -114,9 +114,11 @@ namespace CodeBase.Infrastructure
 
             if (abilityData.TargetingType == TargetingType.ToClosest)
             {
-                directionToClosest = (directionToTarget - pivotObject.position).normalized;
+                enemyPosition = enemyPositionFromTargetService;
 
-                if (directionToTarget == Vector3.zero)
+                directionToClosest = (enemyPositionFromTargetService - pivotObject.position).normalized;
+
+                if (enemyPositionFromTargetService == Vector3.zero)
                     directionToClosest = _targetFinderService.GetPlayerDirection();
             }
 
@@ -124,11 +126,11 @@ namespace CodeBase.Infrastructure
             {
                 enemyPosition = _targetFinderService.GetRandomEnemyPosition();
                 directionToClosest = (enemyPosition - pivotObject.position).normalized;
-                if (directionToTarget == Vector3.zero)
+                if (enemyPositionFromTargetService == Vector3.zero)
                     directionToClosest = _targetFinderService.GetPlayerDirection();
             }
 
-            float distanceToTarget = (directionToTarget - pivotObject.position).magnitude;
+            float distanceToTarget = (enemyPositionFromTargetService - pivotObject.position).magnitude;
 
             Vector3 startPosition = Vector3.zero;
             float newOffset = 0;

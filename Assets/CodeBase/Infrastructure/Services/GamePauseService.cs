@@ -11,6 +11,7 @@ namespace CodeBase.Infrastructure.Services
         private int _pauseCallsFromRewardedAds;
         private int _pauseCallsFromInterstitialAds;
         private int _pauseCallsFromRaceMenu;
+        private bool _isPaused;
 
         public GamePauseService()
         {
@@ -26,6 +27,8 @@ namespace CodeBase.Infrastructure.Services
 
         public event Action PauseStarted;
         public event Action PauseEnded;
+
+        public bool IsPaused => _isPaused;
 
         public void StartPauseByRewarded()
         {
@@ -45,7 +48,7 @@ namespace CodeBase.Infrastructure.Services
             HandlePause();
         }
 
-        public void StartPauseByRaceMenu()
+        public void StartPauseByMenu()
         {
             HandlePauseCall(
                 isIncreaseCall: true,
@@ -127,6 +130,11 @@ namespace CodeBase.Infrastructure.Services
         {
             if (_pauseCalls != 0)
             {
+                if (_isPaused)
+                    return;
+
+                _isPaused = true;
+
                 AudioListener.pause = true;
                 AudioListener.volume = 0;
                 PauseStarted?.Invoke();
@@ -134,6 +142,11 @@ namespace CodeBase.Infrastructure.Services
             }
             else
             {
+                if (_isPaused == false)
+                    return;
+
+                _isPaused = false;
+
                 PauseEnded?.Invoke();
                 Time.timeScale = 1;
             }

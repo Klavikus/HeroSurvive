@@ -6,9 +6,10 @@ namespace CodeBase.Infrastructure.Services
     {
         event Action PauseStarted;
         event Action PauseEnded;
+        bool IsPaused { get; }
         void StartPauseByRewarded();
         void StopPauseByRewarded();
-        void StartPauseByRaceMenu();
+        void StartPauseByMenu();
         void StopPauseByRaceMenu();
         void StartPauseByInterstitial();
         void StopPauseByInterstitial();

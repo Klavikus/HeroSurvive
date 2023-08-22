@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using CodeBase.Configs;
 using CodeBase.Domain;
@@ -82,6 +83,14 @@ namespace CodeBase.Infrastructure
         {
             _coroutineRunner.StartCoroutine(DelayedStopMainMenu());
         }
+
+        public void PlayThunder()
+        {
+            RuntimeManager.PlayOneShot(_configurationProvider.FMOD_Thunder);
+        }
+
+        public void PlayOneShot(EventReference reference) => RuntimeManager.PlayOneShot(reference);
+        public void PlayOneShot(EventReference reference, Vector3 position) => RuntimeManager.PlayOneShot(reference, position);
 
         private IEnumerator DelayedStartMainMenu()
         {

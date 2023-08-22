@@ -34,7 +34,7 @@ MonoBehaviour:
   <IsLimitedPenetration>k__BackingField: 0
   <AttackDelay>k__BackingField: 0.1
   <BurstCount>k__BackingField: 3
-  <MaxBurstCount>k__BackingField: 3
+  <MaxBurstCount>k__BackingField: 10
   <BurstFireDelay>k__BackingField: 0.1
   <SpawnPosition>k__BackingField: 0
   <SpawnCount>k__BackingField: 1
@@ -119,7 +119,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   <AlignWithRotation>k__BackingField: 0
   <FlipDirectionAllowed>k__BackingField: 0
-  <TargetingType>k__BackingField: 2
+  <TargetingType>k__BackingField: 1
   <Size>k__BackingField: 5
   <Duration>k__BackingField: 0.3
   <Cooldown>k__BackingField: 1
@@ -129,27 +129,27 @@ MonoBehaviour:
   - <PropertyType>k__BackingField: 3
     <Value>k__BackingField: 100
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 0
+    <IsFirstAbilityGain>k__BackingField: 1
   - <PropertyType>k__BackingField: 6
     <Value>k__BackingField: 1
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 0
+    <IsFirstAbilityGain>k__BackingField: 1
   - <PropertyType>k__BackingField: 8
     <Value>k__BackingField: 100
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 0
+    <IsFirstAbilityGain>k__BackingField: 1
   - <PropertyType>k__BackingField: 4
     <Value>k__BackingField: 10
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 0
+    <IsFirstAbilityGain>k__BackingField: 1
   - <PropertyType>k__BackingField: 3
     <Value>k__BackingField: 100
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 0
+    <IsFirstAbilityGain>k__BackingField: 1
   - <PropertyType>k__BackingField: 6
     <Value>k__BackingField: 1
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 0
+    <IsFirstAbilityGain>k__BackingField: 1
   - <PropertyType>k__BackingField: 3
     <Value>k__BackingField: 100
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
@@ -184,11 +184,17 @@ MonoBehaviour:
     <UseArea>k__BackingField: 1
     <UseProjectileSpeed>k__BackingField: 0
   <AudioData>k__BackingField:
-    HitAFX: {fileID: 0}
-    StartAFX: {fileID: 0}
+    FMOD:
+      Guid:
+        Data1: -1556121318
+        Data2: 1203208758
+        Data3: -1718241408
+        Data4: -924484144
+      Path: event:/Spell_Shock
+    IsPlayable: 1
   <SizeBehaviourData>k__BackingField:
     <SizeType>k__BackingField: 0
-    <MainTargetSize>k__BackingField: 5
+    <MainTargetSize>k__BackingField: 8.75
     <StartTargetSize>k__BackingField: 0
     <EndTargetSize>k__BackingField: 0
     <StartTime>k__BackingField: 0

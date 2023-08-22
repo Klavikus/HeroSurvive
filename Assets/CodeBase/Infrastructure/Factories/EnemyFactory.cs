@@ -66,18 +66,19 @@ namespace CodeBase.Infrastructure
 
         public Vector3 GetClosestEnemy(Vector3 to)
         {
-            if (_enemies.Count == 0)
+            var livingEnemies = _enemies.Where(enemy => enemy.CanReceiveDamage).ToArray();
+            if (livingEnemies.Length == 0)
                 return Vector3.zero;
 
-            float minDistance = Vector3.Distance(_enemies[0].transform.position, to);
+            float minDistance = Vector3.Distance(livingEnemies[0].transform.position, to);
             int targetEnemyId = 0;
 
-            for (var i = 0; i < _enemies.Count; i++)
+            for (var i = 0; i < livingEnemies.Length; i++)
             {
-                if (_enemies[i].CanReceiveDamage == false)
+                if (livingEnemies[i].CanReceiveDamage == false)
                     continue;
 
-                float newDistance = Vector3.Distance(_enemies[i].transform.position, to);
+                float newDistance = Vector3.Distance(livingEnemies[i].transform.position, to);
 
                 if (newDistance < minDistance)
                 {
@@ -86,7 +87,7 @@ namespace CodeBase.Infrastructure
                 }
             }
 
-            return _enemies[targetEnemyId].transform.position;
+            return livingEnemies[targetEnemyId].transform.position;
         }
 
         public Vector3 GetRandomEnemyPosition()

@@ -9,6 +9,7 @@ namespace CodeBase.Infrastructure
     [CreateAssetMenu(menuName = "Create ConfigurationContainer", fileName = "ConfigurationContainer", order = 0)]
     public class ConfigurationContainer : ScriptableObject
     {
+        [field: SerializeField] public EventReference FMOD_Thunder { get; private set; }
         [field: SerializeField] public EventReference FMOD_MainMenuAmbientReference { get; private set; }
         [field: SerializeField] public EventReference FMOD_GameLoopAmbientReference { get; private set; }
         [field: SerializeField] public EventReference FMOD_StartLevelReference { get; private set; }

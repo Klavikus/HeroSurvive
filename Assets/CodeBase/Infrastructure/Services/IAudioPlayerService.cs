@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using CodeBase.Domain;
+using FMODUnity;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure
 {
@@ -13,5 +15,8 @@ namespace CodeBase.Infrastructure
         void StopAmbient();
         void StartMainMenuAmbient();
         void StopMainMenuAmbient();
+        void PlayThunder();
+        void PlayOneShot(EventReference reference);
+        void PlayOneShot(EventReference reference, Vector3 position);
     }
 }

@@ -34,6 +34,10 @@ namespace CodeBase.Domain
         {
             gameObject.SetActive(true);
 
+            //TODO: Refactor this
+            if (abilityBaseData.AudioData.IsPlayable)
+                AllServices.Container.AsSingle<IAudioPlayerService>().PlayOneShot(abilityBaseData.AudioData.FMOD, spawnData.StartPosition);
+            
             _audioPlayerService = audioPlayerService;
             _abilityBaseData = abilityBaseData;
             _attackBehaviour = attackBehaviour;

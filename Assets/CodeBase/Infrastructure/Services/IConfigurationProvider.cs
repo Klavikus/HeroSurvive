@@ -23,5 +23,6 @@ namespace CodeBase.Infrastructure
         EventReference FMOD_StartLevelReference { get; }
         EventReference FMOD_GameLoopAmbientReference { get; }
         EventReference FMOD_MainMenuAmbientReference { get; }
+        EventReference FMOD_Thunder { get; }
     }
 }

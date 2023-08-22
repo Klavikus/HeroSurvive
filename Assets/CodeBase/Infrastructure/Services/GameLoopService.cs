@@ -1,6 +1,11 @@
 using System;
 using System.Threading.Tasks;
+using CodeBase.Configs;
 using CodeBase.Domain;
+using CodeBase.Infrastructure.CompositionRoots;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Presentation;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure
 {
@@ -60,6 +65,14 @@ namespace CodeBase.Infrastructure
             _playerBuilder.BindEventsHandler(_playerEventHandler);
             _levelCompetitionService.StartCompetition();
 
+            IGamePauseService gamePauseService = AllServices.Container.AsSingle<IGamePauseService>();
+            IViewModelProvider viewModelProvider = AllServices.Container.AsSingle<IViewModelProvider>();
+
+            GameLoopPauseViewModel gameLoopPauseViewModel = new GameLoopPauseViewModel(gamePauseService);
+            viewModelProvider.Bind(gameLoopPauseViewModel);
+
+            GameObject.FindObjectOfType<SceneCompositionRoot>().Initialize(AllServices.Container);
+            
             _sfxService.PlayAmbient();
         }
 

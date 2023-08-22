@@ -1,4 +1,5 @@
 using System;
+using FMODUnity;
 using UnityEngine;
 
 namespace CodeBase.Domain
@@ -6,7 +7,7 @@ namespace CodeBase.Domain
     [Serializable]
     public class AudioData
     {
-        public AudioClip HitAFX;
-        public AudioClip StartAFX;
+        public EventReference FMOD;
+        public bool IsPlayable;
     }
 }
