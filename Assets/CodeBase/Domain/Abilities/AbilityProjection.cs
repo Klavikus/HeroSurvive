@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using CodeBase.Infrastructure;
-using FMODUnity;
 using UnityEngine;
 
 namespace CodeBase.Domain
@@ -11,6 +10,7 @@ namespace CodeBase.Domain
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Rigidbody2D _rigidbody2D;
+        [SerializeField] private bool _useVfxView;
         [SerializeField] private View _view;
 
         private AbilityData _abilityBaseData;
@@ -36,8 +36,9 @@ namespace CodeBase.Domain
 
             //TODO: Refactor this
             if (abilityBaseData.AudioData.IsPlayable)
-                AllServices.Container.AsSingle<IAudioPlayerService>().PlayOneShot(abilityBaseData.AudioData.FMOD, spawnData.StartPosition);
-            
+                AllServices.Container.AsSingle<IAudioPlayerService>()
+                    .PlayOneShot(abilityBaseData.AudioData.FMOD, spawnData.StartPosition);
+
             _audioPlayerService = audioPlayerService;
             _abilityBaseData = abilityBaseData;
             _attackBehaviour = attackBehaviour;
@@ -49,7 +50,8 @@ namespace CodeBase.Domain
             // transform.localScale = Vector3.one * abilityBaseData.Size;
 
             _sizeBehaviour.Initialize(transform, abilityBaseData.SizeBehaviourData);
-            _view.Initialize(_spriteRenderer);
+
+
             _attackBehaviour.Initialize(_rigidbody2D);
             _movementBehaviour.Initialize(transform, spawnData, abilityBaseData, targetFinderService);
 
@@ -58,10 +60,15 @@ namespace CodeBase.Domain
             _coroutineHandlers = new List<Coroutine>
             {
                 StartCoroutine(_sizeBehaviour.Run()),
-                StartCoroutine(_view.Run()),
                 StartCoroutine(_attackBehaviour.Run()),
                 StartCoroutine(_movementBehaviour.Run()),
             };
+
+            if (_useVfxView == false)
+            {
+                _view.Initialize(_spriteRenderer);
+                _coroutineHandlers.Add(StartCoroutine(_view.Run()));
+            }
 
             // _audioPlayerService.PlayVFXAudio(_abilityBaseData.AudioData.StartAFX);
             _attackBehaviour.PenetrationLimit += OnAttackExpired;
