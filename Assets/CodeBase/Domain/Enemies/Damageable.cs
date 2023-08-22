@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using CodeBase.Configs;
-using CodeBase.Domain;
 using UnityEngine;
 
 namespace CodeBase.Domain

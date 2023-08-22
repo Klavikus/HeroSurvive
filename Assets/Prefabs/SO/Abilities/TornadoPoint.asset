@@ -184,13 +184,22 @@ MonoBehaviour:
     <UseArea>k__BackingField: 1
     <UseProjectileSpeed>k__BackingField: 1
   <AudioData>k__BackingField:
-    HitAFX: {fileID: 0}
-    StartAFX: {fileID: 0}
+    FMOD:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+    IsPlayable: 0
   <SizeBehaviourData>k__BackingField:
     <SizeType>k__BackingField: 2
-    <MainTargetSize>k__BackingField: 1.75
+    <MainTargetSize>k__BackingField: 1
     <StartTargetSize>k__BackingField: 0
     <EndTargetSize>k__BackingField: 0
     <StartTime>k__BackingField: 0.4
     <EndTime>k__BackingField: 0.4
-    <FullTimePeriod>k__BackingField: 6
+    <FullTimePeriod>k__BackingField: 3
+  <EnemyCheckRadius>k__BackingField: 20
+  <CheckCount>k__BackingField: 1
+  <AttackRadius>k__BackingField: 20

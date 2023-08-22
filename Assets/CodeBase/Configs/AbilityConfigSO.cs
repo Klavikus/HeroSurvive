@@ -51,7 +51,11 @@ namespace CodeBase.Configs
         [field: SerializeField] public AbilityModifiersMask AbilityModifiersMask { get; private set; }
         [field: SerializeField] public AudioData AudioData { get; private set; }
         [field: SerializeField] public SizeBehaviourData SizeBehaviourData { get; private set; }
-
+     
+        [field: Header("Enemy activation check")]
+        [field: SerializeField] public float EnemyCheckRadius { get; private set; }
+        [field: SerializeField] public int CheckCount { get; private set; }
+        [field: SerializeField] public float AttackRadius { get; private set; }
 
         private void OnValidate()
         {

@@ -105,7 +105,9 @@ namespace CodeBase.Infrastructure
 
         private SpawnData GetSpawnData(AbilityData abilityData, Transform pivotObject, int i)
         {
-            Vector3 enemyPositionFromTargetService = _targetFinderService.GetClosestEnemyToPlayer();
+            Vector3 enemyPositionFromTargetService =
+                _targetFinderService.GetClosestEnemyToPlayer(abilityData.AttackRadius,
+                    abilityData.WhatIsEnemy.layerMask);
             Vector3 directionToClosest = (enemyPositionFromTargetService - pivotObject.position).normalized;
             Vector3 enemyPosition = Vector3.zero;
 

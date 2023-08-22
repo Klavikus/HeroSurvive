@@ -129,43 +129,43 @@ MonoBehaviour:
   - <PropertyType>k__BackingField: 3
     <Value>k__BackingField: 100
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 1
+    <IsFirstAbilityGain>k__BackingField: 0
   - <PropertyType>k__BackingField: 6
     <Value>k__BackingField: 1
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 1
+    <IsFirstAbilityGain>k__BackingField: 0
   - <PropertyType>k__BackingField: 8
     <Value>k__BackingField: 100
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 1
+    <IsFirstAbilityGain>k__BackingField: 0
   - <PropertyType>k__BackingField: 4
     <Value>k__BackingField: 10
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 1
+    <IsFirstAbilityGain>k__BackingField: 0
   - <PropertyType>k__BackingField: 3
     <Value>k__BackingField: 100
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 1
+    <IsFirstAbilityGain>k__BackingField: 0
   - <PropertyType>k__BackingField: 6
     <Value>k__BackingField: 1
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 1
+    <IsFirstAbilityGain>k__BackingField: 0
   - <PropertyType>k__BackingField: 3
     <Value>k__BackingField: 100
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 1
+    <IsFirstAbilityGain>k__BackingField: 0
   - <PropertyType>k__BackingField: 7
     <Value>k__BackingField: 100
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 1
+    <IsFirstAbilityGain>k__BackingField: 0
   - <PropertyType>k__BackingField: 6
     <Value>k__BackingField: 1
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 1
+    <IsFirstAbilityGain>k__BackingField: 0
   - <PropertyType>k__BackingField: 4
     <Value>k__BackingField: 15
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 1
+    <IsFirstAbilityGain>k__BackingField: 0
   <UpgradeViewData>k__BackingField:
     <Icon>k__BackingField: {fileID: 21300000, guid: 92482e0b3fd17834e947ef92c1555708, type: 3}
     <Name>k__BackingField: Magic Blast
@@ -185,13 +185,22 @@ MonoBehaviour:
     <UseArea>k__BackingField: 1
     <UseProjectileSpeed>k__BackingField: 0
   <AudioData>k__BackingField:
-    HitAFX: {fileID: 0}
-    StartAFX: {fileID: 0}
+    FMOD:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+    IsPlayable: 0
   <SizeBehaviourData>k__BackingField:
     <SizeType>k__BackingField: 0
-    <MainTargetSize>k__BackingField: 1.75
+    <MainTargetSize>k__BackingField: 1
     <StartTargetSize>k__BackingField: 0
     <EndTargetSize>k__BackingField: 0
     <StartTime>k__BackingField: 0
     <EndTime>k__BackingField: 0
-    <FullTimePeriod>k__BackingField: 2.25
+    <FullTimePeriod>k__BackingField: 1
+  <EnemyCheckRadius>k__BackingField: 20
+  <CheckCount>k__BackingField: 1
+  <AttackRadius>k__BackingField: 20

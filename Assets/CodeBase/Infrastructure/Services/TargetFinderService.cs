@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure
 {
     public class TargetFinderService : ITargetService
     {
         private readonly EnemyFactory _enemyFactory;
-        
+        private readonly RaycastHit2D[] _raycastHits = new RaycastHit2D[10];
+
         private PlayerBuilder _playerBuilder;
 
         public TargetFinderService(EnemyFactory enemyFactory) => _enemyFactory = enemyFactory;
@@ -18,7 +20,7 @@ namespace CodeBase.Infrastructure
         public Vector3 GetPlayerDirection() =>
             _playerBuilder.GetPlayerDirection();
 
-        public Vector3 GetClosestEnemyToPlayer() =>
+        public Vector3 GetClosestEnemyToPlayer(float radius, LayerMask layerMask) => 
             _enemyFactory.GetClosestEnemy(_playerBuilder.GetPlayerPosition());
 
         public Vector3 GetRandomEnemyPosition() =>

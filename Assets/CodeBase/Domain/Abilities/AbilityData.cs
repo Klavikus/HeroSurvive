@@ -23,7 +23,7 @@ namespace CodeBase.Domain
         private float _baseCooldown;
         private bool _isSelfParent;
         private float _size;
-        
+
         public AttackType AttackType { get; }
         public ContactFilter2D WhatIsEnemy { get; }
         public int MaxAffectedEnemy { get; }
@@ -54,6 +54,9 @@ namespace CodeBase.Domain
         public float Speed { get; private set; }
         public float Duration { get; private set; }
         public float Cooldown { get; private set; }
+        public float EnemyCheckRadius { get; private set; }
+        public int CheckCount { get; private set; }
+        public float AttackRadius { get; }
 
         public AbilityData(AbilityConfigSO abilityConfig)
         {
@@ -99,6 +102,9 @@ namespace CodeBase.Domain
             AbilityView = abilityConfig.AbilityView;
             _isSelfParent = abilityConfig.IsSelfParent;
             AudioData = abilityConfig.AudioData;
+            EnemyCheckRadius = abilityConfig.EnemyCheckRadius;
+            CheckCount = abilityConfig.CheckCount;
+            AttackRadius = abilityConfig.AttackRadius;
 
             SizeBehaviourData.UpdateFullTime(_baseDuration);
             SizeBehaviourData.UpdateTargetSize(_baseSize);

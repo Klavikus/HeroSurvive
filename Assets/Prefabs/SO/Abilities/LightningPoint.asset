@@ -129,27 +129,27 @@ MonoBehaviour:
   - <PropertyType>k__BackingField: 3
     <Value>k__BackingField: 100
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 1
+    <IsFirstAbilityGain>k__BackingField: 0
   - <PropertyType>k__BackingField: 6
     <Value>k__BackingField: 1
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 1
+    <IsFirstAbilityGain>k__BackingField: 0
   - <PropertyType>k__BackingField: 8
     <Value>k__BackingField: 100
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 1
+    <IsFirstAbilityGain>k__BackingField: 0
   - <PropertyType>k__BackingField: 4
     <Value>k__BackingField: 10
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 1
+    <IsFirstAbilityGain>k__BackingField: 0
   - <PropertyType>k__BackingField: 3
     <Value>k__BackingField: 100
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 1
+    <IsFirstAbilityGain>k__BackingField: 0
   - <PropertyType>k__BackingField: 6
     <Value>k__BackingField: 1
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
-    <IsFirstAbilityGain>k__BackingField: 1
+    <IsFirstAbilityGain>k__BackingField: 0
   - <PropertyType>k__BackingField: 3
     <Value>k__BackingField: 100
     <BaseConfigSO>k__BackingField: {fileID: 11400000}
@@ -200,3 +200,6 @@ MonoBehaviour:
     <StartTime>k__BackingField: 0
     <EndTime>k__BackingField: 0
     <FullTimePeriod>k__BackingField: 0.3
+  <EnemyCheckRadius>k__BackingField: 20
+  <CheckCount>k__BackingField: 1
+  <AttackRadius>k__BackingField: 20

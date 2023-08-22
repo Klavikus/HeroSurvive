@@ -11,9 +11,7 @@ namespace CodeBase.Infrastructure
     {
         private readonly IConfigurationProvider _configurationProvider;
         private readonly Dictionary<EnemyType, EnemyData> _enemiesData;
-        private GameObject _enemyPrefab;
-        private List<Enemy> _enemies;
-
+        private readonly List<Enemy> _enemies;
         private readonly Dictionary<EnemyType, Queue<Enemy>> _enemyPoolByType;
 
         public EnemyFactory(IConfigurationProvider configurationProvider)
@@ -38,13 +36,14 @@ namespace CodeBase.Infrastructure
             if (enemy == null)
             {
                 enemy = GameObject.Instantiate(_enemiesData[enemyType].Prefab, at, Quaternion.identity);
-                _enemies.Add(enemy);
                 enemy.InvokedBackToPool += OnBackToPoolInvoked;
             }
             else
             {
                 enemy.transform.SetPositionAndRotation(at, Quaternion.identity);
             }
+
+            _enemies.Add(enemy);
 
             enemy.Initialize(targetFinderService, _enemiesData[enemyType]);
             return enemy;
@@ -61,6 +60,7 @@ namespace CodeBase.Infrastructure
         //TODO: Handle Died and Destroyed events
         private void OnBackToPoolInvoked(Enemy enemy)
         {
+            _enemies.Remove(enemy);
             _enemyPoolByType[enemy.Type].Enqueue(enemy);
         }
 
@@ -92,12 +92,12 @@ namespace CodeBase.Infrastructure
 
         public Vector3 GetRandomEnemyPosition()
         {
-            Enemy[] livingEnemy = _enemies.Where(enemy => enemy.CanReceiveDamage).ToArray();
-
-            if (livingEnemy.Length == 0)
+            int enemiesCount = _enemies.Count;
+            
+            if (enemiesCount == 0)
                 return Vector3.zero;
 
-            return livingEnemy[Random.Range(0, livingEnemy.Length)].transform.position;
+            return _enemies[Random.Range(0, enemiesCount)].transform.position;
         }
 
         public void ClearEnemies()

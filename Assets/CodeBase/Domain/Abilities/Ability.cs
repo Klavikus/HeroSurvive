@@ -24,6 +24,7 @@ namespace CodeBase.Domain
         private int _currentUpgradeLevel;
         private Coroutine _activateProjectionCoroutine;
         private Coroutine _runCoroutine;
+        private RaycastHit2D[] _raycastHits;
 
         public Ability(
             AbilityProjectionBuilder projectionBuilder,
@@ -42,6 +43,7 @@ namespace CodeBase.Domain
             _gameLoopService.LevelCloseInvoked += OnGameCloseInvoked;
             _cooldownWaitForSeconds = new WaitForSeconds(_abilityData.Cooldown);
             _burstDelayWaitForSeconds = new WaitForSeconds(_abilityData.BurstFireDelay);
+            _raycastHits = new RaycastHit2D[abilityData.CheckCount];
         }
 
         ~Ability() => _gameLoopService.LevelCloseInvoked -= OnGameCloseInvoked;
@@ -64,7 +66,7 @@ namespace CodeBase.Domain
 
         public void Execute()
         {
-            if (_onCooldown || !_isInitialized)
+            if (_onCooldown || !_isInitialized || !CheckForTargetExistence())
                 return;
 
             if (_activateProjectionCoroutine != null)
@@ -75,6 +77,12 @@ namespace CodeBase.Domain
                 _coroutineRunner.Stop(_runCoroutine);
 
             _runCoroutine = _coroutineRunner.Run(StartCooldown());
+        }
+
+        private bool CheckForTargetExistence()
+        {
+            return Physics2D.CircleCastNonAlloc(_pivotObject.position, _abilityData.EnemyCheckRadius, Vector2.zero,
+                _raycastHits, 1, _abilityData.WhatIsEnemy.layerMask) > 0;
         }
 
         public void UpdatePlayerModifiers(IReadOnlyDictionary<BaseProperty, float> stats) =>
