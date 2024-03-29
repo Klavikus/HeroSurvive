@@ -11,7 +11,7 @@ namespace CodeBase.Domain
 
         public override IEnumerator Run()
         {
-            _currenRotationAngle =  Offset * Mathf.Deg2Rad;
+            _currenRotationAngle = Offset * Mathf.Deg2Rad;
 
             float startDuration = BaseDataConfig.Duration * BaseDataConfig.StartTimePercent;
             float midDuration = BaseDataConfig.Duration - BaseDataConfig.Duration *
