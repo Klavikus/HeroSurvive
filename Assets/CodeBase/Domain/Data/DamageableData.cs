@@ -8,16 +8,16 @@ namespace CodeBase.Domain
     [Serializable]
     public struct DamageableData
     {
-        [field: SerializeField] public int MaxHealth { get; private set; }
-        [field: SerializeField] public float HealthRegenerationPercent { get; private set; }
-        [field: SerializeField] public float RegenerationDelayInSeconds { get; private set; }
-
         public DamageableData(MainProperties mainProperties)
         {
             MaxHealth = (int) mainProperties.BaseProperties[BaseProperty.MaxHealth];
             HealthRegenerationPercent = mainProperties.BaseProperties[BaseProperty.HealthRegen].AsPercentFactor();
             RegenerationDelayInSeconds = GameConstants.RegenerationDelay;
         }
+
+        [field: SerializeField] public int MaxHealth { get; private set; }
+        [field: SerializeField] public float HealthRegenerationPercent { get; private set; }
+        [field: SerializeField] public float RegenerationDelayInSeconds { get; private set; }
 
         public void UpdateProgression(float stageProgressionModifier)
         {

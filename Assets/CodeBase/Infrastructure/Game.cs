@@ -6,11 +6,10 @@ namespace CodeBase.Infrastructure
     {
         public readonly GameStateMachine StateMachine;
 
-        public Game(ICoroutineRunner coroutineRunner, ConfigurationContainer configurationContainer,
-            AudioPlayer audioPlayer)
+        public Game(ICoroutineRunner coroutineRunner, ConfigurationContainer configurationContainer)
         {
             StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), configurationContainer,
-                coroutineRunner, audioPlayer);
+                coroutineRunner);
         }
     }
 }

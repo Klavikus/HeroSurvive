@@ -6,6 +6,7 @@ namespace CodeBase.Domain
     [Serializable]
     public class MainPropertyViewData
     {
+        //TODO: Refactor this
         [field: SerializeField] public float Value;
         [field: SerializeField] public BaseProperty BaseProperty { get; private set; }
         [field: SerializeField] public Sprite Icon { get; private set; }

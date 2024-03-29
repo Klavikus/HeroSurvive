@@ -5,6 +5,7 @@ namespace CodeBase.Domain
     [Serializable]
     public struct EnemyAIData
     {
+        //TODO: Refactor this
         public MoveStrategy MoveStrategy;
         public float Speed;
         public float AttackRange;
@@ -12,6 +13,7 @@ namespace CodeBase.Domain
         public float ObstacleCheckDistance;
         public float StaggerResist;
 
-        public void CalculateWithProgression(float progressionModifier) => Speed *= progressionModifier;
+        public void CalculateWithProgression(float progressionModifier) =>
+            Speed *= progressionModifier;
     }
 }

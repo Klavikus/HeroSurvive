@@ -2,8 +2,8 @@ namespace CodeBase.Domain
 {
     public struct InputData
     {
-        public float Horizontal;
-        public float Vertical;
+        public readonly float Horizontal;
+        public readonly float Vertical;
 
         public InputData(float horizontal, float vertical)
         {

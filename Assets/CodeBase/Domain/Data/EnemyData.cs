@@ -22,10 +22,15 @@ namespace CodeBase.Domain
         [field: SerializeField] public LootData LootData { get; private set; }
         [field: SerializeField] public ProgressionData ProgressionData { get; private set; }
 
-        public void SetProgressionData(ProgressionData progressionData) => ProgressionData = progressionData;
+        public void SetProgressionData(ProgressionData progressionData) =>
+            ProgressionData = progressionData;
 
-        public void SetData(DamageableData damageableData, DamageSourceData damageSourceData, LootData lootData,
-            EnemyAIData enemyAIData, ProgressionData baseProgressionData)
+        public void SetData(
+            DamageableData damageableData,
+            DamageSourceData damageSourceData,
+            LootData lootData,
+            EnemyAIData enemyAIData,
+            ProgressionData baseProgressionData)
         {
             AIData = enemyAIData;
             DamageableData = damageableData;

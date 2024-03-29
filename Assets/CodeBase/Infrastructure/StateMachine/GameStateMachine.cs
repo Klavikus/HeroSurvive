@@ -11,12 +11,12 @@ namespace CodeBase.Infrastructure
         private IExitableState _activeState;
 
         public GameStateMachine(SceneLoader sceneLoader, ConfigurationContainer configurationContainer,
-            ICoroutineRunner coroutineRunner, AudioPlayer audioPlayer)
+            ICoroutineRunner coroutineRunner)
         {
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] =
-                    new BootstrapState(this, sceneLoader, configurationContainer, coroutineRunner, audioPlayer),
+                    new BootstrapState(this, sceneLoader, configurationContainer, coroutineRunner),
                 [typeof(LoadProgressState)] = new LoadProgressState(this),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader),
                 [typeof(GameLoopState)] = new GameLoopState(this, sceneLoader),

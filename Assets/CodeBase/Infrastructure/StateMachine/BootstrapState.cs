@@ -14,17 +14,15 @@ namespace CodeBase.Infrastructure
         private readonly SceneLoader _sceneLoader;
         private readonly ConfigurationContainer _configurationContainer;
         private readonly ICoroutineRunner _coroutineRunner;
-        private readonly AudioPlayer _audioPlayer;
         private readonly AllServices _services;
 
         public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader,
-            ConfigurationContainer configurationContainer, ICoroutineRunner coroutineRunner, AudioPlayer audioPlayer)
+            ConfigurationContainer configurationContainer, ICoroutineRunner coroutineRunner)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _configurationContainer = configurationContainer;
             _coroutineRunner = coroutineRunner;
-            _audioPlayer = audioPlayer;
             _services = AllServices.Container;
             RegisterServices();
         }
@@ -57,26 +55,25 @@ namespace CodeBase.Infrastructure
             IConfigurationProvider configurationProvider = new ConfigurationProvider(_configurationContainer);
             IViewModelProvider viewModelProvider = new ViewModelProvider();
             IModelProvider modelProvider = new ModelProvider();
-            AbilityUpgradesProvider abilityUpgradesProvider = new AbilityUpgradesProvider(configurationProvider);
+            AbilityUpgradesProvider abilityUpgradesProvider = new(configurationProvider);
 
             ITranslationService translationService = new TranslationService();
 
-            UpgradeDescriptionBuilder upgradeDescriptionBuilder =
-                new UpgradeDescriptionBuilder(configurationProvider, translationService);
-            LevelMapFactory levelMapFactory = new LevelMapFactory(configurationProvider);
-            ModelFactory modelFactory = new ModelFactory(configurationProvider);
-            EnemyFactory enemyFactory = new EnemyFactory(configurationProvider);
+            UpgradeDescriptionBuilder upgradeDescriptionBuilder = new(configurationProvider, translationService);
+            LevelMapFactory levelMapFactory = new(configurationProvider);
+            ModelFactory modelFactory = new(configurationProvider);
+            EnemyFactory enemyFactory = new(configurationProvider);
             IViewFactory viewFactory = new ViewFactory(
                 configurationProvider,
                 viewModelProvider,
                 upgradeDescriptionBuilder);
-            MainMenuViewBuilder mainMenuViewBuilder = new MainMenuViewBuilder(viewFactory);
+            MainMenuViewBuilder mainMenuViewBuilder = new(viewFactory);
             IMainMenuFactory mainMenuFactory = new MainMenuFactory(mainMenuViewBuilder);
-            GameLoopViewFactory gameLoopViewFactory = new GameLoopViewFactory(
+            GameLoopViewFactory gameLoopViewFactory = new(
                 configurationProvider,
                 viewModelProvider,
                 upgradeDescriptionBuilder);
-            GameLoopViewBuilder gameLoopViewBuilder = new GameLoopViewBuilder(gameLoopViewFactory);
+            GameLoopViewBuilder gameLoopViewBuilder = new(gameLoopViewFactory);
 
             IGamePauseService gamePauseService = new GamePauseService();
 
@@ -94,7 +91,7 @@ namespace CodeBase.Infrastructure
             IVfxService vfxService = new VfxService(configurationProvider);
             ILeveCompetitionService leveCompetitionService =
                 new LeveCompetitionService(enemySpawnService, configurationProvider, modelProvider, vfxService);
-            PlayerEventHandler playerEventHandler = new PlayerEventHandler();
+            PlayerEventHandler playerEventHandler = new();
 
             IModelBuilder modelBuilder = new ModelBuilder(modelFactory, abilityUpgradeService);
 
@@ -119,13 +116,11 @@ namespace CodeBase.Infrastructure
                 upgradeService,
                 modelProvider);
 
-            AbilityProjectionBuilder abilityProjectionBuilder =
-                new AbilityProjectionBuilder(targetFinderService, audioPlayerService);
-            AbilityFactory abilityFactory =
-                new AbilityFactory(abilityProjectionBuilder, _coroutineRunner, abilityUpgradesProvider);
-            PlayerBuilder playerBuilder = new PlayerBuilder(modelProvider, configurationProvider, propertyProvider,
+            AbilityProjectionBuilder abilityProjectionBuilder = new(targetFinderService, audioPlayerService);
+            AbilityFactory abilityFactory = new(abilityProjectionBuilder, _coroutineRunner, abilityUpgradesProvider);
+            PlayerBuilder playerBuilder = new(modelProvider, configurationProvider, propertyProvider,
                 abilityUpgradeService, abilityFactory, audioPlayerService);
-            AbilityBuilder abilityBuilder = new AbilityBuilder(playerBuilder);
+            AbilityBuilder abilityBuilder = new(playerBuilder);
 
             IGameLoopService gameLoopService = new GameLoopService(
                 levelMapFactory,
