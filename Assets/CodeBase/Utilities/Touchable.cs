@@ -1,17 +1,11 @@
 using UnityEngine.UI;
 
-#if UNITY_EDITOR
-using UnityEditor;
-
-[CustomEditor(typeof(Touchable))]
-public class Touchable_Editor : Editor
+namespace CodeBase.Utilities
 {
-    public override void OnInspectorGUI()
+    public class Touchable : Graphic
     {
+        protected override void UpdateGeometry()
+        {
+        }
     }
-}
-#endif
-public class Touchable : Graphic
-{
-    protected override void UpdateGeometry() { }
 }

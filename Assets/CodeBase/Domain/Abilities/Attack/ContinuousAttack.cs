@@ -13,6 +13,7 @@ namespace CodeBase.Domain.Abilities.Attack
 
         public ContinuousAttack(AbilityData abilityConfig) : base(abilityConfig)
         {
+            _canRun = true;
         }
 
         public override IEnumerator Run()

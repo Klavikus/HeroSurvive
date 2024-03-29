@@ -10,9 +10,9 @@ namespace CodeBase.Domain.Abilities.Attack
     {
         private bool _canRun;
 
-        public PeriodicalAttack(AbilityData abilityConfig, bool canRun) : base(abilityConfig)
+        public PeriodicalAttack(AbilityData abilityConfig) : base(abilityConfig)
         {
-            _canRun = canRun;
+            _canRun = true;
         }
 
         public override IEnumerator Run()
