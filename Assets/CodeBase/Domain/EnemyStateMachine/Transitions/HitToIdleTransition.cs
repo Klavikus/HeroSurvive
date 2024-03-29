@@ -1,5 +1,5 @@
 using CodeBase.Domain.Enemies;
-using CodeBase.Domain.EnemyStateMachine.States;
+using CodeBase.Domain.StateMachines;
 
 namespace CodeBase.Domain.EnemyStateMachine.Transitions
 {
@@ -7,7 +7,10 @@ namespace CodeBase.Domain.EnemyStateMachine.Transitions
     {
         private readonly EnemyAI _enemyAI;
 
-        public HitToIdleTransition(IEntityState nextEntityState, EnemyAI enemyAI) : base(nextEntityState)
+        public HitToIdleTransition(
+            IEntityState nextEntityState,
+            EnemyAI enemyAI)
+            : base(nextEntityState)
         {
             _enemyAI = enemyAI;
             _enemyAI.StaggerOut += OnStaggerOut;
@@ -19,8 +22,10 @@ namespace CodeBase.Domain.EnemyStateMachine.Transitions
                 MoveNextState();
         }
 
-        public override void Update()
+        public override void OnDispose()
         {
+            base.OnDispose();
+            _enemyAI.StaggerOut -= OnStaggerOut;
         }
     }
 }

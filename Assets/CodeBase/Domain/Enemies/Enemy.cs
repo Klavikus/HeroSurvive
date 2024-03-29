@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using CodeBase.Domain.Data;
-using CodeBase.Domain.EnemyStateMachine;
 using CodeBase.Domain.EnemyStateMachine.States;
 using CodeBase.Domain.EnemyStateMachine.Transitions;
 using CodeBase.Domain.EntityComponents;
 using CodeBase.Domain.Enums;
+using CodeBase.Domain.StateMachines;
 using CodeBase.Infrastructure.Services;
 using UnityEngine;
 
@@ -37,6 +37,7 @@ namespace CodeBase.Domain.Enemies
         private void OnDestroy()
         {
             _stateMachine.Dispose();
+
             Destroyed?.Invoke(this);
         }
 
@@ -84,11 +85,10 @@ namespace CodeBase.Domain.Enemies
 
         private void InitializeStateMachine(IVfxService vfxService, IAudioPlayerService audioPlayerService)
         {
-            IdleEntityState idleEntityState = new IdleEntityState(_animationSynchronizer, _enemyAI);
-            RunEntityState runEntityState = new RunEntityState(_animationSynchronizer, _enemyAI);
-            DieEntityState dieEntityState = new DieEntityState(_animationSynchronizer, _enemyAI, this);
-
-            HitEntityState hitEntityState = new HitEntityState(
+            IdleEntityState idleEntityState = new(_animationSynchronizer, _enemyAI);
+            RunEntityState runEntityState = new(_animationSynchronizer, _enemyAI);
+            DieEntityState dieEntityState = new(_animationSynchronizer, _enemyAI, this, vfxService);
+            HitEntityState hitEntityState = new(
                 _animationSynchronizer,
                 _enemyAI,
                 _damageable,
@@ -116,16 +116,25 @@ namespace CodeBase.Domain.Enemies
                 hitToRunTransition,
             };
 
-            _stateMachine = new EntityStateMachine(idleEntityState, _transitions);
+            List<EntityState> states = new List<EntityState>()
+            {
+                idleEntityState,
+                runEntityState,
+                dieEntityState,
+                hitEntityState
+            };
+
+            _stateMachine = new EntityStateMachine(idleEntityState, states);
+
+            foreach (Transition transition in _transitions)
+                transition.BindContext(_stateMachine);
+
             _stateMachine.Reset();
         }
 
         private void Update()
         {
-            _stateMachine.Update();
-
-            foreach (Transition transition in _transitions)
-                transition.Update();
+            _stateMachine?.Update();
         }
     }
 }

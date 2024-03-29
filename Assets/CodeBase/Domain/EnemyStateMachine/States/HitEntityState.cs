@@ -1,6 +1,7 @@
 using CodeBase.Domain.Enemies;
 using CodeBase.Domain.EntityComponents;
 using CodeBase.Domain.Enums;
+using CodeBase.Domain.StateMachines;
 using CodeBase.Infrastructure.Services;
 
 namespace CodeBase.Domain.EnemyStateMachine.States

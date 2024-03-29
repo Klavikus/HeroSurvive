@@ -1,6 +1,7 @@
 using CodeBase.Domain.Enemies;
 using CodeBase.Domain.EntityComponents;
 using CodeBase.Domain.Enums;
+using CodeBase.Domain.StateMachines;
 using CodeBase.Infrastructure.Services;
 
 namespace CodeBase.Domain.EnemyStateMachine.States
@@ -12,12 +13,16 @@ namespace CodeBase.Domain.EnemyStateMachine.States
         private readonly Enemy _enemy;
         private readonly IVfxService _vfxService;
 
-        public DieEntityState(AnimationSynchronizer animationSynchronizer, EnemyAI enemyAI, Enemy enemy)
+        public DieEntityState(
+            AnimationSynchronizer animationSynchronizer,
+            EnemyAI enemyAI,
+            Enemy enemy,
+            IVfxService vfxService)
         {
             _animationSynchronizer = animationSynchronizer;
             _enemyAI = enemyAI;
             _enemy = enemy;
-            _vfxService = AllServices.Container.AsSingle<IVfxService>();
+            _vfxService = vfxService;
         }
 
         public override void Enter()

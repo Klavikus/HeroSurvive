@@ -1,5 +1,5 @@
 using CodeBase.Domain.Enemies;
-using CodeBase.Domain.EnemyStateMachine.States;
+using CodeBase.Domain.StateMachines;
 
 namespace CodeBase.Domain.EnemyStateMachine.Transitions
 {
@@ -7,14 +7,16 @@ namespace CodeBase.Domain.EnemyStateMachine.Transitions
     {
         private readonly EnemyAI _enemyAI;
 
-        public IdleToRunTransition(IEntityState nextEntityState, EnemyAI enemyAI) : base(nextEntityState)
+        public IdleToRunTransition(
+            IEntityState nextEntityState,
+            EnemyAI enemyAI)
+            : base(nextEntityState)
         {
             _enemyAI = enemyAI;
             _enemyAI.StartMoving += MoveNextState;
         }
 
-        public override void Update()
-        {
-        }
+        public override void OnDispose() =>
+            _enemyAI.StartMoving -= MoveNextState;
     }
 }
