@@ -14,7 +14,6 @@ namespace CodeBase.Domain
         [field: SerializeField] public float EndTime { get; private set; }
         [field: SerializeField] public float FullTimePeriod { get; private set; }
 
-
         public void UpdateTargetSize(float size)
         {
             MainTargetSize = size;

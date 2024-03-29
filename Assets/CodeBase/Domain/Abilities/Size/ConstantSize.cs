@@ -19,6 +19,7 @@ namespace CodeBase.Domain
         public IEnumerator Run()
         {
             _targetTransform.localScale = _targetLocalScale;
+
             yield break;
         }
     }

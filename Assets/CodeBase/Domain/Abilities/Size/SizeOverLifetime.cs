@@ -38,12 +38,13 @@ namespace CodeBase.Domain
             {
                 currentSize += startPeriodStepValue;
                 _targetTransform.localScale = currentSize * Vector3.one;
+
                 yield return _oneStepDuration;
             }
 
             _targetTransform.localScale = _sizeBehaviourData.MainTargetSize * Vector3.one;
-            yield return _mainPeriodInSeconds;
 
+            yield return _mainPeriodInSeconds;
 
             float endPeriodDuration = _sizeBehaviourData.EndTime * _sizeBehaviourData.FullTimePeriod;
             float endPeriodSteps = endPeriodDuration * StepsInSecond;
@@ -54,6 +55,7 @@ namespace CodeBase.Domain
             {
                 currentSize += endPeriodStepValue;
                 _targetTransform.localScale = currentSize * Vector3.one;
+
                 yield return _oneStepDuration;
             }
         }

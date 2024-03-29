@@ -17,7 +17,6 @@ namespace CodeBase.Domain
             _targetTransform = targetTransform;
             _sizeBehaviourData = sizeBehaviourData;
 
-
             float startPeriod = _sizeBehaviourData.StartTime;
             float endPeriod = _sizeBehaviourData.EndTime;
             float mainPeriod = _sizeBehaviourData.FullTimePeriod - startPeriod - endPeriod;
@@ -52,7 +51,6 @@ namespace CodeBase.Domain
 
             yield return _mainPeriodInSeconds;
 
-
             float endPeriodSteps = _sizeBehaviourData.EndTime * StepsInSecond;
             float endPeriodStepValue = (_sizeBehaviourData.EndTargetSize - _sizeBehaviourData.MainTargetSize) /
                                        endPeriodSteps;
@@ -64,6 +62,7 @@ namespace CodeBase.Domain
                     _targetTransform.localScale = currentSize * new Vector3(-1, 1, 1);
                 else
                     _targetTransform.localScale = currentSize * Vector3.one;
+
                 yield return _oneStepDuration;
             }
         }
