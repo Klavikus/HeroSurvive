@@ -12,7 +12,7 @@ namespace CodeBase.Infrastructure
 {
     public class AudioPlayerService : IAudioPlayerService
     {
-        private IGamePauseService _gamePauseService;
+        private readonly IGamePauseService _gamePauseService;
         private readonly IConfigurationProvider _configurationProvider;
         private readonly ICoroutineRunner _coroutineRunner;
         private EventInstance _ambientInstance;
@@ -33,8 +33,7 @@ namespace CodeBase.Infrastructure
         public void Initialize(IPersistentDataService persistentDataService)
         {
             _ambientInstance = RuntimeManager.CreateInstance(_configurationProvider.FMOD_GameLoopAmbientReference);
-            _mainMenuAmbientInstance =
-                RuntimeManager.CreateInstance(_configurationProvider.FMOD_MainMenuAmbientReference);
+            _mainMenuAmbientInstance = RuntimeManager.CreateInstance(_configurationProvider.FMOD_MainMenuAmbientReference);
 
             _gamePauseService.PauseStarted += OnPauseStarted;
             _gamePauseService.PauseEnded += OnPauseEnded;

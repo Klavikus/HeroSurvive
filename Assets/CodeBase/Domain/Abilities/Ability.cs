@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using CodeBase.Configs;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace CodeBase.Domain
 {
-    public class Ability
+    public class Ability : IDisposable
     {
         private readonly AbilityData _abilityData;
         private readonly ICoroutineRunner _coroutineRunner;
@@ -46,7 +47,10 @@ namespace CodeBase.Domain
             _raycastHits = new RaycastHit2D[abilityData.CheckCount];
         }
 
-        ~Ability() => _gameLoopService.LevelCloseInvoked -= OnGameCloseInvoked;
+        ~Ability()
+        {
+            ReleaseUnmanagedResources();
+        }
 
         public bool CanUpgrade => _currentUpgradeLevel < _abilityUpgradesData.Length;
         public AbilityUpgradeData AvailableUpgrade => _abilityUpgradesData[_currentUpgradeLevel];
@@ -71,6 +75,7 @@ namespace CodeBase.Domain
 
             if (_activateProjectionCoroutine != null)
                 _coroutineRunner.Stop(_activateProjectionCoroutine);
+
             _activateProjectionCoroutine = _coroutineRunner.Run(ActivateProjections());
 
             if (_runCoroutine != null)
@@ -109,11 +114,7 @@ namespace CodeBase.Domain
         {
             for (int i = 0; i < _abilityData.BurstCount; i++)
             {
-                //TODO: Refactor this, should use event
-                if (_pivotObject == null)
-                    yield break;
-
-                _projectionBuilder.Build(_abilityData, _pivotObject, _projectionPool);
+               _projectionBuilder.Build(_abilityData, _pivotObject, _projectionPool);
                 yield return _burstDelayWaitForSeconds;
             }
         }
@@ -128,7 +129,13 @@ namespace CodeBase.Domain
         public bool CheckConfig(AbilityConfigSO abilityConfigSO) =>
             _abilityUpgradesData[0].BaseConfigSO == abilityConfigSO;
 
-        public void Disable()
+        public void Dispose()
+        {
+            ReleaseUnmanagedResources();
+            GC.SuppressFinalize(this);
+        }
+
+        private void ReleaseUnmanagedResources()
         {
             if (_activateProjectionCoroutine != null)
                 _coroutineRunner.Stop(_activateProjectionCoroutine);

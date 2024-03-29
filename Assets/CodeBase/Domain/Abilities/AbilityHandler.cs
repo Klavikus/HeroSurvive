@@ -70,7 +70,7 @@ namespace CodeBase.Domain
         private void OnDestroy()
         {
             foreach (Ability ability in _abilities) 
-                ability.Disable();
+                ability.Dispose();
         }
     }
 }
