@@ -2,7 +2,7 @@
 using CodeBase.Infrastructure.Services;
 using UnityEngine.InputSystem;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.ViewModels
 {
     public class GameLoopPauseViewModel
     {

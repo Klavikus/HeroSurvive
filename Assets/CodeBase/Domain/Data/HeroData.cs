@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using CodeBase.Configs;
+using CodeBase.Domain.EntityComponents;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Data
 {
     [Serializable]
     public class HeroData

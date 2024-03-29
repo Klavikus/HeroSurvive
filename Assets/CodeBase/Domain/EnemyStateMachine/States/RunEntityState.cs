@@ -1,4 +1,8 @@
-namespace CodeBase.Domain
+using CodeBase.Domain.Enemies;
+using CodeBase.Domain.EntityComponents;
+using CodeBase.Domain.Enums;
+
+namespace CodeBase.Domain.EnemyStateMachine.States
 {
     class RunEntityState : EntityState
     {

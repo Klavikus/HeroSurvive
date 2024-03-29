@@ -1,9 +1,9 @@
 using System.Collections;
-using CodeBase.Domain;
+using CodeBase.Domain.EntityComponents;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views
 {
     public class HealthView : MonoBehaviour
     {

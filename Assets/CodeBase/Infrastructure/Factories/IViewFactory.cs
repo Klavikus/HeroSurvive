@@ -1,8 +1,11 @@
 using System.Collections.Generic;
-using CodeBase.Domain;
-using CodeBase.Presentation;
+using CodeBase.Domain.Models;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Presentation.Views;
+using CodeBase.Presentation.Views.HeroSelector;
+using CodeBase.Presentation.Views.Upgrades;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Factories
 {
     public interface IViewFactory : IService
     {

@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using CodeBase.Presentation.ViewModels;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views
 {
     public class SettingsView : MonoBehaviour
     {

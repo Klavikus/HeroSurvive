@@ -1,8 +1,7 @@
 using System;
 using Agava.YandexGames;
-using CodeBase.Domain;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services
 {
     public class AdsProvider : IAdsProvider
     {

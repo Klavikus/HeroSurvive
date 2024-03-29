@@ -1,10 +1,10 @@
-using CodeBase.Domain;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Data;
+using CodeBase.Infrastructure.Services;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views.HeroSelector
 {
     public class HeroDescriptionView : MonoBehaviour
     {

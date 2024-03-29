@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using CodeBase.Domain;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Enums;
+using CodeBase.Domain.Models;
+using CodeBase.Infrastructure.Services;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.ViewModels
 {
     public class MainPropertiesViewModel
     {

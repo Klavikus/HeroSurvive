@@ -1,7 +1,7 @@
 using System;
-using CodeBase.Domain;
+using CodeBase.Domain.Data;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Models
 {
     public class GameLoopModel
     {

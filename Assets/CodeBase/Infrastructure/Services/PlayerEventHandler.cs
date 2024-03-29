@@ -1,7 +1,7 @@
 using System;
-using CodeBase.Domain;
+using CodeBase.Domain.EntityComponents;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services
 {
     public class PlayerEventHandler
     {

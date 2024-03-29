@@ -1,7 +1,7 @@
-﻿using System.Linq;
+﻿using CodeBase.Infrastructure.Factories;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services
 {
     public class TargetFinderService : ITargetService
     {

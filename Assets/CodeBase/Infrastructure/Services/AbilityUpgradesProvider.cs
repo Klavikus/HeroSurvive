@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using CodeBase.Configs;
-using CodeBase.Domain;
+using CodeBase.Domain.Abilities;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services
 {
     public class AbilityUpgradesProvider
     {

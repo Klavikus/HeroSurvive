@@ -1,8 +1,7 @@
 using System;
 using FMODUnity;
-using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Abilities
 {
     [Serializable]
     public class AudioData

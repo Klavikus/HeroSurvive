@@ -1,9 +1,15 @@
 using System;
 using System.Collections.Generic;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.EnemyStateMachine;
+using CodeBase.Domain.EnemyStateMachine.States;
+using CodeBase.Domain.EnemyStateMachine.Transitions;
+using CodeBase.Domain.EntityComponents;
+using CodeBase.Domain.Enums;
+using CodeBase.Infrastructure.Services;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Enemies
 {
     public class Enemy : MonoBehaviour
     {
@@ -27,21 +33,18 @@ namespace CodeBase.Domain
         public int KillExperience => _lootData.Experience;
         public int KillCurrency => _lootData.Currency;
         public EnemyType Type => _enemyData.Type;
+
         private void OnDestroy()
         {
             _stateMachine.Dispose();
             Destroyed?.Invoke(this);
         }
 
-        public void InvokeBackToPool()
-        {
-            _damageable.Died -= OnDied;
-            _enemyAI.AttackDistanceReached -= _damageSource.HandleAttack;
-            InvokedBackToPool?.Invoke(this);
-            gameObject.SetActive(false);
-        }
-
-        public void Initialize(ITargetService targetService, EnemyData enemyData)
+        public void Initialize(
+            ITargetService targetService,
+            EnemyData enemyData,
+            IVfxService vfxService,
+            IAudioPlayerService audioPlayerService)
         {
             gameObject.SetActive(true);
             _enemyData = enemyData;
@@ -56,10 +59,17 @@ namespace CodeBase.Domain
             _enemyAI.AttackDistanceReached += _damageSource.HandleAttack;
 
             _enemyAI.enabled = true;
-            InitializeStateMachine();
+
+            InitializeStateMachine(vfxService, audioPlayerService);
         }
 
-        private void OnDied() => Died?.Invoke(this);
+        public void InvokeBackToPool()
+        {
+            _damageable.Died -= OnDied;
+            _enemyAI.AttackDistanceReached -= _damageSource.HandleAttack;
+            InvokedBackToPool?.Invoke(this);
+            gameObject.SetActive(false);
+        }
 
         public void UpdateProgression(float completeProgress)
         {
@@ -69,12 +79,21 @@ namespace CodeBase.Domain
             _lootData.UpdateProgression(_enemyData.ProgressionData.Loot.Evaluate(completeProgress));
         }
 
-        private void InitializeStateMachine()
+        private void OnDied() =>
+            Died?.Invoke(this);
+
+        private void InitializeStateMachine(IVfxService vfxService, IAudioPlayerService audioPlayerService)
         {
             IdleEntityState idleEntityState = new IdleEntityState(_animationSynchronizer, _enemyAI);
             RunEntityState runEntityState = new RunEntityState(_animationSynchronizer, _enemyAI);
             DieEntityState dieEntityState = new DieEntityState(_animationSynchronizer, _enemyAI, this);
-            HitEntityState hitEntityState = new HitEntityState(_animationSynchronizer, _enemyAI, _damageable);
+
+            HitEntityState hitEntityState = new HitEntityState(
+                _animationSynchronizer,
+                _enemyAI,
+                _damageable,
+                vfxService,
+                audioPlayerService);
 
             IdleToRunTransition idleToRunTransition = new IdleToRunTransition(runEntityState, _enemyAI);
             RunToIdleTransition runToIdleTransition = new RunToIdleTransition(idleEntityState, _enemyAI);

@@ -1,8 +1,10 @@
-using CodeBase.Infrastructure;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.StateMachine;
+using CodeBase.Presentation.ViewModels;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views
 {
     public class LeaderBoardViewInvoker : MonoBehaviour
     {

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using CodeBase.Domain;
+using CodeBase.Domain.Enums;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Models
 {
     public class PropertiesModel
     {

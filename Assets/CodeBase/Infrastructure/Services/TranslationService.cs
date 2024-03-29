@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using Agava.YandexGames;
 using CodeBase.Configs;
-using CodeBase.Domain;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Enums;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services
 {
     public class TranslationService : ITranslationService
     {

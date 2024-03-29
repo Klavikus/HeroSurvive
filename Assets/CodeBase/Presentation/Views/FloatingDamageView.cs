@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views
 {
     public class FloatingDamageView : MonoBehaviour
     {

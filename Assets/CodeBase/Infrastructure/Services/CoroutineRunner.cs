@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Infrastructure.Services
 {
     public class CoroutineRunner : MonoBehaviour, ICoroutineRunner
     {

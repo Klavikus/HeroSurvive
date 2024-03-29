@@ -1,6 +1,9 @@
-using CodeBase.Presentation;
+using CodeBase.Infrastructure.Factories;
+using CodeBase.Presentation.Views;
+using CodeBase.Presentation.Views.HeroSelector;
+using CodeBase.Presentation.Views.Upgrades;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Builders
 {
     public class MainMenuViewBuilder
     {

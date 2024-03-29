@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Models
 {
     public class SettingsModel
     {

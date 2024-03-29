@@ -1,8 +1,8 @@
-using CodeBase.Domain;
+using CodeBase.Domain.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views
 {
     public class LeaderBoardAuthorizeRequestView : MonoBehaviour
     {

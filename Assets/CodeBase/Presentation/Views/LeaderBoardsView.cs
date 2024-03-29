@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using Agava.YandexGames;
 using CodeBase.Configs;
-using CodeBase.Domain;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Models;
+using CodeBase.Infrastructure.Factories;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.StateMachine;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views
 {
     public class LeaderBoardsView : MonoBehaviour
     {

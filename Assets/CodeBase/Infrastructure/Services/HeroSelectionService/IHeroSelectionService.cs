@@ -1,7 +1,7 @@
 using System;
 using CodeBase.Domain;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services.HeroSelectionService
 {
     public interface IHeroSelectionService : IService
     {

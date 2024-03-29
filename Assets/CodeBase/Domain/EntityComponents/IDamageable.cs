@@ -1,6 +1,6 @@
 using System;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.EntityComponents
 {
     public interface IDamageable
     {
@@ -8,7 +8,6 @@ namespace CodeBase.Domain
         event Action<int, float> DamageTaken;
         event Action<int> HealTaken;
         event Action Died;
-        void Initialize(DamageableData damageableData);
         void TakeDamage(int damage, float stagger);
         void RestoreHealth(int healAmount);
         void Respawn();

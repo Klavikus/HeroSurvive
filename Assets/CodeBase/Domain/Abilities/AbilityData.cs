@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using CodeBase.Configs;
+using CodeBase.Domain.Abilities.Size;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Enums;
 using CodeBase.Extensions;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Abilities
 {
     public class AbilityData
     {

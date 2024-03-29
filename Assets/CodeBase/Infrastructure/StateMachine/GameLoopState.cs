@@ -1,7 +1,9 @@
 using CodeBase.Configs;
-using CodeBase.Domain;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Models;
+using CodeBase.Infrastructure.Services;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.StateMachine
 {
     public class GameLoopState : IPayloadedState<HeroData>
     {

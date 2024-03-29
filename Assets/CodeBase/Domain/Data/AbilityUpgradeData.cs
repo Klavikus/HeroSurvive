@@ -1,8 +1,9 @@
 using System;
 using CodeBase.Configs;
+using CodeBase.Domain.Enums;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Data
 {
     [Serializable]
     public class AbilityUpgradeData

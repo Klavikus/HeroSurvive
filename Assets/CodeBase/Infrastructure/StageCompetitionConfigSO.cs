@@ -1,4 +1,5 @@
 using CodeBase.Domain;
+using CodeBase.Domain.Data;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure

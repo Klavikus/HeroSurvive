@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using CodeBase.Infrastructure.StateMachine;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services
 {
     public class ViewModelProvider : IViewModelProvider
     {

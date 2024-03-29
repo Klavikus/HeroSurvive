@@ -1,4 +1,6 @@
-﻿namespace CodeBase.Infrastructure
+﻿using CodeBase.Infrastructure.Builders;
+
+namespace CodeBase.Infrastructure.Factories
 {
     public class MainMenuFactory : IMainMenuFactory
     {

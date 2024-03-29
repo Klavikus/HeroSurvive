@@ -2,7 +2,7 @@ using System;
 using DG.Tweening;
 using UnityEngine;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.ViewComponents
 {
     public class SelectedTweener : MonoBehaviour
     {

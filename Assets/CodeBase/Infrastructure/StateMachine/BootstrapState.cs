@@ -1,10 +1,14 @@
 using System.Collections;
 using CodeBase.Configs;
-using CodeBase.Domain;
+using CodeBase.Domain.Models;
+using CodeBase.Infrastructure.Builders;
+using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.PropertiesProviders;
+using CodeBase.Infrastructure.Services.UpgradeService;
 using FMODUnity;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.StateMachine
 {
     public class BootstrapState : IState
     {
@@ -62,7 +66,13 @@ namespace CodeBase.Infrastructure
             UpgradeDescriptionBuilder upgradeDescriptionBuilder = new(configurationProvider, translationService);
             LevelMapFactory levelMapFactory = new(configurationProvider);
             ModelFactory modelFactory = new(configurationProvider);
-            EnemyFactory enemyFactory = new(configurationProvider);
+
+            IGamePauseService gamePauseService = new GamePauseService();
+            IVfxService vfxService = new VfxService(configurationProvider);
+            IAudioPlayerService audioPlayerService =
+                new AudioPlayerService(configurationProvider, _coroutineRunner, gamePauseService);
+
+            EnemyFactory enemyFactory = new(configurationProvider, vfxService, audioPlayerService);
             IViewFactory viewFactory = new ViewFactory(
                 configurationProvider,
                 viewModelProvider,
@@ -75,10 +85,6 @@ namespace CodeBase.Infrastructure
                 upgradeDescriptionBuilder);
             GameLoopViewBuilder gameLoopViewBuilder = new(gameLoopViewFactory);
 
-            IGamePauseService gamePauseService = new GamePauseService();
-
-            IAudioPlayerService audioPlayerService =
-                new AudioPlayerService(configurationProvider, _coroutineRunner, gamePauseService);
             IAdsProvider adsProvider = new AdsProvider(_coroutineRunner);
             ISaveLoadService saveLoadService = new SaveLoadService(configurationProvider);
             IAuthorizeService authorizeService = new AuthorizeService();
@@ -88,7 +94,6 @@ namespace CodeBase.Infrastructure
                 new PersistentDataService(configurationProvider, saveLoadService, modelProvider);
             ITargetService targetFinderService = new TargetFinderService(enemyFactory);
             IEnemySpawnService enemySpawnService = new EnemySpawnService(targetFinderService, enemyFactory);
-            IVfxService vfxService = new VfxService(configurationProvider);
             ILeveCompetitionService leveCompetitionService =
                 new LeveCompetitionService(enemySpawnService, configurationProvider, modelProvider, vfxService);
             PlayerEventHandler playerEventHandler = new();

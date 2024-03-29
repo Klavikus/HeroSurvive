@@ -1,4 +1,7 @@
-namespace CodeBase.Domain
+using CodeBase.Domain.EnemyStateMachine.States;
+using CodeBase.Domain.EntityComponents;
+
+namespace CodeBase.Domain.EnemyStateMachine.Transitions
 {
     class AnyToDieTransition : Transition
     {

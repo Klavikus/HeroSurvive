@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using CodeBase.Domain.EntityComponents;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Abilities.Attack
 {
     public abstract class AttackBehaviour : IAttackBehaviour
     {

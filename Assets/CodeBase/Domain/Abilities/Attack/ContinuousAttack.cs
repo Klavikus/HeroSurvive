@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Linq;
+using CodeBase.Domain.EntityComponents;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Abilities.Attack
 {
     [Serializable]
     public sealed class ContinuousAttack : AttackBehaviour

@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CodeBase.Domain;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Enemies;
+using CodeBase.Domain.Enums;
+using CodeBase.Infrastructure.Services;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Factories
 {
     public class EnemyFactory
     {
@@ -13,10 +16,18 @@ namespace CodeBase.Infrastructure
         private readonly Dictionary<EnemyType, EnemyData> _enemiesData;
         private readonly List<Enemy> _enemies;
         private readonly Dictionary<EnemyType, Queue<Enemy>> _enemyPoolByType;
+        private readonly IVfxService _vfxService;
+        private readonly IAudioPlayerService _audioPlayerService;
 
-        public EnemyFactory(IConfigurationProvider configurationProvider)
+        public EnemyFactory(
+            IConfigurationProvider configurationProvider,
+            IVfxService vfxService,
+            IAudioPlayerService audioPlayerService)
         {
             _configurationProvider = configurationProvider;
+            _vfxService = vfxService;
+            _audioPlayerService = audioPlayerService;
+
             _enemiesData = new Dictionary<EnemyType, EnemyData>();
 
             _enemyPoolByType = new Dictionary<EnemyType, Queue<Enemy>>();
@@ -45,7 +56,8 @@ namespace CodeBase.Infrastructure
 
             _enemies.Add(enemy);
 
-            enemy.Initialize(targetFinderService, _enemiesData[enemyType]);
+            enemy.Initialize(targetFinderService, _enemiesData[enemyType], _vfxService, _audioPlayerService);
+
             return enemy;
         }
 
@@ -67,6 +79,7 @@ namespace CodeBase.Infrastructure
         public Vector3 GetClosestEnemy(Vector3 to)
         {
             var livingEnemies = _enemies.Where(enemy => enemy.CanReceiveDamage).ToArray();
+
             if (livingEnemies.Length == 0)
                 return Vector3.zero;
 
@@ -93,7 +106,7 @@ namespace CodeBase.Infrastructure
         public Vector3 GetRandomEnemyPosition()
         {
             int enemiesCount = _enemies.Count;
-            
+
             if (enemiesCount == 0)
                 return Vector3.zero;
 

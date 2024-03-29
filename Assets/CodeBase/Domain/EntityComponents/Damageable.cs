@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using CodeBase.Configs;
+using CodeBase.Domain.Data;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.EntityComponents
 {
     public class Damageable : MonoBehaviour, IDamageable
     {

@@ -1,8 +1,9 @@
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Enemies;
+using CodeBase.Domain.EntityComponents;
+using CodeBase.Domain.Enums;
 using CodeBase.Infrastructure.Services;
-using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.EnemyStateMachine.States
 {
     class DieEntityState : EntityState
     {

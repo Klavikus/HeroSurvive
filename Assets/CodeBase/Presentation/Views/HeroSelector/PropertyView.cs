@@ -1,11 +1,14 @@
 using System.Collections.Generic;
-using CodeBase.Domain;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Enums;
+using CodeBase.Infrastructure.Builders;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Presentation.ViewModels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views.HeroSelector
 {
     public class PropertyView : MonoBehaviour
     {

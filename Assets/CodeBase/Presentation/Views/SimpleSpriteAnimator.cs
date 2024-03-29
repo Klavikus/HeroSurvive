@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views
 {
     public class SimpleSpriteAnimator : MonoBehaviour
     {

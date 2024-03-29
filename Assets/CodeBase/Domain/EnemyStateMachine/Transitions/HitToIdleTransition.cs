@@ -1,4 +1,7 @@
-namespace CodeBase.Domain
+using CodeBase.Domain.Enemies;
+using CodeBase.Domain.EnemyStateMachine.States;
+
+namespace CodeBase.Domain.EnemyStateMachine.Transitions
 {
     class HitToIdleTransition : Transition
     {

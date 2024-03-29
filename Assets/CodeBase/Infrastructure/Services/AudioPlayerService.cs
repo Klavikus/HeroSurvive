@@ -1,14 +1,11 @@
-using System;
 using System.Collections;
-using CodeBase.Configs;
-using CodeBase.Domain;
-using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Factories;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services
 {
     public class AudioPlayerService : IAudioPlayerService
     {

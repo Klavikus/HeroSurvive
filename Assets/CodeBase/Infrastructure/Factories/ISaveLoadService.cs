@@ -1,6 +1,7 @@
 using System;
+using CodeBase.Infrastructure.Services;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Factories
 {
     public interface ISaveLoadService : IService
     {

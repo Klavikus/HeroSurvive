@@ -1,10 +1,11 @@
-using CodeBase.Domain;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Data;
+using CodeBase.Infrastructure.Builders;
+using CodeBase.Presentation.ViewModels;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views.HeroSelector
 {
     public class HeroSelectorView : MonoBehaviour
     {

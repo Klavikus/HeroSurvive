@@ -1,8 +1,10 @@
+using CodeBase.Presentation.ViewComponents;
+using CodeBase.Presentation.ViewModels;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views
 {
     public class StartMenuView : MonoBehaviour
     {

@@ -1,13 +1,14 @@
 using System;
-using System.Threading.Tasks;
-using CodeBase.Configs;
-using CodeBase.Domain;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Models;
+using CodeBase.Infrastructure.Builders;
 using CodeBase.Infrastructure.CompositionRoots;
-using CodeBase.Infrastructure.Services;
-using CodeBase.Presentation;
+using CodeBase.Infrastructure.Factories;
+using CodeBase.Infrastructure.StateMachine;
+using CodeBase.Presentation.ViewModels;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services
 {
     public class GameLoopService : IGameLoopService
     {

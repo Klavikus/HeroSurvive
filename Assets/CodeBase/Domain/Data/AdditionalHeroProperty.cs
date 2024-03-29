@@ -1,6 +1,7 @@
 using System;
+using CodeBase.Domain.Enums;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Data
 {
     [Serializable]
     public struct AdditionalHeroProperty

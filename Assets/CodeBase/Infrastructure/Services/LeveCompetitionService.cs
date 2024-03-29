@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
-using CodeBase.Domain;
-using CodeBase.Infrastructure.Services;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Enemies;
+using CodeBase.Domain.Models;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services
 {
     public class LeveCompetitionService : ILeveCompetitionService
     {

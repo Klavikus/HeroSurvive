@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services.Save
 {
     public interface ISaveInfoService : IService
     {

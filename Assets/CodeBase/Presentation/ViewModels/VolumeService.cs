@@ -1,8 +1,8 @@
-﻿using CodeBase.Domain;
+﻿using CodeBase.Domain.Models;
 using FMOD.Studio;
 using FMODUnity;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.ViewModels
 {
     public class VolumeService
     {

@@ -1,6 +1,8 @@
 using System;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Enemies;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Models
 {
     public class LevelUpModel
     {

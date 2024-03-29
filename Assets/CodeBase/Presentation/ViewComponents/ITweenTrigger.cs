@@ -1,6 +1,6 @@
 using System;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.ViewComponents
 {
     public interface ITweenTrigger
     {

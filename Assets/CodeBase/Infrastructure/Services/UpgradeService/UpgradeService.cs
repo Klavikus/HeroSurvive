@@ -1,8 +1,9 @@
 using System;
 using System.Linq;
 using CodeBase.Domain;
+using CodeBase.Domain.Models;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services.UpgradeService
 {
     class UpgradeService : IUpgradeService
     {

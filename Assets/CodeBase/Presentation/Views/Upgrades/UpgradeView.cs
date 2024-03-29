@@ -1,11 +1,12 @@
-using CodeBase.Domain;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Data;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Presentation.ViewModels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views.Upgrades
 {
     public class UpgradeView : MonoBehaviour, IPointerClickHandler
     {

@@ -1,9 +1,9 @@
-using CodeBase.Domain;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Models;
+using CodeBase.Infrastructure.Services;
 using TMPro;
 using UnityEngine;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views
 {
     public class UserNameView : MonoBehaviour
     {

@@ -1,8 +1,9 @@
 using System;
-using CodeBase.Domain;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.EntityComponents;
+using CodeBase.Infrastructure.Services;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Models
 {
     public interface IAbilityUpgradeService : IService
     {

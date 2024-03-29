@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Configs;
-using CodeBase.Domain;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Abilities;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.EntityComponents;
+using CodeBase.Infrastructure.Services;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Models
 {
     public class AbilityUpgradeService : IAbilityUpgradeService
     {

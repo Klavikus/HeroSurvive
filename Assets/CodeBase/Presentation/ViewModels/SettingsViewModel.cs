@@ -1,7 +1,7 @@
 ﻿using System;
-using CodeBase.Domain;
+using CodeBase.Domain.Models;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.ViewModels
 {
     public class SettingsViewModel
     {

@@ -1,7 +1,9 @@
 using System;
+using CodeBase.Domain.Enemies;
+using CodeBase.Domain.Enums;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Data
 {
     [Serializable]
     public class EnemyData

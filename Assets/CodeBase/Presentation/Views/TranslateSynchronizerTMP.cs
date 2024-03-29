@@ -1,9 +1,9 @@
-using CodeBase.Domain;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Data;
+using CodeBase.Infrastructure.Services;
 using TMPro;
 using UnityEngine;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views
 {
     public class TranslateSynchronizerTMP : MonoBehaviour
     {

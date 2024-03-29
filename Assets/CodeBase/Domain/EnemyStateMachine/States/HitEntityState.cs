@@ -1,7 +1,9 @@
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Enemies;
+using CodeBase.Domain.EntityComponents;
+using CodeBase.Domain.Enums;
 using CodeBase.Infrastructure.Services;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.EnemyStateMachine.States
 {
     internal class HitEntityState : EntityState
     {
@@ -9,15 +11,20 @@ namespace CodeBase.Domain
         private readonly EnemyAI _enemyAI;
         private readonly Damageable _damageable;
         private readonly IVfxService _vfxService;
-        private readonly IAudioPlayerService _sfxService;
+        private readonly IAudioPlayerService _afxService;
 
-        public HitEntityState(AnimationSynchronizer animationSynchronizer, EnemyAI enemyAI, Damageable damageable)
+        public HitEntityState(
+            AnimationSynchronizer animationSynchronizer,
+            EnemyAI enemyAI,
+            Damageable damageable,
+            IVfxService vfxService,
+            IAudioPlayerService audioPlayerService)
         {
             _animationSynchronizer = animationSynchronizer;
             _enemyAI = enemyAI;
             _damageable = damageable;
-            _vfxService = AllServices.Container.AsSingle<IVfxService>();
-            _sfxService = AllServices.Container.AsSingle<IAudioPlayerService>();
+            _vfxService = vfxService;
+            _afxService = audioPlayerService;
         }
 
         public override void Enter()
@@ -25,7 +32,7 @@ namespace CodeBase.Domain
             base.Enter();
             _enemyAI.Stagger(_damageable.GetLastStagger());
             _animationSynchronizer.ChangeState(EntityAnimatorState.Hitted);
-            _sfxService.PlayHit(_damageable.transform.position);
+            _afxService.PlayHit(_damageable.transform.position);
         }
     }
 }

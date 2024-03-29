@@ -1,9 +1,11 @@
-using CodeBase.Infrastructure;
+using CodeBase.Infrastructure.Builders;
+using CodeBase.Infrastructure.Factories;
+using CodeBase.Presentation.ViewModels;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views.Upgrades
 {
     public class UpgradesSelectorView : MonoBehaviour
     {

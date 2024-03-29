@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CodeBase.Domain;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Models;
 using CodeBase.Extensions;
-using CodeBase.Infrastructure;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.UpgradeService;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.ViewModels
 {
     public class UpgradeViewModel
     {

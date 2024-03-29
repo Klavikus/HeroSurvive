@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using CodeBase.Configs;
-using CodeBase.Domain;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Enums;
+using CodeBase.Infrastructure.Services;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Builders
 {
     public class UpgradeDescriptionBuilder
     {

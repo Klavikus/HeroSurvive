@@ -1,6 +1,4 @@
-using CodeBase.Infrastructure;
-
-namespace CodeBase.Domain
+namespace CodeBase.Infrastructure.Services
 {
     public interface IProvider : IService
     {

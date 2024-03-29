@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Agava.YandexGames;
 using CodeBase.Configs;
-using CodeBase.Domain;
+using CodeBase.Infrastructure.Services;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Models
 {
     public class LeaderBoardsViewModel
     {

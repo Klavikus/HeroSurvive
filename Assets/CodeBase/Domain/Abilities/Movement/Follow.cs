@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Abilities.Movement
 {
     public sealed class Follow : MovementBehaviour
     {

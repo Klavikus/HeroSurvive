@@ -1,8 +1,9 @@
 using System;
-using CodeBase.Domain;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Models;
+using CodeBase.Infrastructure.Services;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.ViewModels
 {
     public class LevelUpViewModel
     {

@@ -1,9 +1,9 @@
-using CodeBase.Infrastructure;
+using CodeBase.Infrastructure.Services;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views
 {
     public class LeaderBoardScoreView : MonoBehaviour
     {

@@ -1,8 +1,8 @@
-using CodeBase.Infrastructure;
+using CodeBase.Infrastructure.Services;
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Helpers
 {
     public class TranslateTestHelper : MonoBehaviour
     {

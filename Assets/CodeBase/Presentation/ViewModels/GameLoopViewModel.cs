@@ -1,10 +1,11 @@
 using System;
-using System.Threading.Tasks;
-using CodeBase.Domain;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Enemies;
+using CodeBase.Domain.Models;
+using CodeBase.Infrastructure.Services;
 using UnityEngine;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.ViewModels
 {
     public class GameLoopViewModel
     {

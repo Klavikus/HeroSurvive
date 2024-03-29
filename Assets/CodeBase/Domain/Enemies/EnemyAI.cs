@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using CodeBase.Configs;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Data;
+using CodeBase.Infrastructure.Services;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Enemies
 {
     public class EnemyAI : MonoBehaviour
     {
@@ -34,6 +35,15 @@ namespace CodeBase.Domain
         public bool IsMoving => _isMoving;
         public bool IsStaggered => _isStaggered;
 
+        private void Update()
+        {
+            if (_isWaitingForInitialize || _isStaggered)
+                return;
+
+            Move();
+            UpdateMoveStatus();
+        }
+
         public void Initialize(EnemyAIData enemyAIData, ITargetService targetService)
         {
             _enemyAIData = enemyAIData;
@@ -46,7 +56,7 @@ namespace CodeBase.Domain
             _isStaggered = false;
             _isPreviousMoving = false;
             _isAttackOnCooldown = false;
-            
+
             if (_attackCoroutine != null)
                 StopCoroutine(_attackCoroutine);
         }
@@ -62,6 +72,7 @@ namespace CodeBase.Domain
             if (stagger == 0 && _isStaggered == false)
             {
                 StaggerOut?.Invoke();
+
                 return;
             }
 
@@ -84,20 +95,12 @@ namespace CodeBase.Domain
             while (_currentStaggerPower > 0)
             {
                 _currentStaggerPower -= 0.1f;
+
                 yield return _staggerDelay;
             }
 
             _isStaggered = false;
             StaggerOut?.Invoke();
-        }
-
-        private void Update()
-        {
-            if (_isWaitingForInitialize || _isStaggered)
-                return;
-
-            Move();
-            UpdateMoveStatus();
         }
 
         private void Move()
@@ -110,6 +113,7 @@ namespace CodeBase.Domain
             if (directionToTarget.magnitude > _enemyAIData.AttackRange)
             {
                 _isMoving = false;
+
                 if (moveVector.magnitude > 0)
                 {
                     _isMoving = true;
@@ -142,7 +146,9 @@ namespace CodeBase.Domain
         private IEnumerator StartAttackCooldown()
         {
             _isAttackOnCooldown = true;
+
             yield return _attackCheckDelay;
+
             _isAttackOnCooldown = false;
         }
 

@@ -1,8 +1,9 @@
 using System.Collections;
-using CodeBase.Infrastructure;
+using CodeBase.Infrastructure.Factories;
+using CodeBase.Infrastructure.Services;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Abilities.Movement
 {
     public interface IMovementBehaviour
     {

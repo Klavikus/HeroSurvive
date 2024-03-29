@@ -1,10 +1,15 @@
 using Cinemachine;
 using CodeBase.Configs;
-using CodeBase.Domain;
+using CodeBase.Domain.Abilities;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.EntityComponents;
+using CodeBase.Domain.Models;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.PropertiesProviders;
 using FMODUnity;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Factories
 {
     public class PlayerBuilder
     {

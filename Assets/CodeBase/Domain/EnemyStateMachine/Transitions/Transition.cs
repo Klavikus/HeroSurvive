@@ -1,6 +1,7 @@
 using System;
+using CodeBase.Domain.EnemyStateMachine.States;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.EnemyStateMachine.Transitions
 {
     public abstract class Transition : IDisposable
     {

@@ -1,12 +1,12 @@
 using System;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Data
 {
     [Serializable]
     public struct EnemyAIData
     {
         //TODO: Refactor this
-        public MoveStrategy MoveStrategy;
+        public MoveStrategy.MoveStrategy MoveStrategy;
         public float Speed;
         public float AttackRange;
         public float AttackCheckInterval;

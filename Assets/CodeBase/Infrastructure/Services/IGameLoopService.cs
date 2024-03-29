@@ -1,7 +1,8 @@
 using System;
-using CodeBase.Domain;
+using CodeBase.Domain.Data;
+using CodeBase.Infrastructure.Factories;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services
 {
     public interface IGameLoopService : IService, IInitializeable
     {

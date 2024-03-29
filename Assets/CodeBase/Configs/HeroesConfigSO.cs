@@ -1,5 +1,6 @@
 using CodeBase.Domain;
-using CodeBase.Presentation;
+using CodeBase.Domain.Data;
+using CodeBase.Presentation.Views.HeroSelector;
 using UnityEngine;
 
 namespace CodeBase.Configs

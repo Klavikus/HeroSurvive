@@ -1,9 +1,10 @@
 using System.Collections;
 using CodeBase.Configs;
+using CodeBase.Domain.Data;
 using CodeBase.Extensions;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.EntityComponents
 {
     public class MoveController : MonoBehaviour
     {

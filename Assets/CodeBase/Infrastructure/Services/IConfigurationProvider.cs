@@ -1,9 +1,7 @@
 ﻿using CodeBase.Configs;
-using CodeBase.Domain;
-using CodeBase.Infrastructure.Services;
 using FMODUnity;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services
 {
     public interface IConfigurationProvider : IService
     {

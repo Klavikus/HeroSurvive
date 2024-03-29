@@ -1,4 +1,4 @@
-﻿using CodeBase.Presentation;
+﻿using CodeBase.Presentation.Views;
 using UnityEngine;
 
 namespace CodeBase.Configs

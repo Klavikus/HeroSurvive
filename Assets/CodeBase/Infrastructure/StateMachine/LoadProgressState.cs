@@ -1,8 +1,12 @@
 using CodeBase.Configs;
-using CodeBase.Domain;
-using CodeBase.Presentation;
+using CodeBase.Domain.Models;
+using CodeBase.Infrastructure.Builders;
+using CodeBase.Infrastructure.Factories;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.PropertiesProviders;
+using CodeBase.Presentation.ViewModels;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.StateMachine
 {
     public class LoadProgressState : IState
     {

@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using CodeBase.Domain.Enums;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.EntityComponents
 {
     public class AnimationSynchronizer
     {

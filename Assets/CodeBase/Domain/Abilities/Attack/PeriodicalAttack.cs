@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
+using CodeBase.Domain.EntityComponents;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Abilities.Attack
 {
     [Serializable]
     public sealed class PeriodicalAttack : AttackBehaviour

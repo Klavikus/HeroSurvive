@@ -1,8 +1,9 @@
-using CodeBase.Infrastructure;
+using CodeBase.Infrastructure.Builders;
+using CodeBase.Presentation.ViewModels;
 using TMPro;
 using UnityEngine;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views
 {
     public class CurrencyView : MonoBehaviour
     {

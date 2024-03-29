@@ -1,13 +1,15 @@
 using System.Collections.Generic;
-using CodeBase.Domain;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Data;
+using CodeBase.Infrastructure.Builders;
+using CodeBase.Presentation.ViewComponents;
+using CodeBase.Presentation.ViewModels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views
 {
     public class LevelUpView : MonoBehaviour
     {

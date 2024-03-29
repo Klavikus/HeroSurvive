@@ -1,6 +1,6 @@
 using System;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.EnemyStateMachine.States
 {
     public interface IEntityState : IDisposable
     {

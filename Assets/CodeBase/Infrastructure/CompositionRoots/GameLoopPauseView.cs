@@ -1,4 +1,4 @@
-﻿using CodeBase.Presentation;
+﻿using CodeBase.Presentation.ViewModels;
 using UnityEngine;
 using UnityEngine.UI;
 

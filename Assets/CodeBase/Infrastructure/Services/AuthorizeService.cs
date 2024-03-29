@@ -1,9 +1,9 @@
 using System;
 using Agava.YandexGames;
-using CodeBase.Domain;
+using CodeBase.Domain.Models;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services
 {
     public class AuthorizeService : IAuthorizeService
     {

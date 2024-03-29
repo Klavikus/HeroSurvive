@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using CodeBase.Configs;
-using CodeBase.Domain;
-using CodeBase.Presentation;
+using CodeBase.Domain.Models;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.UpgradeService;
+using CodeBase.Presentation.ViewModels;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Builders
 {
     public class ViewModelBuilder : IViewModelBuilder
     {

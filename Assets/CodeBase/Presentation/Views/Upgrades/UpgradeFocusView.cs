@@ -1,11 +1,14 @@
 using System.Linq;
-using CodeBase.Domain;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Data;
+using CodeBase.Infrastructure.Builders;
+using CodeBase.Infrastructure.Factories;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Presentation.ViewModels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views.Upgrades
 {
     public class UpgradeFocusView : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.ViewComponents
 {
     [CreateAssetMenu(menuName = "Create TweenStrategy", fileName = "TweenStrategy", order = 0)]
     public class TweenStrategy : ScriptableObject

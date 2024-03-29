@@ -1,7 +1,9 @@
-using System.Threading.Tasks;
-using CodeBase.Domain;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Models;
+using CodeBase.Infrastructure.Factories;
+using CodeBase.Infrastructure.Services;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.StateMachine
 {
     public class LoadLevelState : IPayloadedState<string>
     {

@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using CodeBase.Configs;
 using CodeBase.Domain;
-using CodeBase.Presentation;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Models;
+using CodeBase.Infrastructure.Services.UpgradeService;
+using CodeBase.Presentation.Views.HeroSelector;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services.PropertiesProviders
 {
     public class PropertyProvider : IPropertyProvider
     {

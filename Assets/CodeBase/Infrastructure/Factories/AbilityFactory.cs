@@ -1,7 +1,10 @@
 using CodeBase.Configs;
-using CodeBase.Domain;
+using CodeBase.Domain.Abilities;
+using CodeBase.Domain.Data;
+using CodeBase.Infrastructure.Pools;
+using CodeBase.Infrastructure.Services;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Factories
 {
     public class AbilityFactory
     {

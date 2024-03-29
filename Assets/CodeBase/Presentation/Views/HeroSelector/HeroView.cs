@@ -1,9 +1,10 @@
-using CodeBase.Domain;
+using CodeBase.Domain.Data;
+using CodeBase.Presentation.ViewModels;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views.HeroSelector
 {
     public class HeroView : MonoBehaviour, IPointerClickHandler
     {

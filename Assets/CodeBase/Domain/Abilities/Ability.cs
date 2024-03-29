@@ -2,10 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using CodeBase.Configs;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Enums;
+using CodeBase.Infrastructure.Factories;
+using CodeBase.Infrastructure.Pools;
+using CodeBase.Infrastructure.Services;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Abilities
 {
     public class Ability : IDisposable
     {

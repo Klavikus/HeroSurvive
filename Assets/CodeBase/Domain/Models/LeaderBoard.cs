@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Agava.YandexGames;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Models
 {
     public class LeaderBoard
     {

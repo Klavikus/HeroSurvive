@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views.Upgrades
 {
     public class UpgradeLevelView : MonoBehaviour
     {

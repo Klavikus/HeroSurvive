@@ -1,10 +1,9 @@
 using CodeBase.Configs;
-using CodeBase.Domain;
 using CodeBase.Infrastructure.Services;
 using FMODUnity;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.StateMachine
 {
     [CreateAssetMenu(menuName = "Create ConfigurationContainer", fileName = "ConfigurationContainer", order = 0)]
     public class ConfigurationContainer : ScriptableObject

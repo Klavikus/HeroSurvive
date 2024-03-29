@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.MoveStrategy
 {
     public abstract class MoveStrategy : ScriptableObject
     {

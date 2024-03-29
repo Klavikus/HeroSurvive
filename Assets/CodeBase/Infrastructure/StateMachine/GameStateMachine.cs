@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using CodeBase.Domain;
+using CodeBase.Infrastructure.Services;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.StateMachine
 {
     public class GameStateMachine
     {

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.ViewComponents
 {
     public class TweenTrigger : MonoBehaviour, ITweenTrigger, IPointerEnterHandler, IPointerExitHandler
     {

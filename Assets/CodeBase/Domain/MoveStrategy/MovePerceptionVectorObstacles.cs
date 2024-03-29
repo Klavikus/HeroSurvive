@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.MoveStrategy
 {
     [CreateAssetMenu(menuName = "SO/MoveStrategy/PerceptionVectorObstacles", fileName = "MovePerceptionVectorObstacles",
         order = 51)]

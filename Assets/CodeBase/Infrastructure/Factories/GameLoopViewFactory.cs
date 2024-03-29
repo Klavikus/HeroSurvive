@@ -1,7 +1,11 @@
-﻿using CodeBase.Presentation;
+﻿using CodeBase.Infrastructure.Builders;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.StateMachine;
+using CodeBase.Presentation.ViewModels;
+using CodeBase.Presentation.Views;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Factories
 {
     public class GameLoopViewFactory
     {

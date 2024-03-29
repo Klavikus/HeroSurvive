@@ -1,6 +1,4 @@
-﻿using CodeBase.Domain;
-
-namespace CodeBase.Infrastructure
+﻿namespace CodeBase.Infrastructure.Services
 {
     public interface IModelProvider : IProvider
     {

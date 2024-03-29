@@ -1,4 +1,6 @@
-﻿using CodeBase.Presentation;
+﻿using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.StateMachine;
+using CodeBase.Presentation.ViewModels;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.CompositionRoots

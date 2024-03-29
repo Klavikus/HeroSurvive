@@ -1,8 +1,13 @@
 using CodeBase.Configs;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Abilities;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Enums;
+using CodeBase.Infrastructure.Factories;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.PropertiesProviders;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.EntityComponents
 {
     public class Player : MonoBehaviour
     {

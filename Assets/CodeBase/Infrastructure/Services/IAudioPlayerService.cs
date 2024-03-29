@@ -1,8 +1,8 @@
-﻿using CodeBase.Domain;
+﻿using CodeBase.Infrastructure.Factories;
 using FMODUnity;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services
 {
     public interface IAudioPlayerService : IService
     {

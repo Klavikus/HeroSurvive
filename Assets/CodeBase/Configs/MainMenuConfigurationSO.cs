@@ -1,7 +1,9 @@
-using CodeBase.Presentation;
+using CodeBase.Presentation.Views;
+using CodeBase.Presentation.Views.HeroSelector;
+using CodeBase.Presentation.Views.Upgrades;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Configs
 {
     [CreateAssetMenu(menuName = "Create MainMenuConfiguration", fileName = "MainMenuConfiguration", order = 0)]
     public class MainMenuConfigurationSO : ScriptableObject

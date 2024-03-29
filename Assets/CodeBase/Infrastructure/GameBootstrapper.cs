@@ -1,5 +1,7 @@
 using System.Collections;
 using CodeBase.Domain;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.StateMachine;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase
+namespace CodeBase.Utilities
 {
     [RequireComponent(typeof(RectTransform))]
     public class CellSizeAdjuster : MonoBehaviour

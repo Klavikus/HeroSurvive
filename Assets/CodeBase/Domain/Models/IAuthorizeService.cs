@@ -1,7 +1,7 @@
 ﻿using System;
-using CodeBase.Infrastructure;
+using CodeBase.Infrastructure.Services;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Models
 {
     public interface IAuthorizeService : IService
     {

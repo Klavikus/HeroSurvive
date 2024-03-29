@@ -1,4 +1,6 @@
-namespace CodeBase.Infrastructure
+using CodeBase.Infrastructure.Factories;
+
+namespace CodeBase.Infrastructure.Builders
 {
     public class GameLoopViewBuilder
     {

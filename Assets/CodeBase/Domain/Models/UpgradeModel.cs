@@ -1,9 +1,10 @@
 using System;
 using System.Linq;
-using CodeBase.Domain;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Enums;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.Models
 {
     [Serializable]
     public class UpgradeModel

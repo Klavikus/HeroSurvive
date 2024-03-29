@@ -1,12 +1,13 @@
 using System;
-using CodeBase.Domain;
-using CodeBase.Infrastructure;
+using CodeBase.Domain.Data;
+using CodeBase.Infrastructure.Builders;
+using CodeBase.Infrastructure.Services;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace CodeBase.Presentation
+namespace CodeBase.Presentation.Views
 {
     public class AbilityUpgradeView : MonoBehaviour, IPointerClickHandler
     {

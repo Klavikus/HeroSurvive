@@ -1,6 +1,7 @@
+using CodeBase.Domain.Data;
 using UnityEngine;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.EntityComponents
 {
     public class AnimatorSynchronizer : MonoBehaviour
     {

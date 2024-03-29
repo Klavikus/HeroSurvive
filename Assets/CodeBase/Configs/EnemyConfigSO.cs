@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Domain;
+using CodeBase.Domain.Data;
+using CodeBase.Domain.Enemies;
+using CodeBase.Domain.Enums;
 using NaughtyAttributes;
 using UnityEngine;
 

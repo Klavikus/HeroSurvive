@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using CodeBase.Domain.EnemyStateMachine.States;
+using CodeBase.Domain.EnemyStateMachine.Transitions;
 
-namespace CodeBase.Domain
+namespace CodeBase.Domain.EnemyStateMachine
 {
     public class EntityStateMachine : IDisposable
     {

@@ -1,4 +1,6 @@
-﻿namespace CodeBase.Infrastructure
+﻿using CodeBase.Infrastructure.Services;
+
+namespace CodeBase.Infrastructure.Factories
 {
     public interface IMainMenuFactory : IService
     {
