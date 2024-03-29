@@ -7,27 +7,16 @@ namespace CodeBase.Domain
 {
     public abstract class AttackBehaviour : IAttackBehaviour
     {
-        protected readonly AbilityData AbilityConfig;
-
-        protected int Penetration;
-        protected RaycastHit2D[] Results;
-        protected Rigidbody2D Rigidbody2D;
-        protected List<Damageable> PreviousEnemies = new();
-        protected List<Damageable> CurrentEnemies = new();
-        protected WaitForSeconds AttackDelayInSeconds;
-        protected bool CanRun;
+        public AbilityData AbilityConfig { get; }
+        public int Penetration { get; private set; }
+        public RaycastHit2D[] Results { get; private set; }
+        public Rigidbody2D Rigidbody2D { get; private set; }
+        public List<Damageable> PreviousEnemies { get; } = new();
+        public List<Damageable> CurrentEnemies { get; } = new();
+        public WaitForSeconds AttackDelayInSeconds { get; private set; }
 
         public event Action PenetrationLimit;
         public event Action<Transform> EnemyHitted;
-
-        protected void InvokePenetrationLimit() => PenetrationLimit?.Invoke();
-        protected void InvokeEnemyHitted(Transform enemy) => EnemyHitted?.Invoke(enemy);
-
-        protected AttackBehaviour(AbilityData abilityConfig)
-        {
-            AbilityConfig = abilityConfig;
-            Penetration = AbilityConfig.Penetration;
-        }
 
         public void Initialize(Rigidbody2D rigidbody2D)
         {
@@ -35,12 +24,26 @@ namespace CodeBase.Domain
             AttackDelayInSeconds = new WaitForSeconds(AbilityConfig.AttackDelay);
             Results = new RaycastHit2D[AbilityConfig.MaxAffectedEnemy];
             Penetration = AbilityConfig.Penetration;
-            CanRun = true;
         }
 
         public virtual IEnumerator Run()
         {
             yield return AttackDelayInSeconds;
+        }
+
+        public void HandlePenetration() =>
+            Penetration--;
+
+        protected void InvokePenetrationLimit() =>
+            PenetrationLimit?.Invoke();
+
+        protected void InvokeEnemyHitted(Transform enemy) =>
+            EnemyHitted?.Invoke(enemy);
+
+        protected AttackBehaviour(AbilityData abilityConfig)
+        {
+            AbilityConfig = abilityConfig;
+            Penetration = AbilityConfig.Penetration;
         }
     }
 }

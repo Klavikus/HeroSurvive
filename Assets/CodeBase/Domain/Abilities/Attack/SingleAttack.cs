@@ -14,6 +14,7 @@ namespace CodeBase.Domain
         public override IEnumerator Run()
         {
             yield return base.Run();
+
             CheckOverlap();
         }
 
@@ -21,16 +22,16 @@ namespace CodeBase.Domain
         {
             int count = Rigidbody2D.Cast(Vector2.zero, AbilityConfig.WhatIsEnemy, Results);
 
-            if (count > 0)
+            if (count == 0)
+                return;
+
+            for (var i = 0; i < count; i++)
             {
-                for (var i = 0; i < count; i++)
-                {
-                    if (Results[i].collider.TryGetComponent(out Damageable damageable))
-                    {
-                        InvokeEnemyHitted(damageable.transform);
-                        damageable.TakeDamage(AbilityConfig.Damage, AbilityConfig.Stagger);
-                    }
-                }
+                if (Results[i].collider.TryGetComponent(out Damageable damageable) == false)
+                    continue;
+
+                InvokeEnemyHitted(damageable.transform);
+                damageable.TakeDamage(AbilityConfig.Damage, AbilityConfig.Stagger);
             }
         }
     }

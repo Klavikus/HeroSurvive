@@ -8,6 +8,8 @@ namespace CodeBase.Domain
     [Serializable]
     public sealed class ContinuousAttack : AttackBehaviour
     {
+        private bool _canRun;
+
         public ContinuousAttack(AbilityData abilityConfig) : base(abilityConfig)
         {
         }
@@ -16,9 +18,10 @@ namespace CodeBase.Domain
         {
             yield return base.Run();
 
-            while (CanRun)
+            while (_canRun)
             {
                 CheckOverlap();
+
                 yield return null;
             }
         }
@@ -27,21 +30,24 @@ namespace CodeBase.Domain
         {
             int count = Rigidbody2D.Cast(Vector2.zero, AbilityConfig.WhatIsEnemy, Results);
 
-            if (count > 0)
-            {
-                for (var i = 0; i < count; i++)
-                    if (Results[i].collider.TryGetComponent(out Damageable damageable) && damageable.CanReceiveDamage)
-                        CurrentEnemies.Add(damageable);
+            if (count == 0)
+                return;
 
-                foreach (Damageable newDamageable in CurrentEnemies.Except(PreviousEnemies))
+            for (var i = 0; i < count; i++)
+                if (Results[i].collider.TryGetComponent(out Damageable damageable) && damageable.CanReceiveDamage)
+                    CurrentEnemies.Add(damageable);
+
+            foreach (Damageable newDamageable in CurrentEnemies.Except(PreviousEnemies))
+            {
+                newDamageable.TakeDamage(AbilityConfig.Damage, AbilityConfig.Stagger);
+                InvokeEnemyHitted(newDamageable.transform);
+
+                HandlePenetration();
+
+                if (AbilityConfig.IsLimitedPenetration && Penetration == 0)
                 {
-                    newDamageable.TakeDamage(AbilityConfig.Damage, AbilityConfig.Stagger);
-                    InvokeEnemyHitted(newDamageable.transform);
-                    if (AbilityConfig.IsLimitedPenetration && --Penetration == 0)
-                    {
-                        CanRun = false;
-                        InvokePenetrationLimit();
-                    }
+                    _canRun = false;
+                    InvokePenetrationLimit();
                 }
             }
 

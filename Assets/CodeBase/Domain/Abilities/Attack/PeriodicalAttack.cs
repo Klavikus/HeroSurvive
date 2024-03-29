@@ -7,17 +7,21 @@ namespace CodeBase.Domain
     [Serializable]
     public sealed class PeriodicalAttack : AttackBehaviour
     {
-        public PeriodicalAttack(AbilityData abilityConfig) : base(abilityConfig)
+        private bool _canRun;
+
+        public PeriodicalAttack(AbilityData abilityConfig, bool canRun) : base(abilityConfig)
         {
+            _canRun = canRun;
         }
 
         public override IEnumerator Run()
         {
             yield return base.Run();
 
-            while (CanRun)
+            while (_canRun)
             {
                 CheckOverlap();
+
                 yield return AttackDelayInSeconds;
             }
         }
@@ -26,16 +30,16 @@ namespace CodeBase.Domain
         {
             int count = Rigidbody2D.Cast(Vector2.zero, AbilityConfig.WhatIsEnemy, Results);
 
-            if (count > 0)
+            if (count == 0)
+                return;
+
+            for (var i = 0; i < count; i++)
             {
-                for (var i = 0; i < count; i++)
-                {
-                    if (Results[i].collider.TryGetComponent(out Damageable enemy))
-                    {
-                        InvokeEnemyHitted(enemy.transform);
-                        enemy.TakeDamage(AbilityConfig.Damage, AbilityConfig.Stagger);
-                    }
-                }
+                if (Results[i].collider.TryGetComponent(out Damageable enemy) == false)
+                    continue;
+
+                InvokeEnemyHitted(enemy.transform);
+                enemy.TakeDamage(AbilityConfig.Damage, AbilityConfig.Stagger);
             }
         }
     }
