@@ -33,7 +33,7 @@ namespace CodeBase.Domain
 
         public void UseUpgrade(AbilityUpgradeData abilityUpgradeData)
         {
-            _playerAbilityHandler.UpdateAbility(abilityUpgradeData);
+            _playerAbilityHandler.UpgradeAbility(abilityUpgradeData);
         }
 
 

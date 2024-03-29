@@ -16,7 +16,6 @@ namespace CodeBase.Domain
         private AbilityData _abilityBaseData;
         private IAttackBehaviour _attackBehaviour;
         private IMovementBehaviour _movementBehaviour;
-        private ITargetService _targetFinderService;
 
         private List<Coroutine> _coroutineHandlers;
         private WaitForSeconds _returnToPoolDelay;
@@ -25,7 +24,9 @@ namespace CodeBase.Domain
 
         public event Action<AbilityProjection> Destroed;
 
-        public void Initialize(IAudioPlayerService audioPlayerService, ITargetService targetFinderService,
+        public void Initialize(
+            IAudioPlayerService audioPlayerService,
+            ITargetService targetFinderService,
             AbilityData abilityBaseData,
             IAttackBehaviour attackBehaviour,
             IMovementBehaviour movementBehaviour,
@@ -34,27 +35,21 @@ namespace CodeBase.Domain
         {
             gameObject.SetActive(true);
 
-            //TODO: Refactor this
-            if (abilityBaseData.AudioData.IsPlayable)
-                AllServices.Container.AsSingle<IAudioPlayerService>()
-                    .PlayOneShot(abilityBaseData.AudioData.FMOD, spawnData.StartPosition);
-
             _audioPlayerService = audioPlayerService;
             _abilityBaseData = abilityBaseData;
             _attackBehaviour = attackBehaviour;
             _movementBehaviour = movementBehaviour;
             _sizeBehaviour = sizeBehaviour;
 
-            _targetFinderService = targetFinderService;
-
-            // transform.localScale = Vector3.one * abilityBaseData.Size;
+            if (abilityBaseData.AudioData.IsPlayable)
+                _audioPlayerService.PlayOneShot(abilityBaseData.AudioData.FMOD, spawnData.StartPosition);
 
             _sizeBehaviour.Initialize(transform, abilityBaseData.SizeBehaviourData);
-
-
             _attackBehaviour.Initialize(_rigidbody2D);
             _movementBehaviour.Initialize(transform, spawnData, abilityBaseData, targetFinderService);
 
+            _attackBehaviour.PenetrationLimit += OnAttackExpired;
+            _attackBehaviour.EnemyHitted += OnEnemyHitted;
 
             _returnToPoolDelay = new WaitForSeconds(_abilityBaseData.Duration);
             _coroutineHandlers = new List<Coroutine>
@@ -70,9 +65,6 @@ namespace CodeBase.Domain
                 _coroutineHandlers.Add(StartCoroutine(_view.Run()));
             }
 
-            // _audioPlayerService.PlayVFXAudio(_abilityBaseData.AudioData.StartAFX);
-            _attackBehaviour.PenetrationLimit += OnAttackExpired;
-            _attackBehaviour.EnemyHitted += OnEnemyHitted;
             StartCoroutine(ReturnToPool());
         }
 
@@ -86,17 +78,19 @@ namespace CodeBase.Domain
         private void OnAttackExpired()
         {
             _attackBehaviour.PenetrationLimit -= OnAttackExpired;
-            foreach (Coroutine coroutineHandler in _coroutineHandlers)
-                if (coroutineHandler != null)
-                    StopCoroutine(coroutineHandler);
 
-            gameObject.SetActive(false);
+            Disable();
         }
 
         private IEnumerator ReturnToPool()
         {
             yield return _returnToPoolDelay;
 
+            Disable();
+        }
+
+        private void Disable()
+        {
             foreach (Coroutine coroutineHandler in _coroutineHandlers)
                 if (coroutineHandler != null)
                     StopCoroutine(coroutineHandler);

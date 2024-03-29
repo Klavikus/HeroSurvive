@@ -18,6 +18,7 @@ namespace CodeBase.Domain
 
         private readonly WaitForSeconds _cooldownWaitForSeconds;
         private readonly WaitForSeconds _burstDelayWaitForSeconds;
+        private readonly RaycastHit2D[] _raycastHits;
 
         private Transform _pivotObject;
         private bool _onCooldown;
@@ -25,7 +26,6 @@ namespace CodeBase.Domain
         private int _currentUpgradeLevel;
         private Coroutine _activateProjectionCoroutine;
         private Coroutine _runCoroutine;
-        private RaycastHit2D[] _raycastHits;
 
         public Ability(
             AbilityProjectionBuilder projectionBuilder,
@@ -47,10 +47,8 @@ namespace CodeBase.Domain
             _raycastHits = new RaycastHit2D[abilityData.CheckCount];
         }
 
-        ~Ability()
-        {
+        ~Ability() =>
             ReleaseUnmanagedResources();
-        }
 
         public bool CanUpgrade => _currentUpgradeLevel < _abilityUpgradesData.Length;
         public AbilityUpgradeData AvailableUpgrade => _abilityUpgradesData[_currentUpgradeLevel];
@@ -59,13 +57,6 @@ namespace CodeBase.Domain
         {
             _pivotObject = pivotObject;
             _isInitialized = true;
-        }
-
-        private void OnGameCloseInvoked()
-        {
-            _coroutineRunner.Stop(_activateProjectionCoroutine);
-            _coroutineRunner.Stop(_runCoroutine);
-            _projectionPool.Clear();
         }
 
         public void Execute()
@@ -82,12 +73,6 @@ namespace CodeBase.Domain
                 _coroutineRunner.Stop(_runCoroutine);
 
             _runCoroutine = _coroutineRunner.Run(StartCooldown());
-        }
-
-        private bool CheckForTargetExistence()
-        {
-            return Physics2D.CircleCastNonAlloc(_pivotObject.position, _abilityData.EnemyCheckRadius, Vector2.zero,
-                _raycastHits, 1, _abilityData.WhatIsEnemy.layerMask) > 0;
         }
 
         public void UpdatePlayerModifiers(IReadOnlyDictionary<BaseProperty, float> stats) =>
@@ -110,22 +95,6 @@ namespace CodeBase.Domain
             _abilityData.UpdateUpgradeModifiers(new AbilityUpgradeData[] { });
         }
 
-        private IEnumerator ActivateProjections()
-        {
-            for (int i = 0; i < _abilityData.BurstCount; i++)
-            {
-               _projectionBuilder.Build(_abilityData, _pivotObject, _projectionPool);
-                yield return _burstDelayWaitForSeconds;
-            }
-        }
-
-        private IEnumerator StartCooldown()
-        {
-            _onCooldown = true;
-            yield return _cooldownWaitForSeconds;
-            _onCooldown = false;
-        }
-
         public bool CheckConfig(AbilityConfigSO abilityConfigSO) =>
             _abilityUpgradesData[0].BaseConfigSO == abilityConfigSO;
 
@@ -135,8 +104,42 @@ namespace CodeBase.Domain
             GC.SuppressFinalize(this);
         }
 
+        private void OnGameCloseInvoked()
+        {
+            _coroutineRunner.Stop(_activateProjectionCoroutine);
+            _coroutineRunner.Stop(_runCoroutine);
+            _projectionPool.Clear();
+        }
+
+        private bool CheckForTargetExistence()
+        {
+            return Physics2D.CircleCastNonAlloc(_pivotObject.position, _abilityData.EnemyCheckRadius, Vector2.zero,
+                _raycastHits, 1, _abilityData.WhatIsEnemy.layerMask) > 0;
+        }
+
+        private IEnumerator ActivateProjections()
+        {
+            for (int i = 0; i < _abilityData.BurstCount; i++)
+            {
+                _projectionBuilder.Build(_abilityData, _pivotObject, _projectionPool);
+
+                yield return _burstDelayWaitForSeconds;
+            }
+        }
+
+        private IEnumerator StartCooldown()
+        {
+            _onCooldown = true;
+
+            yield return _cooldownWaitForSeconds;
+
+            _onCooldown = false;
+        }
+
         private void ReleaseUnmanagedResources()
         {
+            _gameLoopService.LevelCloseInvoked -= OnGameCloseInvoked;
+
             if (_activateProjectionCoroutine != null)
                 _coroutineRunner.Stop(_activateProjectionCoroutine);
 

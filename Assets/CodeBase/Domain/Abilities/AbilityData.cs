@@ -12,16 +12,16 @@ namespace CodeBase.Domain
         private readonly Dictionary<BaseProperty, float> _resultProperties = new();
         private readonly AbilityModifiersMask _modifiersMask;
 
-        private int _baseDamage;
-        private int _baseBurstCount;
-        private int _maxBurstCount;
-        private int _baseSpawnCount;
-        private float _baseRadius;
-        private float _baseSpeed;
-        private float _baseSize;
-        private float _baseDuration;
-        private float _baseCooldown;
-        private bool _isSelfParent;
+        private readonly int _baseDamage;
+        private readonly int _baseBurstCount;
+        private readonly int _maxBurstCount;
+        private readonly int _baseSpawnCount;
+        private readonly float _baseRadius;
+        private readonly float _baseSpeed;
+        private readonly float _baseSize;
+        private readonly float _baseDuration;
+        private readonly float _baseCooldown;
+        
         private float _size;
 
         public AttackType AttackType { get; }
@@ -54,8 +54,8 @@ namespace CodeBase.Domain
         public float Speed { get; private set; }
         public float Duration { get; private set; }
         public float Cooldown { get; private set; }
-        public float EnemyCheckRadius { get; private set; }
-        public int CheckCount { get; private set; }
+        public float EnemyCheckRadius { get; }
+        public int CheckCount { get; }
         public float AttackRadius { get; }
 
         public AbilityData(AbilityConfigSO abilityConfig)
@@ -100,7 +100,6 @@ namespace CodeBase.Domain
             _baseCooldown = abilityConfig.Cooldown;
             Cooldown = _baseCooldown;
             AbilityView = abilityConfig.AbilityView;
-            _isSelfParent = abilityConfig.IsSelfParent;
             AudioData = abilityConfig.AudioData;
             EnemyCheckRadius = abilityConfig.EnemyCheckRadius;
             CheckCount = abilityConfig.CheckCount;

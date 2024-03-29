@@ -37,9 +37,11 @@ namespace CodeBase.Domain
             {
                 case ViewType.SingleSprite:
                     _renderer.sprite = _sprites[0];
+
                     break;
                 case ViewType.SpriteSheet:
                     yield return PlaySpriteSheetAnimation();
+
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

@@ -11,7 +11,9 @@ namespace CodeBase.Domain
         private const int MaxAbilitySlots = 5;
 
         private readonly List<Ability> _abilities = new List<Ability>();
-        private readonly Dictionary<AbilityConfigSO, Ability> _abilityByConfigSo = new Dictionary<AbilityConfigSO, Ability>();
+
+        private readonly Dictionary<AbilityConfigSO, Ability> _abilityByConfigSo =
+            new Dictionary<AbilityConfigSO, Ability>();
 
         private bool _initialized;
         private int _currentAbilitySlots;
@@ -43,7 +45,7 @@ namespace CodeBase.Domain
                 newAbility.UpdatePlayerModifiers(_playerModifiers);
         }
 
-        public void UpdateAbility(AbilityUpgradeData abilityUpgradeData)
+        public void UpgradeAbility(AbilityUpgradeData abilityUpgradeData)
         {
             if (_abilityByConfigSo.ContainsKey(abilityUpgradeData.BaseConfigSO))
                 _abilityByConfigSo[abilityUpgradeData.BaseConfigSO].Upgrade();
@@ -69,7 +71,7 @@ namespace CodeBase.Domain
 
         private void OnDestroy()
         {
-            foreach (Ability ability in _abilities) 
+            foreach (Ability ability in _abilities)
                 ability.Dispose();
         }
     }
