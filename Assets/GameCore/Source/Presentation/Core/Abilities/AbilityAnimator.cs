@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
+using GameCore.Source.Presentation.Api;
 using UnityEngine;
 
-namespace GameCore.Source.Domain.Abilities.Views
+namespace GameCore.Source.Presentation.Core.Abilities
 {
     [Serializable]
-    public sealed class View
+    public sealed class AbilityAnimator : IAbilityAnimator
     {
         private enum ViewType
         {

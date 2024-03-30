@@ -52,7 +52,7 @@ namespace CodeBase.GameCore.Infrastructure.Pools
             _isLocked = true;
             foreach (AbilityProjection projection in _projections)
                 if (projection)
-                    GameObject.Destroy(projection.gameObject);
+                    Object.Destroy(projection.gameObject);
             _projections.Clear();
         }
 
