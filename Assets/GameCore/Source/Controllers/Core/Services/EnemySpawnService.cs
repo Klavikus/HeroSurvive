@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CodeBase.GameCore.Configs;
-using CodeBase.GameCore.Domain.Data;
-using CodeBase.GameCore.Domain.Enemies;
-using CodeBase.GameCore.Domain.Models;
-using CodeBase.GameCore.Infrastructure.Factories;
-using CodeBase.GameCore.Infrastructure.Services;
-using CodeBase.Utilities.Extensions;
+using GameCore.Source.Controllers.Api;
+using GameCore.Source.Controllers.Core.Factories;
+using GameCore.Source.Domain.Data;
+using GameCore.Source.Domain.Models;
+using GameCore.Source.Domain.Services;
+using Modules.Common.Utils;
 using UnityEngine;
+using IEnemySpawnService = GameCore.Source.Controllers.Api.Services.IEnemySpawnService;
 
-namespace CodeBase.GameCore.Infrastructure
+namespace GameCore.Source.Controllers.Core.Services
 {
     public class EnemySpawnService : IEnemySpawnService
     {
@@ -25,9 +25,9 @@ namespace CodeBase.GameCore.Infrastructure
             _enemyFactory = enemyFactory;
         }
 
-        public Enemy[] SpawnWave(EnemySpawnData[] enemiesSpawnData)
+        public IEnemyController[] SpawnWave(EnemySpawnData[] enemiesSpawnData)
         {
-            List<Enemy> result = new List<Enemy>();
+            List<IEnemyController> result = new List<IEnemyController>();
             List<Vector2> points = CalculateAvailableSpawnPoints(CellSize, CellFactor * enemiesSpawnData.Sum(data => data.Count),
                 _targetFinderService.GetCamera(), _targetFinderService.GetPlayerPosition());
             points.Shuffle();
@@ -39,7 +39,7 @@ namespace CodeBase.GameCore.Infrastructure
                 for (int i = 0; i < spawnData.Count; i++)
                 {
                     Vector3 spawnPosition = subset[i];
-                    Enemy enemy = _enemyFactory.Create(at: spawnPosition, spawnData.EnemyType, _targetFinderService);
+                    IEnemyController enemy = _enemyFactory.Create(at: spawnPosition, spawnData.EnemyType, _targetFinderService);
                     result.Add(enemy);
                 }
 
@@ -47,10 +47,6 @@ namespace CodeBase.GameCore.Infrastructure
             }
 
             return result.ToArray();
-        }
-
-        public void MoveCloserToPlayer(Enemy enemy)
-        {
         }
 
         public void ClearEnemies()

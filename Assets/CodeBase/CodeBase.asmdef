@@ -21,8 +21,10 @@
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "CODEBASE"
+    ],
     "versionDefines": [],
     "noEngineReferences": false
 }

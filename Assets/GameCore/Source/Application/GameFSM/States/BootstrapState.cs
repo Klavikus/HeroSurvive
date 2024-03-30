@@ -1,11 +1,12 @@
-﻿using GameCore.Source.Infrastructure.Api;
+﻿using GameCore.Source.Domain.Services;
+using GameCore.Source.Infrastructure.Api;
 using GameCore.Source.Infrastructure.Api.GameFsm;
 using GameCore.Source.Infrastructure.Api.Services;
-using GameCore.Source.Infrastructure.Api.Services.Providers;
 using GameCore.Source.Infrastructure.Core;
 using GameCore.Source.Infrastructure.Core.Services.DI;
 using GameCore.Source.Infrastructure.Core.Services.Providers;
 using UnityEngine;
+using ConfigurationContainer = GameCore.Source.Domain.Configs.ConfigurationContainer;
 
 namespace GameCore.Source.Application.GameFSM.States
 {

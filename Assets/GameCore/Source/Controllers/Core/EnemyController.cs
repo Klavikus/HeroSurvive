@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
+using GameCore.Source.Controllers.Api;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Controllers.Core.EnemyStateMachine.States;
 using GameCore.Source.Controllers.Core.EnemyStateMachine.Transitions;
 using GameCore.Source.Controllers.Core.StateMachines;
 using GameCore.Source.Domain.Data;
-using GameCore.Source.Domain.Enemies;
 using GameCore.Source.Domain.EntityComponents;
 using GameCore.Source.Domain.Enums;
 using GameCore.Source.Domain.Services;
@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace GameCore.Source.Controllers.Core
 {
-    public class EnemyController : MonoBehaviour
+    public class EnemyController : MonoBehaviour, IEnemyController
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private Damageable _damageable;
@@ -26,15 +26,19 @@ namespace GameCore.Source.Controllers.Core
         private EnemyData _enemyData;
         private LootData _lootData;
 
-        public event Action<EnemyController> Died;
-        public event Action<EnemyController> Destroyed;
-        public event Action<EnemyController> OutOfViewTimeout;
-        public event Action<EnemyController> InvokedBackToPool;
+        public event Action<IEnemyController> Died;
+        public event Action<IEnemyController> Destroyed;
+        public event Action<IEnemyController> OutOfViewTimeout;
+        public event Action<IEnemyController> InvokedBackToPool;
 
         public bool CanReceiveDamage => _damageable.CanReceiveDamage;
         public int KillExperience => _lootData.Experience;
         public int KillCurrency => _lootData.Currency;
         public EnemyType Type => _enemyData.Type;
+        public Transform Transform => transform;
+
+        public void Destroy() =>
+            GameObject.Destroy(gameObject);
 
         private void OnDestroy()
         {

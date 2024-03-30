@@ -1,4 +1,6 @@
-﻿namespace GameCore.Source.Domain.Data
+﻿using UnityEngine;
+
+namespace GameCore.Source.Domain.Data
 {
     public static class GameConstants
     {
@@ -19,7 +21,7 @@
         public static float DirectionTrackingDelay = 0.35f;
         public static float MinimumStopDistance = 0.2f;
         public static string BaseLanguage = "en";
-        // public static Vector4 SpawnRectangleRestriction = new Vector4(-61, 61, -61, 61);
+        public static Vector4 SpawnRectangleRestriction = new Vector4(-61, 61, -61, 61);
         public static float RespawnInvincibleDuration = 2f;
         public static float BaseMusicVolume = 0.5f;
         public static bool MuteStatus = false;

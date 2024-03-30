@@ -1,4 +1,4 @@
-namespace GameCore.Source.Domain.Models
+namespace GameCore.Source.Domain.Data
 {
     public class RewardData
     {

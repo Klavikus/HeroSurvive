@@ -1,5 +1,6 @@
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Controllers.Core.Factories;
+using GameCore.Source.Domain.Abilities;
 using GameCore.Source.Domain.Configs;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.EntityComponents;
@@ -9,7 +10,7 @@ using UnityEngine;
 
 namespace GameCore.Source.Controllers.Core
 {
-    public class Player : MonoBehaviour
+    public class PlayerController : MonoBehaviour
     {
         [SerializeField] private Damageable _damageable;
         [SerializeField] private MoveController _moveController;
@@ -21,6 +22,7 @@ namespace GameCore.Source.Controllers.Core
 
         public bool IsFreeSlotAvailable => _abilityHandler.IsFreeSlotAvailable;
         public AbilityHandler AbilityHandler => _abilityHandler;
+        public AbilityContainer AbilityContainer { get; set; }
 
         public void Initialize(
             IPropertyProvider propertyProvider,

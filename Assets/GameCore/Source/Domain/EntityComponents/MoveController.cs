@@ -1,6 +1,6 @@
 using System.Collections;
-using CodeBase.Utilities.Extensions;
 using GameCore.Source.Domain.Data;
+using Modules.Common.Utils;
 using UnityEngine;
 
 namespace GameCore.Source.Domain.EntityComponents

@@ -4,8 +4,8 @@ using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Domain.Configs;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Models;
-using GameCore.Source.Domain.Services;
 using UnityEngine;
+using IConfigurationProvider = GameCore.Source.Domain.Services.IConfigurationProvider;
 
 namespace GameCore.Source.Controllers.Core.Services.PropertiesProviders
 {

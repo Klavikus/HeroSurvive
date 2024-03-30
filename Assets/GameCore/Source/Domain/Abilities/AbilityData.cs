@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using CodeBase.Utilities.Extensions;
 using GameCore.Source.Domain.Abilities.Size;
 using GameCore.Source.Domain.Configs;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Enums;
+using Modules.Common.Utils;
 using UnityEngine;
 
 namespace GameCore.Source.Domain.Abilities

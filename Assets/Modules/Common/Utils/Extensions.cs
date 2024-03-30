@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CodeBase.Utilities.Extensions
+namespace Modules.Common.Utils
 {
     public static class Extensions
     {

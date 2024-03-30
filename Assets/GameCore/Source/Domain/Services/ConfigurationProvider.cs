@@ -15,5 +15,8 @@ namespace GameCore.Source.Domain.Services
         public VfxConfig VfxConfig { get; }
         public List<AbilityConfigSO> AbilityConfigs { get; }
         public BasePropertiesConfigSO BasePropertiesConfig { get; }
+        public GameLoopConfigSO GameLoopConfig { get; set; }
+        public StageCompetitionConfigSO StageCompetitionConfig { get; set; }
+        public EnemyConfigSO EnemyConfig { get; set; }
     }
 }

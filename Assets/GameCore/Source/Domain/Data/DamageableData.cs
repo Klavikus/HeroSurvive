@@ -1,7 +1,7 @@
 using System;
-using CodeBase.Utilities.Extensions;
 using GameCore.Source.Domain.Enums;
 using GameCore.Source.Domain.Models;
+using Modules.Common.Utils;
 using UnityEngine;
 
 namespace GameCore.Source.Domain.Data

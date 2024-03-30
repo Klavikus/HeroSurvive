@@ -1,10 +1,13 @@
 using System;
-using CodeBase.GameCore.Infrastructure.Services;
 using GameCore.Source.Controllers.Api.Services;
+using GameCore.Source.Controllers.Core.Factories;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Models;
-using Modules.GamePauseSystem.Runtime;
 using UnityEngine;
+using IAudioPlayerService = GameCore.Source.Controllers.Api.Services.IAudioPlayerService;
+using IGameLoopService = GameCore.Source.Controllers.Api.Services.IGameLoopService;
+using IGamePauseService = Modules.GamePauseSystem.Runtime.IGamePauseService;
+using IModelProvider = GameCore.Source.Controllers.Api.Services.IModelProvider;
 
 namespace GameCore.Source.Controllers.Core.Services
 {
@@ -27,7 +30,8 @@ namespace GameCore.Source.Controllers.Core.Services
             PlayerBuilder playerBuilder,
             ILeveCompetitionService levelCompetitionService,
             PlayerEventHandler playerEventHandler,
-            IAudioPlayerService sfxService)
+            IAudioPlayerService sfxService,
+            IGamePauseService gamePauseService)
         {
             _levelMapFactory = levelMapFactory;
             _gameLoopViewBuilder = gameLoopViewBuilder;
@@ -59,18 +63,17 @@ namespace GameCore.Source.Controllers.Core.Services
         {
             _levelMapFactory.Create();
             _gameLoopViewBuilder.Build();
-            _abilityBuilder.Build(_modelProvider.Get<HeroModel>());
+            
+            // _abilityBuilder.Build(_modelProvider.Get<HeroModel>());
+            
             _playerBuilder.BindCameraToPlayer();
             _playerBuilder.BindEventsHandler(_playerEventHandler);
             _levelCompetitionService.StartCompetition();
 
-            IGamePauseService gamePauseService = AllServices.Container.AsSingle<IGamePauseService>();
-            IViewModelProvider viewModelProvider = AllServices.Container.AsSingle<IViewModelProvider>();
+            // GameLoopPauseViewModel gameLoopPauseViewModel = new GameLoopPauseViewModel(gamePauseService);
+            // viewModelProvider.Bind(gameLoopPauseViewModel);
 
-            GameLoopPauseViewModel gameLoopPauseViewModel = new GameLoopPauseViewModel(gamePauseService);
-            viewModelProvider.Bind(gameLoopPauseViewModel);
-
-            GameObject.FindObjectOfType<SceneCompositionRoot>().Initialize(AllServices.Container);
+            // GameObject.FindObjectOfType<SceneCompositionRoot>().Initialize(AllServices.Container);
             
             _sfxService.PlayAmbient();
         }
