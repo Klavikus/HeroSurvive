@@ -1,4 +1,4 @@
-﻿namespace Source.Domain.Data
+﻿namespace GameCore.Source.Domain.Data
 {
     public static class GameConstants
     {

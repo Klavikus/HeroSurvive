@@ -1,8 +1,8 @@
-using Source.Application.Factories;
-using Source.Application.GameFSM;
-using Source.Infrastructure.Core;
+using GameCore.Source.Application.Factories;
+using GameCore.Source.Application.GameFSM;
+using GameCore.Source.Infrastructure.Core;
 
-namespace Source.Application.Builders
+namespace GameCore.Source.Application.Builders
 {
     internal class GameBuilder
     {

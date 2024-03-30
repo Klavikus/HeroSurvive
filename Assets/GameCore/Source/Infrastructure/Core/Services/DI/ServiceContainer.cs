@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace Source.Infrastructure.Core.Services.DI
+namespace GameCore.Source.Infrastructure.Core.Services.DI
 {
     public class ServiceContainer
     {

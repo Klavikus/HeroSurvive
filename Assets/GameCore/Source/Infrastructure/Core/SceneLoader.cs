@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
-using Source.Infrastructure.Api.Services;
+using GameCore.Source.Infrastructure.Api.Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Source.Infrastructure.Core
+namespace GameCore.Source.Infrastructure.Core
 {
     public class SceneLoader
     {

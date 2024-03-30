@@ -1,7 +1,7 @@
-using Source.Application.Builders;
+using GameCore.Source.Application.Builders;
 using UnityEngine;
 
-namespace Source.Application.Bootstrap
+namespace GameCore.Source.Application.Bootstrap
 {
     public class Bootstrap : MonoBehaviour
     {

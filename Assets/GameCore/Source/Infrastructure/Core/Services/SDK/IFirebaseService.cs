@@ -1,4 +1,4 @@
-﻿namespace Source.Infrastructure.Core.Services.SDK
+﻿namespace GameCore.Source.Infrastructure.Core.Services.SDK
 {
     public interface IFirebaseService
     {

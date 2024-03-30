@@ -1,3 +1,3 @@
-﻿namespace Source.Domain.Data
+﻿namespace GameCore.Source.Domain.Data
 {
 }

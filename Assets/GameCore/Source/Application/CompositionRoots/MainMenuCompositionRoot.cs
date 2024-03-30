@@ -1,19 +1,16 @@
-using Source.Infrastructure.Core;
-using Source.Infrastructure.Core.Services.DI;
+using GameCore.Source.Infrastructure.Core.Services.DI;
+using GameCore.Source.Presentation.Core.MainMenu;
 using UnityEngine;
 
-namespace Source.Application.CompositionRoots
+namespace GameCore.Source.Application.CompositionRoots
 {
     public class MainMenuCompositionRoot : SceneCompositionRoot
     {
-        [SerializeField] private ConfigurationContainer _configurationContainer;
-
-        private void Start() =>
-            Initialize(new ServiceContainer());
+        [SerializeField] private MVPLeaderBoardsView _leaderBoardsView;
 
         public override async void Initialize(ServiceContainer serviceContainer)
         {
-
+            
         }
     }
 }

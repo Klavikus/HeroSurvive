@@ -1,4 +1,4 @@
-namespace Source.Controllers.Api
+namespace GameCore.Source.Controllers.Api
 {
     public interface IPresenter
     {

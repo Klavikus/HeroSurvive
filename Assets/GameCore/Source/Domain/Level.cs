@@ -1,7 +1,7 @@
 ﻿using System;
-using Source.Domain.Data;
+using GameCore.Source.Domain.Data;
 
-namespace Source.Domain
+namespace GameCore.Source.Domain
 {
     public class Level
     {

@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
-using Source.Application.CompositionRoots;
-using Source.Infrastructure.Core.Services.DI;
+using GameCore.Source.Application.CompositionRoots;
+using GameCore.Source.Infrastructure.Core.Services.DI;
 using Object = UnityEngine.Object;
 
-namespace Source.Application.Factories
+namespace GameCore.Source.Application.Factories
 {
     public class SceneInitializer
     {

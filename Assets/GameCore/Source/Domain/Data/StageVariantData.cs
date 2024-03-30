@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Source.Domain.Data
+namespace GameCore.Source.Domain.Data
 {
     [Serializable]
     public struct StageVariantData

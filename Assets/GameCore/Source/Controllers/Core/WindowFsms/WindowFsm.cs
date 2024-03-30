@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Modules.Common.WindowFsm.Runtime.Abstract;
 
-namespace Source.Controllers.Core.WindowFsms
+namespace GameCore.Source.Controllers.Core.WindowFsms
 {
     public class WindowFsm<T> : IWindowFsm
         where T : IWindow

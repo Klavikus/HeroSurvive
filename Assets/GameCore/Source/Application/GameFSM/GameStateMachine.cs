@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Source.Application.GameFSM.States;
-using Source.Infrastructure.Api.GameFsm;
-using Source.Infrastructure.Core;
-using Source.Infrastructure.Core.Services.DI;
+using GameCore.Source.Application.GameFSM.States;
+using GameCore.Source.Infrastructure.Api.GameFsm;
+using GameCore.Source.Infrastructure.Core;
+using GameCore.Source.Infrastructure.Core.Services.DI;
 
-namespace Source.Application.GameFSM
+namespace GameCore.Source.Application.GameFSM
 {
     public class GameStateMachine : IGameStateMachine
     {

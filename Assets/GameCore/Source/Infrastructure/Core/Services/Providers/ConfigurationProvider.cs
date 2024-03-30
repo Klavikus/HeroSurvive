@@ -1,6 +1,6 @@
-﻿using Source.Infrastructure.Api.Services.Providers;
+﻿using GameCore.Source.Infrastructure.Api.Services.Providers;
 
-namespace Source.Infrastructure.Core.Services.Providers
+namespace GameCore.Source.Infrastructure.Core.Services.Providers
 {
     public class ConfigurationProvider : IConfigurationProvider
     {

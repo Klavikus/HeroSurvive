@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Source.Application.Bootstrap
+namespace GameCore.Source.Application.Bootstrap
 {
     public class  GameRunner : MonoBehaviour
     {

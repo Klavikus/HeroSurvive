@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Source.Domain.Data
+namespace GameCore.Source.Domain.Data
 {
     [Serializable]
     public class SavedData

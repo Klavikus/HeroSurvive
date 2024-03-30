@@ -1,9 +1,9 @@
-﻿using Source.Application.Factories;
-using Source.Infrastructure.Api.GameFsm;
-using Source.Infrastructure.Core;
-using Source.Infrastructure.Core.Services.DI;
+﻿using GameCore.Source.Application.Factories;
+using GameCore.Source.Infrastructure.Api.GameFsm;
+using GameCore.Source.Infrastructure.Core;
+using GameCore.Source.Infrastructure.Core.Services.DI;
 
-namespace Source.Application.GameFSM.States
+namespace GameCore.Source.Application.GameFSM.States
 {
     public class MainMenuState : IState
     {

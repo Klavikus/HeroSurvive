@@ -1,4 +1,4 @@
-﻿namespace Source.Infrastructure.Api.Services
+﻿namespace GameCore.Source.Infrastructure.Api.Services
 {
     public interface ISaveService
     {

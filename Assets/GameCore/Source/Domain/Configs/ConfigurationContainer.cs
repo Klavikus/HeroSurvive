@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Source.Domain.Configs
+namespace GameCore.Source.Domain.Configs
 {
     [CreateAssetMenu(menuName = "Create ConfigurationContainer", fileName = "ConfigurationContainer", order = 0)]
     public class ConfigurationContainer : ScriptableObject

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Source.Infrastructure.Api
+namespace GameCore.Source.Infrastructure.Api
 {
     public interface IPoolable<out T>
     {

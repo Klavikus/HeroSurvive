@@ -1,4 +1,4 @@
-﻿namespace Source.Controllers.Api.Services
+﻿namespace GameCore.Source.Controllers.Api.Services
 {
     public interface ILogger
     {

@@ -1,10 +1,9 @@
-using System.ComponentModel.Design;
-using Source.Application.Factories;
-using Source.Infrastructure.Api.GameFsm;
-using Source.Infrastructure.Core;
-using ServiceContainer = Source.Infrastructure.Core.Services.DI.ServiceContainer;
+using GameCore.Source.Application.Factories;
+using GameCore.Source.Infrastructure.Api.GameFsm;
+using GameCore.Source.Infrastructure.Core;
+using ServiceContainer = GameCore.Source.Infrastructure.Core.Services.DI.ServiceContainer;
 
-namespace Source.Application.GameFSM.States
+namespace GameCore.Source.Application.GameFSM.States
 {
     public class GameLoopState : IState
     {

@@ -1,4 +1,4 @@
-﻿namespace Source.Infrastructure.Api.GameFsm
+﻿namespace GameCore.Source.Infrastructure.Api.GameFsm
 {
     public interface IGameStateMachine
     {

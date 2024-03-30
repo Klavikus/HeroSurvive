@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using ILogger = Source.Controllers.Api.Services.ILogger;
 
-namespace Source.Controllers.Core.Services
+namespace GameCore.Source.Controllers.Core.Services
 {
-    public class DebugLogger : ILogger
+    public class DebugLogger : Api.Services.ILogger
     {
         public void Log(string message) =>
             Debug.Log(message);

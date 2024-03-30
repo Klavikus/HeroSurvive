@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Source.Domain.Data
+namespace GameCore.Source.Domain.Data
 {
     [Serializable]
     public struct LevelViewData

@@ -1,4 +1,4 @@
-﻿namespace Source.Infrastructure.Api.Services.Providers
+﻿namespace GameCore.Source.Infrastructure.Api.Services.Providers
 {
     public interface IConfigurationProvider
     {

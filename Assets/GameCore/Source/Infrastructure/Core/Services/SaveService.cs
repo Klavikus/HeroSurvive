@@ -1,8 +1,8 @@
 ﻿using System;
-using Source.Infrastructure.Api.Services;
+using GameCore.Source.Infrastructure.Api.Services;
 using UnityEngine;
 
-namespace Source.Infrastructure.Core.Services
+namespace GameCore.Source.Infrastructure.Core.Services
 {
     public class SaveService : ISaveService
     {
