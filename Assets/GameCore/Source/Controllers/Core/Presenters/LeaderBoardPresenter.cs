@@ -1,52 +1,31 @@
 ﻿using System;
 using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Presentation.Api;
+using GameCore.Source.Presentation.Core;
 using Modules.Common.WindowFsm.Runtime.Abstract;
 using Modules.MVPPassiveView.Runtime;
 
 namespace GameCore.Source.Controllers.Core.Presenters
 {
-    public class LeaderBoardPresenter : IPresenter
+    public class LeaderBoardPresenter : BaseWindowPresenter<LeaderBoardWindow>
     {
         private readonly ILeaderBoardsView _view;
-        private readonly IWindowFsm _windowFsm;
 
         public LeaderBoardPresenter(
-            ILeaderBoardsView leaderBoardsView,
+            ILeaderBoardsView view,
             IWindowFsm windowFsm)
+            : base(windowFsm, view.MainCanvas)
         {
-            _view = leaderBoardsView ?? throw new ArgumentNullException(nameof(leaderBoardsView));
-            _windowFsm = windowFsm ?? throw new ArgumentNullException(nameof(windowFsm));
+            _view = view;
         }
 
-        public void Enable()
+        protected override void OnAfterEnable()
         {
             _view.CloseButton.Initialize();
-
-            _windowFsm.Opened += OnWindowOpened;
-            _windowFsm.Closed += OnWindowClosed;
         }
 
-        public void Disable()
+        protected override void OnAfterDisable()
         {
-            _windowFsm.Opened -= OnWindowOpened;
-            _windowFsm.Closed -= OnWindowClosed;
-        }
-
-        private void OnWindowOpened(IWindow window)
-        {
-            if (window is not LeaderBoardWindow)
-                return;
-
-            _view.MainCanvas.enabled = true;
-        }
-
-        private void OnWindowClosed(IWindow window)
-        {
-            if (window is not LeaderBoardWindow)
-                return;
-
-            _view.MainCanvas.enabled = false;
         }
     }
 }
