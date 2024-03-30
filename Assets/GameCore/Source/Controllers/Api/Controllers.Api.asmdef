@@ -2,10 +2,8 @@
     "name": "Controllers.Api",
     "rootNamespace": "",
     "references": [
-        "GUID:bb19bb3391eb85d45965c2c5a69681dc",
-        "GUID:1454b29ebbc8bfb4b981917b0671f7f3",
-        "GUID:d6a4906670c0fab49938272f865a2c04",
-        "GUID:3c14eac83d989cf45912aff277ecbb47"
+        "GUID:3c14eac83d989cf45912aff277ecbb47",
+        "GUID:6f3465494c0d6b0428794722e0081118"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
