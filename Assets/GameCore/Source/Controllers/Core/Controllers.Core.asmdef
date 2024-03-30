@@ -1,0 +1,21 @@
+{
+    "name": "Controllers.Core",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3c14eac83d989cf45912aff277ecbb47",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:c3e9389d27f04640a308356ef13838c9",
+        "GUID:73e39e67e37da394bb5b66dd3b1e9b04",
+        "GUID:a155cb15d204444f8e92444823e76043"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

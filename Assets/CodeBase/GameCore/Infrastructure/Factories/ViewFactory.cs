@@ -72,8 +72,7 @@ namespace CodeBase.GameCore.Infrastructure.Factories
 
         public StartMenuView CreateStartMenu()
         {
-            StartMenuView startMenuView =
-                GameObject.Instantiate(_configurationProvider.MainMenuConfig.StartMenuView);
+            StartMenuView startMenuView = GameObject.Instantiate(_configurationProvider.MainMenuConfig.StartMenuView);
             startMenuView.Initialize(_viewModelProvider.Get<MenuViewModel>());
             return startMenuView;
         }

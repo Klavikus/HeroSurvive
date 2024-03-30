@@ -1,0 +1,3 @@
+﻿namespace Source.Domain.Data
+{
+}
