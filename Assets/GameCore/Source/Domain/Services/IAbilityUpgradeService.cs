@@ -4,7 +4,7 @@ using GameCore.Source.Domain.EntityComponents;
 
 namespace GameCore.Source.Domain.Services
 {
-    public interface IAbilityUpgradeService : IService
+    public interface IAbilityUpgradeService
     {
         event Action<AbilityUpgradeData[]> AvailableUpgradesChanged;
         void UseUpgrade(AbilityUpgradeData abilityUpgradeData);

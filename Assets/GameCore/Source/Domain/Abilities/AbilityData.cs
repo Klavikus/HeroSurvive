@@ -46,7 +46,7 @@ namespace GameCore.Source.Domain.Abilities
         public bool AlignWithRotation { get; }
         public bool FlipDirectionAllowed { get; }
         public TargetingType TargetingType { get; }
-        public AbilityProjection AbilityView { get; }
+        public GameObject AbilityView { get; }
         public float Stagger { get; }
         public AudioData AudioData { get; }
         public SizeBehaviourData SizeBehaviourData { get; }

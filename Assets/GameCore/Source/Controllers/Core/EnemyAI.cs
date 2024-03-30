@@ -4,7 +4,7 @@ using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Services;
 using UnityEngine;
 
-namespace GameCore.Source.Domain.Enemies
+namespace GameCore.Source.Controllers.Core
 {
     public class EnemyAI : MonoBehaviour
     {
@@ -34,7 +34,7 @@ namespace GameCore.Source.Domain.Enemies
         public bool IsMoving => _isMoving;
         public bool IsStaggered => _isStaggered;
 
-        private void Update()
+        public void Update()
         {
             if (_isWaitingForInitialize || _isStaggered)
                 return;

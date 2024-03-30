@@ -1,14 +1,19 @@
 using System;
 using System.Collections.Generic;
+using GameCore.Source.Controllers.Api.Services;
+using GameCore.Source.Controllers.Core.EnemyStateMachine.States;
+using GameCore.Source.Controllers.Core.EnemyStateMachine.Transitions;
+using GameCore.Source.Controllers.Core.StateMachines;
 using GameCore.Source.Domain.Data;
+using GameCore.Source.Domain.Enemies;
 using GameCore.Source.Domain.EntityComponents;
 using GameCore.Source.Domain.Enums;
 using GameCore.Source.Domain.Services;
 using UnityEngine;
 
-namespace GameCore.Source.Domain.Enemies
+namespace GameCore.Source.Controllers.Core
 {
-    public class Enemy : MonoBehaviour
+    public class EnemyController : MonoBehaviour
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private Damageable _damageable;
@@ -21,10 +26,10 @@ namespace GameCore.Source.Domain.Enemies
         private EnemyData _enemyData;
         private LootData _lootData;
 
-        public event Action<Enemy> Died;
-        public event Action<Enemy> Destroyed;
-        public event Action<Enemy> OutOfViewTimeout;
-        public event Action<Enemy> InvokedBackToPool;
+        public event Action<EnemyController> Died;
+        public event Action<EnemyController> Destroyed;
+        public event Action<EnemyController> OutOfViewTimeout;
+        public event Action<EnemyController> InvokedBackToPool;
 
         public bool CanReceiveDamage => _damageable.CanReceiveDamage;
         public int KillExperience => _lootData.Experience;

@@ -1,26 +1,9 @@
-using System;
-using System.Collections.Generic;
+using UnityEngine;
 
-namespace CodeBase.Utilities.Extensions
+namespace GameCore.Source.Domain.Models
 {
-    public static class Extensions
+    public static class RectangleExtensions
     {
-        private static Random rng = new Random();
-
-        public static void Shuffle<T>(this IList<T> list)
-        {
-            int n = list.Count;
-
-            while (n > 1)
-            {
-                n--;
-                int k = rng.Next(n + 1);
-                (list[k], list[n]) = (list[n], list[k]);
-            }
-        }
-
-        public static float AsPercentFactor(this float value) => value / 100;
-        
         public static bool ContainsInInterval(this float value, float min, float max) => value >= min && value <= max;
         public static bool ContainsInInterval(this int value, int min, int max) => value >= min && value <= max;
 
@@ -50,6 +33,5 @@ namespace CodeBase.Utilities.Extensions
         }
 
         public static int ConvertIndexToLinear(this int[] yx, int numCols) => yx[0] * numCols + yx[1];
-
     }
 }

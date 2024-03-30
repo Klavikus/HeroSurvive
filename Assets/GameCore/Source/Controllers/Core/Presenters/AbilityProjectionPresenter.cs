@@ -16,7 +16,7 @@ using UnityEngine;
 
 namespace GameCore.Source.Controllers.Core.Presenters
 {
-    public class AbilityPresenter : IPresenter
+    public class AbilityProjectionPresenter : IPresenter
     {
         private readonly IAbilityProjection _view;
         private readonly AbilityData _abilityData;
@@ -31,25 +31,25 @@ namespace GameCore.Source.Controllers.Core.Presenters
         private WaitForSeconds _returnToPoolDelay;
         private List<Coroutine> _coroutineHandlers;
 
-        public AbilityPresenter(
+        public AbilityProjectionPresenter(
             [NotNull] IAbilityProjection view,
             [NotNull] AbilityData abilityData,
-            [NotNull] IAttackBehaviour attackBehaviour,
-            [NotNull] IMovementBehaviour movementBehaviour,
-            [NotNull] ISizeBehaviour sizeBehaviour,
             [NotNull] IAudioPlayerService audioPlayerService,
             [NotNull] ICoroutineRunner coroutineRunner,
             [NotNull] IProjectionPool projectionPool,
+            [NotNull] IAttackBehaviour attackBehaviour,
+            [NotNull] IMovementBehaviour movementBehaviour,
+            [NotNull] ISizeBehaviour sizeBehaviour,
             SpawnData spawnData)
         {
             _view = view ?? throw new ArgumentNullException(nameof(view));
             _abilityData = abilityData ?? throw new ArgumentNullException(nameof(abilityData));
-            _attackBehaviour = attackBehaviour ?? throw new ArgumentNullException(nameof(attackBehaviour));
-            _movementBehaviour = movementBehaviour ?? throw new ArgumentNullException(nameof(movementBehaviour));
-            _sizeBehaviour = sizeBehaviour ?? throw new ArgumentNullException(nameof(sizeBehaviour));
             _audioPlayerService = audioPlayerService ?? throw new ArgumentNullException(nameof(audioPlayerService));
             _coroutineRunner = coroutineRunner ?? throw new ArgumentNullException(nameof(coroutineRunner));
             _projectionPool = projectionPool ?? throw new ArgumentNullException(nameof(projectionPool));
+            _attackBehaviour = attackBehaviour ?? throw new ArgumentNullException(nameof(attackBehaviour));
+            _movementBehaviour = movementBehaviour ?? throw new ArgumentNullException(nameof(movementBehaviour));
+            _sizeBehaviour = sizeBehaviour ?? throw new ArgumentNullException(nameof(sizeBehaviour));
             _spawnData = spawnData;
         }
 

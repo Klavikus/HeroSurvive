@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using GameCore.Source.Presentation.Api;
+using Modules.MVPPassiveView.Runtime;
 using UnityEngine;
 
 namespace GameCore.Source.Presentation.Core.Abilities
 {
-    public class AbilityProjection : MonoBehaviour, IAbilityProjection
+    public class AbilityProjection : ViewBase, IAbilityProjection
     {
         [SerializeField] private AbilityAnimator _abilityAnimator;
 

@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Diagnostics;
 using GameCore.Source.Controllers.Api.Services;
+using GameCore.Source.Domain.Services;
 using GameCore.Source.Infrastructure.Api.Services;
-using GameCore.Source.Infrastructure.Api.Services.Providers;
 using Modules.GamePauseSystem.Runtime;
 using Mono.Cecil;
 using UnityEngine;

@@ -8,7 +8,7 @@ namespace GameCore.Source.Domain.Data
     [Serializable]
     public class EnemyData
     {
-        public EnemyData(EnemyType type, Enemy prefab)
+        public EnemyData(EnemyType type, GameObject prefab)
         {
             Type = type;
             Name = type.ToString();
@@ -17,7 +17,7 @@ namespace GameCore.Source.Domain.Data
 
         [field: SerializeField] public string Name { get; private set; }
         [field: SerializeField] public EnemyType Type { get; private set; }
-        [field: SerializeField] public Enemy Prefab { get; private set; }
+        [field: SerializeField] public GameObject Prefab { get; private set; }
         [field: SerializeField] public EnemyAIData AIData { get; private set; }
         [field: SerializeField] public DamageableData DamageableData { get; private set; }
         [field: SerializeField] public DamageSourceData DamageSourceData { get; private set; }

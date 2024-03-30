@@ -1,6 +1,7 @@
-﻿using GameCore.Source.Infrastructure.Api.Services.Providers;
+﻿using System.Collections.Generic;
+using GameCore.Source.Domain.Configs;
 
-namespace GameCore.Source.Infrastructure.Core.Services.Providers
+namespace GameCore.Source.Domain.Services
 {
     public class ConfigurationProvider : IConfigurationProvider
     {
@@ -10,5 +11,8 @@ namespace GameCore.Source.Infrastructure.Core.Services.Providers
         {
             _configurationContainer = configurationContainer;
         }
+
+        public VfxConfig VfxConfig { get; }
+        public List<AbilityConfigSO> AbilityConfigs { get; }
     }
 }

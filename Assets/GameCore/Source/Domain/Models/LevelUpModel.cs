@@ -42,10 +42,10 @@ namespace GameCore.Source.Domain.Models
             UpgradeSelected?.Invoke(_selectedUpgrade);
         }
 
-        public void HandleRewardedKill(Enemy enemy)
+        public void HandleRewardedKill(RewardData enemyController)
         {
-            _currentExperience += enemy.KillExperience;
-            _currencyModel.Add(enemy.KillCurrency);
+            _currentExperience += enemyController.KillExperience;
+            _currencyModel.Add(enemyController.KillCurrency);
 
             float currentLevelNeedExperience = ExperiencePerLevelSoft * _currentLevel * _currentLevel;
             //TODO: Handle multiple levelup upgrades selection

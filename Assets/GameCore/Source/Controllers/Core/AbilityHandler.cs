@@ -1,30 +1,33 @@
 using System;
 using System.Collections.Generic;
+using GameCore.Source.Controllers.Api;
+using GameCore.Source.Controllers.Api.Services;
+using GameCore.Source.Controllers.Core.Presenters;
+using GameCore.Source.Domain.Abilities;
 using GameCore.Source.Domain.Configs;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Enums;
 using UnityEngine;
 
-namespace GameCore.Source.Domain.Abilities
+namespace GameCore.Source.Controllers.Core
 {
     public class AbilityHandler : MonoBehaviour, IAbilityHandler
     {
         private const int MaxAbilitySlots = 5;
 
-        private readonly List<Ability> _abilities = new List<Ability>();
+        private readonly List<IAbilityController> _abilities = new();
 
-        private readonly Dictionary<AbilityConfigSO, Ability> _abilityByConfigSo =
-            new Dictionary<AbilityConfigSO, Ability>();
+        private readonly Dictionary<AbilityConfigSO, IAbilityController> _abilityByConfigSo = new();
 
         private bool _initialized;
         private int _currentAbilitySlots;
         private IReadOnlyDictionary<BaseProperty, float> _playerModifiers;
-        private AbilityFactory _abilityFactory;
+        private IAbilityFactory _abilityFactory;
 
         public bool IsFreeSlotAvailable => MaxAbilitySlots > _currentAbilitySlots;
-        public IReadOnlyList<Ability> CurrentAbilities => _abilities;
+        public IReadOnlyList<IAbilityController> CurrentAbilities => _abilities;
 
-        public void Initialize(AbilityFactory abilityFactory, IAudioPlayerService audioPlayerService)
+        public void Initialize(IAbilityFactory abilityFactory, IAudioPlayerService audioPlayerService)
         {
             _abilityFactory = abilityFactory;
             _initialized = true;
@@ -35,15 +38,14 @@ namespace GameCore.Source.Domain.Abilities
             if (IsFreeSlotAvailable == false)
                 throw new ArgumentException($"Add ability above limit is canceled! Limit is {MaxAbilitySlots}");
 
-            Ability newAbility = _abilityFactory.Create(newAbilityConfigSO);
+            IAbilityController newAbilityController = _abilityFactory.Create(newAbilityConfigSO, transform);
 
             _currentAbilitySlots++;
-            _abilities.Add(newAbility);
-            _abilityByConfigSo.Add(newAbilityConfigSO, newAbility);
-            newAbility.Initialize(transform);
+            _abilities.Add(newAbilityController);
+            _abilityByConfigSo.Add(newAbilityConfigSO, newAbilityController);
 
             if (_playerModifiers != null)
-                newAbility.UpdatePlayerModifiers(_playerModifiers);
+                newAbilityController.UpdatePlayerModifiers(_playerModifiers);
         }
 
         public void UpgradeAbility(AbilityUpgradeData abilityUpgradeData)
@@ -57,7 +59,7 @@ namespace GameCore.Source.Domain.Abilities
         public void UpdatePlayerModifiers(IReadOnlyDictionary<BaseProperty, float> stats)
         {
             _playerModifiers = stats;
-            foreach (Ability ability in _abilities)
+            foreach (AbilityController ability in _abilities)
                 ability.UpdatePlayerModifiers(stats);
         }
 
@@ -66,13 +68,13 @@ namespace GameCore.Source.Domain.Abilities
             if (_initialized == false)
                 return;
 
-            foreach (Ability ability in _abilities)
+            foreach (AbilityController ability in _abilities)
                 ability.Execute();
         }
 
         private void OnDestroy()
         {
-            foreach (Ability ability in _abilities)
+            foreach (AbilityController ability in _abilities)
                 ability.Dispose();
         }
     }

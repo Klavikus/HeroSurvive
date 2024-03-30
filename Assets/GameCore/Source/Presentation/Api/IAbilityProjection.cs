@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Modules.MVPPassiveView.Runtime;
 using UnityEngine;
 
 namespace GameCore.Source.Presentation.Api
@@ -11,6 +12,7 @@ namespace GameCore.Source.Presentation.Api
         IAbilityAnimator Animator { get; }
         SpriteRenderer SpriteRenderer { get; }
         GameObject GameObject { get; }
+        void Construct(IPresenter presenter);
         IEnumerator Run();
     }
 }

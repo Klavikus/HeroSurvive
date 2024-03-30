@@ -45,7 +45,7 @@ namespace GameCore.Source.Domain.Configs
         [field: SerializeField] public float Size { get; private set; }
         [field: SerializeField] public float Duration { get; private set; }
         [field: SerializeField] public float Cooldown { get; private set; }
-        [field: SerializeField] public AbilityProjection AbilityView { get; private set; }
+        [field: SerializeField] public GameObject AbilityView { get; private set; }
         [field: SerializeField] public bool IsSelfParent { get; private set; }
 
         [field: Header("Available upgrades")]

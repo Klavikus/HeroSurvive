@@ -10,18 +10,18 @@ namespace GameCore.Source.Controllers.Core.EnemyStateMachine.States
     {
         private readonly AnimationSynchronizer _animationSynchronizer;
         private readonly EnemyAI _enemyAI;
-        private readonly Enemy _enemy;
+        private readonly EnemyController _enemyController;
         private readonly IVfxService _vfxService;
 
         public DieEntityState(
             AnimationSynchronizer animationSynchronizer,
             EnemyAI enemyAI,
-            Enemy enemy,
+            EnemyController enemyController,
             IVfxService vfxService)
         {
             _animationSynchronizer = animationSynchronizer;
             _enemyAI = enemyAI;
-            _enemy = enemy;
+            _enemyController = enemyController;
             _vfxService = vfxService;
         }
 
@@ -29,15 +29,15 @@ namespace GameCore.Source.Controllers.Core.EnemyStateMachine.States
         {
             base.Enter();
 
-            if (_enemy == null)
+            if (_enemyController == null)
                 return;
 
             _animationSynchronizer.ChangeState(EntityAnimatorState.Died);
-            _vfxService.HandleKill(_enemy.transform.position);
+            _vfxService.HandleKill(_enemyController.transform.position);
             _enemyAI.enabled = false;
 
             //TODO: change Destroy for BackToPool
-            _enemy?.InvokeBackToPool();
+            _enemyController?.InvokeBackToPool();
             // GameObject.Destroy(_enemyAI.gameObject, 0.5f);
         }
     }

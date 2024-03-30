@@ -1,5 +1,5 @@
 ﻿using GameCore.Source.Controllers.Api.Services;
-using GameCore.Source.Infrastructure.Api.Services.Providers;
+using GameCore.Source.Domain.Services;
 using GameCore.Source.Presentation.Api;
 using UnityEngine;
 using UnityEngine.Pool;

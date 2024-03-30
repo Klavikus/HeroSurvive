@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CodeBase.Utilities.Extensions;
 using UnityEngine;
 
 namespace GameCore.Source.Domain.Models

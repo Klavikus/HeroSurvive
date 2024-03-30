@@ -16,6 +16,6 @@ namespace GameCore.Source.Domain.Data
         [field: SerializeField] public Sprite Sprite { get; private set; }
         [field: SerializeField] public List<AdditionalHeroProperty> AdditionalProperties { get; private set; }
         [field: SerializeField] public AbilityConfigSO InitialAbilityConfig { get; private set; }
-        [field: SerializeField] public Player Prefab { get; private set; }
+        [field: SerializeField] public GameObject Prefab { get; private set; }
     }
 }

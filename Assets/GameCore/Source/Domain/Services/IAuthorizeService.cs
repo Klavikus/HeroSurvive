@@ -3,7 +3,7 @@ using GameCore.Source.Domain.Data;
 
 namespace GameCore.Source.Domain.Services
 {
-    public interface IAuthorizeService : IService
+    public interface IAuthorizeService
     {
         event Action Authorized;
         event Action AuthorizeError;

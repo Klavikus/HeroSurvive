@@ -1,11 +1,13 @@
-using GameCore.Source.Domain.Abilities;
+using GameCore.Source.Controllers.Api.Services;
+using GameCore.Source.Controllers.Core.Factories;
 using GameCore.Source.Domain.Configs;
 using GameCore.Source.Domain.Data;
+using GameCore.Source.Domain.EntityComponents;
 using GameCore.Source.Domain.Enums;
 using GameCore.Source.Domain.Models;
 using UnityEngine;
 
-namespace GameCore.Source.Domain.EntityComponents
+namespace GameCore.Source.Controllers.Core
 {
     public class Player : MonoBehaviour
     {
@@ -20,8 +22,11 @@ namespace GameCore.Source.Domain.EntityComponents
         public bool IsFreeSlotAvailable => _abilityHandler.IsFreeSlotAvailable;
         public AbilityHandler AbilityHandler => _abilityHandler;
 
-        public void Initialize(IPropertyProvider propertyProvider, AbilityConfigSO initialAbilityConfigSO,
-            AbilityFactory abilityFactory, IAudioPlayerService audioPlayerService)
+        public void Initialize(
+            IPropertyProvider propertyProvider,
+            AbilityConfigSO initialAbilityConfigSO,
+            AbilityFactory abilityFactory,
+            IAudioPlayerService audioPlayerService)
         {
             _propertyProvider = propertyProvider;
             _audioPlayerService = audioPlayerService;

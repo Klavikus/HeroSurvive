@@ -39,7 +39,7 @@ namespace GameCore.Source.Domain.Configs
             var result = new List<EnemyData>();
             foreach (EnemyType type in Enum.GetValues(typeof(EnemyType)))
             {
-                Enemy prefab = Resources.Load<Enemy>($"Enemies/{type.ToString()}");
+                GameObject prefab = Resources.Load<GameObject>($"Enemies/{type.ToString()}");
                 result.Add(new EnemyData(type, prefab));
             }
 
