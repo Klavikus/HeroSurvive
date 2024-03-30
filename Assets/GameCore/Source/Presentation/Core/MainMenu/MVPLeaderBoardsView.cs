@@ -5,12 +5,13 @@ using UnityEngine;
 
 namespace GameCore.Source.Presentation.Core.MainMenu
 {
-    public class MVPLeaderBoardsView : ViewBase
+    public class MVPLeaderBoardsView : ViewBase, ILeaderBoardsView
     {
         [field: SerializeField] public Canvas MainCanvas { get; private set; }
         [field: SerializeField] public Transform ScoreViewsContainer { get; private set; }
         [field: SerializeField] public ActionButton CloseButton { get; private set; }
-        [field: SerializeField] public MVPLeaderBoardScoreView PlayerLeaderBoardScoreView { get; private set; }
+        [field: SerializeField] public MVPLeaderBoardScoreView _playerLeaderBoardScoreView { get; private set; }
+        [field: SerializeField] public ILeaderBoardScoreView PlayerLeaderBoardScoreView { get; private set; }
 
         // [SerializeField] private Button _closeButton;
         // [SerializeField] private LeaderBoardScoreView _playerScoreView;

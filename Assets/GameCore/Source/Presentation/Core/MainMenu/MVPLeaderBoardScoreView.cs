@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace GameCore.Source.Presentation.Core.MainMenu
 {
-    public class MVPLeaderBoardScoreView : MonoBehaviour
+    public class MVPLeaderBoardScoreView : MonoBehaviour, ILeaderBoardScoreView
     {
         [SerializeField] private TMP_Text _name;
         [SerializeField] private TMP_Text _position;
