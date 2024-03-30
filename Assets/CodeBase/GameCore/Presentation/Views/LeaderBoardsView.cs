@@ -26,7 +26,7 @@ namespace CodeBase.GameCore.Presentation.Views
         private void Start()
         {
             return;
-            
+
             Hide();
             _leaderBoardsViewModel = AllServices.Container.AsSingle<IViewModelProvider>().Get<LeaderBoardsViewModel>();
             _viewFactory = AllServices.Container.AsSingle<IViewFactory>();
@@ -55,6 +55,8 @@ namespace CodeBase.GameCore.Presentation.Views
 
         private void OnDisable()
         {
+            return;
+
             _leaderBoardsViewModel.LeaderBoardUpdated -= CreateScoreViews;
             _leaderBoardsViewModel.PlayerScoreUpdated -= UpdatePlayerScoreView;
             _leaderBoardsViewModel.ShowLeaderBordInvoked -= Show;
@@ -81,7 +83,7 @@ namespace CodeBase.GameCore.Presentation.Views
 
                 string userName = entryData.player.publicName;
 
-                if (string.IsNullOrEmpty(userName)) 
+                if (string.IsNullOrEmpty(userName))
                     userName = _translationService.GetLocalizedHiddenUser();
 
                 scoreView.Render(userName, entryData.score, entryData.rank);

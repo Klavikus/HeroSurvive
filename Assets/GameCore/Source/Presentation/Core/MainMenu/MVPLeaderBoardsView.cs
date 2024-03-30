@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using GameCore.Source.Presentation.Api;
 using Modules.MVPPassiveView.Runtime;
 using Modules.UIComponents.Runtime.Implementations.Buttons;
 using UnityEngine;
@@ -7,11 +7,12 @@ namespace GameCore.Source.Presentation.Core.MainMenu
 {
     public class MVPLeaderBoardsView : ViewBase, ILeaderBoardsView
     {
+        [SerializeField] private MVPLeaderBoardScoreView _playerLeaderBoardScoreView;
         [field: SerializeField] public Canvas MainCanvas { get; private set; }
         [field: SerializeField] public Transform ScoreViewsContainer { get; private set; }
         [field: SerializeField] public ActionButton CloseButton { get; private set; }
-        [field: SerializeField] public MVPLeaderBoardScoreView _playerLeaderBoardScoreView { get; private set; }
-        [field: SerializeField] public ILeaderBoardScoreView PlayerLeaderBoardScoreView { get; private set; }
+
+        public ILeaderBoardScoreView PlayerLeaderBoardScoreView => _playerLeaderBoardScoreView;
 
         // [SerializeField] private Button _closeButton;
         // [SerializeField] private LeaderBoardScoreView _playerScoreView;

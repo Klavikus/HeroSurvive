@@ -1,4 +1,4 @@
-namespace GameCore.Source.Presentation.Core.MainMenu
+namespace GameCore.Source.Presentation.Api
 {
     public interface ILeaderBoardScoreView
     {

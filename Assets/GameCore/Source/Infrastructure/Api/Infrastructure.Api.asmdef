@@ -2,7 +2,8 @@
     "name": "Infrastructure.Api",
     "rootNamespace": "",
     "references": [
-        "GUID:3c14eac83d989cf45912aff277ecbb47"
+        "GUID:3c14eac83d989cf45912aff277ecbb47",
+        "GUID:641736b40241467b8c03e61c7d6a60cd"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

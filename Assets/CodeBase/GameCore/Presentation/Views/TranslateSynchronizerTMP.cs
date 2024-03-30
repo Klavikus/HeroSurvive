@@ -14,6 +14,7 @@ namespace CodeBase.GameCore.Presentation.Views
 
         private void Start()
         {
+            return;
             _translationService = AllServices.Container.AsSingle<ITranslationService>();
             _tmpText.text = _translationService.GetLocalizedText(_translatableStrings);
             _translationService.LocalizationChanged += OnLocalizationChanged;
