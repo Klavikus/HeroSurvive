@@ -8,8 +8,7 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
     public sealed class RectTransformMoveTween : TweenActionBaseComponent
     {
         [SerializeField] private RectTransform _rectTransform;
-        [SerializeField] private Vector2TweenData _forwardPlayData;
-        [SerializeField] private Vector2TweenData _backwardPlayData;
+        [SerializeField] private TwoSidedVector2TweenData _tweenData;
         [SerializeField] private bool _lockDoubleInteraction;
         [SerializeField] private bool _initializeByComposition;
         [SerializeField] private bool _activateBackwardAfterForward;
@@ -51,12 +50,12 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
             _inProgress = true;
 
             float duration = _useDurationAsSpeed
-                ? _forwardPlayData.Value.magnitude / _forwardPlayData.Duration
-                : _forwardPlayData.Duration;
+                ? _tweenData.Forward.Value.magnitude / _tweenData.Forward.Duration
+                : _tweenData.Forward.Duration;
 
             await _rectTransform
-                .DOAnchorPos(_initialPosition + _forwardPlayData.Value, duration)
-                .SetEase(_forwardPlayData.Ease)
+                .DOAnchorPos(_initialPosition + _tweenData.Forward.Value, duration)
+                .SetEase(_tweenData.Forward.Ease)
                 .WithCancellation(_cancellationTokenSource.Token);
 
             _inProgress = false;
@@ -72,17 +71,17 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
 
             CancelTweens();
 
-            _rectTransform.anchoredPosition = _forwardPlayData.Value;
+            _rectTransform.anchoredPosition = _tweenData.Forward.Value;
 
             _inProgress = true;
 
             float duration = _useDurationAsSpeed
-                ? _backwardPlayData.Value.magnitude / _backwardPlayData.Duration
-                : _backwardPlayData.Duration;
+                ? _tweenData.Backward.Value.magnitude / _tweenData.Backward.Duration
+                : _tweenData.Backward.Duration;
             
             await _rectTransform
-                .DOAnchorPos(_initialPosition + _backwardPlayData.Value, duration)
-                .SetEase(_backwardPlayData.Ease)
+                .DOAnchorPos(_initialPosition + _tweenData.Backward.Value, duration)
+                .SetEase(_tweenData.Backward.Ease)
                 .WithCancellation(_cancellationTokenSource.Token);
 
             _inProgress = false;
@@ -98,13 +97,13 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
         public override void SetForwardState()
         {
             CancelTweens();
-            _rectTransform.anchoredPosition = _initialPosition + _forwardPlayData.Value;
+            _rectTransform.anchoredPosition = _initialPosition + _tweenData.Forward.Value;
         }
 
         public override void SetBackwardState()
         {
             CancelTweens();
-            _rectTransform.anchoredPosition = _initialPosition + _backwardPlayData.Value;
+            _rectTransform.anchoredPosition = _initialPosition + _tweenData.Backward.Value;
         }
 
         private void CancelTweens()

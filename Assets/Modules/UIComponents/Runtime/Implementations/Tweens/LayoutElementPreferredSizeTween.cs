@@ -9,8 +9,7 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
     public sealed class LayoutElementPreferredSizeTween : TweenActionBaseComponent
     {
         [SerializeField] private LayoutElement _layoutElement;
-        [SerializeField] private Vector2TweenData _forwardPlayData;
-        [SerializeField] private Vector2TweenData _backwardPlayData;
+        [SerializeField] private TwoSidedVector2TweenData _tweenData;
         [SerializeField] private bool _lockDoubleInteraction;
         [SerializeField] private bool _initializeByComposition;
         [SerializeField] private bool _activateBackwardAfterForward;
@@ -59,8 +58,8 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
             _inProgress = true;
 
             await _layoutElement
-                .DOPreferredSize(_initialSize * _forwardPlayData.Value, _forwardPlayData.Duration)
-                .SetEase(_forwardPlayData.Ease)
+                .DOPreferredSize(_initialSize * _tweenData.Forward.Value, _tweenData.Forward.Duration)
+                .SetEase(_tweenData.Forward.Ease)
                 .WithCancellation(_cancellationTokenSource.Token);
 
             _inProgress = false;
@@ -76,14 +75,14 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
 
             CancelTweens();
 
-            _layoutElement.preferredWidth = _initialSize.x * _forwardPlayData.Value.x;
-            _layoutElement.preferredHeight = _initialSize.y * _forwardPlayData.Value.y;
+            _layoutElement.preferredWidth = _initialSize.x * _tweenData.Forward.Value.x;
+            _layoutElement.preferredHeight = _initialSize.y * _tweenData.Forward.Value.y;
 
             _inProgress = true;
-            
+
             await _layoutElement
-                .DOPreferredSize(_initialSize * _backwardPlayData.Value, _backwardPlayData.Duration)
-                .SetEase(_backwardPlayData.Ease)
+                .DOPreferredSize(_initialSize * _tweenData.Backward.Value, _tweenData.Backward.Duration)
+                .SetEase(_tweenData.Backward.Ease)
                 .WithCancellation(_cancellationTokenSource.Token);
 
             _inProgress = false;
@@ -92,15 +91,15 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
         public override void SetForwardState()
         {
             CancelTweens();
-            _layoutElement.preferredWidth = _initialSize.x * _forwardPlayData.Value.x;
-            _layoutElement.preferredHeight = _initialSize.y * _forwardPlayData.Value.y;
+            _layoutElement.preferredWidth = _initialSize.x * _tweenData.Forward.Value.x;
+            _layoutElement.preferredHeight = _initialSize.y * _tweenData.Forward.Value.y;
         }
 
         public override void SetBackwardState()
         {
             CancelTweens();
-            _layoutElement.preferredWidth = _initialSize.x * _backwardPlayData.Value.x;
-            _layoutElement.preferredHeight = _initialSize.y * _backwardPlayData.Value.y;
+            _layoutElement.preferredWidth = _initialSize.x * _tweenData.Backward.Value.x;
+            _layoutElement.preferredHeight = _initialSize.y * _tweenData.Backward.Value.y;
         }
 
         private void CancelTweens()

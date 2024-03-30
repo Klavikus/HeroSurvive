@@ -8,8 +8,7 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
     public sealed class RectTransformSizeTween : TweenActionBaseComponent
     {
         [SerializeField] private RectTransform _rectTransform;
-        [SerializeField] private Vector2TweenData _forwardPlayData;
-        [SerializeField] private Vector2TweenData _backwardPlayData;
+        [SerializeField] private TwoSidedVector2TweenData _tweenData;
         [SerializeField] private bool _lockDoubleInteraction;
         [SerializeField] private bool _initializeByComposition;
         [SerializeField] private bool _activateBackwardAfterForward;
@@ -55,10 +54,10 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
             _rectTransform.sizeDelta = _initialSize;
 
             _inProgress = true;
-            
+
             await _rectTransform
-                .DOSizeDelta(_initialSize * _forwardPlayData.Value, _forwardPlayData.Duration)
-                .SetEase(_forwardPlayData.Ease)
+                .DOSizeDelta(_initialSize * _tweenData.Forward.Value, _tweenData.Forward.Duration)
+                .SetEase(_tweenData.Forward.Ease)
                 .WithCancellation(_cancellationTokenSource.Token);
 
             _inProgress = false;
@@ -74,13 +73,13 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
 
             CancelTweens();
 
-            _rectTransform.sizeDelta = _initialSize * _forwardPlayData.Value;
+            _rectTransform.sizeDelta = _initialSize * _tweenData.Forward.Value;
 
             _inProgress = true;
 
             await _rectTransform
-                .DOSizeDelta(_initialSize * _backwardPlayData.Value, _backwardPlayData.Duration)
-                .SetEase(_backwardPlayData.Ease)
+                .DOSizeDelta(_initialSize * _tweenData.Backward.Value, _tweenData.Backward.Duration)
+                .SetEase(_tweenData.Backward.Ease)
                 .WithCancellation(_cancellationTokenSource.Token);
 
             _inProgress = false;
@@ -89,13 +88,13 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
         public override void SetForwardState()
         {
             CancelTweens();
-            _rectTransform.sizeDelta = _initialSize + _forwardPlayData.Value;
+            _rectTransform.sizeDelta = _initialSize + _tweenData.Forward.Value;
         }
 
         public override void SetBackwardState()
         {
             CancelTweens();
-            _rectTransform.sizeDelta = _initialSize + _backwardPlayData.Value;
+            _rectTransform.sizeDelta = _initialSize + _tweenData.Backward.Value;
         }
 
         private void CancelTweens()
