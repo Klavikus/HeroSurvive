@@ -14,5 +14,6 @@ namespace GameCore.Source.Domain.Services
 
         public VfxConfig VfxConfig { get; }
         public List<AbilityConfigSO> AbilityConfigs { get; }
+        public BasePropertiesConfigSO BasePropertiesConfig { get; }
     }
 }

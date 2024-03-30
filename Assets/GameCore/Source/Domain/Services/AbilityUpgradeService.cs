@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameCore.Source.Domain.Abilities;
 using GameCore.Source.Domain.Configs;
 using GameCore.Source.Domain.Data;
+using GameCore.Source.Domain.Models;
 
 namespace GameCore.Source.Domain.Services
 {
@@ -15,8 +17,8 @@ namespace GameCore.Source.Domain.Services
 
         private Dictionary<bool, AbilityUpgradeData[]> _availableUpgrades;
 
-        private AbilityHandler _playerAbilityHandler;
-        private Player _currentPlayer;
+        private AbilityContainer _abilityContainer;
+        private PlayerModel _currentPlayer;
 
         public AbilityUpgradeService(IConfigurationProvider configurationProvider)
         {
@@ -32,12 +34,12 @@ namespace GameCore.Source.Domain.Services
 
         public void UseUpgrade(AbilityUpgradeData abilityUpgradeData)
         {
-            _playerAbilityHandler.UpgradeAbility(abilityUpgradeData);
+            _abilityContainer.UpgradeAbility(abilityUpgradeData);
         }
 
         public void ResetUpgrades()
         {
-            foreach (AbilityController currentAbility in _playerAbilityHandler.CurrentAbilities)
+            foreach (Ability currentAbility in _abilityContainer.CurrentAbilities)
                 currentAbility.ResetUpgrades();
         }
 
@@ -49,9 +51,9 @@ namespace GameCore.Source.Domain.Services
         {
             List<AbilityUpgradeData> resultData = new List<AbilityUpgradeData>();
 
-            IReadOnlyList<AbilityController> _currentAbilities = GetPlayerAbilities();
+            IReadOnlyList<Ability> _currentAbilities = GetPlayerAbilities();
 
-            foreach (AbilityController currentAbility in _currentAbilities)
+            foreach (Ability currentAbility in _currentAbilities)
                 if (currentAbility.CanUpgrade)
                 {
                     currentAbility.AvailableUpgrade.SetAbilityGainedStatus(true);
@@ -76,10 +78,10 @@ namespace GameCore.Source.Domain.Services
             return resultData.ToArray();
         }
 
-        public void BindToPlayer(Player player)
+        public void BindToPlayer(PlayerModel player)
         {
             _currentPlayer = player;
-            _playerAbilityHandler = player.AbilityHandler;
+            _abilityContainer = player.AbilityContainer;
             ResetAbilitiesGainedStatus();
         }
 
@@ -91,6 +93,6 @@ namespace GameCore.Source.Domain.Services
         }
 
         private bool CheckFreeSlot() => _currentPlayer.IsFreeSlotAvailable;
-        private IReadOnlyList<AbilityController> GetPlayerAbilities() => _playerAbilityHandler.CurrentAbilities;
+        private IReadOnlyList<Ability> GetPlayerAbilities() => _abilityContainer.CurrentAbilities;
     }
 }

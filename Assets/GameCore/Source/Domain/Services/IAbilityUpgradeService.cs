@@ -1,6 +1,7 @@
 using System;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.EntityComponents;
+using GameCore.Source.Domain.Models;
 
 namespace GameCore.Source.Domain.Services
 {
@@ -10,7 +11,7 @@ namespace GameCore.Source.Domain.Services
         void UseUpgrade(AbilityUpgradeData abilityUpgradeData);
         void ResetUpgrades();
         void CalculateAvailableUpgrades();
-        void BindToPlayer(Player player);
+        void BindToPlayer(PlayerModel player);
         AbilityUpgradeData[] GetAvailableUpgrades();
     }
 }

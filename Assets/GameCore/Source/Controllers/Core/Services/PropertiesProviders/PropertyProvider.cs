@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using CodeBase.GameCore.Configs;
-using CodeBase.GameCore.Domain.Data;
-using CodeBase.GameCore.Domain.Models;
-using CodeBase.GameCore.Infrastructure.Services;
-using CodeBase.GameCore.Infrastructure.Services.UpgradeService;
-using CodeBase.GameCore.Presentation.Views.HeroSelector;
+using GameCore.Source.Controllers.Api.Services;
+using GameCore.Source.Domain.Configs;
+using GameCore.Source.Domain.Data;
+using GameCore.Source.Domain.Models;
+using GameCore.Source.Domain.Services;
+using UnityEngine;
 
 namespace GameCore.Source.Controllers.Core.Services.PropertiesProviders
 {
@@ -60,7 +60,7 @@ namespace GameCore.Source.Controllers.Core.Services.PropertiesProviders
             return result;
         }
 
-        public PropertyView GetBasePropertyView() => _configurationProvider.BasePropertiesConfig.PropertyView;
+        public GameObject GetBasePropertyView() => _configurationProvider.BasePropertiesConfig.PropertyView;
 
         private void OnHeroChanged(HeroData heroData)
         {

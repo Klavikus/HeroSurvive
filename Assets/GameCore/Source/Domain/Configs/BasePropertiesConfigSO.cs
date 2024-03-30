@@ -15,7 +15,7 @@ namespace GameCore.Source.Domain.Configs
 
         private Dictionary<BaseProperty, MainPropertyViewData> _propertyViewsData;
 
-        // [field: SerializeField] public PropertyView PropertyView { get; private set; }
+        [field: SerializeField] public GameObject PropertyView { get; private set; }
         public IReadOnlyList<MainPropertyViewData> PropertiesData => _data;
 
         private void OnValidate()
