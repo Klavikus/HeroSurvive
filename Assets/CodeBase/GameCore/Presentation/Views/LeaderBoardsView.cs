@@ -25,6 +25,8 @@ namespace CodeBase.GameCore.Presentation.Views
 
         private void Start()
         {
+            return;
+            
             Hide();
             _leaderBoardsViewModel = AllServices.Container.AsSingle<IViewModelProvider>().Get<LeaderBoardsViewModel>();
             _viewFactory = AllServices.Container.AsSingle<IViewFactory>();
