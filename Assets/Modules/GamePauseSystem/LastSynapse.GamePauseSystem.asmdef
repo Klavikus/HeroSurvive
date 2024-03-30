@@ -1,0 +1,16 @@
+{
+    "name": "LastSynapse.GamePauseSystem",
+    "rootNamespace": "",
+    "references": [
+        "GUID:36ea60daf80ff3d45aba76f8232d619b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
