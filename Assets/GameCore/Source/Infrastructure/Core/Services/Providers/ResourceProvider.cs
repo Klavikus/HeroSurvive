@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using GameCore.Source.Domain.Configs;
 using GameCore.Source.Infrastructure.Api;
 using UnityEngine;
 using Object = UnityEngine.Object;
