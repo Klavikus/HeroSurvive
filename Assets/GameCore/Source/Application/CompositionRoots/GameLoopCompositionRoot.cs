@@ -46,6 +46,10 @@ namespace GameCore.Source.Application.CompositionRoots
             UpgradeModel[] upgradeModels = modelProvider.Get<UpgradeModel[]>();
             HeroModel heroModel = modelProvider.Get<HeroModel>();
             GameLoopModel gameLoopModel = new GameLoopModel();
+            PropertiesModel propertiesModel = new PropertiesModel();
+            PlayerModel playerModel = new PlayerModel();
+
+            modelProvider.Bind(propertiesModel);
 
             IUpgradeService upgradeService = new UpgradeService(upgradeModels);
 
@@ -58,7 +62,7 @@ namespace GameCore.Source.Application.CompositionRoots
 
             EnemyFactory enemyFactory = new EnemyFactory(configurationProvider, vfxService, audioPlayerService);
 
-            ITargetService targetService = new TargetService(enemyFactory);
+            ITargetService targetService = new TargetService(enemyFactory, playerModel);
             AbilityProjectionBuilder abilityProjectionBuilder = new AbilityProjectionBuilder(
                 targetService,
                 audioPlayerService,
@@ -71,7 +75,8 @@ namespace GameCore.Source.Application.CompositionRoots
                 propertyProvider,
                 abilityUpgradeService,
                 abilityFactory,
-                audioPlayerService);
+                audioPlayerService,
+                playerModel);
 
             AbilityBuilder abilityBuilder = new AbilityBuilder(playerBuilder);
 
@@ -93,9 +98,11 @@ namespace GameCore.Source.Application.CompositionRoots
                 audioPlayerService,
                 gamePauseService,
                 gameLoopModel,
-                heroModel);
+                heroModel,
+                targetService);
 
             gameLoopService.Initialize();
+            propertyProvider.Initialize();
 
             GameLoopPresenter gameLoopPresenter = new(
                 windowFsm,

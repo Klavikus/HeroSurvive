@@ -19,6 +19,7 @@ namespace GameCore.Source.Controllers.Core.Factories
         private readonly IAbilityUpgradeService _abilityUpgradeService;
         private readonly AbilityFactory _abilityFactory;
         private readonly IAudioPlayerService _audioPlayerService;
+        private readonly PlayerModel _playerModel;
 
         private PlayerController _playerController;
 
@@ -36,7 +37,8 @@ namespace GameCore.Source.Controllers.Core.Factories
             IPropertyProvider propertyProvider,
             IAbilityUpgradeService abilityUpgradeService,
             AbilityFactory abilityFactory,
-            IAudioPlayerService audioPlayerService)
+            IAudioPlayerService audioPlayerService,
+            PlayerModel playerModel)
         {
             _heroModel = heroModel;
             _configurationProvider = configurationProvider;
@@ -44,11 +46,12 @@ namespace GameCore.Source.Controllers.Core.Factories
             _abilityUpgradeService = abilityUpgradeService;
             _abilityFactory = abilityFactory;
             _audioPlayerService = audioPlayerService;
+            _playerModel = playerModel;
         }
 
         public PlayerController Build(AbilityConfigSO initialAbilityConfigSO, IGameLoopService gameLoopService)
         {
-            _playerController = GameObject.Instantiate(_heroModel.CurrentSelectedHero.Prefab,
+            _playerController = Object.Instantiate(_heroModel.CurrentSelectedHero.Prefab,
                 Vector3.zero,
                 Quaternion.identity).GetComponent<PlayerController>();
             _inputController = _playerController.GetComponent<InputController>();
@@ -58,13 +61,13 @@ namespace GameCore.Source.Controllers.Core.Factories
             _playerController.Initialize(_propertyProvider, initialAbilityConfigSO, _abilityFactory,
                 _audioPlayerService, gameLoopService);
 
-            PlayerModel playerModel = new PlayerModel()
-            {
-                AbilityContainer = _playerController.AbilityContainer,
-                IsFreeSlotAvailable = _playerController.IsFreeSlotAvailable
-            };
+            _playerModel.AbilityContainer = _playerController.AbilityContainer;
+            _playerModel.IsFreeSlotAvailable = _playerController.IsFreeSlotAvailable;
+            _playerModel.Transform = _playerController.transform;
+            _playerModel.MoveController = _moveController;
+            _playerModel.Camera = _playerCamera;
 
-            _abilityUpgradeService.BindToPlayer(playerModel);
+            _abilityUpgradeService.BindToPlayer(_playerModel);
 
             return _playerController;
         }
@@ -79,25 +82,12 @@ namespace GameCore.Source.Controllers.Core.Factories
             _playerDirection = newDirection;
         }
 
-        public IAbilityHandler GetPlayerAbilityHandler() =>
-            _playerController.GetComponentInChildren<IAbilityHandler>();
-
-        public Vector3 GetPlayerPosition()
-        {
-            if (_playerController)
-                _playerPosition = _playerController.transform.position;
-
-            return _playerPosition;
-        }
-
-        public Vector3 GetPlayerDirection() =>
-            _moveController.LastMoveVector;
-
         public void BindCameraToPlayer()
         {
-            _currentCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
+            _currentCamera = Object.FindObjectOfType<CinemachineVirtualCamera>();
             _currentCamera.Follow = _playerController.transform;
-            _playerCamera = GameObject.FindObjectOfType<Camera>();
+            _playerCamera = Object.FindObjectOfType<Camera>();
+            _playerModel.Camera = _playerCamera;
         }
 
         public void BindEventsHandler(PlayerEventHandler playerEventHandler)
@@ -113,7 +103,5 @@ namespace GameCore.Source.Controllers.Core.Factories
 
             _playerController.GetComponent<IDamageable>().Respawn();
         }
-
-        public Camera GetPlayerCamera() => _playerCamera;
     }
 }

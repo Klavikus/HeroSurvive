@@ -3,7 +3,7 @@ using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Controllers.Core.Factories;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Models;
-using JetBrains.Annotations;
+using GameCore.Source.Domain.Services;
 using Modules.GamePauseSystem.Runtime;
 
 namespace GameCore.Source.Controllers.Core.Services
@@ -18,6 +18,7 @@ namespace GameCore.Source.Controllers.Core.Services
         private readonly IGamePauseService _gamePauseService;
         private readonly GameLoopModel _gameLoopModel;
         private readonly HeroModel _heroModel;
+        private readonly ITargetService _targetService;
 
         public GameLoopService(
             AbilityBuilder abilityBuilder,
@@ -27,7 +28,8 @@ namespace GameCore.Source.Controllers.Core.Services
             IAudioPlayerService sfxService,
             IGamePauseService gamePauseService,
             GameLoopModel gameLoopModel,
-            HeroModel heroModel)
+            HeroModel heroModel,
+            ITargetService targetService)
         {
             _abilityBuilder = abilityBuilder ?? throw new ArgumentNullException(nameof(abilityBuilder));
             _playerBuilder = playerBuilder ?? throw new ArgumentNullException(nameof(playerBuilder));
@@ -38,6 +40,7 @@ namespace GameCore.Source.Controllers.Core.Services
             _gamePauseService = gamePauseService ?? throw new ArgumentNullException(nameof(gamePauseService));
             _gameLoopModel = gameLoopModel ?? throw new ArgumentNullException(nameof(gameLoopModel));
             _heroModel = heroModel ?? throw new ArgumentNullException(nameof(heroModel));
+            _targetService = targetService ?? throw new ArgumentNullException(nameof(targetService));
         }
 
         public void Initialize() =>
@@ -63,7 +66,6 @@ namespace GameCore.Source.Controllers.Core.Services
             _playerBuilder.BindCameraToPlayer();
             _playerBuilder.BindEventsHandler(_playerEventHandler);
             _levelCompetitionService.StartCompetition();
-
             // GameLoopPauseViewModel gameLoopPauseViewModel = new GameLoopPauseViewModel(gamePauseService);
             // viewModelProvider.Bind(gameLoopPauseViewModel);
 
