@@ -3,48 +3,45 @@ using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Controllers.Core.Factories;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Models;
-using UnityEngine;
-using IAudioPlayerService = GameCore.Source.Controllers.Api.Services.IAudioPlayerService;
-using IGameLoopService = GameCore.Source.Controllers.Api.Services.IGameLoopService;
-using IGamePauseService = Modules.GamePauseSystem.Runtime.IGamePauseService;
-using IModelProvider = GameCore.Source.Controllers.Api.Services.IModelProvider;
+using JetBrains.Annotations;
+using Modules.GamePauseSystem.Runtime;
 
 namespace GameCore.Source.Controllers.Core.Services
 {
     public class GameLoopService : IGameLoopService
     {
-        private readonly LevelMapFactory _levelMapFactory;
-        private readonly GameLoopViewBuilder _gameLoopViewBuilder;
         private readonly AbilityBuilder _abilityBuilder;
-        private readonly IModelProvider _modelProvider;
         private readonly PlayerBuilder _playerBuilder;
         private readonly PlayerEventHandler _playerEventHandler;
         private readonly ILeveCompetitionService _levelCompetitionService;
         private readonly IAudioPlayerService _sfxService;
+        private readonly IGamePauseService _gamePauseService;
+        private readonly GameLoopModel _gameLoopModel;
+        private readonly HeroModel _heroModel;
 
         public GameLoopService(
-            LevelMapFactory levelMapFactory,
-            GameLoopViewBuilder gameLoopViewBuilder,
             AbilityBuilder abilityBuilder,
-            IModelProvider modelProvider,
             PlayerBuilder playerBuilder,
             ILeveCompetitionService levelCompetitionService,
             PlayerEventHandler playerEventHandler,
             IAudioPlayerService sfxService,
-            IGamePauseService gamePauseService)
+            IGamePauseService gamePauseService,
+            GameLoopModel gameLoopModel,
+            HeroModel heroModel)
         {
-            _levelMapFactory = levelMapFactory;
-            _gameLoopViewBuilder = gameLoopViewBuilder;
-            _abilityBuilder = abilityBuilder;
-            _modelProvider = modelProvider;
-            _playerBuilder = playerBuilder;
-            _levelCompetitionService = levelCompetitionService;
-            _playerEventHandler = playerEventHandler;
-            _sfxService = sfxService;
+            _abilityBuilder = abilityBuilder ?? throw new ArgumentNullException(nameof(abilityBuilder));
+            _playerBuilder = playerBuilder ?? throw new ArgumentNullException(nameof(playerBuilder));
+            _levelCompetitionService = levelCompetitionService ??
+                                       throw new ArgumentNullException(nameof(levelCompetitionService));
+            _playerEventHandler = playerEventHandler ?? throw new ArgumentNullException(nameof(playerEventHandler));
+            _sfxService = sfxService ?? throw new ArgumentNullException(nameof(sfxService));
+            _gamePauseService = gamePauseService ?? throw new ArgumentNullException(nameof(gamePauseService));
+            _gameLoopModel = gameLoopModel ?? throw new ArgumentNullException(nameof(gameLoopModel));
+            _heroModel = heroModel ?? throw new ArgumentNullException(nameof(heroModel));
         }
 
         public void Initialize() =>
-            _modelProvider.Get<GameLoopModel>().PlayerResurrected += OnPlayerResurrected;
+            _gameLoopModel.PlayerResurrected += OnPlayerResurrected;
 
         public event Action<HeroData> LevelInvoked;
 
@@ -57,15 +54,12 @@ namespace GameCore.Source.Controllers.Core.Services
 
         public void InvokeLevelStart(HeroData heroData) => LevelInvoked?.Invoke(heroData);
 
-        public void InvokeLevelClose() => _modelProvider.Get<GameLoopModel>().InvokeLevelClose();
+        public void InvokeLevelClose() => _gameLoopModel.InvokeLevelClose();
 
         public void Start()
         {
-            _levelMapFactory.Create();
-            _gameLoopViewBuilder.Build();
-            
-            // _abilityBuilder.Build(_modelProvider.Get<HeroModel>());
-            
+            _abilityBuilder.Build(_heroModel);
+
             _playerBuilder.BindCameraToPlayer();
             _playerBuilder.BindEventsHandler(_playerEventHandler);
             _levelCompetitionService.StartCompetition();
@@ -74,7 +68,7 @@ namespace GameCore.Source.Controllers.Core.Services
             // viewModelProvider.Bind(gameLoopPauseViewModel);
 
             // GameObject.FindObjectOfType<SceneCompositionRoot>().Initialize(AllServices.Container);
-            
+
             _sfxService.PlayAmbient();
         }
 

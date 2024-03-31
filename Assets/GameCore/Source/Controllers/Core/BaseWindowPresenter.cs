@@ -3,7 +3,7 @@ using Modules.Common.WindowFsm.Runtime.Abstract;
 using Modules.MVPPassiveView.Runtime;
 using UnityEngine;
 
-namespace GameCore.Source.Presentation.Core
+namespace GameCore.Source.Controllers.Core
 {
     public abstract class BaseWindowPresenter<T> : IPresenter
         where T : IWindow

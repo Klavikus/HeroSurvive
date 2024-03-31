@@ -1,9 +1,6 @@
-﻿using System;
-using GameCore.Source.Controllers.Core.WindowFsms.Windows;
+﻿using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Presentation.Api;
-using GameCore.Source.Presentation.Core;
 using Modules.Common.WindowFsm.Runtime.Abstract;
-using Modules.MVPPassiveView.Runtime;
 
 namespace GameCore.Source.Controllers.Core.Presenters
 {

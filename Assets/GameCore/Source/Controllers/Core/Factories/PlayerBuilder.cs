@@ -13,9 +13,9 @@ namespace GameCore.Source.Controllers.Core.Factories
 {
     public class PlayerBuilder
     {
+        private readonly HeroModel _heroModel;
         private readonly IConfigurationProvider _configurationProvider;
         private readonly IPropertyProvider _propertyProvider;
-        private readonly IModelProvider _modelProvider;
         private readonly IAbilityUpgradeService _abilityUpgradeService;
         private readonly AbilityFactory _abilityFactory;
         private readonly IAudioPlayerService _audioPlayerService;
@@ -31,14 +31,14 @@ namespace GameCore.Source.Controllers.Core.Factories
         private Camera _playerCamera;
 
         public PlayerBuilder(
-            IModelProvider modelProvider,
+            HeroModel heroModel,
             IConfigurationProvider configurationProvider,
             IPropertyProvider propertyProvider,
             IAbilityUpgradeService abilityUpgradeService,
             AbilityFactory abilityFactory,
             IAudioPlayerService audioPlayerService)
         {
-            _modelProvider = modelProvider;
+            _heroModel = heroModel;
             _configurationProvider = configurationProvider;
             _propertyProvider = propertyProvider;
             _abilityUpgradeService = abilityUpgradeService;
@@ -48,7 +48,7 @@ namespace GameCore.Source.Controllers.Core.Factories
 
         public PlayerController Build(AbilityConfigSO initialAbilityConfigSO)
         {
-            _playerController = GameObject.Instantiate(_modelProvider.Get<HeroModel>().CurrentSelectedHero.Prefab,
+            _playerController = GameObject.Instantiate(_heroModel.CurrentSelectedHero.Prefab,
                 Vector3.zero,
                 Quaternion.identity).GetComponent<PlayerController>();
             _inputController = _playerController.GetComponent<InputController>();

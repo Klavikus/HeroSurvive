@@ -7,7 +7,7 @@ namespace GameCore.Source.Application.GameFSM.States
 {
     public class GameLoopState : IState
     {
-        private const string GameLoopScene = "GameLoopScene";
+        private const string GameLoopScene = "GameLoop";
 
         private readonly SceneLoader _sceneLoader;
         private readonly ServiceContainer _serviceContainer;

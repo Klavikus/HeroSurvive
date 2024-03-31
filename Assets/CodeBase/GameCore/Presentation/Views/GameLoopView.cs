@@ -26,8 +26,10 @@ namespace CodeBase.GameCore.Presentation.Views
             _gameLoopViewModel.WaveCompleted -= OnWaveCompleted;
         }
 
-        public void Initialize(GameLoopViewModel gameLoopViewModel,
-            LevelUpViewModel levelUpViewModel, UpgradeDescriptionBuilder upgradeDescriptionBuilder)
+        public void Initialize(
+            GameLoopViewModel gameLoopViewModel,
+            LevelUpViewModel levelUpViewModel,
+            UpgradeDescriptionBuilder upgradeDescriptionBuilder)
         {
             _gameLoopViewModel = gameLoopViewModel;
             _levelUpView.Initialize(levelUpViewModel, upgradeDescriptionBuilder);

@@ -7,19 +7,15 @@ namespace GameCore.Source.Controllers.Core.Services
 {
     public class UpgradeService : IUpgradeService
     {
-        private readonly IModelProvider _modelProvider;
+        private readonly UpgradeModel[] _upgradeModels;
 
         private MainProperties _resultProperties;
 
         public event Action Updated;
 
-        public UpgradeService(IModelProvider modelProvider)
+        public UpgradeService(UpgradeModel[] upgradeModels)
         {
-            _modelProvider = modelProvider;
-        }
-
-        public void Initialize()
-        {
+            _upgradeModels = upgradeModels ?? throw new ArgumentNullException(nameof(upgradeModels));
             Recalculate();
         }
 
@@ -27,7 +23,7 @@ namespace GameCore.Source.Controllers.Core.Services
         {
             _resultProperties = new MainProperties();
 
-            foreach (UpgradeModel upgradeModel in _modelProvider.Get<UpgradeModel[]>())
+            foreach (UpgradeModel upgradeModel in _upgradeModels)
             {
                 _resultProperties += upgradeModel.Properties;
             }
@@ -42,7 +38,7 @@ namespace GameCore.Source.Controllers.Core.Services
 
         public void AddProperties(UpgradeModel upgradeModel)
         {
-            UpgradeModel first = _modelProvider.Get<UpgradeModel[]>().First(model => model == upgradeModel);
+            UpgradeModel first = _upgradeModels.First(model => model == upgradeModel);
 
             Updated?.Invoke();
         }

@@ -29,7 +29,7 @@ namespace GameCore.Source.Domain.Models
         [field: SerializeField] public UpgradeData Data { get; }
         [field: SerializeField] public int CurrentLevel { get; private set; }
 
-        public Action<UpgradeModel> LevelChanged;
+        public event Action<UpgradeModel> LevelChanged;
 
         private AdditionalHeroProperty[] GetCurrentAdditionalProperties()
         {
