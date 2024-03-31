@@ -66,6 +66,8 @@ namespace GameCore.Source.Application.GameFSM.States
             IVfxService vfxService = RegisterVfxService(configurationProvider, audioPlayerService);
             IModelProvider modelProvider = RegisterModelProvider();
 
+            //TODO: Move to LoadDataState
+            
             _services.LockRegister();
         }
 

@@ -7,14 +7,10 @@ namespace GameCore.Source.Controllers.Core.Services
     {
         public event Action Died;
 
-        public void Initialize(IDamageable damageable)
-        {
+        public void Initialize(IDamageable damageable) =>
             damageable.Died += OnDied;
-        }
 
-        private void OnDied()
-        {
+        private void OnDied() =>
             Died?.Invoke();
-        }
     }
 }
