@@ -46,7 +46,7 @@ namespace GameCore.Source.Controllers.Core.Factories
             _audioPlayerService = audioPlayerService;
         }
 
-        public PlayerController Build(AbilityConfigSO initialAbilityConfigSO)
+        public PlayerController Build(AbilityConfigSO initialAbilityConfigSO, IGameLoopService gameLoopService)
         {
             _playerController = GameObject.Instantiate(_heroModel.CurrentSelectedHero.Prefab,
                 Vector3.zero,
@@ -56,14 +56,14 @@ namespace GameCore.Source.Controllers.Core.Factories
             _moveController = _playerController.GetComponent<MoveController>();
             _inputController.InputUpdated += OnPlayerInputUpdated;
             _playerController.Initialize(_propertyProvider, initialAbilityConfigSO, _abilityFactory,
-                _audioPlayerService);
+                _audioPlayerService, gameLoopService);
 
             PlayerModel playerModel = new PlayerModel()
             {
                 AbilityContainer = _playerController.AbilityContainer,
                 IsFreeSlotAvailable = _playerController.IsFreeSlotAvailable
             };
-            
+
             _abilityUpgradeService.BindToPlayer(playerModel);
 
             return _playerController;

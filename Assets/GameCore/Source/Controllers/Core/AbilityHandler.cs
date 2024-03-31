@@ -23,13 +23,18 @@ namespace GameCore.Source.Controllers.Core
         private int _currentAbilitySlots;
         private IReadOnlyDictionary<BaseProperty, float> _playerModifiers;
         private IAbilityFactory _abilityFactory;
+        private IGameLoopService _gameLoopService;
 
         public bool IsFreeSlotAvailable => MaxAbilitySlots > _currentAbilitySlots;
         public IReadOnlyList<IAbilityController> CurrentAbilities => _abilities;
 
-        public void Initialize(IAbilityFactory abilityFactory, IAudioPlayerService audioPlayerService)
+        public void Initialize(
+            IAbilityFactory abilityFactory,
+            IAudioPlayerService audioPlayerService,
+            IGameLoopService gameLoopService)
         {
             _abilityFactory = abilityFactory;
+            _gameLoopService = gameLoopService;
             _initialized = true;
         }
 
@@ -38,7 +43,8 @@ namespace GameCore.Source.Controllers.Core
             if (IsFreeSlotAvailable == false)
                 throw new ArgumentException($"Add ability above limit is canceled! Limit is {MaxAbilitySlots}");
 
-            IAbilityController newAbilityController = _abilityFactory.Create(newAbilityConfigSO, transform);
+            IAbilityController newAbilityController =
+                _abilityFactory.Create(newAbilityConfigSO, transform, _gameLoopService);
 
             _currentAbilitySlots++;
             _abilities.Add(newAbilityController);

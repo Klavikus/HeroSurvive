@@ -32,7 +32,7 @@ namespace GameCore.Source.Application.CompositionRoots
                 [typeof(GameLoopWindow)] = new MainMenuWindow(),
             };
 
-            WindowFsm<MainMenuWindow> windowFsm = new WindowFsm<MainMenuWindow>(windows);
+            WindowFsm<GameLoopWindow> windowFsm = new WindowFsm<GameLoopWindow>(windows);
 
             IGameStateMachine gameStateMachine = serviceContainer.Single<IGameStateMachine>();
             IConfigurationProvider configurationProvider = serviceContainer.Single<IConfigurationProvider>();

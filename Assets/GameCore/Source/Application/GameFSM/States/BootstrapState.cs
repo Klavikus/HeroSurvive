@@ -1,6 +1,9 @@
-﻿using GameCore.Source.Controllers.Api.Services;
+﻿using System.Linq;
+using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Controllers.Core.Services;
 using GameCore.Source.Domain.Configs;
+using GameCore.Source.Domain.Data;
+using GameCore.Source.Domain.Models;
 using GameCore.Source.Domain.Services;
 using GameCore.Source.Infrastructure.Api;
 using GameCore.Source.Infrastructure.Api.GameFsm;
@@ -63,11 +66,22 @@ namespace GameCore.Source.Application.GameFSM.States
                 coroutineRunner,
                 gamePauseService);
 
-            IVfxService vfxService = RegisterVfxService(configurationProvider, audioPlayerService);
+            IVfxService vfxService = RegisterVfxService(configurationProvider);
             IModelProvider modelProvider = RegisterModelProvider();
 
             //TODO: Move to LoadDataState
-            
+            UpgradesConfigSO upgradesConfig = configurationProvider.UpgradesConfig;
+            UpgradeModel[] result = new UpgradeModel[upgradesConfig.UpgradeData.Length];
+            for (var i = 0; i < result.Length; i++)
+                result[i] = new UpgradeModel(upgradesConfig.UpgradeData[i]);
+            modelProvider.Bind(result);
+
+            HeroModel heroModel = new HeroModel();
+            modelProvider.Bind(heroModel);
+            HeroData[] availableHeroesData =
+                configurationProvider.HeroConfig.HeroesData.Select(heroData => heroData).ToArray();
+            heroModel.SetHeroData(availableHeroesData.First());
+
             _services.LockRegister();
         }
 
@@ -120,11 +134,10 @@ namespace GameCore.Source.Application.GameFSM.States
             return audioPlayerService;
         }
 
-        private IVfxService RegisterVfxService(IConfigurationProvider configurationProvider,
-            IAudioPlayerService audioPlayerService)
+        private IVfxService RegisterVfxService(IConfigurationProvider configurationProvider)
         {
             IVfxService vfxService = new VfxService(configurationProvider);
-            _services.RegisterAsSingle(audioPlayerService);
+            _services.RegisterAsSingle(vfxService);
 
             return vfxService;
         }

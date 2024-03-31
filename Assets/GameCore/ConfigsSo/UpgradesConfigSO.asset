@@ -1,0 +1,245 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3379ed64aaad4cc6acf71aa6887db583, type: 3}
+  m_Name: UpgradesConfigSO
+  m_EditorClassIdentifier: 
+  <UpgradeData>k__BackingField:
+  - <KeyName>k__BackingField: Health
+    <TranslatableNames>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Health
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u0417\u0434\u043E\u0440\u043E\u0432\u044C\u0435"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: "Sa\u011Fl\u0131k"
+    <Icon>k__BackingField: {fileID: 21300000, guid: e5487dbe2dfee44bf949e0ade82bcbf5, type: 3}
+    <Upgrades>k__BackingField:
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 0
+        <Value>k__BackingField: 50
+      <Price>k__BackingField: 1000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 0
+        <Value>k__BackingField: 100
+      <Price>k__BackingField: 3000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 0
+        <Value>k__BackingField: 200
+      <Price>k__BackingField: 6000
+  - <KeyName>k__BackingField: Regeneration
+    <TranslatableNames>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Regeneration
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u0420\u0435\u0433\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: Rejenerasyon
+    <Icon>k__BackingField: {fileID: 21300000, guid: 79b6da8b67c0d4130b619d38ee221bf2, type: 3}
+    <Upgrades>k__BackingField:
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 1
+        <Value>k__BackingField: 0.5
+      <Price>k__BackingField: 2000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 1
+        <Value>k__BackingField: 1.5
+      <Price>k__BackingField: 5000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 1
+        <Value>k__BackingField: 3
+      <Price>k__BackingField: 12000
+  - <KeyName>k__BackingField: Move Speed
+    <TranslatableNames>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Move Speed
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C \u0411\u0435\u0433\u0430"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: "Ko\u015Fu h\u0131z\u0131"
+    <Icon>k__BackingField: {fileID: 21300000, guid: 9fbdd0376ab914cc6a1b8835495610c8, type: 3}
+    <Upgrades>k__BackingField:
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 2
+        <Value>k__BackingField: 10
+      <Price>k__BackingField: 1000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 2
+        <Value>k__BackingField: 20
+      <Price>k__BackingField: 2000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 2
+        <Value>k__BackingField: 35
+      <Price>k__BackingField: 4000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 2
+        <Value>k__BackingField: 50
+      <Price>k__BackingField: 9000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 2
+        <Value>k__BackingField: 100
+      <Price>k__BackingField: 16000
+  - <KeyName>k__BackingField: Damage
+    <TranslatableNames>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Damage
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u0423\u0440\u043E\u043D"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: Hasar
+    <Icon>k__BackingField: {fileID: 21300000, guid: c5f379770ddf3470cab5328d5615bb23, type: 3}
+    <Upgrades>k__BackingField:
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 3
+        <Value>k__BackingField: 15
+      <Price>k__BackingField: 1000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 3
+        <Value>k__BackingField: 30
+      <Price>k__BackingField: 2000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 3
+        <Value>k__BackingField: 50
+      <Price>k__BackingField: 6000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 3
+        <Value>k__BackingField: 100
+      <Price>k__BackingField: 10000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 3
+        <Value>k__BackingField: 150
+      <Price>k__BackingField: 15000
+  - <KeyName>k__BackingField: Cooldown
+    <TranslatableNames>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Cooldown
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u041F\u0435\u0440\u0435\u0437\u0430\u0440\u044F\u0434\u043A\u0430"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: Sakin ol
+    <Icon>k__BackingField: {fileID: 21300000, guid: 31db59f0a66f144f99d4d7d6ef9bbb9f, type: 3}
+    <Upgrades>k__BackingField:
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 4
+        <Value>k__BackingField: -10
+      <Price>k__BackingField: 1000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 4
+        <Value>k__BackingField: -20
+      <Price>k__BackingField: 3000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 4
+        <Value>k__BackingField: -30
+      <Price>k__BackingField: 6000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 4
+        <Value>k__BackingField: -40
+      <Price>k__BackingField: 7000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 4
+        <Value>k__BackingField: -50
+      <Price>k__BackingField: 10000
+  - <KeyName>k__BackingField: Duration
+    <TranslatableNames>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Duration
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u0414\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: "S\xFCre"
+    <Icon>k__BackingField: {fileID: 21300000, guid: 552ee50297f7b4c04a775dedd5c96aea, type: 3}
+    <Upgrades>k__BackingField:
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 5
+        <Value>k__BackingField: 10
+      <Price>k__BackingField: 1000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 5
+        <Value>k__BackingField: 20
+      <Price>k__BackingField: 2000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 5
+        <Value>k__BackingField: 35
+      <Price>k__BackingField: 5000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 5
+        <Value>k__BackingField: 50
+      <Price>k__BackingField: 9000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 5
+        <Value>k__BackingField: 100
+      <Price>k__BackingField: 20000
+  - <KeyName>k__BackingField: Amount
+    <TranslatableNames>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Amount
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: Miktar
+    <Icon>k__BackingField: {fileID: 21300000, guid: a222a9e7d571b458092a70ec97a64a03, type: 3}
+    <Upgrades>k__BackingField:
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 6
+        <Value>k__BackingField: 1
+      <Price>k__BackingField: 5000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 6
+        <Value>k__BackingField: 2
+      <Price>k__BackingField: 15000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 6
+        <Value>k__BackingField: 3
+      <Price>k__BackingField: 30000
+  - <KeyName>k__BackingField: Area
+    <TranslatableNames>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Area
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u041F\u043B\u043E\u0449\u0430\u0434\u044C"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: Alan
+    <Icon>k__BackingField: {fileID: 21300000, guid: cfca08577a857449f9070ba922aa86df, type: 3}
+    <Upgrades>k__BackingField:
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 7
+        <Value>k__BackingField: 20
+      <Price>k__BackingField: 2000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 7
+        <Value>k__BackingField: 40
+      <Price>k__BackingField: 6000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 7
+        <Value>k__BackingField: 75
+      <Price>k__BackingField: 20000
+  - <KeyName>k__BackingField: Haste
+    <TranslatableNames>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Projectile speed
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C \u0441\u043D\u0430\u0440\u044F\u0434\u043E\u0432"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: "Mermi h\u0131z\u0131"
+    <Icon>k__BackingField: {fileID: 21300000, guid: dbef0a76fe3974542888e09e324d1836, type: 3}
+    <Upgrades>k__BackingField:
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 8
+        <Value>k__BackingField: 20
+      <Price>k__BackingField: 2000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 8
+        <Value>k__BackingField: 40
+      <Price>k__BackingField: 6000
+    - <AdditionalHeroProperties>k__BackingField:
+      - <BaseProperty>k__BackingField: 8
+        <Value>k__BackingField: 75
+      <Price>k__BackingField: 20000

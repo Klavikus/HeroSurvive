@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f8a755a46c4f9296a178dbb6940629, type: 3}
+  m_Name: Noise
+  m_EditorClassIdentifier: 
+  <AttackType>k__BackingField: 1
+  <WhatIsEnemy>k__BackingField:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 128
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  <Damage>k__BackingField: 2
+  <Stagger>k__BackingField: 0
+  <MaxAffectedEnemy>k__BackingField: 50
+  <Penetration>k__BackingField: 0
+  <IsLimitedPenetration>k__BackingField: 0
+  <AttackDelay>k__BackingField: 0.25
+  <BurstCount>k__BackingField: 1
+  <MaxBurstCount>k__BackingField: 1
+  <BurstFireDelay>k__BackingField: 0
+  <SpawnPosition>k__BackingField: 0
+  <SpawnCount>k__BackingField: 1
+  <Radius>k__BackingField: 0
+  <Arc>k__BackingField: 0
+  <MoveType>k__BackingField: 1
+  <Speed>k__BackingField: 0
+  <RotationStep>k__BackingField: 0
+  <StartTimePercent>k__BackingField: 0
+  <EndTimePercent>k__BackingField: 0
+  <StartRadiusCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <MainRadiusCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <EndRadiusCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <AlignWithRotation>k__BackingField: 0
+  <FlipDirectionAllowed>k__BackingField: 0
+  <TargetingType>k__BackingField: 0
+  <Size>k__BackingField: 5
+  <Duration>k__BackingField: 5
+  <Cooldown>k__BackingField: 5
+  <AbilityView>k__BackingField: {fileID: 6875578204607319243, guid: d66394e42188d0049a94ef7f49cee9ab, type: 3}
+  <IsSelfParent>k__BackingField: 0
+  <UpgradeData>k__BackingField:
+  - <PropertyType>k__BackingField: 7
+    <Value>k__BackingField: 50
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 0
+  - <PropertyType>k__BackingField: 3
+    <Value>k__BackingField: 50
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 0
+  - <PropertyType>k__BackingField: 7
+    <Value>k__BackingField: 50
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 0
+  - <PropertyType>k__BackingField: 3
+    <Value>k__BackingField: 50
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 0
+  - <PropertyType>k__BackingField: 7
+    <Value>k__BackingField: 50
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 0
+  - <PropertyType>k__BackingField: 3
+    <Value>k__BackingField: 50
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 0
+  - <PropertyType>k__BackingField: 7
+    <Value>k__BackingField: 50
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 0
+  - <PropertyType>k__BackingField: 7
+    <Value>k__BackingField: 50
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 0
+  - <PropertyType>k__BackingField: 3
+    <Value>k__BackingField: 50
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 0
+  - <PropertyType>k__BackingField: 7
+    <Value>k__BackingField: 50
+    <BaseConfigSO>k__BackingField: {fileID: 11400000}
+    <IsFirstAbilityGain>k__BackingField: 0
+  <UpgradeViewData>k__BackingField:
+    <Icon>k__BackingField: {fileID: 21300000, guid: 806e6002b16723a40944b1376b66f33f, type: 3}
+    <Name>k__BackingField: 
+    <TranslatableName>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: Noise
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u0428\u0443\u043C"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: "G\xFCr\xFClt\xFC"
+  <AbilityModifiersMask>k__BackingField:
+    <UseAmount>k__BackingField: 0
+    <UseDamage>k__BackingField: 1
+    <UseCooldown>k__BackingField: 0
+    <UseDuration>k__BackingField: 0
+    <UseArea>k__BackingField: 1
+    <UseProjectileSpeed>k__BackingField: 0
+  <AudioData>k__BackingField:
+    IsPlayable: 0
+  <SizeBehaviourData>k__BackingField:
+    <SizeType>k__BackingField: 0
+    <MainTargetSize>k__BackingField: 8.75
+    <StartTargetSize>k__BackingField: 0
+    <EndTargetSize>k__BackingField: 0
+    <StartTime>k__BackingField: 0
+    <EndTime>k__BackingField: 0
+    <FullTimePeriod>k__BackingField: 5
+  <EnemyCheckRadius>k__BackingField: 20
+  <CheckCount>k__BackingField: 1
+  <AttackRadius>k__BackingField: 5

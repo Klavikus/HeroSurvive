@@ -28,11 +28,12 @@ namespace GameCore.Source.Controllers.Core
             IPropertyProvider propertyProvider,
             AbilityConfigSO initialAbilityConfigSO,
             AbilityFactory abilityFactory,
-            IAudioPlayerService audioPlayerService)
+            IAudioPlayerService audioPlayerService,
+            IGameLoopService gameLoopService)
         {
             _propertyProvider = propertyProvider;
             _audioPlayerService = audioPlayerService;
-            _abilityHandler.Initialize(abilityFactory, _audioPlayerService);
+            _abilityHandler.Initialize(abilityFactory, _audioPlayerService, gameLoopService);
             _abilityHandler.AddAbility(initialAbilityConfigSO);
             _propertyProvider.PropertiesUpdated += OnPropertiesUpdated;
 

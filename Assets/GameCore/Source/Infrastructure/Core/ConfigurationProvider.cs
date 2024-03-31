@@ -12,11 +12,13 @@ namespace GameCore.Source.Domain.Services
             _configurationContainer = configurationContainer;
         }
 
-        public VfxConfig VfxConfig { get; }
-        public List<AbilityConfigSO> AbilityConfigs { get; }
-        public BasePropertiesConfigSO BasePropertiesConfig { get; }
-        public GameLoopConfigSO GameLoopConfig { get; set; }
-        public StageCompetitionConfigSO StageCompetitionConfig { get; set; }
-        public EnemyConfigSO EnemyConfig { get; set; }
+        public VfxConfig VfxConfig => _configurationContainer.VfxConfig;
+        public AbilityConfigSO[] AbilityConfigs => _configurationContainer.AbilityConfigsSO;
+        public BasePropertiesConfigSO BasePropertiesConfig => _configurationContainer.BasePropertiesConfigSO;
+        public GameLoopConfigSO GameLoopConfig => _configurationContainer.GameLoopConfigSO;
+        public StageCompetitionConfigSO StageCompetitionConfig => _configurationContainer.StageCompetitionConfigSO;
+        public EnemyConfigSO EnemyConfig => _configurationContainer.EnemyConfigSO;
+        public UpgradesConfigSO UpgradesConfig => _configurationContainer.UpgradesConfigSO;
+        public HeroesConfigSO HeroConfig => _configurationContainer.HeroConfigSO;
     }
 }

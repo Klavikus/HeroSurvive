@@ -58,7 +58,7 @@ namespace GameCore.Source.Controllers.Core.Services
 
         public void Start()
         {
-            _abilityBuilder.Build(_heroModel);
+            _abilityBuilder.Build(_heroModel, this);
 
             _playerBuilder.BindCameraToPlayer();
             _playerBuilder.BindEventsHandler(_playerEventHandler);

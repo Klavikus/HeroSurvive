@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43c290df19d44c7c85a34feccbb9365c, type: 3}
   m_Name: ConfigurationContainer
   m_EditorClassIdentifier: 
-  <InitialSceneName>k__BackingField: Bootstrap
-  <DataSaveKey>k__BackingField: Kek
-  <MainMenuSceneName>k__BackingField: MainMenu
-  <LevelViewSo>k__BackingField: {fileID: 0}
+  <HeroConfigSO>k__BackingField: {fileID: 11400000, guid: c9d4232fc7d78a0479f43cdeb85ea743, type: 2}
+  <BasePropertiesConfigSO>k__BackingField: {fileID: 11400000, guid: 6ffefc293dca13b419451e22fe662130, type: 2}
+  <UpgradesConfigSO>k__BackingField: {fileID: 11400000, guid: 1d73c43cc3cb04b4a8fa6f1fb9fde7d8, type: 2}
+  <ColorConfigSO>k__BackingField: {fileID: 11400000, guid: be693a87420da9348a3171fe8f1e6a3c, type: 2}
+  <GameLoopConfigSO>k__BackingField: {fileID: 11400000, guid: 2eca211bd0c499740969023087ca005d, type: 2}
+  <EnemyConfigSO>k__BackingField: {fileID: 11400000, guid: 869bfe7dc0ff0e946a34eb9bcc87567f, type: 2}
+  <StageCompetitionConfigSO>k__BackingField: {fileID: 11400000, guid: 167320bc269d6054b872bcd21575f4af, type: 2}
+  <AbilityConfigsSO>k__BackingField:
+  - {fileID: 11400000, guid: 8f47b8b7df52f854f93f10f29f16d7b7, type: 2}
+  <VfxConfig>k__BackingField:
+    <KillPrefab>k__BackingField: {fileID: 8665184405990146887, guid: cff3642f09b0f18449e2060ccf252cfc, type: 3}

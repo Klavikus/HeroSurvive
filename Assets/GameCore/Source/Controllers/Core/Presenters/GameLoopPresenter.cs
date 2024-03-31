@@ -43,14 +43,14 @@ namespace GameCore.Source.Controllers.Core.Presenters
             // _wavesCounter.text = "1";
             
             _view.CloseButton.Initialize();
-            _view.CloseButton.Clicked += _gameStateMachine.GoToGameLoop;
+            _view.CloseButton.Clicked += _gameStateMachine.GoToMainMenu;
             
             _gameLoopService.Start();
         }
 
         protected override void OnAfterDisable()
         {
-            _view.CloseButton.Clicked -= _gameStateMachine.GoToGameLoop;
+            _view.CloseButton.Clicked -= _gameStateMachine.GoToMainMenu;
         }
     }
 }
