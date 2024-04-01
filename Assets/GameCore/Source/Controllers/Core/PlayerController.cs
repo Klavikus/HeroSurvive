@@ -33,7 +33,7 @@ namespace GameCore.Source.Controllers.Core
         {
             _propertyProvider = propertyProvider;
             _audioPlayerService = audioPlayerService;
-            _abilityHandler.Initialize(abilityFactory, _audioPlayerService, gameLoopService);
+            _abilityHandler.Initialize(abilityFactory, _audioPlayerService);
             _abilityHandler.AddAbility(initialAbilityConfigSO);
             _propertyProvider.PropertiesUpdated += OnPropertiesUpdated;
 

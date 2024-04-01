@@ -5,11 +5,8 @@ namespace GameCore.Source.Controllers.Api.Services
 {
     public interface IGameLoopService
     {
-        event Action<HeroData> LevelInvoked;
-        event Action LevelCloseInvoked;
-        void InvokeLevelStart(HeroData heroData);
+        event Action CloseLevelInvoked;
+        event Action PlayerResurrectInvoked;
         void InvokeLevelClose();
-        void Start();
-        void Stop();
     }
 }

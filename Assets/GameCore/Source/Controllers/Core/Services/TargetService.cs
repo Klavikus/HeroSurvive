@@ -11,7 +11,7 @@ namespace GameCore.Source.Controllers.Core.Services
         private readonly EnemyFactory _enemyFactory;
         private readonly PlayerModel _playerModel;
         private readonly RaycastHit2D[] _raycastHits = new RaycastHit2D[10];
-        private PlayerBuilder _playerBuilder;
+        private PlayerFactory _playerFactory;
 
         // private PlayerBuilder _playerBuilder;
 
@@ -23,20 +23,20 @@ namespace GameCore.Source.Controllers.Core.Services
             _playerModel = playerModel ?? throw new ArgumentNullException(nameof(playerModel));
         }
 
-        public void BindPlayerBuilder(PlayerBuilder playerBuilder) => _playerBuilder = playerBuilder;
+        public void BindPlayerBuilder(PlayerFactory playerFactory) => _playerFactory = playerFactory;
 
         public Vector3 GetPlayerPosition() =>
-            _playerModel.GetPlayerPosition();
+            _playerModel.GetPosition();
 
         public Vector3 GetPlayerDirection() =>
-            _playerModel.GetPlayerDirection();
+            _playerModel.GetDirection();
 
         public Vector3 GetClosestEnemyToPlayer(float radius, LayerMask layerMask) =>
-            _enemyFactory.GetClosestEnemy(_playerModel.GetPlayerPosition());
+            _enemyFactory.GetClosestEnemy(_playerModel.GetPosition());
 
         public Vector3 GetRandomEnemyPosition() =>
             _enemyFactory.GetRandomEnemyPosition();
 
-        public Camera GetCamera() => _playerModel.GetPlayerCamera();
+        public Camera GetCamera() => _playerModel.GetCamera();
     }
 }

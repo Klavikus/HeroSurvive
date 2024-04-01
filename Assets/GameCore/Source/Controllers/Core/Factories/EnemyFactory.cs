@@ -120,7 +120,7 @@ namespace GameCore.Source.Controllers.Core.Factories
         public void ClearEnemies()
         {
             foreach (IEnemyController enemy in _enemies)
-                enemy.Destroy();
+                enemy?.Destroy();
 
             _enemies.Clear();
         }

@@ -76,11 +76,14 @@ namespace GameCore.Source.Application.GameFSM.States
                 result[i] = new UpgradeModel(upgradesConfig.UpgradeData[i]);
             modelProvider.Bind(result);
 
+            PropertiesModel propertiesModel = new PropertiesModel();
+            modelProvider.Bind(propertiesModel);
+
             HeroModel heroModel = new HeroModel();
-            modelProvider.Bind(heroModel);
             HeroData[] availableHeroesData =
                 configurationProvider.HeroConfig.HeroesData.Select(heroData => heroData).ToArray();
             heroModel.SetHeroData(availableHeroesData.First());
+            modelProvider.Bind(heroModel);
 
             _services.LockRegister();
         }

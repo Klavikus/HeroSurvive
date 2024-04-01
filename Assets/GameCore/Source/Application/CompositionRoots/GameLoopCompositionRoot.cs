@@ -29,7 +29,7 @@ namespace GameCore.Source.Application.CompositionRoots
         {
             Dictionary<Type, IWindow> windows = new Dictionary<Type, IWindow>()
             {
-                [typeof(GameLoopWindow)] = new MainMenuWindow(),
+                [typeof(GameLoopWindow)] = new GameLoopWindow(),
             };
 
             WindowFsm<GameLoopWindow> windowFsm = new WindowFsm<GameLoopWindow>(windows);
@@ -45,11 +45,9 @@ namespace GameCore.Source.Application.CompositionRoots
 
             UpgradeModel[] upgradeModels = modelProvider.Get<UpgradeModel[]>();
             HeroModel heroModel = modelProvider.Get<HeroModel>();
-            GameLoopModel gameLoopModel = new GameLoopModel();
-            PropertiesModel propertiesModel = new PropertiesModel();
-            PlayerModel playerModel = new PlayerModel();
+            PropertiesModel propertiesModel = modelProvider.Get<PropertiesModel>();
 
-            modelProvider.Bind(propertiesModel);
+            PlayerModel playerModel = new PlayerModel();
 
             IUpgradeService upgradeService = new UpgradeService(upgradeModels);
 
@@ -69,7 +67,7 @@ namespace GameCore.Source.Application.CompositionRoots
                 coroutineRunner);
             AbilityFactory abilityFactory = new AbilityFactory(abilityProjectionBuilder, coroutineRunner);
 
-            PlayerBuilder playerBuilder = new PlayerBuilder(
+            PlayerFactory playerFactory = new PlayerFactory(
                 heroModel,
                 configurationProvider,
                 propertyProvider,
@@ -77,8 +75,6 @@ namespace GameCore.Source.Application.CompositionRoots
                 abilityFactory,
                 audioPlayerService,
                 playerModel);
-
-            AbilityBuilder abilityBuilder = new AbilityBuilder(playerBuilder);
 
             IEnemySpawnService enemySpawnService = new EnemySpawnService(targetService, enemyFactory);
 
@@ -88,27 +84,18 @@ namespace GameCore.Source.Application.CompositionRoots
                 modelProvider,
                 vfxService);
 
-            PlayerEventHandler playerEventHandler = new PlayerEventHandler();
+            GameLoopService gameLoopService = new();
 
-            GameLoopService gameLoopService = new GameLoopService(
-                abilityBuilder,
-                playerBuilder,
-                levelCompetitionService,
-                playerEventHandler,
-                audioPlayerService,
-                gamePauseService,
-                gameLoopModel,
-                heroModel,
-                targetService);
-
-            gameLoopService.Initialize();
             propertyProvider.Initialize();
 
             GameLoopPresenter gameLoopPresenter = new(
                 windowFsm,
                 _gameLoopView,
                 gameStateMachine,
-                gameLoopService);
+                gameLoopService,
+                playerFactory,
+                levelCompetitionService,
+                audioPlayerService);
 
             _gameLoopView.Construct(gameLoopPresenter);
         }

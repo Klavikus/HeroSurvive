@@ -2,15 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using GameCore.Source.Controllers.Api;
-using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Domain.Abilities;
 using GameCore.Source.Domain.Configs;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Enums;
 using GameCore.Source.Infrastructure.Api;
-using JetBrains.Annotations;
+using GameCore.Source.Infrastructure.Api.Services;
 using UnityEngine;
-using ICoroutineRunner = GameCore.Source.Infrastructure.Api.Services.ICoroutineRunner;
 
 namespace GameCore.Source.Controllers.Core.Presenters
 {
@@ -20,7 +18,6 @@ namespace GameCore.Source.Controllers.Core.Presenters
         private readonly AbilityUpgradeData[] _abilityUpgradesData;
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly IProjectionPool _projectionPool;
-        private readonly IGameLoopService _gameLoopService;
         private readonly AbilityProjectionBuilder _abilityProjectionBuilder;
 
         private readonly WaitForSeconds _cooldownWaitForSeconds;
@@ -35,24 +32,21 @@ namespace GameCore.Source.Controllers.Core.Presenters
         private Coroutine _runCoroutine;
 
         public AbilityController(
-            [NotNull] AbilityData abilityData,
-            [NotNull] AbilityUpgradeData[] abilityUpgradesData,
-            [NotNull] ICoroutineRunner coroutineRunner,
-            [NotNull] IProjectionPool projectionPool,
-            [NotNull] IGameLoopService gameLoopService,
-            [NotNull] AbilityProjectionBuilder abilityProjectionBuilder,
-            [NotNull] Transform pivotObject)
+            AbilityData abilityData,
+            AbilityUpgradeData[] abilityUpgradesData,
+            ICoroutineRunner coroutineRunner,
+            IProjectionPool projectionPool,
+            AbilityProjectionBuilder abilityProjectionBuilder,
+            Transform pivotObject)
         {
             _abilityData = abilityData ?? throw new ArgumentNullException(nameof(abilityData));
             _abilityUpgradesData = abilityUpgradesData ?? throw new ArgumentNullException(nameof(abilityUpgradesData));
 
             _coroutineRunner = coroutineRunner ?? throw new ArgumentNullException(nameof(coroutineRunner));
             _projectionPool = projectionPool ?? throw new ArgumentNullException(nameof(projectionPool));
-            _gameLoopService = gameLoopService ?? throw new ArgumentNullException(nameof(gameLoopService));
-            _abilityProjectionBuilder = abilityProjectionBuilder ?? throw new ArgumentNullException(nameof(abilityProjectionBuilder));
-            _pivotObject = pivotObject ?? throw new ArgumentNullException(nameof(pivotObject));
-
-            _gameLoopService.LevelCloseInvoked += OnLevelCloseInvoked;
+            _abilityProjectionBuilder = abilityProjectionBuilder ??
+                                        throw new ArgumentNullException(nameof(abilityProjectionBuilder));
+            _pivotObject = pivotObject ? pivotObject : throw new ArgumentNullException(nameof(pivotObject));
         }
 
         public void Execute()
@@ -91,31 +85,15 @@ namespace GameCore.Source.Controllers.Core.Presenters
             _abilityData.UpdateUpgradeModifiers(new AbilityUpgradeData[] { });
         }
 
-        public bool CheckConfig(AbilityConfigSO abilityConfigSO) =>
-            _abilityUpgradesData[0].BaseConfigSO == abilityConfigSO;
+        public bool CheckConfig(AbilityConfigSO abilityConfigSo) =>
+            _abilityUpgradesData[0].BaseConfigSO == abilityConfigSo;
 
-        public void Dispose()
-        {
+        public void Dispose() =>
             ReleaseUnmanagedResources();
-        }
 
-        private void OnLevelCloseInvoked()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void OnGameCloseInvoked()
-        {
-            _coroutineRunner.StopCoroutine(_activateProjectionCoroutine);
-            _coroutineRunner.StopCoroutine(_runCoroutine);
-            _projectionPool.Clear();
-        }
-
-        private bool CheckForTargetExistence()
-        {
-            return Physics2D.CircleCastNonAlloc(_pivotObject.position, _abilityData.EnemyCheckRadius, Vector2.zero,
+        private bool CheckForTargetExistence() =>
+            Physics2D.CircleCastNonAlloc(_pivotObject.position, _abilityData.EnemyCheckRadius, Vector2.zero,
                 _raycastHits, 1, _abilityData.WhatIsEnemy.layerMask) > 0;
-        }
 
         private IEnumerator ActivateProjections()
         {
@@ -138,13 +116,13 @@ namespace GameCore.Source.Controllers.Core.Presenters
 
         private void ReleaseUnmanagedResources()
         {
-            _gameLoopService.LevelCloseInvoked -= OnGameCloseInvoked;
-
             if (_activateProjectionCoroutine != null)
                 _coroutineRunner.StopCoroutine(_activateProjectionCoroutine);
 
             if (_runCoroutine != null)
                 _coroutineRunner.StopCoroutine(_runCoroutine);
+            
+            _projectionPool.Clear();
         }
     }
 }

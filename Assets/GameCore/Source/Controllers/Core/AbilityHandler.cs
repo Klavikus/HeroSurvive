@@ -23,32 +23,29 @@ namespace GameCore.Source.Controllers.Core
         private int _currentAbilitySlots;
         private IReadOnlyDictionary<BaseProperty, float> _playerModifiers;
         private IAbilityFactory _abilityFactory;
-        private IGameLoopService _gameLoopService;
 
         public bool IsFreeSlotAvailable => MaxAbilitySlots > _currentAbilitySlots;
         public IReadOnlyList<IAbilityController> CurrentAbilities => _abilities;
 
         public void Initialize(
             IAbilityFactory abilityFactory,
-            IAudioPlayerService audioPlayerService,
-            IGameLoopService gameLoopService)
+            IAudioPlayerService audioPlayerService)
         {
             _abilityFactory = abilityFactory;
-            _gameLoopService = gameLoopService;
             _initialized = true;
         }
 
-        public void AddAbility(AbilityConfigSO newAbilityConfigSO)
+        public void AddAbility(AbilityConfigSO newAbilityConfigSo)
         {
             if (IsFreeSlotAvailable == false)
                 throw new ArgumentException($"Add ability above limit is canceled! Limit is {MaxAbilitySlots}");
 
             IAbilityController newAbilityController =
-                _abilityFactory.Create(newAbilityConfigSO, transform, _gameLoopService);
+                _abilityFactory.Create(newAbilityConfigSo, transform);
 
             _currentAbilitySlots++;
             _abilities.Add(newAbilityController);
-            _abilityByConfigSo.Add(newAbilityConfigSO, newAbilityController);
+            _abilityByConfigSo.Add(newAbilityConfigSo, newAbilityController);
 
             if (_playerModifiers != null)
                 newAbilityController.UpdatePlayerModifiers(_playerModifiers);
@@ -65,8 +62,9 @@ namespace GameCore.Source.Controllers.Core
         public void UpdatePlayerModifiers(IReadOnlyDictionary<BaseProperty, float> stats)
         {
             _playerModifiers = stats;
-            foreach (AbilityController ability in _abilities)
-                ability.UpdatePlayerModifiers(stats);
+
+            foreach (IAbilityController abilityController in _abilities) 
+                abilityController.UpdatePlayerModifiers(stats);
         }
 
         private void LateUpdate()
@@ -74,13 +72,13 @@ namespace GameCore.Source.Controllers.Core
             if (_initialized == false)
                 return;
 
-            foreach (AbilityController ability in _abilities)
+            foreach (IAbilityController ability in _abilities)
                 ability.Execute();
         }
 
         private void OnDestroy()
         {
-            foreach (AbilityController ability in _abilities)
+            foreach (IAbilityController ability in _abilities)
                 ability.Dispose();
         }
     }

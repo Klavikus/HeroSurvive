@@ -9,8 +9,11 @@ namespace GameCore.Source.Domain.Models
         public event Action CloseLevelInvoked;
         public event Action PlayerResurrected;
 
-        public void InvokeStartLevel(HeroData heroData) => StartLevelInvoked?.Invoke(heroData);
-        public void InvokeLevelClose() => CloseLevelInvoked?.Invoke();
-        public void ResurrectPlayer() => PlayerResurrected?.Invoke();
+        public void InvokeStartLevel(HeroData heroData) =>
+            StartLevelInvoked?.Invoke(heroData);
+        public void InvokeLevelClose() =>
+            CloseLevelInvoked?.Invoke();
+        public void ResurrectPlayer() =>
+            PlayerResurrected?.Invoke();
     }
 }

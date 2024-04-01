@@ -5,7 +5,6 @@ namespace GameCore.Source.Controllers.Api.Services
 {
     public interface IAbilityFactory
     {
-        IAbilityController Create(AbilityConfigSO initialAbilityConfig, Transform transform,
-            IGameLoopService gameLoopService);
+        IAbilityController Create(AbilityConfigSO initialAbilityConfig, Transform transform);
     }
 }

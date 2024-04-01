@@ -1,5 +1,6 @@
 ﻿using System;
 using GameCore.Source.Controllers.Api.Services;
+using GameCore.Source.Controllers.Core.Factories;
 using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Infrastructure.Api.GameFsm;
 using GameCore.Source.Presentation.Api;
@@ -12,45 +13,48 @@ namespace GameCore.Source.Controllers.Core.Presenters
         private readonly IGameLoopView _view;
         private readonly IGameStateMachine _gameStateMachine;
         private readonly IGameLoopService _gameLoopService;
+        private readonly PlayerFactory _playerFactory;
+        private readonly ILeveCompetitionService _levelCompetitionService;
+        private readonly IAudioPlayerService _audioPlayerService;
 
-        public GameLoopPresenter(
-            IWindowFsm windowFsm,
+        public GameLoopPresenter(IWindowFsm windowFsm,
             IGameLoopView view,
             IGameStateMachine gameStateMachine,
-            IGameLoopService gameLoopService)
+            IGameLoopService gameLoopService,
+            PlayerFactory playerFactory,
+            ILeveCompetitionService levelCompetitionService,
+            IAudioPlayerService audioPlayerService)
             : base(windowFsm, view.Canvas)
         {
             _view = view;
             _gameStateMachine = gameStateMachine ?? throw new ArgumentNullException(nameof(gameStateMachine));
             _gameLoopService = gameLoopService ?? throw new ArgumentNullException(nameof(gameLoopService));
+            _playerFactory = playerFactory ?? throw new ArgumentNullException(nameof(playerFactory));
+            _levelCompetitionService = levelCompetitionService ?? throw new ArgumentNullException(nameof(levelCompetitionService));
+            _audioPlayerService = audioPlayerService ?? throw new ArgumentNullException(nameof(audioPlayerService));
         }
 
         protected override void OnAfterEnable()
         {
-            // _gameLoopViewModel = gameLoopViewModel;
-            // _levelUpView.Initialize(levelUpViewModel, upgradeDescriptionBuilder);
-            // _killCounterView.Initialize();
-            // _currencyCounterView.Initialize();
-            // _gameLoopViewModel.KilledChanged += _killCounterView.OnCounterChanged;
-            // _gameLoopViewModel.RewardCurrencyChanged += _currencyCounterView.OnCounterChanged;
-            // _winView.Initialize(gameLoopViewModel);
-            // _diedView.Initialize(gameLoopViewModel);
-            // _closeLevelButton.onClick.AddListener(OnCloseLevelButtonClicked);
-            // _gameLoopViewModel.WaveCompleted += OnWaveCompleted;
-            // _wavesSlider.maxValue = _gameLoopViewModel.GetAllWavesCount();
-            // //TODO: Change to TextBuilder
-            // _wavesSlider.value = 0;
-            // _wavesCounter.text = "1";
-            
             _view.CloseButton.Initialize();
-            _view.CloseButton.Clicked += _gameStateMachine.GoToMainMenu;
-            
-            _gameLoopService.Start();
+            _view.CloseButton.Clicked += GoToMainMenu;
+
+            _playerFactory.Create(_gameLoopService);
+            _levelCompetitionService.StartCompetition();
+            _audioPlayerService.PlayAmbient();
         }
 
         protected override void OnAfterDisable()
         {
-            _view.CloseButton.Clicked -= _gameStateMachine.GoToMainMenu;
+            _view.CloseButton.Clicked -= GoToMainMenu;
+
+            _levelCompetitionService.Stop();
+            _audioPlayerService.StopAmbient();
+        }
+
+        private void GoToMainMenu()
+        {
+            _gameStateMachine.GoToMainMenu();
         }
     }
 }

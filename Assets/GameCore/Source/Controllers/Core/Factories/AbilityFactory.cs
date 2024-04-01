@@ -27,34 +27,29 @@ namespace GameCore.Source.Controllers.Core.Factories
 
         public IAbilityController Create(
             AbilityConfigSO initialAbilityConfig,
-            Transform transform,
-            IGameLoopService gameLoopService)
+            Transform transform)
         {
-            // AbilityData abilityData = _abilityUpgradesProvider.ConfigsByAbilityData[initialAbilityConfig];
-            AbilityData abilityData = new AbilityData(initialAbilityConfig);
+            AbilityData abilityData = new(initialAbilityConfig);
 
             //TODO: Replace _abilityProjectionBuilder.GetOrCreateProjectionPool() to projectionPoolFactory.Create()
             return Create(
                 abilityData,
                 _abilityProjectionBuilder.GetOrCreateProjectionPool(abilityData),
                 initialAbilityConfig.UpgradeData,
-                transform,
-                gameLoopService);
+                transform);
         }
 
         private AbilityController Create(
             AbilityData abilityData,
             IProjectionPool projectionPool,
             AbilityUpgradeData[] upgradesData,
-            Transform transform,
-            IGameLoopService gameLoopService)
+            Transform transform)
         {
             return new AbilityController(
                 abilityData,
                 upgradesData,
                 _coroutineRunner,
                 projectionPool,
-                gameLoopService,
                 _abilityProjectionBuilder,
                 transform);
         }

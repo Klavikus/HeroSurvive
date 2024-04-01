@@ -8,13 +8,14 @@ namespace GameCore.Source.Domain.Models
     {
         private Vector3 _lastPosition;
         private Camera _playerCamera;
+        
         public bool IsFreeSlotAvailable { get; set; }
         public AbilityContainer AbilityContainer { get; set; }
         public Transform Transform { get; set; }
         public MoveController MoveController { get; set; }
         public Camera Camera { get; set; }
 
-        public Vector3 GetPlayerPosition()
+        public Vector3 GetPosition()
         {
             if (Transform)
                 _lastPosition = Transform.position;
@@ -22,9 +23,10 @@ namespace GameCore.Source.Domain.Models
             return _lastPosition;
         }
 
-        public Vector3 GetPlayerDirection() =>
+        public Vector3 GetDirection() =>
             MoveController.LastMoveVector;
 
-        public Camera GetPlayerCamera() => Camera;
+        public Camera GetCamera() =>
+            Camera;
     }
 }
