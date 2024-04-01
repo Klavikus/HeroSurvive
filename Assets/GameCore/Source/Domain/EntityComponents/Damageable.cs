@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using GameCore.Source.Domain.Data;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace GameCore.Source.Domain.EntityComponents
 {

@@ -257,6 +257,7 @@ GameObject:
   - component: {fileID: 7322152489490777889}
   - component: {fileID: 5351711539273964432}
   - component: {fileID: 7518416457126627068}
+  - component: {fileID: 4816376742444784869}
   m_Layer: 8
   m_Name: Maximus
   m_TagString: Untagged
@@ -500,3 +501,19 @@ MonoBehaviour:
   <Target>k__BackingField: {fileID: 4384465421469232149}
   <FillImage>k__BackingField: {fileID: 996082635}
   <TransitionMaxDelta>k__BackingField: 10
+--- !u!114 &4816376742444784869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4384465421469232149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 969e6bf64a994c00ad068a0b22e7ef66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageable: {fileID: 6976077942215153135}
+  _spriteRenderer: {fileID: 4384465421469232148}
+  _changeColorTime: 0.4
+  _colorOnDamage: {r: 1, g: 0.047058824, b: 0.047058824, a: 1}
