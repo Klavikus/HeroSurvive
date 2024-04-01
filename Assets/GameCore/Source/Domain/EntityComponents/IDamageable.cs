@@ -9,6 +9,7 @@ namespace GameCore.Source.Domain.EntityComponents
         event Action<int, float> DamageTaken;
         event Action<int> HealTaken;
         event Action Died;
+        float CurrentHealthPercent { get; }
         void Initialize(DamageableData damageableData);
         void TakeDamage(int damage, float stagger);
         void RestoreHealth(int healAmount);

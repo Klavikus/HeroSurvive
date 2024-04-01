@@ -75,6 +75,8 @@ namespace GameCore.Source.Application.CompositionRoots
                 audioPlayerService,
                 playerModel);
 
+            HealthViewBuilder healthViewBuilder = new HealthViewBuilder(coroutineRunner);
+
             IEnemySpawnService enemySpawnService = new EnemySpawnService(targetService, enemyFactory);
 
             ILeveCompetitionService levelCompetitionService = new LeveCompetitionService(
@@ -94,7 +96,8 @@ namespace GameCore.Source.Application.CompositionRoots
                 gameLoopService,
                 playerFactory,
                 levelCompetitionService,
-                audioPlayerService);
+                audioPlayerService,
+                healthViewBuilder);
 
             _gameLoopView.Construct(gameLoopPresenter);
         }

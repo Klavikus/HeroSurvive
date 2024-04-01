@@ -1,4 +1,5 @@
 ﻿using System;
+using GameCore.Source.Controllers.Api;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Controllers.Core.Factories;
 using GameCore.Source.Controllers.Core.WindowFsms.Windows;
@@ -16,6 +17,7 @@ namespace GameCore.Source.Controllers.Core.Presenters
         private readonly PlayerFactory _playerFactory;
         private readonly ILeveCompetitionService _levelCompetitionService;
         private readonly IAudioPlayerService _audioPlayerService;
+        private readonly IHealthViewBuilder _healthViewBuilder;
 
         public GameLoopPresenter(
             IWindowFsm windowFsm,
@@ -24,7 +26,8 @@ namespace GameCore.Source.Controllers.Core.Presenters
             IGameLoopService gameLoopService,
             PlayerFactory playerFactory,
             ILeveCompetitionService levelCompetitionService,
-            IAudioPlayerService audioPlayerService)
+            IAudioPlayerService audioPlayerService,
+            IHealthViewBuilder healthViewBuilder)
             : base(windowFsm, view.Canvas)
         {
             _view = view;
@@ -34,6 +37,7 @@ namespace GameCore.Source.Controllers.Core.Presenters
             _levelCompetitionService = levelCompetitionService ??
                                        throw new ArgumentNullException(nameof(levelCompetitionService));
             _audioPlayerService = audioPlayerService ?? throw new ArgumentNullException(nameof(audioPlayerService));
+            _healthViewBuilder = healthViewBuilder ?? throw new ArgumentNullException(nameof(healthViewBuilder));
         }
 
         protected override void OnAfterEnable()
@@ -41,7 +45,9 @@ namespace GameCore.Source.Controllers.Core.Presenters
             _view.CloseButton.Initialize();
             _view.CloseButton.Clicked += GoToMainMenu;
 
-            _playerFactory.Create(_gameLoopService);
+            PlayerController playerController = _playerFactory.Create(_gameLoopService);
+            _healthViewBuilder.Build(playerController.gameObject);
+
             _levelCompetitionService.StartCompetition();
             _audioPlayerService.PlayAmbient();
         }

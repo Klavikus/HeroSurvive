@@ -23,7 +23,7 @@ namespace GameCore.Source.Domain.EntityComponents
         public event Action Died;
 
         public bool CanReceiveDamage => _currentHealth > 0;
-        private float CurrentHealthPercent => (float) _currentHealth / _maxHealth;
+        public float CurrentHealthPercent => (float) _currentHealth / _maxHealth;
 
         public void Initialize(DamageableData damageableData)
         {

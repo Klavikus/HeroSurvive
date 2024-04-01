@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using GameCore.Source.Domain.Configs;
+﻿using GameCore.Source.Domain.Configs;
+using GameCore.Source.Domain.Services;
 
-namespace GameCore.Source.Domain.Services
+namespace GameCore.Source.Infrastructure.Core
 {
     public class ConfigurationProvider : IConfigurationProvider
     {
