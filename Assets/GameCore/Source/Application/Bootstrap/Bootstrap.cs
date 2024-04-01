@@ -10,7 +10,7 @@ namespace GameCore.Source.Application.Bootstrap
         private void Awake()
         {
             DontDestroyOnLoad(this);
-            
+
             _game = new GameBuilder().Build();
         }
 

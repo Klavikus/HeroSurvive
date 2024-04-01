@@ -54,14 +54,17 @@ namespace GameCore.Source.Controllers.Core.Presenters
         {
             _abilityHandler.Initialize(_abilityFactory, _audioPlayerService);
             _abilityHandler.AddAbility(_heroModel.CurrentSelectedHero.InitialAbilityConfig);
+
             ApplyProperties();
 
             _propertyProvider.PropertiesUpdated += ApplyProperties;
+            _damageable.Died += OnDied;
         }
 
         public void Disable()
         {
             _propertyProvider.PropertiesUpdated -= ApplyProperties;
+            _damageable.Died -= OnDied;
         }
 
         private void ApplyProperties()
@@ -71,7 +74,11 @@ namespace GameCore.Source.Controllers.Core.Presenters
             _damageable.Initialize(new DamageableData(currentProperties));
             _moveController.Initialize(currentProperties.BaseProperties[BaseProperty.MoveSpeed]);
             _abilityHandler.UpdatePlayerModifiers(currentProperties.BaseProperties);
-            _abilityHandler.UpdatePlayerModifiers(currentProperties.BaseProperties);
+        }
+
+        private void OnDied()
+        {
+            _gameLoopService.NotifyPlayerDeath();
         }
     }
 }

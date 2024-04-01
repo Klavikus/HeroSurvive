@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using GameCore.Source.Domain.Data;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace GameCore.Source.Domain.EntityComponents
 {
@@ -52,7 +53,7 @@ namespace GameCore.Source.Domain.EntityComponents
 
         public void TakeDamage(int damage, float stagger)
         {
-            if (_isInvincible)
+            if (_isInvincible || _currentHealth == 0)
                 return;
 
             if (damage < 0)
@@ -92,7 +93,9 @@ namespace GameCore.Source.Domain.EntityComponents
         private IEnumerator Invincible()
         {
             _isInvincible = true;
+
             yield return new WaitForSeconds(GameConstants.RespawnInvincibleDuration);
+
             _isInvincible = false;
         }
 
@@ -101,6 +104,7 @@ namespace GameCore.Source.Domain.EntityComponents
             while (true)
             {
                 yield return _healthRegenerationDelay;
+
                 RestoreHealth(_healthRegeneration);
             }
         }
