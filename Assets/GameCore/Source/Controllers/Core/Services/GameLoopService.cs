@@ -9,13 +9,21 @@ namespace GameCore.Source.Controllers.Core.Services
         public event Action PlayerResurrectInvoked;
         public event Action PlayerDied;
 
+        public bool PlayerIsAlive { get; private set; }
+
         public void InvokeLevelClose() =>
             CloseLevelInvoked?.Invoke();
 
         public void ResurrectPlayer() =>
             PlayerResurrectInvoked?.Invoke();
 
-        public void NotifyPlayerDeath() =>
+        public void NotifyPlayerDeath()
+        {
+            PlayerIsAlive = false;
             PlayerDied?.Invoke();
+        }
+
+        public void NotifyPlayerRespawn() =>
+            PlayerIsAlive = true;
     }
 }

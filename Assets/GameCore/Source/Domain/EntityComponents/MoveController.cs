@@ -20,6 +20,7 @@ namespace GameCore.Source.Domain.EntityComponents
         private bool _facedRight = true;
         private Vector3 _previousPosition;
         private float _resultMoveSpeed;
+        private bool _stopped;
 
         public Vector3 LastMoveVector { get; private set; }
 
@@ -38,12 +39,14 @@ namespace GameCore.Source.Domain.EntityComponents
         public void Initialize(float moveSpeedModifier)
         {
             _resultMoveSpeed = _baseMoveSpeed * moveSpeedModifier.AsPercentFactor();
+            _inputController.Enable();
         }
 
         //TODO: Refactor this
         private IEnumerator TrackDirection()
         {
             _previousPosition = transform.position;
+
             yield return _directionTrackingDelay;
         }
 
@@ -52,6 +55,9 @@ namespace GameCore.Source.Domain.EntityComponents
 
         private void HandlePhysicsMove(float inputDataHorizontal, float inputDataVertical)
         {
+            if (_stopped)
+                return;
+
             Vector3 direction = new Vector3(inputDataHorizontal, inputDataVertical, 0).normalized;
 
             if (CheckFlipNeeding(inputDataHorizontal))
@@ -60,6 +66,7 @@ namespace GameCore.Source.Domain.EntityComponents
             if (CheckWall(direction))
             {
                 _rigidbody2D.velocity = Vector2.zero;
+
                 return;
             }
 
@@ -82,6 +89,13 @@ namespace GameCore.Source.Domain.EntityComponents
         {
             _spriteRenderer.flipX = _facedRight;
             _facedRight = !_facedRight;
+        }
+
+        public void Stop()
+        {
+            _inputController.Disable();
+            _rigidbody2D.velocity = Vector2.zero;
+            _stopped = true;
         }
     }
 }

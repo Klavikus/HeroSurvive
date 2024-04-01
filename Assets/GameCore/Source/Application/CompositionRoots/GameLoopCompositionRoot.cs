@@ -40,6 +40,7 @@ namespace GameCore.Source.Application.CompositionRoots
             IVfxService vfxService = serviceContainer.Single<IVfxService>();
             ICoroutineRunner coroutineRunner = serviceContainer.Single<ICoroutineRunner>();
             IGamePauseService gamePauseService = serviceContainer.Single<IGamePauseService>();
+            GameLoopService gameLoopService = new();
 
             IModelProvider modelProvider = serviceContainer.Single<IModelProvider>();
 
@@ -58,7 +59,7 @@ namespace GameCore.Source.Application.CompositionRoots
 
             IAbilityUpgradeService abilityUpgradeService = new AbilityUpgradeService(configurationProvider);
 
-            EnemyFactory enemyFactory = new EnemyFactory(configurationProvider, vfxService, audioPlayerService);
+            EnemyFactory enemyFactory = new EnemyFactory(configurationProvider, vfxService, audioPlayerService, gameLoopService);
 
             ITargetService targetService = new TargetService(enemyFactory, playerModel);
             AbilityProjectionBuilder abilityProjectionBuilder = new AbilityProjectionBuilder(
@@ -85,7 +86,6 @@ namespace GameCore.Source.Application.CompositionRoots
                 modelProvider,
                 vfxService);
 
-            GameLoopService gameLoopService = new();
 
             propertyProvider.Initialize();
 

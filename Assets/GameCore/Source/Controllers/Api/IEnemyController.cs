@@ -21,7 +21,7 @@ namespace GameCore.Source.Controllers.Api
         void Destroy();
 
         void Initialize(ITargetService targetFinderService, EnemyData enemyData, IVfxService vfxService,
-            IAudioPlayerService audioPlayerService);
+            IAudioPlayerService audioPlayerService, IGameLoopService gameLoopService);
 
         void UpdateProgression(float currentPercentage);
     }

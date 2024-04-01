@@ -47,6 +47,7 @@ namespace GameCore.Source.Controllers.Core.Presenters
 
             PlayerController playerController = _playerFactory.Create(_gameLoopService);
             _healthViewBuilder.Build(playerController.gameObject);
+            _gameLoopService.NotifyPlayerRespawn();
 
             _levelCompetitionService.StartCompetition();
             _audioPlayerService.PlayAmbient();

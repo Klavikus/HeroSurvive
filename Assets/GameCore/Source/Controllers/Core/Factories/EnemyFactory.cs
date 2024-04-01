@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using GameCore.Source.Controllers.Api;
 using GameCore.Source.Controllers.Api.Services;
+using GameCore.Source.Controllers.Core.Services;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Enums;
 using GameCore.Source.Domain.Services;
+using JetBrains.Annotations;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -20,15 +22,19 @@ namespace GameCore.Source.Controllers.Core.Factories
         private readonly Dictionary<EnemyType, Queue<IEnemyController>> _enemyPoolByType;
         private readonly IVfxService _vfxService;
         private readonly IAudioPlayerService _audioPlayerService;
+        private readonly IGameLoopService _gameLoopService;
 
         public EnemyFactory(
             IConfigurationProvider configurationProvider,
             IVfxService vfxService,
-            IAudioPlayerService audioPlayerService)
+            IAudioPlayerService audioPlayerService,
+            IGameLoopService gameLoopService)
         {
-            _configurationProvider = configurationProvider;
-            _vfxService = vfxService;
-            _audioPlayerService = audioPlayerService;
+            _configurationProvider =
+                configurationProvider ?? throw new ArgumentNullException(nameof(configurationProvider));
+            _vfxService = vfxService ?? throw new ArgumentNullException(nameof(vfxService));
+            _audioPlayerService = audioPlayerService ?? throw new ArgumentNullException(nameof(audioPlayerService));
+            _gameLoopService = gameLoopService ?? throw new ArgumentNullException(nameof(gameLoopService));
 
             _enemiesData = new Dictionary<EnemyType, EnemyData>();
 
@@ -60,7 +66,7 @@ namespace GameCore.Source.Controllers.Core.Factories
 
             _enemies.Add(enemy);
 
-            enemy.Initialize(targetFinderService, _enemiesData[enemyType], _vfxService, _audioPlayerService);
+            enemy.Initialize(targetFinderService, _enemiesData[enemyType], _vfxService, _audioPlayerService, _gameLoopService);
 
             return enemy;
         }

@@ -79,6 +79,8 @@ namespace GameCore.Source.Controllers.Core.Presenters
         private void OnDied()
         {
             _gameLoopService.NotifyPlayerDeath();
+            _moveController.Stop();
+            // _abilityHandler.Stop();
         }
     }
 }

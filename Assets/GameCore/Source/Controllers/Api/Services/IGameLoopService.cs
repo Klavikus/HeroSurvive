@@ -1,5 +1,4 @@
 using System;
-using GameCore.Source.Domain.Data;
 
 namespace GameCore.Source.Controllers.Api.Services
 {
@@ -8,7 +7,9 @@ namespace GameCore.Source.Controllers.Api.Services
         event Action CloseLevelInvoked;
         event Action PlayerResurrectInvoked;
         event Action PlayerDied;
+        bool PlayerIsAlive { get; }
         void InvokeLevelClose();
         void NotifyPlayerDeath();
+        void NotifyPlayerRespawn();
     }
 }

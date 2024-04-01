@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Services;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace GameCore.Source.Controllers.Core
     {
         private EnemyAIData _enemyAIData;
         private ITargetService _targetService;
+        private IGameLoopService _gameLoopService;
 
         private bool _isFacedRight = true;
         private bool _isWaitingForInitialize = true;
@@ -39,14 +41,19 @@ namespace GameCore.Source.Controllers.Core
             if (_isWaitingForInitialize || _isStaggered)
                 return;
 
-            Move();
+            if (_gameLoopService.PlayerIsAlive)
+                Move();
+            else
+                _isMoving = false;
+
             UpdateMoveStatus();
         }
 
-        public void Initialize(EnemyAIData enemyAIData, ITargetService targetService)
+        public void Initialize(EnemyAIData enemyAIData, ITargetService targetService, IGameLoopService gameLoopService)
         {
             _enemyAIData = enemyAIData;
             _targetService = targetService;
+            _gameLoopService = gameLoopService;
 
             _attackCheckDelay = new WaitForSeconds(enemyAIData.AttackCheckInterval);
             _staggerDelay = new WaitForSeconds(GameConstants.AIMinimumStaggerDelay);

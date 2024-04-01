@@ -25,7 +25,8 @@ namespace GameCore.Source.Controllers.Core
         private DamageSource _damageSource;
         private EnemyData _enemyData;
         private LootData _lootData;
-
+        private IGameLoopService _gameLoopService;
+        
         public event Action<IEnemyController> Died;
         public event Action<IEnemyController> Destroyed;
         public event Action<IEnemyController> OutOfViewTimeout;
@@ -51,12 +52,13 @@ namespace GameCore.Source.Controllers.Core
             ITargetService targetService,
             EnemyData enemyData,
             IVfxService vfxService,
-            IAudioPlayerService audioPlayerService)
+            IAudioPlayerService audioPlayerService, 
+            IGameLoopService gameLoopService)
         {
             gameObject.SetActive(true);
             _enemyData = enemyData;
             _lootData = enemyData.LootData;
-            _enemyAI.Initialize(enemyData.AIData, targetService);
+            _enemyAI.Initialize(enemyData.AIData, targetService, gameLoopService);
             _damageSource = new DamageSource(enemyData.DamageSourceData, transform);
             _animationSynchronizer = new AnimationSynchronizer(_animator);
 
