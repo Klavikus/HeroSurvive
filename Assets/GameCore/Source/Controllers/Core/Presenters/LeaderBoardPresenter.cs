@@ -19,6 +19,7 @@ namespace GameCore.Source.Controllers.Core.Presenters
         protected override void OnAfterEnable()
         {
             _view.CloseButton.Initialize();
+            _view.CloseButton.Clicked += () => WindowFsm.Close<LeaderBoardWindow>();
         }
 
         protected override void OnAfterDisable()

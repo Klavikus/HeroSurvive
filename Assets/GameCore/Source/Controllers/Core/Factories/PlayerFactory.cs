@@ -1,10 +1,10 @@
 using Cinemachine;
 using GameCore.Source.Controllers.Api.Services;
-using GameCore.Source.Domain.Configs;
-using GameCore.Source.Domain.Data;
+using GameCore.Source.Controllers.Core.Presenters;
 using GameCore.Source.Domain.EntityComponents;
 using GameCore.Source.Domain.Models;
 using GameCore.Source.Domain.Services;
+using GameCore.Source.Presentation.Api;
 using UnityEngine;
 
 namespace GameCore.Source.Controllers.Core.Factories
@@ -12,24 +12,16 @@ namespace GameCore.Source.Controllers.Core.Factories
     public class PlayerFactory
     {
         private readonly HeroModel _heroModel;
-        private readonly IConfigurationProvider _configurationProvider;
         private readonly IPropertyProvider _propertyProvider;
         private readonly IAbilityUpgradeService _abilityUpgradeService;
         private readonly AbilityFactory _abilityFactory;
         private readonly IAudioPlayerService _audioPlayerService;
         private readonly PlayerModel _playerModel;
 
-        private PlayerController _playerController;
-
         private GameObject _playerPrefab;
-        private InputController _inputController;
-        private MoveController _moveController;
-        private CinemachineVirtualCamera _currentCamera;
-        private Camera _playerCamera;
 
         public PlayerFactory(
             HeroModel heroModel,
-            IConfigurationProvider configurationProvider,
             IPropertyProvider propertyProvider,
             IAbilityUpgradeService abilityUpgradeService,
             AbilityFactory abilityFactory,
@@ -37,7 +29,6 @@ namespace GameCore.Source.Controllers.Core.Factories
             PlayerModel playerModel)
         {
             _heroModel = heroModel;
-            _configurationProvider = configurationProvider;
             _propertyProvider = propertyProvider;
             _abilityUpgradeService = abilityUpgradeService;
             _abilityFactory = abilityFactory;
@@ -47,35 +38,45 @@ namespace GameCore.Source.Controllers.Core.Factories
 
         public PlayerController Create(IGameLoopService gameLoopService)
         {
-            AbilityConfigSO initialAbilityConfigSo = _heroModel.CurrentSelectedHero.InitialAbilityConfig;
-            _playerController = Object.Instantiate(_heroModel.CurrentSelectedHero.Prefab,
-                Vector3.zero,
-                Quaternion.identity).GetComponent<PlayerController>();
-            _inputController = _playerController.GetComponent<InputController>();
-            _inputController.Initialize();
-            _moveController = _playerController.GetComponent<MoveController>();
-            _playerController.Initialize(_propertyProvider, initialAbilityConfigSo, _abilityFactory,
-                _audioPlayerService, gameLoopService);
+            PlayerController playerController = Object.Instantiate(
+                    _heroModel.CurrentSelectedHero.Prefab,
+                    Vector3.zero,
+                    Quaternion.identity)
+                .GetComponent<PlayerController>();
 
-            _playerModel.AbilityContainer = _playerController.AbilityContainer;
-            _playerModel.IsFreeSlotAvailable = _playerController.IsFreeSlotAvailable;
-            _playerModel.Transform = _playerController.transform;
-            _playerModel.MoveController = _moveController;
-            _playerModel.Camera = _playerCamera;
+            InputController inputController = playerController.GetComponent<InputController>();
+            MoveController moveController = playerController.GetComponent<MoveController>();
+            AbilityHandler abilityHandler = playerController.GetComponent<AbilityHandler>();
+            IDamageable damageable = playerController.GetComponent<IDamageable>();
+            IHeroView heroView = playerController.GetComponent<IHeroView>();
+
+            inputController.Initialize();
+
+            _playerModel.AbilityContainer = playerController.AbilityContainer;
+            _playerModel.IsFreeSlotAvailable = playerController.IsFreeSlotAvailable;
+            _playerModel.Transform = playerController.transform;
+            _playerModel.MoveController = moveController;
+
+            HeroPresenter heroPresenter = new(
+                heroView,
+                playerController,
+                damageable,
+                moveController,
+                abilityHandler,
+                _heroModel,
+                gameLoopService,
+                _propertyProvider,
+                _abilityFactory,
+                _audioPlayerService);
 
             _abilityUpgradeService.BindToPlayer(_playerModel);
 
-            BindCameraToPlayer();
+            Object.FindObjectOfType<CinemachineVirtualCamera>().Follow = playerController.transform;
+            _playerModel.Camera = Object.FindObjectOfType<Camera>();
 
-            return _playerController;
-        }
+            heroView.Construct(heroPresenter);
 
-        private void BindCameraToPlayer()
-        {
-            _currentCamera = Object.FindObjectOfType<CinemachineVirtualCamera>();
-            _currentCamera.Follow = _playerController.transform;
-            _playerCamera = Object.FindObjectOfType<Camera>();
-            _playerModel.Camera = _playerCamera;
+            return playerController;
         }
     }
 }

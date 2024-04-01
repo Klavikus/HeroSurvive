@@ -8,28 +8,31 @@ namespace GameCore.Source.Controllers.Core.Presenters
 {
     public class MainMenuPresenter : BaseWindowPresenter<MainMenuWindow>
     {
-        private readonly IMainMenuView _mainMenuView;
+        private readonly IMainMenuView _view;
         private readonly IGameStateMachine _gameStateMachine;
 
         public MainMenuPresenter(
             IWindowFsm windowFsm,
-            IMainMenuView mainMenuView,
+            IMainMenuView view,
             IGameStateMachine gameStateMachine)
-            : base(windowFsm, mainMenuView.Canvas)
+            : base(windowFsm, view.Canvas)
         {
-            _mainMenuView = mainMenuView;
+            _view = view;
             _gameStateMachine = gameStateMachine ?? throw new ArgumentNullException(nameof(gameStateMachine));
         }
 
         protected override void OnAfterEnable()
         {
-            _mainMenuView.StartButton.Initialize();
-            _mainMenuView.StartButton.Clicked += _gameStateMachine.GoToGameLoop;
+            _view.StartButton.Initialize();
+            _view.LeaderBoardButton.Initialize();
+
+            _view.StartButton.Clicked += _gameStateMachine.GoToGameLoop;
+            _view.LeaderBoardButton.Clicked += () => WindowFsm.OpenWindow<LeaderBoardWindow>();
         }
 
         protected override void OnAfterDisable()
         {
-            _mainMenuView.StartButton.Clicked -= _gameStateMachine.GoToGameLoop;
+            _view.StartButton.Clicked -= _gameStateMachine.GoToGameLoop;
         }
     }
 }

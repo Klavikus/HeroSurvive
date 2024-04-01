@@ -69,7 +69,6 @@ namespace GameCore.Source.Application.CompositionRoots
 
             PlayerFactory playerFactory = new PlayerFactory(
                 heroModel,
-                configurationProvider,
                 propertyProvider,
                 abilityUpgradeService,
                 abilityFactory,

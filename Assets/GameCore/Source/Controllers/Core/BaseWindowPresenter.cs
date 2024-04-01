@@ -8,19 +8,20 @@ namespace GameCore.Source.Controllers.Core
     public abstract class BaseWindowPresenter<T> : IPresenter
         where T : IWindow
     {
-        private readonly IWindowFsm _windowFsm;
         private readonly Canvas _canvas;
 
         protected BaseWindowPresenter(IWindowFsm windowFsm, Canvas canvas)
         {
-            _windowFsm = windowFsm ?? throw new ArgumentNullException(nameof(windowFsm));
+            WindowFsm = windowFsm ?? throw new ArgumentNullException(nameof(windowFsm));
             _canvas = canvas ? canvas : throw new ArgumentNullException(nameof(canvas));
         }
 
+        public IWindowFsm WindowFsm { get; }
+
         public void Enable()
         {
-            _windowFsm.Opened += OnOpened;
-            _windowFsm.Closed += OnClosed;
+            WindowFsm.Opened += OnOpened;
+            WindowFsm.Closed += OnClosed;
 
             InitialCheck();
 
@@ -29,8 +30,8 @@ namespace GameCore.Source.Controllers.Core
 
         public void Disable()
         {
-            _windowFsm.Opened -= OnOpened;
-            _windowFsm.Opened -= OnClosed;
+            WindowFsm.Opened -= OnOpened;
+            WindowFsm.Opened -= OnClosed;
 
             OnAfterDisable();
         }
@@ -72,6 +73,6 @@ namespace GameCore.Source.Controllers.Core
         }
 
         private void InitialCheck() =>
-            _canvas.enabled = _windowFsm.CurrentWindow is T;
+            _canvas.enabled = WindowFsm.CurrentWindow is T;
     }
 }

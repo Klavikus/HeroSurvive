@@ -9,5 +9,6 @@ namespace GameCore.Source.Presentation.Core.MainMenu
     {
         [field: SerializeField] public Canvas Canvas { get; set; }
         [field: SerializeField] public ActionButton StartButton { get; set; }
+        [field: SerializeField] public ActionButton LeaderBoardButton { get; set; }
     }
 }

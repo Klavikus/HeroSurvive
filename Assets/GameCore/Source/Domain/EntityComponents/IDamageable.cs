@@ -1,4 +1,5 @@
 using System;
+using GameCore.Source.Domain.Data;
 
 namespace GameCore.Source.Domain.EntityComponents
 {
@@ -8,6 +9,7 @@ namespace GameCore.Source.Domain.EntityComponents
         event Action<int, float> DamageTaken;
         event Action<int> HealTaken;
         event Action Died;
+        void Initialize(DamageableData damageableData);
         void TakeDamage(int damage, float stagger);
         void RestoreHealth(int healAmount);
         void Respawn();

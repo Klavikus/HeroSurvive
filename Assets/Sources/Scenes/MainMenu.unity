@@ -264,6 +264,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &1073257891 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 294631625, guid: 1d0092591d16fbd4485317222248e22f, type: 3}
+  m_PrefabInstance: {fileID: 1320322392}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1073257892 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 294631626, guid: 1d0092591d16fbd4485317222248e22f, type: 3}
+  m_PrefabInstance: {fileID: 1320322392}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073257893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1073257893 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 294631624, guid: 1d0092591d16fbd4485317222248e22f, type: 3}
+  m_PrefabInstance: {fileID: 1320322392}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1073257894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073257893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2acda699229a47f59c4b5c14e26f2575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 1073257892}
+  _upAndDown: 0
+  _actionComponent: {fileID: 1073257895}
+--- !u!114 &1073257895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073257893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c300534ac1404dbf808b8133ff4ca77c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 1073257891}
+  _tweenData: {fileID: 11400000, guid: 70469131b5fbe3b40bdc800530ff8db6, type: 2}
+  _lockDoubleInteraction: 1
+  _initializeByComposition: 1
+  _activateBackwardAfterForward: 0
+  _useDurationAsSpeed: 0
 --- !u!223 &1224998816 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 4380283291103801368, guid: 1d0092591d16fbd4485317222248e22f, type: 3}
@@ -526,6 +580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Canvas>k__BackingField: {fileID: 1224998816}
   <StartButton>k__BackingField: {fileID: 1320322398}
+  <LeaderBoardButton>k__BackingField: {fileID: 1073257894}
 --- !u!114 &1320322398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -767,7 +822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2646250414019605479, guid: 5fd0c28b318003846a9a5ee603a07c89, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 45038.633
+      value: 45173.477
       objectReference: {fileID: 0}
     - target: {fileID: 3558897969797303120, guid: 5fd0c28b318003846a9a5ee603a07c89, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -799,7 +854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1555526922374517827, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 9.911246
+      value: 144.7148
       objectReference: {fileID: 0}
     - target: {fileID: 3825262620608170728, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
       propertyPath: m_RootOrder

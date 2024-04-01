@@ -1,5 +1,7 @@
-﻿using GameCore.Source.Domain.Abilities;
+﻿using System;
+using GameCore.Source.Domain.Abilities;
 using GameCore.Source.Domain.EntityComponents;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace GameCore.Source.Domain.Models
@@ -8,7 +10,7 @@ namespace GameCore.Source.Domain.Models
     {
         private Vector3 _lastPosition;
         private Camera _playerCamera;
-        
+
         public bool IsFreeSlotAvailable { get; set; }
         public AbilityContainer AbilityContainer { get; set; }
         public Transform Transform { get; set; }

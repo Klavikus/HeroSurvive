@@ -7,5 +7,6 @@ namespace GameCore.Source.Presentation.Api
     {
         Canvas Canvas { get; }
         ActionButton StartButton { get; }
+        ActionButton LeaderBoardButton { get; set; }
     }
 }

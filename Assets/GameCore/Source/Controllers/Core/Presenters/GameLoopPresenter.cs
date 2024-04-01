@@ -17,7 +17,8 @@ namespace GameCore.Source.Controllers.Core.Presenters
         private readonly ILeveCompetitionService _levelCompetitionService;
         private readonly IAudioPlayerService _audioPlayerService;
 
-        public GameLoopPresenter(IWindowFsm windowFsm,
+        public GameLoopPresenter(
+            IWindowFsm windowFsm,
             IGameLoopView view,
             IGameStateMachine gameStateMachine,
             IGameLoopService gameLoopService,
@@ -30,7 +31,8 @@ namespace GameCore.Source.Controllers.Core.Presenters
             _gameStateMachine = gameStateMachine ?? throw new ArgumentNullException(nameof(gameStateMachine));
             _gameLoopService = gameLoopService ?? throw new ArgumentNullException(nameof(gameLoopService));
             _playerFactory = playerFactory ?? throw new ArgumentNullException(nameof(playerFactory));
-            _levelCompetitionService = levelCompetitionService ?? throw new ArgumentNullException(nameof(levelCompetitionService));
+            _levelCompetitionService = levelCompetitionService ??
+                                       throw new ArgumentNullException(nameof(levelCompetitionService));
             _audioPlayerService = audioPlayerService ?? throw new ArgumentNullException(nameof(audioPlayerService));
         }
 
