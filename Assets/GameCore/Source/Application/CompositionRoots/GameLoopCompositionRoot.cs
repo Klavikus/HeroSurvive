@@ -12,24 +12,29 @@ using GameCore.Source.Domain.Services;
 using GameCore.Source.Infrastructure.Api.GameFsm;
 using GameCore.Source.Infrastructure.Api.Services;
 using GameCore.Source.Infrastructure.Core.Services.DI;
-using GameCore.Source.Presentation.Core.MainMenu;
+using GameCore.Source.Presentation.Core.GameLoop;
 using Modules.Common.WindowFsm.Runtime.Abstract;
 using Modules.Common.WindowFsm.Runtime.Implementation;
 using Modules.GamePauseSystem.Runtime;
 using UnityEngine;
-using IEnemySpawnService = GameCore.Source.Controllers.Api.Services.IEnemySpawnService;
 
 namespace GameCore.Source.Application.CompositionRoots
 {
     public class GameLoopCompositionRoot : SceneCompositionRoot
     {
         [SerializeField] private GameLoopView _gameLoopView;
+        [SerializeField] private DeathView _deathView;
+        [SerializeField] private WinView _winView;
+        [SerializeField] private LevelUpSystemView _levelUpSystemView;
+        [SerializeField] private LocalizationSystemView _localizationSystemView;
 
         public override void Initialize(ServiceContainer serviceContainer)
         {
             Dictionary<Type, IWindow> windows = new Dictionary<Type, IWindow>()
             {
                 [typeof(GameLoopWindow)] = new GameLoopWindow(),
+                [typeof(DeathWindow)] = new DeathWindow(),
+                [typeof(WinWindow)] = new WinWindow(),
             };
 
             WindowFsm<GameLoopWindow> windowFsm = new WindowFsm<GameLoopWindow>(windows);
@@ -41,42 +46,47 @@ namespace GameCore.Source.Application.CompositionRoots
             ICoroutineRunner coroutineRunner = serviceContainer.Single<ICoroutineRunner>();
             IGamePauseService gamePauseService = serviceContainer.Single<IGamePauseService>();
             GameLoopService gameLoopService = new();
-
+            ILocalizationService localizationService = serviceContainer.Single<ILocalizationService>();
             IModelProvider modelProvider = serviceContainer.Single<IModelProvider>();
 
             UpgradeModel[] upgradeModels = modelProvider.Get<UpgradeModel[]>();
             HeroModel heroModel = modelProvider.Get<HeroModel>();
             PropertiesModel propertiesModel = modelProvider.Get<PropertiesModel>();
 
-            PlayerModel playerModel = new PlayerModel();
+            PlayerModel playerModel = new();
 
             IUpgradeService upgradeService = new UpgradeService(upgradeModels);
 
             IPropertyProvider propertyProvider = new PropertyProvider(
                 configurationProvider,
                 upgradeService,
-                modelProvider);
+                heroModel,
+                propertiesModel);
 
             IAbilityUpgradeService abilityUpgradeService = new AbilityUpgradeService(configurationProvider);
+            CurrencyModel currencyModel = modelProvider.Get<CurrencyModel>();
 
-            EnemyFactory enemyFactory = new EnemyFactory(configurationProvider, vfxService, audioPlayerService, gameLoopService);
+            LevelUpModel levelUpModel = new(abilityUpgradeService, currencyModel);
 
-            ITargetService targetService = new TargetService(enemyFactory, playerModel);
-            AbilityProjectionBuilder abilityProjectionBuilder = new AbilityProjectionBuilder(
+            EnemyFactory enemyFactory = new(configurationProvider, vfxService, audioPlayerService, gameLoopService);
+
+            TargetService targetService = new(enemyFactory, playerModel);
+            AbilityProjectionBuilder abilityProjectionBuilder = new(
                 targetService,
                 audioPlayerService,
                 coroutineRunner);
-            AbilityFactory abilityFactory = new AbilityFactory(abilityProjectionBuilder, coroutineRunner);
+            AbilityFactory abilityFactory = new(abilityProjectionBuilder, coroutineRunner);
 
-            PlayerFactory playerFactory = new PlayerFactory(
+            HealthViewBuilder healthViewBuilder = new(coroutineRunner);
+
+            PlayerFactory playerFactory = new(
                 heroModel,
                 propertyProvider,
                 abilityUpgradeService,
                 abilityFactory,
                 audioPlayerService,
-                playerModel);
-
-            HealthViewBuilder healthViewBuilder = new HealthViewBuilder(coroutineRunner);
+                playerModel,
+                healthViewBuilder);
 
             IEnemySpawnService enemySpawnService = new EnemySpawnService(targetService, enemyFactory);
 
@@ -84,10 +94,30 @@ namespace GameCore.Source.Application.CompositionRoots
                 enemySpawnService,
                 configurationProvider,
                 modelProvider,
-                vfxService);
-
+                vfxService,
+                levelUpModel);
 
             propertyProvider.Initialize();
+
+            LevelUpSystemPresenter levelUpSystemPresenter = new(_levelUpSystemView, levelUpModel);
+
+            LocalizationSystemPresenter localizationSystemPresenter = new(_localizationSystemView, localizationService);
+
+            DeathPresenter deathPresenter = new(
+                windowFsm,
+                _deathView,
+                gameStateMachine,
+                gameLoopService,
+                gamePauseService);
+
+            WinPresenter winPresenter = new(
+                windowFsm,
+                _winView,
+                gameStateMachine,
+                gameLoopService,
+                gamePauseService,
+                levelCompetitionService,
+                currencyModel);
 
             GameLoopPresenter gameLoopPresenter = new(
                 windowFsm,
@@ -97,8 +127,14 @@ namespace GameCore.Source.Application.CompositionRoots
                 playerFactory,
                 levelCompetitionService,
                 audioPlayerService,
-                healthViewBuilder);
+                healthViewBuilder,
+                currencyModel,
+                levelUpModel);
 
+            _localizationSystemView.Construct(localizationSystemPresenter);
+            _levelUpSystemView.Construct(levelUpSystemPresenter);
+            _deathView.Construct(deathPresenter);
+            _winView.Construct(winPresenter);
             _gameLoopView.Construct(gameLoopPresenter);
         }
     }

@@ -1,5 +1,4 @@
 using GameCore.Source.Controllers.Core.StateMachines;
-using GameCore.Source.Domain.Enemies;
 using GameCore.Source.Domain.EntityComponents;
 using GameCore.Source.Domain.Enums;
 

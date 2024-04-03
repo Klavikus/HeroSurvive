@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using GameCore.Source.Domain.Configs;
-using GameCore.Source.Domain.EntityComponents;
 using UnityEngine;
 
 namespace GameCore.Source.Domain.Data

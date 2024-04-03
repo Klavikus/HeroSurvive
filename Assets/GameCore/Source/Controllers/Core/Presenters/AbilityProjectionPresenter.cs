@@ -10,8 +10,7 @@ using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Services;
 using GameCore.Source.Infrastructure.Api;
 using GameCore.Source.Infrastructure.Api.Services;
-using GameCore.Source.Presentation.Api;
-using JetBrains.Annotations;
+using GameCore.Source.Presentation.Api.GameLoop.Abilities;
 using Modules.MVPPassiveView.Runtime;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -30,9 +29,9 @@ namespace GameCore.Source.Controllers.Core.Presenters
         private readonly IProjectionPool _projectionPool;
         private readonly SpawnData _spawnData;
         private readonly ITargetService _targetFinderService;
-
+        private readonly List<Coroutine> _coroutineHandlers;
+        
         private WaitForSeconds _returnToPoolDelay;
-        private List<Coroutine> _coroutineHandlers;
 
         public AbilityProjectionPresenter(
             IAbilityProjection view,
@@ -103,10 +102,8 @@ namespace GameCore.Source.Controllers.Core.Presenters
 
         private void OnAttackExpired()
         {
+            _attackBehaviour.PenetrationLimit -= OnAttackExpired;
             Object.Destroy(_view.Rigidbody.gameObject);
-            // _attackBehaviour.PenetrationLimit -= OnAttackExpired;
-            //
-            // Disable();
         }
 
         private IEnumerator ReturnToPool()
@@ -121,8 +118,6 @@ namespace GameCore.Source.Controllers.Core.Presenters
                     _coroutineRunner.StopCoroutine(coroutineHandler);
             
             _view.Rigidbody.gameObject.SetActive(false);
-            // Disable();
-            // Object.Destroy(_view.Rigidbody.gameObject);
         }
     }
 }

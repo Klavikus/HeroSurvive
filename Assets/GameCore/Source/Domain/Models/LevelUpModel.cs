@@ -1,6 +1,5 @@
 using System;
 using GameCore.Source.Domain.Data;
-using GameCore.Source.Domain.Enemies;
 using GameCore.Source.Domain.Services;
 
 namespace GameCore.Source.Domain.Models
@@ -10,9 +9,9 @@ namespace GameCore.Source.Domain.Models
         private const int ExperiencePerLevelSoft = 10;
 
         private readonly IAbilityUpgradeService _abilityUpgradeService;
+        private readonly CurrencyModel _currencyModel;
 
         private AbilityUpgradeData _selectedUpgrade;
-        private CurrencyModel _currencyModel;
         private int _currentExperience;
         private int _currentLevel;
 
@@ -20,20 +19,25 @@ namespace GameCore.Source.Domain.Models
         public event Action<float> LevelProgressChanged;
         public event Action<AbilityUpgradeData> UpgradeSelected;
 
-
-        public LevelUpModel(IAbilityUpgradeService abilityUpgradeService)
+        public LevelUpModel(IAbilityUpgradeService abilityUpgradeService, CurrencyModel currencyModel)
         {
-            _abilityUpgradeService = abilityUpgradeService;
+            _abilityUpgradeService =
+                abilityUpgradeService ?? throw new ArgumentNullException(nameof(abilityUpgradeService));
+            _currencyModel = currencyModel ?? throw new ArgumentNullException(nameof(currencyModel));
             _currentLevel = 1;
         }
 
-        public void Bind(CurrencyModel currencyModel) => _currencyModel = currencyModel;
+        public int CurrentLevel => _currentLevel;
+
+        public float CurrentCompletionProgress =>
+            _currentExperience / ExperiencePerLevelSoft * _currentLevel * _currentLevel;
 
         public void SelectUpgrade(AbilityUpgradeData abilityUpgradeData)
         {
             if (abilityUpgradeData == null)
             {
                 UpgradeSelected?.Invoke(_selectedUpgrade);
+
                 return;
             }
 
@@ -48,6 +52,7 @@ namespace GameCore.Source.Domain.Models
             _currencyModel.Add(enemyController.KillCurrency);
 
             float currentLevelNeedExperience = ExperiencePerLevelSoft * _currentLevel * _currentLevel;
+
             //TODO: Handle multiple levelup upgrades selection
             while (_currentExperience >= currentLevelNeedExperience)
             {

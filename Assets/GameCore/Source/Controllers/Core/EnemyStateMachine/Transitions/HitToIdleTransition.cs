@@ -1,6 +1,5 @@
 using GameCore.Source.Controllers.Api;
 using GameCore.Source.Controllers.Core.StateMachines;
-using GameCore.Source.Domain.Enemies;
 
 namespace GameCore.Source.Controllers.Core.EnemyStateMachine.Transitions
 {

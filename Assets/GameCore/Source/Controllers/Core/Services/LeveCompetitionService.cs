@@ -11,38 +11,46 @@ namespace GameCore.Source.Controllers.Core.Services
 {
     public class LeveCompetitionService : ILeveCompetitionService
     {
-        private IEnemySpawnService _enemySpawnService;
+        private readonly IEnemySpawnService _enemySpawnService;
+        private readonly IConfigurationProvider _configurationProvider;
         private readonly IModelProvider _modelProvider;
         private readonly IVfxService _vfxService;
+        private readonly LevelUpModel _levelUpModel;
         private readonly StageCompetitionConfigSO _competitionConfig;
+        private readonly List<IEnemyController> _enemies;
 
-        private int _currentWaveId;
         private int _maxWaveId;
         private int _allWavesCounter;
 
         private int _currentStageId;
         private int _maxStageId;
 
-        private int _killedEnemiesCount;
         private int _enemiesInWave;
 
-        private List<IEnemyController> _enemies;
+        public int KilledEnemiesCount { get; private set; }
+        public int TotalKilledEnemiesCount { get; private set; }
+        public int CurrentWaveId { get; private set; }
+        public int TotalGoldGained { get; private set; }
 
         public event Action<int> WaveCompleted;
         public event Action AllWavesCompleted;
-        public event Action<IEnemyController> EnemyKilled;
+        public event Action EnemyKilled;
 
         public LeveCompetitionService
         (
             IEnemySpawnService enemySpawnService,
             IConfigurationProvider configurationProvider,
             IModelProvider modelProvider,
-            IVfxService vfxService
+            IVfxService vfxService,
+            LevelUpModel levelUpModel
         )
         {
-            _enemySpawnService = enemySpawnService;
-            _modelProvider = modelProvider;
-            _vfxService = vfxService;
+            _enemySpawnService = enemySpawnService ?? throw new ArgumentNullException(nameof(enemySpawnService));
+            _configurationProvider =
+                configurationProvider ?? throw new ArgumentNullException(nameof(configurationProvider));
+            _modelProvider = modelProvider ?? throw new ArgumentNullException(nameof(modelProvider));
+            _vfxService = vfxService ?? throw new ArgumentNullException(nameof(vfxService));
+            _levelUpModel = levelUpModel ?? throw new ArgumentNullException(nameof(levelUpModel));
             _competitionConfig = configurationProvider.StageCompetitionConfig;
             _enemies = new List<IEnemyController>();
         }
@@ -54,7 +62,8 @@ namespace GameCore.Source.Controllers.Core.Services
 
         public void StartCompetition()
         {
-            _currentWaveId = 0;
+            TotalKilledEnemiesCount = 0;
+            CurrentWaveId = 0;
             _currentStageId = 0;
             _maxStageId = _competitionConfig.WavesData.Length;
             _allWavesCounter = 0;
@@ -96,7 +105,7 @@ namespace GameCore.Source.Controllers.Core.Services
                 _enemySpawnService.SpawnWave(_competitionConfig.WavesData[_currentStageId].EnemiesSpawnData);
             _enemies.AddRange(waveEnemies);
             _enemiesInWave = waveEnemies.Length;
-            _killedEnemiesCount = 0;
+            KilledEnemiesCount = 0;
 
             foreach (IEnemyController enemy in waveEnemies)
             {
@@ -113,44 +122,48 @@ namespace GameCore.Source.Controllers.Core.Services
 
         private void OnEnemyDied(IEnemyController enemy)
         {
-            RewardData reward = new RewardData()
+            TotalKilledEnemiesCount++;
+
+            RewardData reward = new()
             {
                 KillCurrency = enemy.KillCurrency,
                 KillExperience = enemy.KillExperience
             };
-            
-            _modelProvider.Get<LevelUpModel>().HandleRewardedKill(reward);
+
+            TotalGoldGained += enemy.KillCurrency;
+
+            _levelUpModel.HandleRewardedKill(reward);
 
             enemy.Died -= OnEnemyDied;
             enemy.OutOfViewTimeout -= OnEnemyOutOfViewTimeout;
-            EnemyKilled?.Invoke(enemy);
-            _killedEnemiesCount++;
+            EnemyKilled?.Invoke();
+            KilledEnemiesCount++;
 
-            if (_killedEnemiesCount == _enemiesInWave)
+            if (KilledEnemiesCount != _enemiesInWave)
+                return;
+
+            _allWavesCounter++;
+            CurrentWaveId++;
+
+            if (CurrentWaveId == _maxWaveId)
             {
-                _allWavesCounter++;
-                _currentWaveId++;
+                _currentStageId++;
 
-                if (_currentWaveId == _maxWaveId)
+                if (_currentStageId == _maxStageId)
                 {
-                    _currentStageId++;
-
-                    if (_currentStageId == _maxStageId)
-                    {
-                        AllWavesCompleted?.Invoke();
-                    }
-                    else
-                    {
-                        _currentWaveId = 0;
-                        WaveCompleted?.Invoke(_allWavesCounter);
-                        SpawnNextWave();
-                    }
+                    AllWavesCompleted?.Invoke();
                 }
                 else
                 {
+                    CurrentWaveId = 0;
                     WaveCompleted?.Invoke(_allWavesCounter);
                     SpawnNextWave();
                 }
+            }
+            else
+            {
+                WaveCompleted?.Invoke(_allWavesCounter);
+                SpawnNextWave();
             }
         }
     }

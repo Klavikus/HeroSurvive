@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GameCore.Source.Infrastructure.Api;
-using GameCore.Source.Presentation.Api;
+using GameCore.Source.Presentation.Api.GameLoop.Abilities;
 using UnityEngine;
 
 namespace GameCore.Source.Infrastructure.Core.Pools

@@ -1,7 +1,7 @@
 ﻿using System;
 using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Infrastructure.Api.GameFsm;
-using GameCore.Source.Presentation.Api;
+using GameCore.Source.Presentation.Api.MainMenu;
 using Modules.Common.WindowFsm.Runtime.Abstract;
 
 namespace GameCore.Source.Controllers.Core.Presenters

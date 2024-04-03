@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GameCore.Source.Domain.Data;
-using GameCore.Source.Domain.Enemies;
 using GameCore.Source.Domain.Enums;
 using NaughtyAttributes;
 using UnityEngine;

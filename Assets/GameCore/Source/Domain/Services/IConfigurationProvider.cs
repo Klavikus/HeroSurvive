@@ -12,5 +12,7 @@ namespace GameCore.Source.Domain.Services
         EnemyConfigSO EnemyConfig { get; }
         UpgradesConfigSO UpgradesConfig { get; }
         HeroesConfigSO HeroConfig { get; }
+        string LocalizationTablePath { get; }
+        string BaseLanguage { get; }
     }
 }

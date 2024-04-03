@@ -1,7 +1,5 @@
-﻿using System;
-using GameCore.Source.Domain.Abilities;
+﻿using GameCore.Source.Domain.Abilities;
 using GameCore.Source.Domain.EntityComponents;
-using JetBrains.Annotations;
 using UnityEngine;
 
 namespace GameCore.Source.Domain.Models

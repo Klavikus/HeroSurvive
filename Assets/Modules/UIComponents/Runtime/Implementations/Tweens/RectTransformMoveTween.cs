@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Modules.UIComponents.Runtime.Implementations.Tweens.ConfigsSo;
 using UnityEngine;
 
 namespace Modules.UIComponents.Runtime.Implementations.Tweens

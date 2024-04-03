@@ -27,7 +27,7 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  <Damage>k__BackingField: 2
+  <Damage>k__BackingField: 55
   <Stagger>k__BackingField: 0
   <MaxAffectedEnemy>k__BackingField: 50
   <Penetration>k__BackingField: 0

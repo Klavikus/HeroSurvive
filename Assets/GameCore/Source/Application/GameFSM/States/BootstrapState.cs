@@ -60,6 +60,7 @@ namespace GameCore.Source.Application.GameFSM.States
             ICoroutineRunner coroutineRunner = RegisterCoroutineRunner();
             IResourceProvider resourceProvider = RegisterResourceProvider();
             IGamePauseService gamePauseService = RegisterGamePauseService();
+            ILocalizationService localizationService = RegisterLocalizationService(configurationProvider);
 
             IAudioPlayerService audioPlayerService = RegisterAudioPlayerService(
                 configurationProvider,
@@ -69,23 +70,19 @@ namespace GameCore.Source.Application.GameFSM.States
             IVfxService vfxService = RegisterVfxService(configurationProvider);
             IModelProvider modelProvider = RegisterModelProvider();
 
-            //TODO: Move to LoadDataState
-            UpgradesConfigSO upgradesConfig = configurationProvider.UpgradesConfig;
-            UpgradeModel[] result = new UpgradeModel[upgradesConfig.UpgradeData.Length];
-            for (var i = 0; i < result.Length; i++)
-                result[i] = new UpgradeModel(upgradesConfig.UpgradeData[i]);
-            modelProvider.Bind(result);
+            PrepareModels(configurationProvider, modelProvider);
 
-            PropertiesModel propertiesModel = new PropertiesModel();
-            modelProvider.Bind(propertiesModel);
-
-            HeroModel heroModel = new HeroModel();
-            HeroData[] availableHeroesData =
-                configurationProvider.HeroConfig.HeroesData.Select(heroData => heroData).ToArray();
-            heroModel.SetHeroData(availableHeroesData.First());
-            modelProvider.Bind(heroModel);
+            localizationService.Initialize(new EnvironmentData(configurationProvider.BaseLanguage, false));
 
             _services.LockRegister();
+        }
+
+        private ILocalizationService RegisterLocalizationService(IConfigurationProvider configurationProvider)
+        {
+            ILocalizationService localizationService = new LocalizationService(configurationProvider);
+            _services.RegisterAsSingle(localizationService);
+
+            return localizationService;
         }
 
         private void RegisterGameStateMachine() =>
@@ -155,5 +152,27 @@ namespace GameCore.Source.Application.GameFSM.States
 
         private void EnterLoadLevel() =>
             _gameStateMachine.Enter<MainMenuState>();
+
+        private void PrepareModels(IConfigurationProvider configurationProvider, IModelProvider modelProvider)
+        {
+            //TODO: Move to LoadDataState
+            UpgradesConfigSO upgradesConfig = configurationProvider.UpgradesConfig;
+            UpgradeModel[] result = new UpgradeModel[upgradesConfig.UpgradeData.Length];
+            for (var i = 0; i < result.Length; i++)
+                result[i] = new UpgradeModel(upgradesConfig.UpgradeData[i]);
+            modelProvider.Bind(result);
+
+            PropertiesModel propertiesModel = new PropertiesModel();
+            modelProvider.Bind(propertiesModel);
+
+            HeroModel heroModel = new HeroModel();
+            HeroData[] availableHeroesData =
+                configurationProvider.HeroConfig.HeroesData.Select(heroData => heroData).ToArray();
+            heroModel.SetHeroData(availableHeroesData.First());
+            modelProvider.Bind(heroModel);
+
+            CurrencyModel currencyModel = new CurrencyModel();
+            modelProvider.Bind(currencyModel);
+        }
     }
 }

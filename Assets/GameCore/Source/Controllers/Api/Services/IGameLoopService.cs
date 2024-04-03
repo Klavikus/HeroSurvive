@@ -11,5 +11,7 @@ namespace GameCore.Source.Controllers.Api.Services
         void InvokeLevelClose();
         void NotifyPlayerDeath();
         void NotifyPlayerRespawn();
+        void ResurrectPlayer();
+        event Action PlayerResurrected;
     }
 }

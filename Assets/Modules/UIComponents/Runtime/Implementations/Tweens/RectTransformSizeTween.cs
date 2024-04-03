@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Modules.UIComponents.Runtime.Implementations.Tweens.ConfigsSo;
 using UnityEngine;
 
 namespace Modules.UIComponents.Runtime.Implementations.Tweens
@@ -9,8 +10,8 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
     {
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private TwoSidedVector2TweenData _tweenData;
-        [SerializeField] private bool _lockDoubleInteraction;
-        [SerializeField] private bool _initializeByComposition;
+        [SerializeField] private bool _lockDoubleInteraction = true;
+        [SerializeField] private bool _initializeByComposition = true;
         [SerializeField] private bool _activateBackwardAfterForward;
 
         private CancellationTokenSource _cancellationTokenSource;

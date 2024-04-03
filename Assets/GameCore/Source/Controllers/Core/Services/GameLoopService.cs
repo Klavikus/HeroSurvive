@@ -7,6 +7,7 @@ namespace GameCore.Source.Controllers.Core.Services
     {
         public event Action CloseLevelInvoked;
         public event Action PlayerResurrectInvoked;
+        public event Action PlayerResurrected;
         public event Action PlayerDied;
 
         public bool PlayerIsAlive { get; private set; }
@@ -23,7 +24,10 @@ namespace GameCore.Source.Controllers.Core.Services
             PlayerDied?.Invoke();
         }
 
-        public void NotifyPlayerRespawn() =>
+        public void NotifyPlayerRespawn()
+        {
             PlayerIsAlive = true;
+            PlayerResurrected?.Invoke();
+        }
     }
 }

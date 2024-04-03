@@ -16,25 +16,20 @@ namespace GameCore.Source.Controllers.Core.Services
         {
             _configurationProvider = configurationProvider;
             _killVfxPrefab = _configurationProvider.VfxConfig.KillPrefab;
-            _killVfxPool =
-                new ObjectPool<IPoolableParticleSystem>(CreateKillVfx, OnKillVfxGet, ActionOnRelease, ActionOnDestroy);
+            _killVfxPool = new ObjectPool<IPoolableParticleSystem>(CreateKillVfx, OnKillVfxGet, ActionOnRelease, ActionOnDestroy);
         }
 
         private void ActionOnDestroy(IPoolableParticleSystem killVfxInstance)
         {
             killVfxInstance.Completed -= OnCompletedKillVfx;
-            // killVfxInstance.Completed -= OnCompletedKillVfx;
-            // _killVfxPool.Release(killVfxInstance);
         }
 
         public void HandleKill(Vector3 transformPosition)
         {
-            var vfx = _killVfxPool.Get();
+            IPoolableParticleSystem vfx = _killVfxPool.Get();
 
             if (vfx == null)
-            {
                 return;
-            }
 
             vfx.GameObject.transform.position = transformPosition;
             vfx.GameObject.SetActive(true);

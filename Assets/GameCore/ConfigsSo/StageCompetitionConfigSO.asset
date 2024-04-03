@@ -20,7 +20,7 @@ MonoBehaviour:
       <EnemyType>k__BackingField: 1
     - <Count>k__BackingField: 50
       <EnemyType>k__BackingField: 0
-    <PerStage>k__BackingField: 5
+    <PerStage>k__BackingField: 1
   - <EnemiesSpawnData>k__BackingField:
     - <Count>k__BackingField: 300
       <EnemyType>k__BackingField: 4
@@ -28,7 +28,7 @@ MonoBehaviour:
       <EnemyType>k__BackingField: 1
     - <Count>k__BackingField: 50
       <EnemyType>k__BackingField: 0
-    <PerStage>k__BackingField: 5
+    <PerStage>k__BackingField: 1
   - <EnemiesSpawnData>k__BackingField:
     - <Count>k__BackingField: 600
       <EnemyType>k__BackingField: 4
@@ -36,4 +36,4 @@ MonoBehaviour:
       <EnemyType>k__BackingField: 1
     - <Count>k__BackingField: 50
       <EnemyType>k__BackingField: 0
-    <PerStage>k__BackingField: 5
+    <PerStage>k__BackingField: 1

@@ -6,7 +6,11 @@ namespace GameCore.Source.Controllers.Api.Services
     {
         event Action<int> WaveCompleted;
         event Action AllWavesCompleted;
-        event Action<IEnemyController> EnemyKilled;
+        event Action EnemyKilled;
+        int KilledEnemiesCount { get; }
+        int TotalKilledEnemiesCount { get; }
+        int CurrentWaveId { get; }
+        int TotalGoldGained { get; }
         void StartCompetition();
         void Stop();
         int GetAllWavesCount();

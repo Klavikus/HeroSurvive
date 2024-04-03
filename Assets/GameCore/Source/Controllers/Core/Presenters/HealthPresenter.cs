@@ -2,7 +2,7 @@
 using System.Collections;
 using GameCore.Source.Domain.EntityComponents;
 using GameCore.Source.Infrastructure.Api.Services;
-using GameCore.Source.Presentation.Api;
+using GameCore.Source.Presentation.Api.GameLoop;
 using Modules.MVPPassiveView.Runtime;
 using UnityEngine;
 

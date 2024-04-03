@@ -1,4 +1,4 @@
-﻿using GameCore.Source.Presentation.Api;
+﻿using GameCore.Source.Presentation.Api.GameLoop.Abilities;
 
 namespace GameCore.Source.Infrastructure.Api
 {

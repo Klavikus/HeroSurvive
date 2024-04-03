@@ -5,7 +5,7 @@ using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.EntityComponents;
 using GameCore.Source.Domain.Enums;
 using GameCore.Source.Domain.Models;
-using GameCore.Source.Presentation.Api;
+using GameCore.Source.Presentation.Api.GameLoop;
 using Modules.MVPPassiveView.Runtime;
 
 namespace GameCore.Source.Controllers.Core.Presenters
@@ -57,12 +57,14 @@ namespace GameCore.Source.Controllers.Core.Presenters
 
             ApplyProperties();
 
+            _gameLoopService.PlayerResurrectInvoked += OnResurrectInvoked;
             _propertyProvider.PropertiesUpdated += ApplyProperties;
             _damageable.Died += OnDied;
         }
 
         public void Disable()
         {
+            _gameLoopService.PlayerResurrectInvoked -= OnResurrectInvoked;
             _propertyProvider.PropertiesUpdated -= ApplyProperties;
             _damageable.Died -= OnDied;
         }
@@ -79,8 +81,15 @@ namespace GameCore.Source.Controllers.Core.Presenters
         private void OnDied()
         {
             _gameLoopService.NotifyPlayerDeath();
-            _moveController.Stop();
+            _moveController.Disable();
             // _abilityHandler.Stop();
+        }
+
+        private void OnResurrectInvoked()
+        {
+            _damageable.Respawn();
+            _moveController.Enable();
+            _gameLoopService.NotifyPlayerRespawn();
         }
     }
 }

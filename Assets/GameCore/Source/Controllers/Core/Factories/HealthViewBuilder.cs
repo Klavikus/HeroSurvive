@@ -2,7 +2,7 @@
 using GameCore.Source.Controllers.Api;
 using GameCore.Source.Controllers.Core.Presenters;
 using GameCore.Source.Infrastructure.Api.Services;
-using GameCore.Source.Presentation.Api;
+using GameCore.Source.Presentation.Api.GameLoop;
 using UnityEngine;
 
 namespace GameCore.Source.Controllers.Core.Factories

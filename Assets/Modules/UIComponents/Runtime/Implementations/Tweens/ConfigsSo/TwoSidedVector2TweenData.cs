@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Modules.UIComponents.Runtime.Implementations.Tweens
+namespace Modules.UIComponents.Runtime.Implementations.Tweens.ConfigsSo
 {
     [CreateAssetMenu(menuName = "UIComponents/Create TwoSidedVector2TweenData", fileName = "TwoSidedVector2TweenData",
         order = 0)]

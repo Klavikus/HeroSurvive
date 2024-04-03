@@ -20,5 +20,7 @@ namespace GameCore.Source.Infrastructure.Core
         public EnemyConfigSO EnemyConfig => _configurationContainer.EnemyConfigSO;
         public UpgradesConfigSO UpgradesConfig => _configurationContainer.UpgradesConfigSO;
         public HeroesConfigSO HeroConfig => _configurationContainer.HeroConfigSO;
+        public string LocalizationTablePath => _configurationContainer.LocalizationTablePath;
+        public string BaseLanguage => _configurationContainer.BaseLanguage;
     }
 }

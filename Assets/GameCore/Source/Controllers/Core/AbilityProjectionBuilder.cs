@@ -12,7 +12,7 @@ using GameCore.Source.Domain.Services;
 using GameCore.Source.Infrastructure.Api;
 using GameCore.Source.Infrastructure.Api.Services;
 using GameCore.Source.Infrastructure.Core.Pools;
-using GameCore.Source.Presentation.Api;
+using GameCore.Source.Presentation.Api.GameLoop.Abilities;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

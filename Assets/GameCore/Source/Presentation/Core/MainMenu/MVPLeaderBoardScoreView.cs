@@ -1,4 +1,4 @@
-using GameCore.Source.Presentation.Api;
+using GameCore.Source.Presentation.Api.MainMenu;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

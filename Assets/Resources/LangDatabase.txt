@@ -1,0 +1,14 @@
+key,ru,en,tr
+Accept,Принять,Accept,Kabul et
+MainMenuStart,Начать,Start,Start
+MainMenuUpgrades,Усиление,Upgrades,Upgrades
+MainMenuLeaderboard,Лидеры,Leaderboard,Leaderboard
+MainMenuOptions,Настройки,Options,Options
+GameLoopWave,Волна,Wave,Wave
+GameLoopLevel,Уровень,Level,Level
+GameLoopWinLabel,You win!,You win!,You win!
+GameLoopOk,Ok,Ok,Ok
+GameLoopX2,x2 gold,x2 gold,x2 gold
+GameLoopFree,Free,Рекл,Free
+GameLoopKilled,KILLED:,KILLED:,KILLED:
+GameLoopGold,GOLD:,GOLD:,GOLD:

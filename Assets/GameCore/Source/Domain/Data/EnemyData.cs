@@ -1,5 +1,4 @@
 using System;
-using GameCore.Source.Domain.Enemies;
 using GameCore.Source.Domain.Enums;
 using UnityEngine;
 

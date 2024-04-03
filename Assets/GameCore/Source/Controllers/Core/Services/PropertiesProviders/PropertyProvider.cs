@@ -9,11 +9,12 @@ using IConfigurationProvider = GameCore.Source.Domain.Services.IConfigurationPro
 
 namespace GameCore.Source.Controllers.Core.Services.PropertiesProviders
 {
-    public class PropertyProvider : IPropertyProvider
+    public class PropertyProvider : IPropertyProvider, IDisposable
     {
         private readonly IConfigurationProvider _configurationProvider;
         private readonly IUpgradeService _upgradeService;
-        private readonly IModelProvider _modelProvider;
+        private readonly HeroModel _heroModel;
+        private readonly PropertiesModel _propertiesModel;
 
         private MainProperties _baseData;
         private MainProperties _upgradesData;
@@ -25,22 +26,25 @@ namespace GameCore.Source.Controllers.Core.Services.PropertiesProviders
         public PropertyProvider(
             IConfigurationProvider configurationProvider,
             IUpgradeService upgradeService,
-            IModelProvider modelProvider)
+            HeroModel heroModel,
+            PropertiesModel propertiesModel)
         {
-            _configurationProvider = configurationProvider;
-            _upgradeService = upgradeService;
-            _modelProvider = modelProvider;
+            _configurationProvider =
+                configurationProvider ?? throw new ArgumentNullException(nameof(configurationProvider));
+            _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
+            _heroModel = heroModel ?? throw new ArgumentNullException(nameof(heroModel));
+            _propertiesModel = propertiesModel ?? throw new ArgumentNullException(nameof(propertiesModel));
         }
 
         public void Initialize()
         {
             _baseData = _configurationProvider.BasePropertiesConfig.GetPropertiesData();
             _upgradesData = _upgradeService.GetUpgradesPropertiesData();
-            _heroData = _modelProvider.Get<HeroModel>().GetMainPropertiesData();
+            _heroData = _heroModel.GetMainPropertiesData();
             RecalculateData();
-            
+
             _upgradeService.Updated += OnUpgradesUpdated;
-            _modelProvider.Get<HeroModel>().Changed += OnHeroChanged;
+            _heroModel.Changed += OnHeroChanged;
         }
 
         public MainProperties GetResultProperties() => _resultData;
@@ -50,7 +54,7 @@ namespace GameCore.Source.Controllers.Core.Services.PropertiesProviders
             BasePropertiesConfigSO baseConfigurationSO = _configurationProvider.BasePropertiesConfig;
             IReadOnlyList<MainPropertyViewData> baseViews = baseConfigurationSO.PropertiesData;
             MainPropertyViewData[] result = new MainPropertyViewData[baseViews.Count];
-          
+
             for (int i = 0; i < baseViews.Count; i++)
             {
                 result[i] = baseViews[i];
@@ -60,11 +64,18 @@ namespace GameCore.Source.Controllers.Core.Services.PropertiesProviders
             return result;
         }
 
-        public GameObject GetBasePropertyView() => _configurationProvider.BasePropertiesConfig.PropertyView;
+        public GameObject GetBasePropertyView() =>
+            _configurationProvider.BasePropertiesConfig.PropertyView;
+
+        public void Dispose()
+        {
+            _upgradeService.Updated -= OnUpgradesUpdated;
+            _heroModel.Changed -= OnHeroChanged;
+        }
 
         private void OnHeroChanged(HeroData heroData)
         {
-            _heroData = _modelProvider.Get<HeroModel>().GetMainPropertiesData();
+            _heroData = _heroModel.GetMainPropertiesData();
             RecalculateData();
         }
 
@@ -77,7 +88,7 @@ namespace GameCore.Source.Controllers.Core.Services.PropertiesProviders
         private void RecalculateData()
         {
             _resultData = _baseData + _upgradesData + _heroData;
-            _modelProvider.Get<PropertiesModel>().SetResultProperties(_resultData);
+            _propertiesModel.SetResultProperties(_resultData);
             PropertiesUpdated?.Invoke();
         }
     }

@@ -14,5 +14,7 @@ namespace GameCore.Source.Domain.Configs
         [field: SerializeField] public StageCompetitionConfigSO StageCompetitionConfigSO { get; private set; }
         [field: SerializeField] public AbilityConfigSO[] AbilityConfigsSO { get; private set; }
         [field: SerializeField] public VfxConfig VfxConfig { get; private set; }
+        [field: SerializeField] public string LocalizationTablePath { get; private set; }
+        [field: SerializeField] public string BaseLanguage { get; private set; }
     }
 }

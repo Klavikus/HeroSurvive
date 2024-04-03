@@ -91,7 +91,13 @@ namespace GameCore.Source.Domain.EntityComponents
             _facedRight = !_facedRight;
         }
 
-        public void Stop()
+        public void Enable()
+        {
+            _inputController.Enable();
+            _stopped = false;
+        }
+
+        public void Disable()
         {
             _inputController.Disable();
             _rigidbody2D.velocity = Vector2.zero;
