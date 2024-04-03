@@ -47,11 +47,14 @@ namespace GameCore.Source.Controllers.Core.Presenters
             _abilityProjectionBuilder = abilityProjectionBuilder ??
                                         throw new ArgumentNullException(nameof(abilityProjectionBuilder));
             _pivotObject = pivotObject ? pivotObject : throw new ArgumentNullException(nameof(pivotObject));
+            _raycastHits = new RaycastHit2D[1];
+
+            _cooldownWaitForSeconds = new WaitForSeconds(abilityData.Cooldown);
         }
 
         public void Execute()
         {
-            if (_onCooldown || !_isInitialized || !CheckForTargetExistence())
+            if (_onCooldown || !CheckForTargetExistence())
                 return;
 
             if (_activateProjectionCoroutine != null)

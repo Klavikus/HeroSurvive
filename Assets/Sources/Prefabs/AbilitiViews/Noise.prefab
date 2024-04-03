@@ -4799,7 +4799,7 @@ GameObject:
   - component: {fileID: 6875578204607319285}
   - component: {fileID: 202263910669517388}
   - component: {fileID: 6875578204607319242}
-  - component: {fileID: 4875722349291645513}
+  - component: {fileID: 1159166038678923137}
   m_Layer: 9
   m_Name: Noise
   m_TagString: Untagged
@@ -4860,7 +4860,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.42
---- !u!114 &4875722349291645513
+--- !u!114 &1159166038678923137
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4869,15 +4869,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6875578204607319243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ef21dd4c7b74f878806c719dd886ece, type: 3}
+  m_Script: {fileID: 11500000, guid: 8853645b75a94823a8c849d4057ba062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderer: {fileID: 0}
-  _rigidbody2D: {fileID: 202263910669517388}
-  _useVfxView: 1
-  _view:
-    _viewType: 1
+  _abilityAnimator:
+    _viewType: 0
     _sprites: []
-    _isLooped: 1
+    _isLooped: 0
     _shouldHideOnEnd: 0
-    _oneCyclePlayTime: 0.3
+    _oneCyclePlayTime: 0
+  <UseVfx>k__BackingField: 1
+  <SpriteRenderer>k__BackingField: {fileID: 0}
+  <Rigidbody>k__BackingField: {fileID: 202263910669517388}

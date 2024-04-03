@@ -12,9 +12,10 @@ namespace GameCore.Source.Presentation.Core.Abilities
 
         public event Action<IAbilityProjection> Destroyed;
 
-        [field: SerializeField] public bool UseVfx { get; }
-        [field: SerializeField] public SpriteRenderer SpriteRenderer { get; }
-       
+        [field: SerializeField] public bool UseVfx { get; private set; }
+        [field: SerializeField] public SpriteRenderer SpriteRenderer { get; private set; }
+        [field: SerializeField] public Rigidbody2D Rigidbody { get; private set; }
+
         public GameObject GameObject => gameObject;
         public IAbilityAnimator Animator => _abilityAnimator;
 
@@ -23,6 +24,9 @@ namespace GameCore.Source.Presentation.Core.Abilities
             yield return _abilityAnimator.Run();
         }
 
-        private void OnDestroy() => Destroyed?.Invoke(this);
+        protected override void OnBeforeDestroy()
+        {
+            Destroyed?.Invoke(this);
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace GameCore.Source.Infrastructure.Core.Pools
 
             if (forSpawn > 0)
             {
-                for (int i = 0; i <= forSpawn; i++)
+                for (int i = 0; i < forSpawn; i++)
                 {
                     GameObject projectionObject = Object.Instantiate(_abilityProjection, Vector3.zero,
                         Quaternion.identity, _container);

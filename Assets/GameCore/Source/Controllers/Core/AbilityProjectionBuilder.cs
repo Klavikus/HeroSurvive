@@ -91,8 +91,8 @@ namespace GameCore.Source.Controllers.Core
                     GetAttackBehaviour(abilityData),
                     GetMovementBehaviour(abilityData),
                     GetSizeBehaviour(abilityData),
-                    GetSpawnData(abilityData, pivotObject, i)
-                );
+                    _targetFinderService, 
+                    GetSpawnData(abilityData, pivotObject, i));
                 
                 projections[i].Construct(abilityProjectionPresenter);
             }

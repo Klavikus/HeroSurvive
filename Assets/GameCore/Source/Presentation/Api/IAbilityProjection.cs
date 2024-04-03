@@ -12,6 +12,7 @@ namespace GameCore.Source.Presentation.Api
         IAbilityAnimator Animator { get; }
         SpriteRenderer SpriteRenderer { get; }
         GameObject GameObject { get; }
+        Rigidbody2D Rigidbody { get; }
         void Construct(IPresenter presenter);
         IEnumerator Run();
     }
