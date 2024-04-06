@@ -1,7 +1,7 @@
 ﻿using System;
 using GameCore.Source.Domain.Data;
 
-namespace CodeBase.GameCore.Presentation.ViewModels
+namespace GameCore.Source.Controllers.Core.Presenters
 {
     public interface IPersistentUpgradeService
     {
@@ -13,5 +13,6 @@ namespace CodeBase.GameCore.Presentation.ViewModels
         bool CheckPay(UpgradeData upgradeData, int levelToCheck);
         int GetCurrentUpgradeLevel(UpgradeData upgradeData);
         void HandleMove(int dX, int dY, int rowCount, int colCount);
+        UpgradeData GetCurrentUpgradeData();
     }
 }

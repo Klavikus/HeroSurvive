@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using GameCore.Source.Common;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Domain.Data;
@@ -62,6 +63,9 @@ namespace GameCore.Source.Controllers.Core.Services
 
             _localizables.Remove(localizable);
         }
+
+        public string GetLocalizedText(TranslatableString[] translatableFullName) =>
+            translatableFullName.First(data => data.Language.ToString() == CurrentLanguage).Text;
 
         private string GetLocalizedText(string key, Dictionary<string, Dictionary<string, string>> dictionary)
         {

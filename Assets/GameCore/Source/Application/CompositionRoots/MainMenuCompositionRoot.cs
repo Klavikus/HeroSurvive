@@ -1,17 +1,18 @@
 using System;
 using System.Collections.Generic;
-using CodeBase.GameCore.Presentation.ViewModels;
-using CodeBase.GameCore.Presentation.Views.Upgrades;
 using GameCore.Source.Controllers.Api.Services;
+using GameCore.Source.Controllers.Core.Factories;
 using GameCore.Source.Controllers.Core.Presenters;
 using GameCore.Source.Controllers.Core.Services;
 using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Domain.Models;
 using GameCore.Source.Domain.Services;
 using GameCore.Source.Infrastructure.Api.GameFsm;
+using GameCore.Source.Infrastructure.Core;
 using GameCore.Source.Infrastructure.Core.Services.DI;
 using GameCore.Source.Presentation.Core.GameLoop;
 using GameCore.Source.Presentation.Core.MainMenu;
+using GameCore.Source.Presentation.Core.MainMenu.Upgrades;
 using Modules.Common.WindowFsm.Runtime.Abstract;
 using Modules.Common.WindowFsm.Runtime.Implementation;
 using UnityEngine;
@@ -24,6 +25,8 @@ namespace GameCore.Source.Application.CompositionRoots
         [SerializeField] private MVPLeaderBoardsView _leaderBoardsView;
         [SerializeField] private LocalizationSystemView _localizationSystemView;
         [SerializeField] private UpgradesSelectorView _upgradesSelectorView;
+        [SerializeField] private CurrencyView _currencyView;
+        [SerializeField] private UpgradeFocusView _upgradeFocusView;
 
         public override async void Initialize(ServiceContainer serviceContainer)
         {
@@ -46,14 +49,19 @@ namespace GameCore.Source.Application.CompositionRoots
             UpgradeModel[] upgradeModels = modelProvider.Get<UpgradeModel[]>();
             CurrencyModel currencyModel = modelProvider.Get<CurrencyModel>();
 
+            currencyModel.Add(10000);
+            
             IUpgradeService upgradeService = new UpgradeService(upgradeModels);
 
-            PersistentUpgradeService persistentUpgradeService = new PersistentUpgradeService(
+            PersistentUpgradeService persistentUpgradeService = new(
                 upgradeModels,
                 currencyModel,
                 upgradeService,
                 audioPlayerService
             );
+
+            UpgradeDescriptionBuilder descriptionBuilder = new(configurationProvider, localizationService);
+            UpgradeLevelViewFactory viewFactory = new(configurationProvider);
 
             LocalizationSystemPresenter localizationSystemPresenter = new(_localizationSystemView, localizationService);
             _localizationSystemView.Construct(localizationSystemPresenter);
@@ -64,11 +72,27 @@ namespace GameCore.Source.Application.CompositionRoots
             LeaderBoardPresenter leaderBoardPresenter = new(_leaderBoardsView, windowFsm);
             _leaderBoardsView.Construct(leaderBoardPresenter);
 
+            CurrencyPresenter currencyPresenter = new(_currencyView, currencyModel);
+            _currencyView.Construct(currencyPresenter);
+
             UpgradeSelectorPresenter upgradeSelectorPresenter = new(
                 windowFsm,
                 _upgradesSelectorView,
                 persistentUpgradeService);
             _upgradesSelectorView.Construct(upgradeSelectorPresenter);
+
+            UpgradeFocusPresenter upgradeFocusPresenter = new(
+                _upgradeFocusView,
+                persistentUpgradeService,
+                descriptionBuilder,
+                viewFactory,
+                localizationService);
+            _upgradeFocusView.Construct(upgradeFocusPresenter);
+
+            // _upgradeFocusView.Initialize(_upgradeViewModel,
+            //     _viewFactory,
+            //     _currencyViewModel,
+            //     descriptionBuilder);
         }
     }
 }

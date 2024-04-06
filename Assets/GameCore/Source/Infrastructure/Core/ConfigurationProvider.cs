@@ -1,5 +1,6 @@
 ﻿using GameCore.Source.Domain.Configs;
 using GameCore.Source.Domain.Services;
+using UnityEngine;
 
 namespace GameCore.Source.Infrastructure.Core
 {
@@ -22,5 +23,7 @@ namespace GameCore.Source.Infrastructure.Core
         public HeroesConfigSO HeroConfig => _configurationContainer.HeroConfigSO;
         public string LocalizationTablePath => _configurationContainer.LocalizationTablePath;
         public string BaseLanguage => _configurationContainer.BaseLanguage;
+        public ColorConfigSO ColorsConfig => _configurationContainer.ColorConfig;
+        public GameObject UpgradeLevelView => _configurationContainer.UpgradeLevelView;
     }
 }

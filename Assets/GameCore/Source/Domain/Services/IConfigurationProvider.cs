@@ -1,4 +1,5 @@
 ﻿using GameCore.Source.Domain.Configs;
+using UnityEngine;
 
 namespace GameCore.Source.Domain.Services
 {
@@ -14,5 +15,7 @@ namespace GameCore.Source.Domain.Services
         HeroesConfigSO HeroConfig { get; }
         string LocalizationTablePath { get; }
         string BaseLanguage { get; }
+        ColorConfigSO ColorsConfig { get; }
+        GameObject UpgradeLevelView { get; }
     }
 }

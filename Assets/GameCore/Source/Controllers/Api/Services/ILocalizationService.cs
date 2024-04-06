@@ -14,5 +14,6 @@ namespace GameCore.Source.Controllers.Api.Services
         string GetLocalizedText(string placeHolder);
         void Register(ILocalizable localizable);
         void Unregister(ILocalizable localizable);
+        string GetLocalizedText(TranslatableString[] translatableFullName);
     }
 }

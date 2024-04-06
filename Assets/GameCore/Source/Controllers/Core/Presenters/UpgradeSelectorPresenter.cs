@@ -1,5 +1,4 @@
 ﻿using System;
-using CodeBase.GameCore.Presentation.ViewModels;
 using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Models;
@@ -43,7 +42,6 @@ namespace GameCore.Source.Controllers.Core.Presenters
 
             _persistentUpgradeService.UpgradeSelected += OnUpgradeSelected;
 
-            // _currencyView.Initialize(_currencyViewModel, descriptionBuilder);
             //
             // _upgradeFocusView.Initialize(_upgradeViewModel,
             //     _viewFactory,

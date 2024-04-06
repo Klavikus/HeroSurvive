@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1208969573734110617}
   - component: {fileID: 1208969573734110619}
   - component: {fileID: 1208969573734110616}
+  - component: {fileID: 9156833031119914208}
   m_Layer: 5
   m_Name: Currency
   m_TagString: Untagged
@@ -78,6 +79,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9156833031119914208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208969573734110622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 788799482c8f4e9db4898fe55af1db6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _countText: {fileID: 1208969574245098995}
+  _countDuration: 2
+  _countStep: 100
 --- !u!1 &1208969573942104072
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +105,6 @@ GameObject:
   - component: {fileID: 1208969573942104075}
   - component: {fileID: 1208969573942104117}
   - component: {fileID: 1208969573942104074}
-  - component: {fileID: 6395926390648063186}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -214,26 +229,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &6395926390648063186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208969573942104072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15f33690f4ed47619c095574ccaaad6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tmpText: {fileID: 1208969573942104074}
-  _translatableStrings:
-  - <Language>k__BackingField: 0
-    <Text>k__BackingField: Back
-  - <Language>k__BackingField: 1
-    <Text>k__BackingField: "\u041D\u0430\u0437\u0430\u0434"
-  - <Language>k__BackingField: 2
-    <Text>k__BackingField: Geri
 --- !u!1 &1208969574208577247
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,7 +453,6 @@ GameObject:
   - component: {fileID: 1208969574392648563}
   - component: {fileID: 1208969574392648573}
   - component: {fileID: 1208969574392648562}
-  - component: {fileID: 7772495651174236389}
   m_Layer: 5
   m_Name: MainTitle
   m_TagString: Untagged
@@ -527,19 +521,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7772495651174236389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208969574392648560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c02f926112af46d5b38c30796166003b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _amount: {fileID: 1208969574245098995}
 --- !u!1 &1208969574782542620
 GameObject:
   m_ObjectHideFlags: 0

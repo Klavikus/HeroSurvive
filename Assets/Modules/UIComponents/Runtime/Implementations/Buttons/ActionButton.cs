@@ -26,8 +26,11 @@ namespace Modules.UIComponents.Runtime.Implementations.Buttons
         public void Initialize() =>
             _actionComponent.Initialize();
 
-        public void SetInteractionLock(bool isLock) =>
+        public void SetInteractionLock(bool isLock)
+        {
+            _button.interactable = isLock == false;
             _isInteractionLocked = isLock;
+        }
 
         private async void OnButtonClicked()
         {
@@ -44,6 +47,7 @@ namespace Modules.UIComponents.Runtime.Implementations.Buttons
 
                 Clicked?.Invoke();
                 _actionComponent.SetBackwardState();
+
                 return;
             }
 

@@ -3,7 +3,7 @@ using Modules.MVPPassiveView.Runtime;
 using Modules.UIComponents.Runtime.Implementations.Buttons;
 using UnityEngine;
 
-namespace CodeBase.GameCore.Presentation.Views.Upgrades
+namespace GameCore.Source.Presentation.Core.MainMenu.Upgrades
 {
     public class UpgradesSelectorView : ViewBase, IUpgradesSelectorView
     {

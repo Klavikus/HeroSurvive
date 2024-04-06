@@ -5,7 +5,7 @@ using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Models;
 
-namespace CodeBase.GameCore.Presentation.ViewModels
+namespace GameCore.Source.Controllers.Core.Presenters
 {
     public class PersistentUpgradeService : IPersistentUpgradeService
     {
@@ -13,9 +13,9 @@ namespace CodeBase.GameCore.Presentation.ViewModels
         private readonly CurrencyModel _currencyModel;
         private readonly Dictionary<UpgradeData, UpgradeModel> _upgradeModels;
         private readonly IUpgradeService _upgradeService;
+        private readonly IAudioPlayerService _sfxService;
 
         private UpgradeData _currentSelected;
-        private IAudioPlayerService _sfxService;
 
         public PersistentUpgradeService(
             UpgradeModel[] upgrades,
@@ -86,6 +86,9 @@ namespace CodeBase.GameCore.Presentation.ViewModels
             if (dY != 0)
                 HandleVerticalScroll(dY, rowCount, colCount);
         }
+
+        public UpgradeData GetCurrentUpgradeData() =>
+            _currentSelected;
 
         private void HandleVerticalScroll(int dY, int rowCount, int colCount)
         {
