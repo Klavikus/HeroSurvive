@@ -1,0 +1,21 @@
+{
+    "name": "GameCore.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:281c63599c024fdcbe6f11d4dd440c89",
+        "GUID:641736b40241467b8c03e61c7d6a60cd",
+        "GUID:8f51a044a3144297aa6bbabff153146e",
+        "GUID:6f3465494c0d6b0428794722e0081118"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

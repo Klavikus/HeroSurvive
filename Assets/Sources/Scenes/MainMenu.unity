@@ -230,7 +230,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -476,10 +476,10 @@ RectTransform:
   m_Father: {fileID: 4380283292002334019}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.39575, y: 0.44937038}
-  m_AnchorMax: {x: 0.6055625, y: 0.53048146}
-  m_AnchoredPosition: {x: -1.5, y: -98.70003}
-  m_SizeDelta: {x: -3, y: 3}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -109.70003}
+  m_SizeDelta: {x: 400, y: 91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &499077515
 PrefabInstance:
@@ -956,7 +956,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26.35
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1254,10 +1254,10 @@ RectTransform:
   m_Father: {fileID: 4380283292002334019}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.39575, y: 0.44937038}
-  m_AnchorMax: {x: 0.6055625, y: 0.53048146}
-  m_AnchoredPosition: {x: -1.5, y: -198.66}
-  m_SizeDelta: {x: -3, y: 3}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -209.66}
+  m_SizeDelta: {x: 400, y: 91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1597848978
 MonoBehaviour:
@@ -1449,6 +1449,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LocalizationSystemView
       objectReference: {fileID: 0}
+    - target: {fileID: 2541378628290191345, guid: a720ff1e2afad9b43bacd7e45ed74d3a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5315130420467669951, guid: a720ff1e2afad9b43bacd7e45ed74d3a, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -1561,10 +1565,10 @@ RectTransform:
   m_Father: {fileID: 4380283292002334019}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.39575, y: 0.44937038}
-  m_AnchorMax: {x: 0.6055625, y: 0.53048146}
-  m_AnchoredPosition: {x: -1.5, y: -300.33997}
-  m_SizeDelta: {x: -3, y: 3}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -311.33997}
+  m_SizeDelta: {x: 400, y: 91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1691323469
 MonoBehaviour:
@@ -1904,7 +1908,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2301,10 +2305,10 @@ RectTransform:
   m_Father: {fileID: 4380283292002334019}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.39575, y: 0.44937038}
-  m_AnchorMax: {x: 0.6055625, y: 0.53048146}
-  m_AnchoredPosition: {x: -1.5, y: 0.5}
-  m_SizeDelta: {x: -3, y: 3}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -10.5}
+  m_SizeDelta: {x: 400, y: 91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1811968120254380498
 CanvasRenderer:
@@ -2562,8 +2566,8 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 501, y: 1080}
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -2623,7 +2627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1555526922374517827, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000091552734
+      value: 12751.49
       objectReference: {fileID: 0}
     - target: {fileID: 3825262620608170728, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
       propertyPath: m_RootOrder
@@ -2672,6 +2676,10 @@ PrefabInstance:
     - target: {fileID: 3825262620608170731, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
       propertyPath: m_Name
       value: MVP-LeaderBoardsView
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825262620608170731, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3825262620791097194, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
       propertyPath: m_Enabled

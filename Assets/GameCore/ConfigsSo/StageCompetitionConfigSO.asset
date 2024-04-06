@@ -14,26 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <WavesData>k__BackingField:
   - <EnemiesSpawnData>k__BackingField:
-    - <Count>k__BackingField: 100
-      <EnemyType>k__BackingField: 4
-    - <Count>k__BackingField: 50
-      <EnemyType>k__BackingField: 1
-    - <Count>k__BackingField: 50
+    - <Count>k__BackingField: 15
       <EnemyType>k__BackingField: 0
-    <PerStage>k__BackingField: 1
-  - <EnemiesSpawnData>k__BackingField:
-    - <Count>k__BackingField: 300
-      <EnemyType>k__BackingField: 4
-    - <Count>k__BackingField: 50
+    - <Count>k__BackingField: 15
       <EnemyType>k__BackingField: 1
-    - <Count>k__BackingField: 50
-      <EnemyType>k__BackingField: 0
-    <PerStage>k__BackingField: 1
-  - <EnemiesSpawnData>k__BackingField:
-    - <Count>k__BackingField: 600
+    - <Count>k__BackingField: 15
+      <EnemyType>k__BackingField: 2
+    - <Count>k__BackingField: 15
+      <EnemyType>k__BackingField: 3
+    - <Count>k__BackingField: 15
       <EnemyType>k__BackingField: 4
-    - <Count>k__BackingField: 50
-      <EnemyType>k__BackingField: 1
-    - <Count>k__BackingField: 50
-      <EnemyType>k__BackingField: 0
+    - <Count>k__BackingField: 15
+      <EnemyType>k__BackingField: 5
+    - <Count>k__BackingField: 15
+      <EnemyType>k__BackingField: 5
+    - <Count>k__BackingField: 15
+      <EnemyType>k__BackingField: 6
+    - <Count>k__BackingField: 15
+      <EnemyType>k__BackingField: 7
+    - <Count>k__BackingField: 15
+      <EnemyType>k__BackingField: 8
+    - <Count>k__BackingField: 15
+      <EnemyType>k__BackingField: 9
     <PerStage>k__BackingField: 1

@@ -39,34 +39,6 @@ MonoBehaviour:
       <Value>k__BackingField: 1
     <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 8f47b8b7df52f854f93f10f29f16d7b7, type: 2}
     <Prefab>k__BackingField: {fileID: 4384465421469232149, guid: eddb32c3f95ea0e4fb1afc7f1fc31cfc, type: 3}
-  - <Name>k__BackingField: O'Legend
-    <Description>k__BackingField: This man is a legend, though not all legends are
-      good.
-    <TranslatableName>k__BackingField:
-    - <Language>k__BackingField: 0
-      <Text>k__BackingField: O'Legend
-    - <Language>k__BackingField: 1
-      <Text>k__BackingField: "\u041E'\u041B\u0435\u0433\u0435\u043D\u0434\u0430\u0440\u043D\u044B\u0439"
-    - <Language>k__BackingField: 2
-      <Text>k__BackingField: Efsane
-    <TranslatableDescriptions>k__BackingField:
-    - <Language>k__BackingField: 0
-      <Text>k__BackingField: This man is a legend, though not all legends are good.
-    - <Language>k__BackingField: 1
-      <Text>k__BackingField: "\u042D\u0442\u043E\u0442 \u043C\u0443\u0436\u0447\u0438\u043D\u0430
-        \u043B\u0435\u0433\u0435\u043D\u0434\u0430, \u043E\u0434\u043D\u0430\u043A\u043E
-        \u043D\u0435 \u0432\u0441\u0435 \u043B\u0435\u0433\u0435\u043D\u0434\u044B
-        \u0445\u043E\u0440\u043E\u0448\u0438."
-    - <Language>k__BackingField: 2
-      <Text>k__BackingField: "Bu adam bir efsanedir, ancak t\xFCm efsaneler iyi de\u011Fildir."
-    <Sprite>k__BackingField: {fileID: 21300000, guid: 1c5600036ee76bc4fa718b8a10767c77, type: 3}
-    <AdditionalProperties>k__BackingField:
-    - <BaseProperty>k__BackingField: 2
-      <Value>k__BackingField: 15
-    - <BaseProperty>k__BackingField: 3
-      <Value>k__BackingField: 15
-    <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 8f47b8b7df52f854f93f10f29f16d7b7, type: 2}
-    <Prefab>k__BackingField: {fileID: 5607023953017445908, guid: 41bb55a2d163cd247a04608fab015470, type: 3}
   - <Name>k__BackingField: Danilius The Snake
     <Description>k__BackingField: Powerful snake charmer. Snakes can do a lot.
     <TranslatableName>k__BackingField:
@@ -97,6 +69,34 @@ MonoBehaviour:
       <Value>k__BackingField: 30
     <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 8f47b8b7df52f854f93f10f29f16d7b7, type: 2}
     <Prefab>k__BackingField: {fileID: 7526563810551285740, guid: 8cddd1e01f3153445b01f33bcbc647e6, type: 3}
+  - <Name>k__BackingField: O'Legend
+    <Description>k__BackingField: This man is a legend, though not all legends are
+      good.
+    <TranslatableName>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: O'Legend
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u041E'\u041B\u0435\u0433\u0435\u043D\u0434\u0430\u0440\u043D\u044B\u0439"
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: Efsane
+    <TranslatableDescriptions>k__BackingField:
+    - <Language>k__BackingField: 0
+      <Text>k__BackingField: This man is a legend, though not all legends are good.
+    - <Language>k__BackingField: 1
+      <Text>k__BackingField: "\u042D\u0442\u043E\u0442 \u043C\u0443\u0436\u0447\u0438\u043D\u0430
+        \u043B\u0435\u0433\u0435\u043D\u0434\u0430, \u043E\u0434\u043D\u0430\u043A\u043E
+        \u043D\u0435 \u0432\u0441\u0435 \u043B\u0435\u0433\u0435\u043D\u0434\u044B
+        \u0445\u043E\u0440\u043E\u0448\u0438."
+    - <Language>k__BackingField: 2
+      <Text>k__BackingField: "Bu adam bir efsanedir, ancak t\xFCm efsaneler iyi de\u011Fildir."
+    <Sprite>k__BackingField: {fileID: 21300000, guid: 1c5600036ee76bc4fa718b8a10767c77, type: 3}
+    <AdditionalProperties>k__BackingField:
+    - <BaseProperty>k__BackingField: 2
+      <Value>k__BackingField: 15
+    - <BaseProperty>k__BackingField: 3
+      <Value>k__BackingField: 15
+    <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 8f47b8b7df52f854f93f10f29f16d7b7, type: 2}
+    <Prefab>k__BackingField: {fileID: 5607023953017445908, guid: 41bb55a2d163cd247a04608fab015470, type: 3}
   - <Name>k__BackingField: Boris The Auspex
     <Description>k__BackingField: Father's son, grandfather's grandson forever.
     <TranslatableName>k__BackingField:
