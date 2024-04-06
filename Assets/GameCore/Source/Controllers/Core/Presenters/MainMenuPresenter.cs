@@ -25,14 +25,24 @@ namespace GameCore.Source.Controllers.Core.Presenters
         {
             _view.StartButton.Initialize();
             _view.LeaderBoardButton.Initialize();
+            _view.PersistentUpgradesButton.Initialize();
 
             _view.StartButton.Clicked += _gameStateMachine.GoToGameLoop;
-            _view.LeaderBoardButton.Clicked += () => WindowFsm.OpenWindow<LeaderBoardWindow>();
+            _view.LeaderBoardButton.Clicked += OnLeaderBoardButtonClicked;
+            _view.PersistentUpgradesButton.Clicked += OnPersistentUpgradesButtonClicked;
         }
 
         protected override void OnAfterDisable()
         {
             _view.StartButton.Clicked -= _gameStateMachine.GoToGameLoop;
+            _view.LeaderBoardButton.Clicked -= OnLeaderBoardButtonClicked;
+            _view.PersistentUpgradesButton.Clicked -= OnPersistentUpgradesButtonClicked;
         }
+
+        private void OnLeaderBoardButtonClicked() =>
+            WindowFsm.OpenWindow<LeaderBoardWindow>();
+
+        private void OnPersistentUpgradesButtonClicked() =>
+            WindowFsm.OpenWindow<UpgradeSelectorWindow>();
     }
 }

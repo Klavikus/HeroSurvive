@@ -8,5 +8,6 @@ namespace GameCore.Source.Presentation.Api.MainMenu
         Canvas Canvas { get; }
         ActionButton StartButton { get; }
         ActionButton LeaderBoardButton { get; set; }
+        ActionButton PersistentUpgradesButton { get; set; }
     }
 }
