@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using GameCore.Source.Controllers.Api;
+using GameCore.Source.Controllers.Api.Providers;
 using GameCore.Source.Controllers.Api.Services;
+using GameCore.Source.Controllers.Api.ViewModels;
 using GameCore.Source.Controllers.Core.Factories;
 using GameCore.Source.Controllers.Core.Presenters;
+using GameCore.Source.Controllers.Core.Presenters.MainMenu;
 using GameCore.Source.Controllers.Core.Services;
 using GameCore.Source.Controllers.Core.ViewModels;
 using GameCore.Source.Controllers.Core.WindowFsms.Windows;
@@ -12,6 +15,7 @@ using GameCore.Source.Domain.Services;
 using GameCore.Source.Infrastructure.Api.GameFsm;
 using GameCore.Source.Infrastructure.Core.Services.DI;
 using GameCore.Source.Presentation.Api.MainMenu.HeroSelector;
+using GameCore.Source.Presentation.Core;
 using GameCore.Source.Presentation.Core.Factories;
 using GameCore.Source.Presentation.Core.GameLoop;
 using GameCore.Source.Presentation.Core.MainMenu;
@@ -51,12 +55,12 @@ namespace GameCore.Source.Application.CompositionRoots
             IModelProvider modelProvider = serviceContainer.Single<IModelProvider>();
             IAudioPlayerService audioPlayerService = serviceContainer.Single<IAudioPlayerService>();
             IPropertyProvider propertyProvider = serviceContainer.Single<IPropertyProvider>();
+            IUpgradeService upgradeService = serviceContainer.Single<IUpgradeService>();
 
             UpgradeModel[] upgradeModels = modelProvider.Get<UpgradeModel[]>();
             CurrencyModel currencyModel = modelProvider.Get<CurrencyModel>();
             HeroModel heroModel = modelProvider.Get<HeroModel>();
             PropertiesModel propertiesModel = modelProvider.Get<PropertiesModel>();
-            GameLoopModel gameLoopModel = new GameLoopModel();
 
             propertyProvider.Initialize();
 
@@ -64,13 +68,10 @@ namespace GameCore.Source.Application.CompositionRoots
 
             HeroSelectorViewModel heroSelectorViewModel = new(
                 heroModel,
-                gameLoopModel,
                 configurationProvider,
                 audioPlayerService);
 
             IMainPropertiesViewModel mainPropertiesViewModel = new MainPropertiesViewModel(propertiesModel);
-
-            IUpgradeService upgradeService = new UpgradeService(upgradeModels);
 
             UpgradeDescriptionBuilder descriptionBuilder = new(configurationProvider, localizationService);
 

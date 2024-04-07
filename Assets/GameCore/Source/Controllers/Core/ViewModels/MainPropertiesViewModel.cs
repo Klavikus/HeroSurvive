@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using GameCore.Source.Controllers.Api;
 using GameCore.Source.Controllers.Api.Services;
+using GameCore.Source.Controllers.Api.ViewModels;
 using GameCore.Source.Domain.Enums;
 using GameCore.Source.Domain.Models;
 

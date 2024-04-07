@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GameCore.Source.Common;
+using GameCore.Source.Common.Localization;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Services;

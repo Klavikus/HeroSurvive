@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using GameCore.Source.Controllers.Api;
+using GameCore.Source.Controllers.Api.Factories;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Domain.Configs;
 using GameCore.Source.Domain.Data;

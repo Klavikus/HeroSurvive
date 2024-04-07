@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using GameCore.Source.Controllers.Api.Providers;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Controllers.Core;
 using GameCore.Source.Controllers.Core.Factories;
 using GameCore.Source.Controllers.Core.Presenters;
+using GameCore.Source.Controllers.Core.Presenters.GameLoop;
 using GameCore.Source.Controllers.Core.Services;
-using GameCore.Source.Controllers.Core.Services.PropertiesProviders;
 using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Domain.Models;
 using GameCore.Source.Domain.Services;
 using GameCore.Source.Infrastructure.Api.GameFsm;
 using GameCore.Source.Infrastructure.Api.Services;
 using GameCore.Source.Infrastructure.Core.Services.DI;
+using GameCore.Source.Presentation.Core;
 using GameCore.Source.Presentation.Core.GameLoop;
 using Modules.Common.WindowFsm.Runtime.Abstract;
 using Modules.Common.WindowFsm.Runtime.Implementation;
@@ -30,14 +32,7 @@ namespace GameCore.Source.Application.CompositionRoots
 
         public override void Initialize(ServiceContainer serviceContainer)
         {
-            Dictionary<Type, IWindow> windows = new Dictionary<Type, IWindow>()
-            {
-                [typeof(GameLoopWindow)] = new GameLoopWindow(),
-                [typeof(DeathWindow)] = new DeathWindow(),
-                [typeof(WinWindow)] = new WinWindow(),
-            };
-
-            WindowFsm<GameLoopWindow> windowFsm = new WindowFsm<GameLoopWindow>(windows);
+            IWindowFsm windowFsm = CreateWindowFsm();
 
             IGameStateMachine gameStateMachine = serviceContainer.Single<IGameStateMachine>();
             IConfigurationProvider configurationProvider = serviceContainer.Single<IConfigurationProvider>();
@@ -45,18 +40,14 @@ namespace GameCore.Source.Application.CompositionRoots
             IVfxService vfxService = serviceContainer.Single<IVfxService>();
             ICoroutineRunner coroutineRunner = serviceContainer.Single<ICoroutineRunner>();
             IGamePauseService gamePauseService = serviceContainer.Single<IGamePauseService>();
-            GameLoopService gameLoopService = new();
             ILocalizationService localizationService = serviceContainer.Single<ILocalizationService>();
             IModelProvider modelProvider = serviceContainer.Single<IModelProvider>();
+            IPropertyProvider propertyProvider = serviceContainer.Single<IPropertyProvider>();
+            IGameLoopService gameLoopService = serviceContainer.Single<IGameLoopService>();
 
-            UpgradeModel[] upgradeModels = modelProvider.Get<UpgradeModel[]>();
             HeroModel heroModel = modelProvider.Get<HeroModel>();
-            PropertiesModel propertiesModel = modelProvider.Get<PropertiesModel>();
-
             PlayerModel playerModel = modelProvider.Get<PlayerModel>();
 
-            IUpgradeService upgradeService = serviceContainer.Single<IUpgradeService>();
-            IPropertyProvider propertyProvider = serviceContainer.Single<IPropertyProvider>();
 
             IAbilityUpgradeService abilityUpgradeService = new AbilityUpgradeService(configurationProvider);
             CurrencyModel currencyModel = modelProvider.Get<CurrencyModel>();
@@ -92,7 +83,47 @@ namespace GameCore.Source.Application.CompositionRoots
                 vfxService,
                 levelUpModel);
 
+            ConstructViews(
+                levelUpModel,
+                localizationService,
+                windowFsm,
+                gameStateMachine,
+                gameLoopService,
+                gamePauseService,
+                levelCompetitionService,
+                currencyModel,
+                playerFactory,
+                audioPlayerService,
+                healthViewBuilder);
+        }
 
+        private WindowFsm<GameLoopWindow> CreateWindowFsm()
+        {
+            Dictionary<Type, IWindow> windows = new Dictionary<Type, IWindow>()
+            {
+                [typeof(GameLoopWindow)] = new GameLoopWindow(),
+                [typeof(DeathWindow)] = new DeathWindow(),
+                [typeof(WinWindow)] = new WinWindow(),
+            };
+
+            WindowFsm<GameLoopWindow> windowFsm = new WindowFsm<GameLoopWindow>(windows);
+
+            return windowFsm;
+        }
+
+        private void ConstructViews(
+            LevelUpModel levelUpModel,
+            ILocalizationService localizationService,
+            IWindowFsm windowFsm,
+            IGameStateMachine gameStateMachine,
+            IGameLoopService gameLoopService,
+            IGamePauseService gamePauseService,
+            ILeveCompetitionService levelCompetitionService,
+            CurrencyModel currencyModel,
+            PlayerFactory playerFactory,
+            IAudioPlayerService audioPlayerService,
+            HealthViewBuilder healthViewBuilder)
+        {
             LevelUpSystemPresenter levelUpSystemPresenter = new(_levelUpSystemView, levelUpModel);
 
             LocalizationSystemPresenter localizationSystemPresenter = new(_localizationSystemView, localizationService);

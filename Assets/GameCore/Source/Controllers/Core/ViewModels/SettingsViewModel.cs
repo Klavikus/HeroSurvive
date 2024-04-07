@@ -1,4 +1,5 @@
 ﻿using System;
+using GameCore.Source.Controllers.Core.Services;
 using GameCore.Source.Domain.Models;
 
 namespace GameCore.Source.Controllers.Core.ViewModels

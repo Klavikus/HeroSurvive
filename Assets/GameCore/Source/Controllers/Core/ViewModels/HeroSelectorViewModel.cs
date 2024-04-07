@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using GameCore.Source.Controllers.Api;
 using GameCore.Source.Controllers.Api.Services;
+using GameCore.Source.Controllers.Api.ViewModels;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Models;
 using GameCore.Source.Domain.Services;
@@ -11,7 +12,6 @@ namespace GameCore.Source.Controllers.Core.ViewModels
     public class HeroSelectorViewModel : IHeroSelectorViewModel
     {
         private readonly HeroModel _heroModel;
-        private readonly GameLoopModel _gameLoopModel;
         private readonly IConfigurationProvider _configurationProvider;
         private readonly HeroData[] _availableHeroesData;
         private readonly IAudioPlayerService _sfxService;
@@ -27,13 +27,11 @@ namespace GameCore.Source.Controllers.Core.ViewModels
         public HeroSelectorViewModel
         (
             HeroModel heroModel,
-            GameLoopModel gameLoopModel,
             IConfigurationProvider configurationProvider,
             IAudioPlayerService sfxService
         )
         {
             _heroModel = heroModel;
-            _gameLoopModel = gameLoopModel;
             _configurationProvider = configurationProvider;
             _sfxService = sfxService;
             _availableHeroesData = _configurationProvider.HeroConfig.HeroesData.Select(heroData => heroData).ToArray();
@@ -49,12 +47,6 @@ namespace GameCore.Source.Controllers.Core.ViewModels
         public void SelectHero(int heroId) =>
             SelectHero(_availableHeroesData[heroId]);
 
-
-        public void Continue()
-        {
-            _sfxService.PlayStartLevel();
-            _gameLoopModel.InvokeStartLevel(CurrentSelectedHeroData);
-        }
 
         public void HandleMove(int dX, int dY, int rowCount, int colCount)
         {

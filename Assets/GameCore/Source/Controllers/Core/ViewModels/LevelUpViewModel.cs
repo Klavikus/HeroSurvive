@@ -1,4 +1,5 @@
 using System;
+using GameCore.Source.Controllers.Api.Providers;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Models;
 using GameCore.Source.Domain.Services;
@@ -57,10 +58,5 @@ namespace GameCore.Source.Controllers.Core.ViewModels
 
         private void OnLevelProgressChanged(float currentPercent) =>
             LevelProgressChanged?.Invoke(currentPercent);
-    }
-
-    public interface IAdsProvider
-    {
-        void ShowAds(Action onRewardCallback);
     }
 }

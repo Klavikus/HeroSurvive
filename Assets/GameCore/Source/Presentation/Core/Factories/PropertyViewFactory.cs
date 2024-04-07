@@ -1,7 +1,7 @@
 ﻿using System;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Services;
-using GameCore.Source.Presentation.Api;
+using GameCore.Source.Presentation.Api.Factories;
 using GameCore.Source.Presentation.Api.MainMenu.HeroSelector;
 using GameCore.Source.Presentation.Core.MainMenu.HeroSelector;
 using Modules.MVPPassiveView.Runtime;

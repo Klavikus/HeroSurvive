@@ -1,6 +1,7 @@
 ﻿using GameCore.Source.Application.Factories;
 using GameCore.Source.Infrastructure.Api.GameFsm;
 using GameCore.Source.Infrastructure.Core;
+using GameCore.Source.Infrastructure.Core.Services;
 using GameCore.Source.Infrastructure.Core.Services.DI;
 
 namespace GameCore.Source.Application.GameFSM.States

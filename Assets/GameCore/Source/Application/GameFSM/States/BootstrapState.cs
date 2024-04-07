@@ -1,7 +1,8 @@
 ﻿using System.Linq;
+using GameCore.Source.Controllers.Api.Providers;
 using GameCore.Source.Controllers.Api.Services;
+using GameCore.Source.Controllers.Core.Providers;
 using GameCore.Source.Controllers.Core.Services;
-using GameCore.Source.Controllers.Core.Services.PropertiesProviders;
 using GameCore.Source.Domain.Configs;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Models;
@@ -10,6 +11,7 @@ using GameCore.Source.Infrastructure.Api;
 using GameCore.Source.Infrastructure.Api.GameFsm;
 using GameCore.Source.Infrastructure.Api.Services;
 using GameCore.Source.Infrastructure.Core;
+using GameCore.Source.Infrastructure.Core.Services;
 using GameCore.Source.Infrastructure.Core.Services.DI;
 using GameCore.Source.Infrastructure.Core.Services.Providers;
 using Modules.Common.Utils;
@@ -70,22 +72,47 @@ namespace GameCore.Source.Application.GameFSM.States
 
             IVfxService vfxService = RegisterVfxService(configurationProvider);
             IModelProvider modelProvider = RegisterModelProvider();
-
-            PrepareModels(configurationProvider, modelProvider);
-
-            IUpgradeService upgradeService = new UpgradeService(modelProvider.Get<UpgradeModel[]>());
-            _services.RegisterAsSingle(upgradeService);
+            IGameLoopService gameLoopService = RegisterGameLoopService();
+            IUpgradeService upgradeService = RegisterUpgradeService(modelProvider);
             
-            IPropertyProvider propertyProvider = new PropertyProvider(
+            IPropertyProvider propertyProvider = RegisterPropertyProvider(
                 configurationProvider,
                 upgradeService,
-                modelProvider.Get<HeroModel>(),
-                modelProvider.Get<PropertiesModel>());
-            _services.RegisterAsSingle(propertyProvider);
+                modelProvider);
+
+            PrepareModels(configurationProvider, modelProvider);
 
             localizationService.Initialize(new EnvironmentData(configurationProvider.BaseLanguage, false));
 
             _services.LockRegister();
+        }
+
+        private IPropertyProvider RegisterPropertyProvider(IConfigurationProvider configurationProvider,
+            IUpgradeService upgradeService, IModelProvider modelProvider)
+        {
+            IPropertyProvider propertyProvider = new PropertyProvider(
+                configurationProvider,
+                upgradeService,
+                modelProvider);
+            _services.RegisterAsSingle(propertyProvider);
+
+            return propertyProvider;
+        }
+
+        private IUpgradeService RegisterUpgradeService(IModelProvider modelProvider)
+        {
+            IUpgradeService upgradeService = new UpgradeService(modelProvider);
+            _services.RegisterAsSingle(upgradeService);
+
+            return upgradeService;
+        }
+
+        private IGameLoopService RegisterGameLoopService()
+        {
+            IGameLoopService gameLoopService = new GameLoopService();
+            _services.RegisterAsSingle(gameLoopService);
+
+            return gameLoopService;
         }
 
         private ILocalizationService RegisterLocalizationService(IConfigurationProvider configurationProvider)
@@ -161,9 +188,6 @@ namespace GameCore.Source.Application.GameFSM.States
             return modelProvider;
         }
 
-        private void EnterLoadLevel() =>
-            _gameStateMachine.Enter<MainMenuState>();
-
         private void PrepareModels(IConfigurationProvider configurationProvider, IModelProvider modelProvider)
         {
             //TODO: Move to LoadDataState
@@ -188,5 +212,8 @@ namespace GameCore.Source.Application.GameFSM.States
             PlayerModel playerModel = new PlayerModel();
             modelProvider.Bind(playerModel);
         }
+
+        private void EnterLoadLevel() =>
+            _gameStateMachine.Enter<MainMenuState>();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using GameCore.Source.Common;
+using GameCore.Source.Common.Localization;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Presentation.Api.GameLoop;
 using Modules.MVPPassiveView.Runtime;

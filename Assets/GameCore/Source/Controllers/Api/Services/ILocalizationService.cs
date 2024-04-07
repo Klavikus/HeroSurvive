@@ -1,5 +1,6 @@
 ﻿using System;
 using GameCore.Source.Common;
+using GameCore.Source.Common.Localization;
 using GameCore.Source.Domain.Data;
 
 namespace GameCore.Source.Controllers.Api.Services

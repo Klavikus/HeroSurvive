@@ -1,5 +1,5 @@
 using System;
-using System.Linq;
+using GameCore.Source.Controllers.Api.Providers;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Domain.Models;
 
@@ -7,40 +7,29 @@ namespace GameCore.Source.Controllers.Core.Services
 {
     public class UpgradeService : IUpgradeService
     {
-        private readonly UpgradeModel[] _upgradeModels;
-
-        private MainProperties _resultProperties;
+        private readonly IModelProvider _modelProvider;
 
         public event Action Updated;
 
-        public UpgradeService(UpgradeModel[] upgradeModels)
+        public UpgradeService(IModelProvider modelProvider)
         {
-            _upgradeModels = upgradeModels ?? throw new ArgumentNullException(nameof(upgradeModels));
-            Recalculate();
+            _modelProvider = modelProvider ?? throw new ArgumentNullException(nameof(modelProvider));
         }
 
-        private void Recalculate()
+        private MainProperties Recalculate()
         {
-            _resultProperties = new MainProperties();
+            MainProperties resultProperties = new();
 
-            foreach (UpgradeModel upgradeModel in _upgradeModels)
-            {
-                _resultProperties += upgradeModel.Properties;
-            }
+            foreach (UpgradeModel upgradeModel in _modelProvider.Get<UpgradeModel[]>())
+                resultProperties += upgradeModel.Properties;
+
+            return resultProperties;
         }
 
-        public MainProperties GetUpgradesPropertiesData()
-        {
+        public MainProperties GetUpgradesPropertiesData() =>
             Recalculate();
 
-            return _resultProperties;
-        }
-
-        public void AddProperties(UpgradeModel upgradeModel)
-        {
-            UpgradeModel first = _upgradeModels.First(model => model == upgradeModel);
-
+        public void AddProperties(UpgradeModel upgradeModel) =>
             Updated?.Invoke();
-        }
     }
 }

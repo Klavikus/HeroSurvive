@@ -1,7 +1,9 @@
-﻿using GameCore.Source.Domain.Services;
-using GameCore.Source.Presentation.Api;
+﻿using System;
+using GameCore.Source.Domain.Services;
+using GameCore.Source.Presentation.Api.Factories;
 using GameCore.Source.Presentation.Api.GameLoop;
-using UnityEngine;
+using JetBrains.Annotations;
+using Object = UnityEngine.Object;
 
 namespace GameCore.Source.Presentation.Core.Factories
 {
@@ -11,7 +13,8 @@ namespace GameCore.Source.Presentation.Core.Factories
 
         public PersistentUpgradeLevelViewFactory(IConfigurationProvider configurationProvider)
         {
-            _configurationProvider = configurationProvider;
+            _configurationProvider =
+                configurationProvider ?? throw new ArgumentNullException(nameof(configurationProvider));
         }
 
         public IUpgradeLevelView[] Create(int count)
