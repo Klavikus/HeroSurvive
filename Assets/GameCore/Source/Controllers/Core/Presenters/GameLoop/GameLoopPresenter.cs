@@ -86,8 +86,8 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
         private void GoToMainMenu() =>
             _gameStateMachine.GoToMainMenu();
 
-        private void UpdateCurrencyCounter(int currency) =>
-            _view.GoldCountText.text = currency.ToString();
+        private void UpdateCurrencyCounter(int _) =>
+            _view.GoldCountText.text = _levelCompetitionService.TotalGoldGained.ToString();
 
         private void UpdateEnemyCounter() =>
             _view.KillCountText.text = _levelCompetitionService.TotalKilledEnemiesCount.ToString();

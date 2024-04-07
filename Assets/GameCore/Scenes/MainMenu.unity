@@ -965,7 +965,7 @@ GameObject:
   - component: {fileID: 347671052}
   - component: {fileID: 347671042}
   - component: {fileID: 347671053}
-  - component: {fileID: 1434241424352031973}
+  - component: {fileID: 347671056}
   m_Layer: 5
   m_Name: MainTitle
   m_TagString: Untagged
@@ -973,6 +973,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &347671056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347671055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c2cd880b2274d96b7c93d75caa7fe56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Counter>k__BackingField: {fileID: 1073319144}
 --- !u!114 &477543564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2284,6 +2297,7 @@ GameObject:
   - component: {fileID: 1073319142}
   - component: {fileID: 1073319140}
   - component: {fileID: 1073319143}
+  - component: {fileID: 1073319144}
   m_Layer: 5
   m_Name: Currency
   m_TagString: Untagged
@@ -2351,6 +2365,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1073319144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073319137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 788799482c8f4e9db4898fe55af1db6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _countText: {fileID: 477543564}
+  _countDuration: 1
+  _countStep: 100
 --- !u!114 &1298590929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3287,7 +3316,9 @@ MonoBehaviour:
   _leaderBoardsView: {fileID: 4666010688267929111}
   _localizationSystemView: {fileID: 1640532871}
   _upgradesSelectorView: {fileID: 1653140958}
-  _currencyView: {fileID: 788713388}
+  _currencyViews:
+  - {fileID: 347671056}
+  - {fileID: 788713388}
   _upgradeFocusView: {fileID: 1245159604613913133}
   _heroSelectorView: {fileID: 7638257530717277223}
 --- !u!4 &1796456320
@@ -6007,18 +6038,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1434241424352031973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 347671055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c02f926112af46d5b38c30796166003b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &1811968119594766852
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8879,7 +8898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1555526922374517827, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 43266.414
+      value: 43466.523
       objectReference: {fileID: 0}
     - target: {fileID: 3825262620608170728, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
       propertyPath: m_RootOrder

@@ -20,6 +20,6 @@ namespace GameCore.Source.Presentation.Core.MainMenu.Upgrades
             gameObject.SetActive(true);
 
         public void Hide() =>
-            gameObject.SetActive(true);
+            gameObject.SetActive(false);
     }
 }

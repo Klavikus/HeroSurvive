@@ -32,7 +32,7 @@ namespace GameCore.Source.Application.CompositionRoots
         [SerializeField] private LeaderBoardsView _leaderBoardsView;
         [SerializeField] private LocalizationSystemView _localizationSystemView;
         [SerializeField] private UpgradesSelectorView _upgradesSelectorView;
-        [SerializeField] private CurrencyView _currencyView;
+        [SerializeField] private CurrencyView[] _currencyViews;
         [SerializeField] private UpgradeFocusView _upgradeFocusView;
         [SerializeField] private HeroSelectorView _heroSelectorView;
 
@@ -111,8 +111,11 @@ namespace GameCore.Source.Application.CompositionRoots
             LeaderBoardPresenter leaderBoardPresenter = new(_leaderBoardsView, windowFsm);
             _leaderBoardsView.Construct(leaderBoardPresenter);
 
-            CurrencyPresenter currencyPresenter = new(_currencyView, currencyModel);
-            _currencyView.Construct(currencyPresenter);
+            foreach (CurrencyView currencyView in _currencyViews)
+            {
+                CurrencyPresenter currencyPresenter = new(currencyView, currencyModel);
+                currencyView.Construct(currencyPresenter);
+            }
 
             UpgradeSelectorPresenter upgradeSelectorPresenter = new(
                 windowFsm,

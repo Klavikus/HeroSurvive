@@ -134,7 +134,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.MainMenu
 
             for (var i = 0; i < _levelUpgradeViews.Length; i++)
             {
-                if (i <= maxLevel)
+                if (i < maxLevel)
                     _levelUpgradeViews[i].Show();
                 else
                     _levelUpgradeViews[i].Hide();

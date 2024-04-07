@@ -35,6 +35,7 @@ namespace GameCore.Source.Controllers.Core.ViewModels
             _configurationProvider = configurationProvider;
             _sfxService = sfxService;
             _availableHeroesData = _configurationProvider.HeroConfig.HeroesData.Select(heroData => heroData).ToArray();
+            CurrentSelectedHeroData = _availableHeroesData.First();
         }
 
         public void SelectHero(HeroData data)
