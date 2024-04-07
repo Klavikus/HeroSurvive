@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace GameCore.Source.Presentation.Core.MainMenu
 {
-    public class MVPLeaderBoardsView : ViewBase, ILeaderBoardsView
+    public class LeaderBoardsView : ViewBase, ILeaderBoardsView
     {
-        [SerializeField] private MVPLeaderBoardScoreView _playerLeaderBoardScoreView;
+        [SerializeField] private LeaderBoardScoreView _playerLeaderBoardScoreView;
         [field: SerializeField] public Canvas MainCanvas { get; private set; }
         [field: SerializeField] public Transform ScoreViewsContainer { get; private set; }
         [field: SerializeField] public ActionButton CloseButton { get; private set; }

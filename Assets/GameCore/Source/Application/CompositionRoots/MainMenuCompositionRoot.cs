@@ -29,7 +29,7 @@ namespace GameCore.Source.Application.CompositionRoots
     public class MainMenuCompositionRoot : SceneCompositionRoot
     {
         [SerializeField] private MainMenuView _mainMenuView;
-        [SerializeField] private MVPLeaderBoardsView _leaderBoardsView;
+        [SerializeField] private LeaderBoardsView _leaderBoardsView;
         [SerializeField] private LocalizationSystemView _localizationSystemView;
         [SerializeField] private UpgradesSelectorView _upgradesSelectorView;
         [SerializeField] private CurrencyView _currencyView;

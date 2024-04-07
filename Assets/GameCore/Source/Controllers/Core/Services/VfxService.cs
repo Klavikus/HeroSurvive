@@ -10,13 +10,22 @@ namespace GameCore.Source.Controllers.Core.Services
     {
         private readonly IConfigurationProvider _configurationProvider;
         private readonly GameObject _killVfxPrefab;
-        private readonly IObjectPool<IPoolableParticleSystem> _killVfxPool;
+        
+        private IObjectPool<IPoolableParticleSystem> _killVfxPool;
 
         public VfxService(IConfigurationProvider configurationProvider)
         {
             _configurationProvider = configurationProvider;
             _killVfxPrefab = _configurationProvider.VfxConfig.KillPrefab;
-            _killVfxPool = new ObjectPool<IPoolableParticleSystem>(CreateKillVfx, OnKillVfxGet, ActionOnRelease, ActionOnDestroy);
+            _killVfxPool =
+                new ObjectPool<IPoolableParticleSystem>(CreateKillVfx, OnKillVfxGet, ActionOnRelease, ActionOnDestroy);
+        }
+
+        public void Reset()
+        {
+            _killVfxPool?.Clear();
+            _killVfxPool =
+                new ObjectPool<IPoolableParticleSystem>(CreateKillVfx, OnKillVfxGet, ActionOnRelease, ActionOnDestroy);
         }
 
         private void ActionOnDestroy(IPoolableParticleSystem killVfxInstance)
@@ -28,7 +37,7 @@ namespace GameCore.Source.Controllers.Core.Services
         {
             IPoolableParticleSystem vfx = _killVfxPool.Get();
 
-            if (vfx == null)
+            if (vfx == null || vfx.GameObject == null)
                 return;
 
             vfx.GameObject.transform.position = transformPosition;
@@ -42,7 +51,7 @@ namespace GameCore.Source.Controllers.Core.Services
 
         private void ActionOnRelease(IPoolableParticleSystem killVfxInstance)
         {
-            killVfxInstance.GameObject.SetActive(false);
+            killVfxInstance?.GameObject?.SetActive(false);
         }
 
         private void OnKillVfxGet(IPoolableParticleSystem killVfxInstance)

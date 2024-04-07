@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace GameCore.Source.Presentation.Core.MainMenu
 {
-    public class MVPLeaderBoardAuthorizeRequestView : MonoBehaviour
+    public class LeaderBoardAuthorizeRequestView : MonoBehaviour
     {
         [SerializeField] private Canvas _mainCanvas;
         [SerializeField] private Button _approve;

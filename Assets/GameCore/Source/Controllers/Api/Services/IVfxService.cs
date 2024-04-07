@@ -6,5 +6,6 @@ namespace GameCore.Source.Controllers.Api.Services
     {
         void HandleKill(Vector3 transformPosition);
         void Clear();
+        void Reset();
     }
 }

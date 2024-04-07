@@ -83,6 +83,8 @@ namespace GameCore.Source.Application.CompositionRoots
                 vfxService,
                 levelUpModel);
 
+            vfxService.Reset();
+            
             ConstructViews(
                 levelUpModel,
                 localizationService,

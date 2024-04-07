@@ -8,7 +8,22 @@ namespace GameCore.Source.Presentation.Core
     public class PoolableParticleSystem : MonoBehaviour, IPoolableParticleSystem
     {
         public event Action<IPoolableParticleSystem> Completed;
-        public GameObject GameObject => gameObject;
+        public GameObject GameObject
+        {
+            get
+            {
+                try
+                {
+                    return gameObject;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+
+                    throw;
+                }
+            }
+        }
 
         private void OnDisable() =>
             Completed?.Invoke(this);
