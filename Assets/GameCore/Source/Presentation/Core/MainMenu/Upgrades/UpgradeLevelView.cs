@@ -13,9 +13,13 @@ namespace GameCore.Source.Presentation.Core.MainMenu.Upgrades
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;
 
-        public void SetSelectedStatus(bool isSelected)
-        {
+        public void SetSelectedStatus(bool isSelected) =>
             _selectionIcon.color = isSelected ? _goodColor : _badColor;
-        }
+
+        public void Show() =>
+            gameObject.SetActive(true);
+
+        public void Hide() =>
+            gameObject.SetActive(true);
     }
 }

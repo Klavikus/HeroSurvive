@@ -1,6 +1,3 @@
-// using CodeBase.GameCore.Domain.Data;
-// using CodeBase.GameCore.Infrastructure.Services;
-// using CodeBase.GameCore.Presentation.ViewModels;
 // using TMPro;
 // using UnityEngine;
 // using UnityEngine.EventSystems;
@@ -57,7 +54,8 @@
 //
 //         }
 //
-//         public void OnPointerClick(PointerEventData eventData) => _upgradeViewModel.SelectUpgrade(_upgradeData);
+//         public void OnPointerClick(PointerEventData eventData) =>
+//             _upgradeViewModel.SelectUpgrade(_upgradeData);
 //
 //         private void OnLocalizationChanged() =>
 //             _name.text = _translationService.GetLocalizedText(_upgradeData.TranslatableNames);

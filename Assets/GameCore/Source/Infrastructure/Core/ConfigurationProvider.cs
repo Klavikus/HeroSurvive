@@ -25,5 +25,6 @@ namespace GameCore.Source.Infrastructure.Core
         public string BaseLanguage => _configurationContainer.BaseLanguage;
         public ColorConfigSO ColorsConfig => _configurationContainer.ColorConfig;
         public GameObject UpgradeLevelView => _configurationContainer.UpgradeLevelView;
+        public GameObject PersistentUpgradeView => _configurationContainer.PersistentUpgradeView;
     }
 }

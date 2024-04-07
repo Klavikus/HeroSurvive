@@ -1,15 +1,15 @@
-using GameCore.Source.Domain.Services;
-using GameCore.Source.Infrastructure.Api;
+﻿using GameCore.Source.Domain.Services;
+using GameCore.Source.Presentation.Api;
 using GameCore.Source.Presentation.Api.GameLoop;
 using UnityEngine;
 
 namespace GameCore.Source.Infrastructure.Core
 {
-    public class UpgradeLevelViewFactory : IViewFactory
+    public class PersistentUpgradeLevelViewFactory : IPersistentUpgradeLevelViewFactory
     {
         private readonly IConfigurationProvider _configurationProvider;
 
-        public UpgradeLevelViewFactory(IConfigurationProvider configurationProvider)
+        public PersistentUpgradeLevelViewFactory(IConfigurationProvider configurationProvider)
         {
             _configurationProvider = configurationProvider;
         }

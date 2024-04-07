@@ -1,8 +1,9 @@
+
 using GameCore.Source.Presentation.Api.GameLoop;
 
-namespace GameCore.Source.Infrastructure.Api
+namespace GameCore.Source.Presentation.Api
 {
-    public interface IViewFactory
+    public interface IPersistentUpgradeLevelViewFactory
     {
         IUpgradeLevelView[] Create(int count);
     }

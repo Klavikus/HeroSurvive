@@ -3,9 +3,10 @@ using System.Linq;
 using GameCore.Source.Controllers.Api;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Domain.Data;
-using GameCore.Source.Infrastructure.Api;
+using GameCore.Source.Presentation.Api;
 using GameCore.Source.Presentation.Api.GameLoop;
 using Modules.MVPPassiveView.Runtime;
+using UnityEngine;
 
 namespace GameCore.Source.Controllers.Core.Presenters
 {
@@ -15,7 +16,7 @@ namespace GameCore.Source.Controllers.Core.Presenters
         private readonly IUpgradeLevelView[] _upgradeLevelViews;
         private readonly IPersistentUpgradeService _persistentUpgradeService;
         private readonly IUpgradeDescriptionBuilder _descriptionBuilder;
-        private readonly IViewFactory _viewFactory;
+        private readonly IPersistentUpgradeLevelViewFactory _persistentUpgradeLevelViewFactory;
         private readonly ILocalizationService _localizationService;
 
         private UpgradeData _currentUpgradeData;
@@ -26,14 +27,16 @@ namespace GameCore.Source.Controllers.Core.Presenters
             IUpgradeFocusView view,
             IPersistentUpgradeService persistentUpgradeService,
             IUpgradeDescriptionBuilder descriptionBuilder,
-            IViewFactory viewFactory,
+            IPersistentUpgradeLevelViewFactory persistentUpgradeLevelViewFactory,
             ILocalizationService localizationService)
         {
             _view = view ?? throw new ArgumentNullException(nameof(view));
             _persistentUpgradeService = persistentUpgradeService ??
                                         throw new ArgumentNullException(nameof(persistentUpgradeService));
             _descriptionBuilder = descriptionBuilder ?? throw new ArgumentNullException(nameof(descriptionBuilder));
-            _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
+            _persistentUpgradeLevelViewFactory = persistentUpgradeLevelViewFactory ??
+                                                 throw new ArgumentNullException(
+                                                     nameof(persistentUpgradeLevelViewFactory));
             _localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
         }
 
@@ -110,26 +113,31 @@ namespace GameCore.Source.Controllers.Core.Presenters
             _levelUpgradeViews = _view.UpgradeLevelViewsContainer.GetComponentsInChildren<IUpgradeLevelView>(true);
 
             int needed = _currentUpgradeData.Upgrades.Length - _levelUpgradeViews.Length;
+            int maxLevel = _currentUpgradeData.Upgrades.Length;
 
             foreach (IUpgradeLevelView levelUpgradeView in _levelUpgradeViews)
-                levelUpgradeView.GameObject.SetActive(true);
+                levelUpgradeView.Show();
 
             if (needed > 0)
             {
-                IUpgradeLevelView[] additionalViews = _viewFactory.Create(needed);
-                foreach (IUpgradeLevelView additionalView in additionalViews)
-                    additionalView.Transform.SetParent(_view.UpgradeLevelViewsContainer);
-                _levelUpgradeViews = _levelUpgradeViews.Concat(additionalViews).ToArray();
-            }
+                IUpgradeLevelView[] additionalViews = _persistentUpgradeLevelViewFactory.Create(needed);
 
-            if (needed < 0)
-            {
-                for (int i = needed; i < 0; i++)
-                    _levelUpgradeViews[_levelUpgradeViews.Length + i].GameObject.SetActive(false);
+                foreach (IUpgradeLevelView additionalView in additionalViews)
+                {
+                    additionalView.Transform.SetParent(_view.UpgradeLevelViewsContainer);
+                    additionalView.Transform.localScale = Vector3.one;
+                }
+
+                _levelUpgradeViews = _levelUpgradeViews.Concat(additionalViews).ToArray();
             }
 
             for (var i = 0; i < _levelUpgradeViews.Length; i++)
             {
+                if (i <= maxLevel)
+                    _levelUpgradeViews[i].Show();
+                else
+                    _levelUpgradeViews[i].Hide();
+
                 _levelUpgradeViews[i]
                     .SetSelectedStatus(_persistentUpgradeService.GetCurrentUpgradeLevel(_currentUpgradeData) > i);
             }

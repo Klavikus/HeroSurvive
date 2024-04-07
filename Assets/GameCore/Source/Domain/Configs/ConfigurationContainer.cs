@@ -18,5 +18,6 @@ namespace GameCore.Source.Domain.Configs
         [field: SerializeField] public string BaseLanguage { get; private set; }
         [field: SerializeField] public ColorConfigSO ColorConfig { get; private set; }
         [field: SerializeField] public GameObject UpgradeLevelView { get; private set; }
+        [field: SerializeField] public GameObject PersistentUpgradeView { get; private set; }
     }
 }

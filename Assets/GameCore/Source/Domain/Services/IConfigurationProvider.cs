@@ -17,5 +17,6 @@ namespace GameCore.Source.Domain.Services
         string BaseLanguage { get; }
         ColorConfigSO ColorsConfig { get; }
         GameObject UpgradeLevelView { get; }
+        GameObject PersistentUpgradeView { get; }
     }
 }

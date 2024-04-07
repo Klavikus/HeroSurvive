@@ -3,6 +3,8 @@ using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Models;
 using GameCore.Source.Presentation.Api.GameLoop;
+using GameCore.Source.Presentation.Core.Factories;
+using JetBrains.Annotations;
 using Modules.Common.WindowFsm.Runtime.Abstract;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,20 +15,23 @@ namespace GameCore.Source.Controllers.Core.Presenters
     {
         private readonly IUpgradesSelectorView _view;
         private readonly IPersistentUpgradeService _persistentUpgradeService;
+        private readonly IPersistentUpgradeViewFactory _persistentUpgradeViewFactory;
         private readonly CurrencyModel _currencyModel;
         private readonly int _rowCount;
         private readonly int _colCount;
         private readonly PlayerInputActions _playerInputActions;
 
-        public UpgradeSelectorPresenter(
-            IWindowFsm windowFsm,
+        public UpgradeSelectorPresenter(IWindowFsm windowFsm,
             IUpgradesSelectorView view,
-            IPersistentUpgradeService persistentUpgradeService)
+            IPersistentUpgradeService persistentUpgradeService,
+            IPersistentUpgradeViewFactory persistentUpgradeViewFactory)
             : base(windowFsm, view.Canvas)
         {
             _view = view;
             _persistentUpgradeService = persistentUpgradeService ??
                                         throw new ArgumentNullException(nameof(persistentUpgradeService));
+            _persistentUpgradeViewFactory = persistentUpgradeViewFactory ??
+                                            throw new ArgumentNullException(nameof(persistentUpgradeViewFactory));
 
             _rowCount = view.RowCount;
             _colCount = view.ColCount;
@@ -36,17 +41,17 @@ namespace GameCore.Source.Controllers.Core.Presenters
 
         protected override void OnAfterEnable()
         {
+            foreach (IPersistentUpgradeView upgradeView in _persistentUpgradeViewFactory.Create())
+            {
+                upgradeView.Transform.SetParent(_view.UpgradeViewsContainer);
+                upgradeView.Transform.localScale = Vector3.one;
+            }
+
             _view.Initialize();
 
             _view.CloseButton.Clicked += Close;
 
             _persistentUpgradeService.UpgradeSelected += OnUpgradeSelected;
-
-            //
-            // _upgradeFocusView.Initialize(_upgradeViewModel,
-            //     _viewFactory,
-            //     _currencyViewModel,
-            //     descriptionBuilder);
         }
 
         protected override void OnAfterDisable()
@@ -115,7 +120,7 @@ namespace GameCore.Source.Controllers.Core.Presenters
         // {
         //     _upgradeViews = _viewFactory.CreateUpgradeViews();
         //
-        //     foreach (UpgradeView upgradeView in _upgradeViews)
+        //     foreach (IUpgradeView upgradeView in _upgradeViews)
         //     {
         //         upgradeView.transform.SetParent(_upgradeViewsContainer);
         //         upgradeView.transform.localScale = Vector3.one;
