@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using GameCore.Source.Controllers.Api;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Models;
@@ -7,7 +8,7 @@ using GameCore.Source.Domain.Services;
 
 namespace GameCore.Source.Controllers.Core.ViewModels
 {
-    public class HeroSelectorViewModel
+    public class HeroSelectorViewModel : IHeroSelectorViewModel
     {
         private readonly HeroModel _heroModel;
         private readonly GameLoopModel _gameLoopModel;
@@ -16,11 +17,9 @@ namespace GameCore.Source.Controllers.Core.ViewModels
         private readonly IAudioPlayerService _sfxService;
         
         public event Action<HeroData> HeroSelected;
-        public event Action HeroSelectorEnabled;
-        public event Action HeroSelectorDisabled;
         
         public HeroData CurrentSelectedHeroData { get; private set; }
-        private int MaxHeroId => _availableHeroesData.Length - 1;
+        public int MaxHeroId => _availableHeroesData.Length - 1;
 
         public int CurrentSelectedHeroId =>
             _availableHeroesData.TakeWhile(data => data != CurrentSelectedHeroData).Count();
@@ -56,13 +55,6 @@ namespace GameCore.Source.Controllers.Core.ViewModels
             _sfxService.PlayStartLevel();
             _gameLoopModel.InvokeStartLevel(CurrentSelectedHeroData);
         }
-
-        private void OnMenuModelHeroSelectorEnabled() =>
-            HeroSelectorEnabled?.Invoke();
-
-        private void OnMenuModelHeroSelectorDisabled() =>
-            HeroSelectorDisabled?.Invoke();
-
 
         public void HandleMove(int dX, int dY, int rowCount, int colCount)
         {

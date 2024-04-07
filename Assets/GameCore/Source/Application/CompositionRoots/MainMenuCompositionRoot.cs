@@ -1,15 +1,18 @@
 using System;
 using System.Collections.Generic;
+using GameCore.Source.Controllers.Api;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Controllers.Core.Factories;
 using GameCore.Source.Controllers.Core.Presenters;
 using GameCore.Source.Controllers.Core.Services;
+using GameCore.Source.Controllers.Core.ViewModels;
 using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Domain.Models;
 using GameCore.Source.Domain.Services;
 using GameCore.Source.Infrastructure.Api.GameFsm;
 using GameCore.Source.Infrastructure.Core;
 using GameCore.Source.Infrastructure.Core.Services.DI;
+using GameCore.Source.Presentation.Api.MainMenu.HeroSelector;
 using GameCore.Source.Presentation.Core.Factories;
 using GameCore.Source.Presentation.Core.GameLoop;
 using GameCore.Source.Presentation.Core.MainMenu;
@@ -28,15 +31,16 @@ namespace GameCore.Source.Application.CompositionRoots
         [SerializeField] private UpgradesSelectorView _upgradesSelectorView;
         [SerializeField] private CurrencyView _currencyView;
         [SerializeField] private UpgradeFocusView _upgradeFocusView;
-        [SerializeField] private PersistentUpgradeView _persistentUpgradeView;
+        [SerializeField] private HeroSelectorView _heroSelectorView;
 
-        public override async void Initialize(ServiceContainer serviceContainer)
+        public override void Initialize(ServiceContainer serviceContainer)
         {
             Dictionary<Type, IWindow> windows = new Dictionary<Type, IWindow>()
             {
                 [typeof(MainMenuWindow)] = new MainMenuWindow(),
                 [typeof(LeaderBoardWindow)] = new LeaderBoardWindow(),
                 [typeof(UpgradeSelectorWindow)] = new UpgradeSelectorWindow(),
+                [typeof(HeroSelectorWindow)] = new HeroSelectorWindow(),
             };
 
             WindowFsm<MainMenuWindow> windowFsm = new WindowFsm<MainMenuWindow>(windows);
@@ -50,10 +54,23 @@ namespace GameCore.Source.Application.CompositionRoots
 
             UpgradeModel[] upgradeModels = modelProvider.Get<UpgradeModel[]>();
             CurrencyModel currencyModel = modelProvider.Get<CurrencyModel>();
+            HeroModel heroModel = modelProvider.Get<HeroModel>();
+            GameLoopModel gameLoopModel = modelProvider.Get<GameLoopModel>();
+            PropertiesModel propertiesModel = modelProvider.Get<PropertiesModel>();
 
             currencyModel.Add(10000);
 
+            HeroSelectorViewModel heroSelectorViewModel = new(
+                heroModel,
+                gameLoopModel,
+                configurationProvider,
+                audioPlayerService);
+
+            IMainPropertiesViewModel mainPropertiesViewModel = new MainPropertiesViewModel(propertiesModel);
+
             IUpgradeService upgradeService = new UpgradeService(upgradeModels);
+
+            UpgradeDescriptionBuilder descriptionBuilder = new(configurationProvider, localizationService);
 
             PersistentUpgradeService persistentUpgradeService = new(
                 upgradeModels,
@@ -64,14 +81,23 @@ namespace GameCore.Source.Application.CompositionRoots
             PersistentUpgradeLevelViewFactory persistentUpgradeLevelViewFactory = new(configurationProvider);
 
             PersistentUpgradePresenterFactory persistentUpgradePresenterFactory =
-                new PersistentUpgradePresenterFactory(persistentUpgradeService, persistentUpgradeLevelViewFactory,
+                new(persistentUpgradeService, persistentUpgradeLevelViewFactory,
                     localizationService);
 
-            UpgradeDescriptionBuilder descriptionBuilder = new(configurationProvider, localizationService);
-            PersistentUpgradeViewFactory persistentUpgradeViewFactory =
-                new PersistentUpgradeViewFactory(configurationProvider, persistentUpgradePresenterFactory.Create);
+            SelectableHeroPresenterFactory selectableHeroPresenterFactory = new(heroSelectorViewModel);
+            PropertyPresenterFactory propertyPresenterFactory = new(
+                mainPropertiesViewModel,
+                descriptionBuilder,
+                localizationService);
 
-            // PersistentUpgradeViewFactory persistentUpgradeViewFactory =
+            PersistentUpgradeViewFactory persistentUpgradeViewFactory =
+                new(configurationProvider, persistentUpgradePresenterFactory.Create);
+
+            SelectableHeroViewFactory selectableHeroViewFactory =
+                new(configurationProvider, selectableHeroPresenterFactory.Create);
+
+            PropertyViewFactory propertyViewFactory =
+                new(configurationProvider, propertyPresenterFactory.Create);
 
             LocalizationSystemPresenter localizationSystemPresenter = new(_localizationSystemView, localizationService);
             _localizationSystemView.Construct(localizationSystemPresenter);
@@ -100,13 +126,25 @@ namespace GameCore.Source.Application.CompositionRoots
                 localizationService);
             _upgradeFocusView.Construct(upgradeFocusPresenter);
 
-            // PersistentUpgradePresenter persistentUpgradePresenter = new(
-            //     _persistentUpgradeView,
-            //     persistentUpgradeService,
-            //     persistentUpgradeLevelViewFactory,
-            //     localizationService);
-            //
-            // _persistentUpgradeView.Construct(persistentUpgradePresenter);
+            HeroSelectorPresenter heroSelectorPresenter = new(
+                windowFsm,
+                _heroSelectorView,
+                heroSelectorViewModel,
+                localizationService,
+                gameStateMachine);
+            _heroSelectorView.Construct(heroSelectorPresenter);
+
+            foreach (ISelectableHeroView selectableHeroView in selectableHeroViewFactory.Create())
+            {
+                selectableHeroView.Transform.SetParent(_heroSelectorView.HeroViewsContainer);
+                selectableHeroView.Transform.localScale = Vector3.one;
+            }
+
+            foreach (IPropertyView propertyView in propertyViewFactory.Create())
+            {
+                propertyView.Transform.SetParent(_heroSelectorView.PropertiesViewContainer);
+                propertyView.Transform.localScale = Vector3.one;
+            }
         }
     }
 }

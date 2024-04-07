@@ -1,6 +1,6 @@
 ﻿using GameCore.Source.Presentation.Api.GameLoop;
 
-namespace GameCore.Source.Presentation.Core.Factories
+namespace GameCore.Source.Presentation.Api
 {
     public interface IPersistentUpgradeViewFactory
     {

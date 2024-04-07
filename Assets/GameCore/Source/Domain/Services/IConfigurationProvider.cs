@@ -18,5 +18,6 @@ namespace GameCore.Source.Domain.Services
         ColorConfigSO ColorsConfig { get; }
         GameObject UpgradeLevelView { get; }
         GameObject PersistentUpgradeView { get; }
+        GameObject SelectableHeroView { get; }
     }
 }

@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using GameCore.Source.Controllers.Api;
+using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Domain.Enums;
 using GameCore.Source.Domain.Models;
 
 namespace GameCore.Source.Controllers.Core.ViewModels
 {
-    public class MainPropertiesViewModel
+    public class MainPropertiesViewModel : IMainPropertiesViewModel
     {
         private readonly PropertiesModel _propertiesModel;
 

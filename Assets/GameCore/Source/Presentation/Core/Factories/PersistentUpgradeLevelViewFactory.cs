@@ -3,7 +3,7 @@ using GameCore.Source.Presentation.Api;
 using GameCore.Source.Presentation.Api.GameLoop;
 using UnityEngine;
 
-namespace GameCore.Source.Infrastructure.Core
+namespace GameCore.Source.Presentation.Core.Factories
 {
     public class PersistentUpgradeLevelViewFactory : IPersistentUpgradeLevelViewFactory
     {

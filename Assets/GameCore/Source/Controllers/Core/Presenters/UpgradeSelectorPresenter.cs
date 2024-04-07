@@ -2,8 +2,8 @@
 using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Models;
+using GameCore.Source.Presentation.Api;
 using GameCore.Source.Presentation.Api.GameLoop;
-using GameCore.Source.Presentation.Core.Factories;
 using JetBrains.Annotations;
 using Modules.Common.WindowFsm.Runtime.Abstract;
 using UnityEngine;
@@ -17,9 +17,9 @@ namespace GameCore.Source.Controllers.Core.Presenters
         private readonly IPersistentUpgradeService _persistentUpgradeService;
         private readonly IPersistentUpgradeViewFactory _persistentUpgradeViewFactory;
         private readonly CurrencyModel _currencyModel;
+        private readonly PlayerInputActions _playerInputActions;
         private readonly int _rowCount;
         private readonly int _colCount;
-        private readonly PlayerInputActions _playerInputActions;
 
         public UpgradeSelectorPresenter(IWindowFsm windowFsm,
             IUpgradesSelectorView view,
@@ -33,10 +33,10 @@ namespace GameCore.Source.Controllers.Core.Presenters
             _persistentUpgradeViewFactory = persistentUpgradeViewFactory ??
                                             throw new ArgumentNullException(nameof(persistentUpgradeViewFactory));
 
+            _playerInputActions = new PlayerInputActions();
+
             _rowCount = view.RowCount;
             _colCount = view.ColCount;
-
-            _playerInputActions = new PlayerInputActions();
         }
 
         protected override void OnAfterEnable()

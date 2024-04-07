@@ -26,5 +26,6 @@ namespace GameCore.Source.Infrastructure.Core
         public ColorConfigSO ColorsConfig => _configurationContainer.ColorConfig;
         public GameObject UpgradeLevelView => _configurationContainer.UpgradeLevelView;
         public GameObject PersistentUpgradeView => _configurationContainer.PersistentUpgradeView;
+        public GameObject SelectableHeroView => _configurationContainer.SelectableHeroView;
     }
 }
