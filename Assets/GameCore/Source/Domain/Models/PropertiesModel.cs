@@ -8,7 +8,8 @@ namespace GameCore.Source.Domain.Models
     {
         private MainProperties _mainProperties;
         public event Action<MainProperties> Changed;
-        public IReadOnlyDictionary<BaseProperty, float> MainProperties => _mainProperties.BaseProperties;
+        public IReadOnlyDictionary<BaseProperty, float> MainProperties =>
+            _mainProperties.BaseProperties;
 
         public void SetResultProperties(MainProperties mainProperties)
         {

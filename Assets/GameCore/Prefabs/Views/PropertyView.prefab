@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4578206765622668677}
   - component: {fileID: 5792843263836517610}
   - component: {fileID: 4897088206185642169}
-  - component: {fileID: 7018724567780845100}
+  - component: {fileID: 3875364632901593754}
   m_Layer: 5
   m_Name: PropertyView
   m_TagString: Untagged
@@ -70,7 +70,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 827499140331234276}
   m_CullTransparentMesh: 1
---- !u!114 &7018724567780845100
+--- !u!114 &3875364632901593754
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,12 +79,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 827499140331234276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 912ed36b736546aaa7bc6a6a77a3d8fc, type: 3}
+  m_Script: {fileID: 11500000, guid: e470b03500a44ba0bb3377e802db47d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _image: {fileID: 7852133234770334688}
-  _shortName: {fileID: 9157865413816730440}
-  _value: {fileID: 2138523909980570945}
+  <Value>k__BackingField: {fileID: 2138523909980570945}
+  <ShortName>k__BackingField: {fileID: 9157865413816730440}
+  <Icon>k__BackingField: {fileID: 7852133234770334688}
 --- !u!1 &2434619961264974711
 GameObject:
   m_ObjectHideFlags: 0

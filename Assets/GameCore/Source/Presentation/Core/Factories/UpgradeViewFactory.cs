@@ -34,7 +34,7 @@ namespace GameCore.Source.Presentation.Core.Factories
             for (int i = 0; i < count; i++)
             {
                 SelectableHeroView view = Object
-                    .Instantiate(_configurationProvider.SelectableHeroView)
+                    .Instantiate(_configurationProvider.HeroConfig.BaseHeroView)
                     .GetComponent<SelectableHeroView>();
 
                 IPresenter presenter =

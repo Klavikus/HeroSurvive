@@ -10,7 +10,6 @@ using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Domain.Models;
 using GameCore.Source.Domain.Services;
 using GameCore.Source.Infrastructure.Api.GameFsm;
-using GameCore.Source.Infrastructure.Core;
 using GameCore.Source.Infrastructure.Core.Services.DI;
 using GameCore.Source.Presentation.Api.MainMenu.HeroSelector;
 using GameCore.Source.Presentation.Core.Factories;
@@ -51,12 +50,15 @@ namespace GameCore.Source.Application.CompositionRoots
 
             IModelProvider modelProvider = serviceContainer.Single<IModelProvider>();
             IAudioPlayerService audioPlayerService = serviceContainer.Single<IAudioPlayerService>();
+            IPropertyProvider propertyProvider = serviceContainer.Single<IPropertyProvider>();
 
             UpgradeModel[] upgradeModels = modelProvider.Get<UpgradeModel[]>();
             CurrencyModel currencyModel = modelProvider.Get<CurrencyModel>();
             HeroModel heroModel = modelProvider.Get<HeroModel>();
-            GameLoopModel gameLoopModel = modelProvider.Get<GameLoopModel>();
             PropertiesModel propertiesModel = modelProvider.Get<PropertiesModel>();
+            GameLoopModel gameLoopModel = new GameLoopModel();
+
+            propertyProvider.Initialize();
 
             currencyModel.Add(10000);
 
@@ -102,7 +104,7 @@ namespace GameCore.Source.Application.CompositionRoots
             LocalizationSystemPresenter localizationSystemPresenter = new(_localizationSystemView, localizationService);
             _localizationSystemView.Construct(localizationSystemPresenter);
 
-            MainMenuPresenter mainMenuPresenter = new(windowFsm, _mainMenuView, gameStateMachine);
+            MainMenuPresenter mainMenuPresenter = new(windowFsm, _mainMenuView);
             _mainMenuView.Construct(mainMenuPresenter);
 
             LeaderBoardPresenter leaderBoardPresenter = new(_leaderBoardsView, windowFsm);

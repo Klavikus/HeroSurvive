@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Controllers.Core.Services;
+using GameCore.Source.Controllers.Core.Services.PropertiesProviders;
 using GameCore.Source.Domain.Configs;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Models;
@@ -71,6 +72,16 @@ namespace GameCore.Source.Application.GameFSM.States
             IModelProvider modelProvider = RegisterModelProvider();
 
             PrepareModels(configurationProvider, modelProvider);
+
+            IUpgradeService upgradeService = new UpgradeService(modelProvider.Get<UpgradeModel[]>());
+            _services.RegisterAsSingle(upgradeService);
+            
+            IPropertyProvider propertyProvider = new PropertyProvider(
+                configurationProvider,
+                upgradeService,
+                modelProvider.Get<HeroModel>(),
+                modelProvider.Get<PropertiesModel>());
+            _services.RegisterAsSingle(propertyProvider);
 
             localizationService.Initialize(new EnvironmentData(configurationProvider.BaseLanguage, false));
 
@@ -173,6 +184,9 @@ namespace GameCore.Source.Application.GameFSM.States
 
             CurrencyModel currencyModel = new CurrencyModel();
             modelProvider.Bind(currencyModel);
+
+            PlayerModel playerModel = new PlayerModel();
+            modelProvider.Bind(playerModel);
         }
     }
 }

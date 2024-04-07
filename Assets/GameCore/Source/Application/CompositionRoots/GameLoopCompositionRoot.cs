@@ -53,15 +53,10 @@ namespace GameCore.Source.Application.CompositionRoots
             HeroModel heroModel = modelProvider.Get<HeroModel>();
             PropertiesModel propertiesModel = modelProvider.Get<PropertiesModel>();
 
-            PlayerModel playerModel = new();
+            PlayerModel playerModel = modelProvider.Get<PlayerModel>();
 
-            IUpgradeService upgradeService = new UpgradeService(upgradeModels);
-
-            IPropertyProvider propertyProvider = new PropertyProvider(
-                configurationProvider,
-                upgradeService,
-                heroModel,
-                propertiesModel);
+            IUpgradeService upgradeService = serviceContainer.Single<IUpgradeService>();
+            IPropertyProvider propertyProvider = serviceContainer.Single<IPropertyProvider>();
 
             IAbilityUpgradeService abilityUpgradeService = new AbilityUpgradeService(configurationProvider);
             CurrencyModel currencyModel = modelProvider.Get<CurrencyModel>();
@@ -97,7 +92,6 @@ namespace GameCore.Source.Application.CompositionRoots
                 vfxService,
                 levelUpModel);
 
-            propertyProvider.Initialize();
 
             LevelUpSystemPresenter levelUpSystemPresenter = new(_levelUpSystemView, levelUpModel);
 

@@ -1,5 +1,4 @@
-﻿using System;
-using GameCore.Source.Controllers.Core.WindowFsms.Windows;
+﻿using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Infrastructure.Api.GameFsm;
 using GameCore.Source.Presentation.Api.MainMenu;
 using Modules.Common.WindowFsm.Runtime.Abstract;
@@ -13,12 +12,10 @@ namespace GameCore.Source.Controllers.Core.Presenters
 
         public MainMenuPresenter(
             IWindowFsm windowFsm,
-            IMainMenuView view,
-            IGameStateMachine gameStateMachine)
+            IMainMenuView view)
             : base(windowFsm, view.Canvas)
         {
             _view = view;
-            _gameStateMachine = gameStateMachine ?? throw new ArgumentNullException(nameof(gameStateMachine));
         }
 
         protected override void OnAfterEnable()
@@ -27,17 +24,20 @@ namespace GameCore.Source.Controllers.Core.Presenters
             _view.LeaderBoardButton.Initialize();
             _view.PersistentUpgradesButton.Initialize();
 
-            _view.StartButton.Clicked += _gameStateMachine.GoToGameLoop;
+            _view.StartButton.Clicked += OnStartButtonClicked;
             _view.LeaderBoardButton.Clicked += OnLeaderBoardButtonClicked;
             _view.PersistentUpgradesButton.Clicked += OnPersistentUpgradesButtonClicked;
         }
 
         protected override void OnAfterDisable()
         {
-            _view.StartButton.Clicked -= _gameStateMachine.GoToGameLoop;
+            _view.StartButton.Clicked -= OnStartButtonClicked;
             _view.LeaderBoardButton.Clicked -= OnLeaderBoardButtonClicked;
             _view.PersistentUpgradesButton.Clicked -= OnPersistentUpgradesButtonClicked;
         }
+
+        private void OnStartButtonClicked() =>
+            WindowFsm.OpenWindow<HeroSelectorWindow>();
 
         private void OnLeaderBoardButtonClicked() =>
             WindowFsm.OpenWindow<LeaderBoardWindow>();

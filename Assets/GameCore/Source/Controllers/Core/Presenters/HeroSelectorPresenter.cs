@@ -38,8 +38,25 @@ namespace GameCore.Source.Controllers.Core.Presenters
             _colCount = view.ColCount;
         }
 
+        protected override void OnAfterEnable()
+        {
+            _view.Initialize();
+        }
+
+        protected override void OnAfterDisable()
+        {
+            _view.CloseButton.Clicked -= OnCloseButtonClicked;
+            _view.ContinueButton.Clicked -= OnContinueButtonClicked;
+
+            UnsubscribeToViewModel();
+            UnsubscribeToInputActions();
+        }
+
         protected override void OnAfterOpened()
         {
+            _view.CloseButton.Clicked += OnCloseButtonClicked;
+            _view.ContinueButton.Clicked += OnContinueButtonClicked;
+
             SubscribeToViewModel();
             SubscribeToInputActions();
 
@@ -49,6 +66,9 @@ namespace GameCore.Source.Controllers.Core.Presenters
 
         protected override void OnAfterClosed()
         {
+            _view.CloseButton.Clicked -= OnCloseButtonClicked;
+            _view.ContinueButton.Clicked -= OnContinueButtonClicked;
+
             UnsubscribeToViewModel();
             UnsubscribeToInputActions();
         }
@@ -72,7 +92,7 @@ namespace GameCore.Source.Controllers.Core.Presenters
             _playerInputActions.UI.ScrollUp.performed += OnScrollUpPerformed;
             _playerInputActions.UI.ScrollDown.performed += OnScrollDownPerformed;
 
-            _playerInputActions.Disable();
+            _playerInputActions.Enable();
         }
 
         private void UnsubscribeToInputActions()
@@ -84,13 +104,13 @@ namespace GameCore.Source.Controllers.Core.Presenters
             _playerInputActions.UI.ScrollUp.performed -= OnScrollUpPerformed;
             _playerInputActions.UI.ScrollDown.performed -= OnScrollDownPerformed;
 
-            _playerInputActions.Enable();
+            _playerInputActions.Dispose();
         }
 
         private void FillView(HeroData heroData)
         {
             string heroName = _localizationService.GetLocalizedText(heroData.TranslatableName);
-            string heroDescription = _localizationService.GetLocalizedText(heroData.TranslatableName);
+            string heroDescription = _localizationService.GetLocalizedText(heroData.Description);
             string abilityName =
                 _localizationService.GetLocalizedText(heroData.InitialAbilityConfig.UpgradeViewData.TranslatableName);
 

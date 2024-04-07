@@ -28,6 +28,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5794044302373075349}
   m_RootOrder: 2
@@ -103,6 +104,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5794044302373075349}
   m_RootOrder: 0
@@ -178,6 +180,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5794044302373075349}
   m_RootOrder: 1
@@ -235,7 +238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5794044302373075349}
   - component: {fileID: 5794044302373075350}
-  - component: {fileID: 5794044302373075351}
+  - component: {fileID: 2917201505184260993}
   m_Layer: 5
   m_Name: HeroSelectView
   m_TagString: Untagged
@@ -253,6 +256,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5794044301851498223}
   - {fileID: 5794044301920000638}
@@ -285,7 +289,7 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &5794044302373075351
+--- !u!114 &2917201505184260993
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -294,9 +298,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5794044302373075348}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 978af826d864a2e4ab7722773b1147fc, type: 3}
+  m_Script: {fileID: 11500000, guid: a3bb748447b04b928bca2188d1299219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isSelected: 0
-  _selectionBorder: {fileID: 5794044301667373568}
-  _heroImage: {fileID: 5794044301920000639}
+  <SelectionBorder>k__BackingField: {fileID: 5794044301667373568}
+  <Image>k__BackingField: {fileID: 5794044301920000639}
