@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using GameCore.Source.Controllers.Api;
 using GameCore.Source.Controllers.Core.Factories;
+using GameCore.Source.Domain;
 using GameCore.Source.Domain.Abilities;
 using GameCore.Source.Domain.Configs;
 using GameCore.Source.Domain.Data;
@@ -52,6 +52,9 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
 
             _cooldownWaitForSeconds = new WaitForSeconds(abilityData.Cooldown);
         }
+
+        public bool CanUpgrade => _currentUpgradeLevel < _abilityUpgradesData.Length;
+        public AbilityUpgradeData AvailableUpgrade => _abilityUpgradesData[_currentUpgradeLevel];
 
         public void Execute()
         {
@@ -125,7 +128,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
 
             if (_runCoroutine != null)
                 _coroutineRunner.StopCoroutine(_runCoroutine);
-            
+
             _projectionPool.Clear();
         }
     }

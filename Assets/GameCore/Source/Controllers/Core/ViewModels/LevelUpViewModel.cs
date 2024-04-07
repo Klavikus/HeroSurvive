@@ -1,12 +1,13 @@
 using System;
 using GameCore.Source.Controllers.Api.Providers;
+using GameCore.Source.Controllers.Api.ViewModels;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Models;
 using GameCore.Source.Domain.Services;
 
 namespace GameCore.Source.Controllers.Core.ViewModels
 {
-    public class LevelUpViewModel
+    public class LevelUpViewModel : ILevelUpViewModel
     {
         private readonly LevelUpModel _levelUpModel;
         private readonly IAbilityUpgradeService _abilityUpgradeService;

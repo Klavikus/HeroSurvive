@@ -62,7 +62,7 @@ namespace GameCore.Source.Controllers.Core.Factories
 
             inputController.Initialize();
 
-            _playerModel.AbilityContainer = playerController.AbilityContainer;
+            _playerModel.AbilityContainer = abilityHandler;
             _playerModel.IsFreeSlotAvailable = playerController.IsFreeSlotAvailable;
             _playerModel.Transform = playerController.transform;
             _playerModel.MoveController = moveController;

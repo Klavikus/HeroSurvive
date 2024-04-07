@@ -1,4 +1,5 @@
-﻿using GameCore.Source.Domain.Configs;
+﻿using GameCore.Source.Domain;
+using GameCore.Source.Domain.Configs;
 using UnityEngine;
 
 namespace GameCore.Source.Controllers.Api.Factories

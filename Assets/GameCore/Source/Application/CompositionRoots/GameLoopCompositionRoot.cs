@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using GameCore.Source.Controllers.Api.Factories;
 using GameCore.Source.Controllers.Api.Providers;
 using GameCore.Source.Controllers.Api.Services;
-using GameCore.Source.Controllers.Core;
+using GameCore.Source.Controllers.Api.ViewModels;
 using GameCore.Source.Controllers.Core.Factories;
 using GameCore.Source.Controllers.Core.Presenters;
 using GameCore.Source.Controllers.Core.Presenters.GameLoop;
 using GameCore.Source.Controllers.Core.Services;
+using GameCore.Source.Controllers.Core.ViewModels;
 using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Domain.Models;
 using GameCore.Source.Domain.Services;
@@ -44,15 +46,18 @@ namespace GameCore.Source.Application.CompositionRoots
             IModelProvider modelProvider = serviceContainer.Single<IModelProvider>();
             IPropertyProvider propertyProvider = serviceContainer.Single<IPropertyProvider>();
             IGameLoopService gameLoopService = serviceContainer.Single<IGameLoopService>();
+            IAdsProvider adsProvider = serviceContainer.Single<IAdsProvider>();
+            IUpgradeDescriptionBuilder upgradeDescriptionBuilder = serviceContainer.Single<IUpgradeDescriptionBuilder>();
 
             HeroModel heroModel = modelProvider.Get<HeroModel>();
             PlayerModel playerModel = modelProvider.Get<PlayerModel>();
-
 
             IAbilityUpgradeService abilityUpgradeService = new AbilityUpgradeService(configurationProvider);
             CurrencyModel currencyModel = modelProvider.Get<CurrencyModel>();
 
             LevelUpModel levelUpModel = new(abilityUpgradeService, currencyModel);
+
+            ILevelUpViewModel levelUpViewModel = new LevelUpViewModel(levelUpModel, abilityUpgradeService, adsProvider);
 
             EnemyFactory enemyFactory = new(configurationProvider, vfxService, audioPlayerService, gameLoopService);
 
@@ -84,7 +89,7 @@ namespace GameCore.Source.Application.CompositionRoots
                 levelUpModel);
 
             vfxService.Reset();
-            
+
             ConstructViews(
                 levelUpModel,
                 localizationService,
@@ -96,7 +101,9 @@ namespace GameCore.Source.Application.CompositionRoots
                 currencyModel,
                 playerFactory,
                 audioPlayerService,
-                healthViewBuilder);
+                healthViewBuilder,
+                levelUpViewModel, 
+                upgradeDescriptionBuilder);
         }
 
         private WindowFsm<GameLoopWindow> CreateWindowFsm()
@@ -106,6 +113,7 @@ namespace GameCore.Source.Application.CompositionRoots
                 [typeof(GameLoopWindow)] = new GameLoopWindow(),
                 [typeof(DeathWindow)] = new DeathWindow(),
                 [typeof(WinWindow)] = new WinWindow(),
+                [typeof(LevelUpWindow)] = new LevelUpWindow(),
             };
 
             WindowFsm<GameLoopWindow> windowFsm = new WindowFsm<GameLoopWindow>(windows);
@@ -113,8 +121,7 @@ namespace GameCore.Source.Application.CompositionRoots
             return windowFsm;
         }
 
-        private void ConstructViews(
-            LevelUpModel levelUpModel,
+        private void ConstructViews(LevelUpModel levelUpModel,
             ILocalizationService localizationService,
             IWindowFsm windowFsm,
             IGameStateMachine gameStateMachine,
@@ -124,9 +131,12 @@ namespace GameCore.Source.Application.CompositionRoots
             CurrencyModel currencyModel,
             PlayerFactory playerFactory,
             IAudioPlayerService audioPlayerService,
-            HealthViewBuilder healthViewBuilder)
+            HealthViewBuilder healthViewBuilder,
+            ILevelUpViewModel levelUpViewModel, 
+            IUpgradeDescriptionBuilder upgradeDescriptionBuilder)
         {
-            LevelUpSystemPresenter levelUpSystemPresenter = new(_levelUpSystemView, levelUpModel);
+            LevelUpSystemPresenter levelUpSystemPresenter =
+                new(windowFsm, _levelUpSystemView, levelUpViewModel, gamePauseService, localizationService, upgradeDescriptionBuilder);
 
             LocalizationSystemPresenter localizationSystemPresenter = new(_localizationSystemView, localizationService);
 

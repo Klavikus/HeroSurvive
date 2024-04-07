@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using GameCore.Source.Controllers.Api.Factories;
 using GameCore.Source.Controllers.Api.Providers;
 using GameCore.Source.Controllers.Api.Services;
+using GameCore.Source.Controllers.Core.Factories;
 using GameCore.Source.Controllers.Core.Providers;
 using GameCore.Source.Controllers.Core.Services;
 using GameCore.Source.Domain.Configs;
@@ -74,11 +76,18 @@ namespace GameCore.Source.Application.GameFSM.States
             IModelProvider modelProvider = RegisterModelProvider();
             IGameLoopService gameLoopService = RegisterGameLoopService();
             IUpgradeService upgradeService = RegisterUpgradeService(modelProvider);
-            
+
             IPropertyProvider propertyProvider = RegisterPropertyProvider(
                 configurationProvider,
                 upgradeService,
                 modelProvider);
+
+            IUpgradeDescriptionBuilder descriptionBuilder =
+                new UpgradeDescriptionBuilder(configurationProvider, localizationService);
+            _services.RegisterAsSingle(descriptionBuilder);
+
+            IAdsProvider adsProvider = new AdsProvider();
+            _services.RegisterAsSingle(adsProvider);
 
             PrepareModels(configurationProvider, modelProvider);
 
@@ -156,6 +165,9 @@ namespace GameCore.Source.Application.GameFSM.States
             IMultiCallHandler multiCallHandler = new MultiCallHandler();
             IGamePauseService gamePauseService = new GamePauseService(multiCallHandler);
             _services.RegisterAsSingle(gamePauseService);
+
+            gamePauseService.Paused += () => Time.timeScale = 0;
+            gamePauseService.Resumed += () => Time.timeScale = 1;
 
             return gamePauseService;
         }

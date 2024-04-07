@@ -12,12 +12,11 @@ namespace GameCore.Source.Domain.Services
     {
         private readonly IConfigurationProvider _configurationProvider;
 
-        private Dictionary<AbilityConfigSO, AbilityUpgradeViewData> _abilityConfigView =
-            new Dictionary<AbilityConfigSO, AbilityUpgradeViewData>();
+        private Dictionary<AbilityConfigSO, AbilityUpgradeViewData> _abilityConfigView = new();
 
         private Dictionary<bool, AbilityUpgradeData[]> _availableUpgrades;
 
-        private AbilityContainer _abilityContainer;
+        private IAbilityHandler _abilityContainer;
         private PlayerModel _currentPlayer;
 
         public AbilityUpgradeService(IConfigurationProvider configurationProvider)
@@ -39,7 +38,7 @@ namespace GameCore.Source.Domain.Services
 
         public void ResetUpgrades()
         {
-            foreach (Ability currentAbility in _abilityContainer.CurrentAbilities)
+            foreach (IAbilityController currentAbility in _abilityContainer.CurrentAbilities)
                 currentAbility.ResetUpgrades();
         }
 
@@ -51,9 +50,9 @@ namespace GameCore.Source.Domain.Services
         {
             List<AbilityUpgradeData> resultData = new List<AbilityUpgradeData>();
 
-            IReadOnlyList<Ability> _currentAbilities = GetPlayerAbilities();
+            IReadOnlyList<IAbilityController> _currentAbilities = GetPlayerAbilities();
 
-            foreach (Ability currentAbility in _currentAbilities)
+            foreach (IAbilityController currentAbility in _currentAbilities)
                 if (currentAbility.CanUpgrade)
                 {
                     currentAbility.AvailableUpgrade.SetAbilityGainedStatus(true);
@@ -93,6 +92,7 @@ namespace GameCore.Source.Domain.Services
         }
 
         private bool CheckFreeSlot() => _currentPlayer.IsFreeSlotAvailable;
-        private IReadOnlyList<Ability> GetPlayerAbilities() => _abilityContainer.CurrentAbilities;
+        private IReadOnlyList<IAbilityController> GetPlayerAbilities() =>
+            _abilityContainer.CurrentAbilities;
     }
 }

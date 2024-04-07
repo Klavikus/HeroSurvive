@@ -1,5 +1,4 @@
-﻿using GameCore.Source.Domain.Abilities;
-using GameCore.Source.Domain.EntityComponents;
+﻿using GameCore.Source.Domain.EntityComponents;
 using UnityEngine;
 
 namespace GameCore.Source.Domain.Models
@@ -10,7 +9,7 @@ namespace GameCore.Source.Domain.Models
         private Camera _playerCamera;
 
         public bool IsFreeSlotAvailable { get; set; }
-        public AbilityContainer AbilityContainer { get; set; }
+        public IAbilityHandler AbilityContainer { get; set; }
         public Transform Transform { get; set; }
         public MoveController MoveController { get; set; }
         public Camera Camera { get; set; }

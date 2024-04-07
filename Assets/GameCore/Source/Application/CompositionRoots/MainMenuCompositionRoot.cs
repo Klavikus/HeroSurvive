@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using GameCore.Source.Controllers.Api;
+using GameCore.Source.Controllers.Api.Factories;
 using GameCore.Source.Controllers.Api.Providers;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Controllers.Api.ViewModels;
@@ -17,7 +17,6 @@ using GameCore.Source.Infrastructure.Core.Services.DI;
 using GameCore.Source.Presentation.Api.MainMenu.HeroSelector;
 using GameCore.Source.Presentation.Core;
 using GameCore.Source.Presentation.Core.Factories;
-using GameCore.Source.Presentation.Core.GameLoop;
 using GameCore.Source.Presentation.Core.MainMenu;
 using GameCore.Source.Presentation.Core.MainMenu.Upgrades;
 using Modules.Common.WindowFsm.Runtime.Abstract;
@@ -56,6 +55,7 @@ namespace GameCore.Source.Application.CompositionRoots
             IAudioPlayerService audioPlayerService = serviceContainer.Single<IAudioPlayerService>();
             IPropertyProvider propertyProvider = serviceContainer.Single<IPropertyProvider>();
             IUpgradeService upgradeService = serviceContainer.Single<IUpgradeService>();
+            IUpgradeDescriptionBuilder descriptionBuilder = serviceContainer.Single<IUpgradeDescriptionBuilder>();
 
             UpgradeModel[] upgradeModels = modelProvider.Get<UpgradeModel[]>();
             CurrencyModel currencyModel = modelProvider.Get<CurrencyModel>();
@@ -72,8 +72,6 @@ namespace GameCore.Source.Application.CompositionRoots
                 audioPlayerService);
 
             IMainPropertiesViewModel mainPropertiesViewModel = new MainPropertiesViewModel(propertiesModel);
-
-            UpgradeDescriptionBuilder descriptionBuilder = new(configurationProvider, localizationService);
 
             PersistentUpgradeService persistentUpgradeService = new(
                 upgradeModels,
