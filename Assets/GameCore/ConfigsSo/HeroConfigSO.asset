@@ -37,7 +37,7 @@ MonoBehaviour:
       <Value>k__BackingField: 50
     - <BaseProperty>k__BackingField: 1
       <Value>k__BackingField: 1
-    <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 8f47b8b7df52f854f93f10f29f16d7b7, type: 2}
+    <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 2f16df4d150786c428364534fde6c676, type: 2}
     <Prefab>k__BackingField: {fileID: 4384465421469232149, guid: eddb32c3f95ea0e4fb1afc7f1fc31cfc, type: 3}
   - <Name>k__BackingField: Danilius The Snake
     <Description>k__BackingField: Powerful snake charmer. Snakes can do a lot.
@@ -124,7 +124,7 @@ MonoBehaviour:
       <Value>k__BackingField: 15
     - <BaseProperty>k__BackingField: 2
       <Value>k__BackingField: -15
-    <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 8f47b8b7df52f854f93f10f29f16d7b7, type: 2}
+    <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 0ad242d56c55db246be5e252a25a4aa3, type: 2}
     <Prefab>k__BackingField: {fileID: 5197431521435042443, guid: 2ed1bce4578aabc49ae4048e5bafca3c, type: 3}
   - <Name>k__BackingField: Vampure
     <Description>k__BackingField: An ancient creature that sucks from all living
@@ -155,6 +155,6 @@ MonoBehaviour:
       <Value>k__BackingField: 50
     - <BaseProperty>k__BackingField: 8
       <Value>k__BackingField: 100
-    <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 8f47b8b7df52f854f93f10f29f16d7b7, type: 2}
+    <InitialAbilityConfig>k__BackingField: {fileID: 11400000, guid: 6566df3eee9e6df4d91f266322690b0e, type: 2}
     <Prefab>k__BackingField: {fileID: 4014900518795304681, guid: f4b7d0f86eb92c44ebb45f4813cb0f43, type: 3}
   <BaseHeroView>k__BackingField: {fileID: 5794044302373075348, guid: 4fb7c26dcf24d964699c614b8b7ce628, type: 3}

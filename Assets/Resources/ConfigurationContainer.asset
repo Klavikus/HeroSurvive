@@ -20,7 +20,11 @@ MonoBehaviour:
   <EnemyConfigSO>k__BackingField: {fileID: 11400000, guid: 869bfe7dc0ff0e946a34eb9bcc87567f, type: 2}
   <StageCompetitionConfigSO>k__BackingField: {fileID: 11400000, guid: 167320bc269d6054b872bcd21575f4af, type: 2}
   <AbilityConfigsSO>k__BackingField:
+  - {fileID: 11400000, guid: fd62626efc0f21d4e908d03267c9f161, type: 2}
+  - {fileID: 11400000, guid: 0ad242d56c55db246be5e252a25a4aa3, type: 2}
   - {fileID: 11400000, guid: 8f47b8b7df52f854f93f10f29f16d7b7, type: 2}
+  - {fileID: 11400000, guid: 6566df3eee9e6df4d91f266322690b0e, type: 2}
+  - {fileID: 11400000, guid: 2f16df4d150786c428364534fde6c676, type: 2}
   <VfxConfig>k__BackingField:
     <KillPrefab>k__BackingField: {fileID: 8665184405990146887, guid: cff3642f09b0f18449e2060ccf252cfc, type: 3}
   <LocalizationTablePath>k__BackingField: LangDatabase

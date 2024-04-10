@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 565816474701656203}
   - component: {fileID: 565816474701656200}
-  - component: {fileID: 1953103478361970231}
   - component: {fileID: 6520736256253034034}
+  - component: {fileID: 5336038092055090400}
   m_Layer: 9
   m_Name: SkullGuardVFX
   m_TagString: Untagged
@@ -61,27 +61,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6463344, y: 0.58432454}
   m_EdgeRadius: 0
---- !u!114 &1953103478361970231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 565816474701656245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ef21dd4c7b74f878806c719dd886ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spriteRenderer: {fileID: 0}
-  _rigidbody2D: {fileID: 6520736256253034034}
-  _useVfxView: 1
-  _view:
-    _viewType: 0
-    _sprites: []
-    _isLooped: 1
-    _shouldHideOnEnd: 0
-    _oneCyclePlayTime: 0.3
 --- !u!50 &6520736256253034034
 Rigidbody2D:
   serializedVersion: 4
@@ -103,6 +82,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5336038092055090400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565816474701656245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8853645b75a94823a8c849d4057ba062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _abilityAnimator:
+    _viewType: 0
+    _sprites: []
+    _isLooped: 0
+    _shouldHideOnEnd: 0
+    _oneCyclePlayTime: 0
+  <UseVfx>k__BackingField: 1
+  <SpriteRenderer>k__BackingField: {fileID: 0}
+  <Rigidbody>k__BackingField: {fileID: 6520736256253034034}
 --- !u!1 &3922850334199210080
 GameObject:
   m_ObjectHideFlags: 0

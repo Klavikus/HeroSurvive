@@ -20,3 +20,4 @@ MonoBehaviour:
     Value: {x: 1, y: 1}
     Duration: 0.2
     Ease: 1
+  <IgnoreTimeScale>k__BackingField: 1

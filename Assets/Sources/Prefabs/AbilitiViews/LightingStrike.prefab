@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 550520186151107553}
   - component: {fileID: 550520186151107554}
-  - component: {fileID: 550520186151107536}
   - component: {fileID: 550520186151107537}
   m_Layer: 9
   m_Name: LightingStrike
@@ -61,32 +60,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.44869673, y: 1.7436224}
   m_EdgeRadius: 0
---- !u!114 &550520186151107536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 550520186151107551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ef21dd4c7b74f878806c719dd886ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spriteRenderer: {fileID: 5220522424548018236}
-  _rigidbody2D: {fileID: 550520186151107537}
-  _view:
-    _viewType: 1
-    _sprites:
-    - {fileID: 21300000, guid: 24791e9df69568c458174a23e896f066, type: 3}
-    - {fileID: 21300000, guid: be885a1e558f6e14a956f1efc5bfde98, type: 3}
-    - {fileID: 21300000, guid: 927403aead1d92245a708bf6ee330b4d, type: 3}
-    - {fileID: 21300000, guid: 2529984c947536040804b592527c4d40, type: 3}
-    - {fileID: 21300000, guid: d620e605f9b68ed4f9bfa45d8d1108e1, type: 3}
-    - {fileID: 21300000, guid: 677f965a7eae1864599862a6bee6e976, type: 3}
-    _isLooped: 1
-    _shouldHideOnEnd: 0
-    _oneCyclePlayTime: 0.5
 --- !u!50 &550520186151107537
 Rigidbody2D:
   serializedVersion: 4

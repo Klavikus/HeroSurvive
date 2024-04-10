@@ -33,8 +33,8 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
 
         private int _respawnsCount;
 
-        private int _currentSelectedViewId = 0;
-        private int _maxId = 2;
+        private int _currentSelectedViewId;
+        private int _maxId;
         private int _currentActiveButtonId;
         private int _maxButtonId = 1;
         private AbilityUpgradeData _currentSelectedUpgrade;
@@ -78,7 +78,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
                 _abilityUpgradeDataByView.Add(upgradeView, null);
                 upgradeView.Selected += OnUpgradeSelected;
             }
-            
+
             _view.ContinueButton.SetInteractionLock(false);
         }
 
@@ -92,10 +92,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             _view.ReRollButton.Clicked -= OnReRollButtonClicked;
 
             foreach (IAbilityUpgradeView upgradeView in _abilityUpgradeViews)
-            {
-                // upgradeView.Initialize(upgradeDescriptionBuilder);
                 upgradeView.Selected -= OnUpgradeSelected;
-            }
 
             UnsubscribeFromInputActions();
 
