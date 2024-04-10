@@ -6,7 +6,8 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens.ConfigsSo
         order = 0)]
     public class TwoSidedVector2TweenData : ScriptableObject
     {
-        [field: SerializeField] public Vector2TweenData Forward { get; set; }
-        [field: SerializeField] public Vector2TweenData Backward { get; set; }
+        [field: SerializeField] public Vector2TweenData Forward { get; private set; }
+        [field: SerializeField] public Vector2TweenData Backward { get; private set; }
+        [field: SerializeField] public bool IgnoreTimeScale { get; private set; }
     }
 }

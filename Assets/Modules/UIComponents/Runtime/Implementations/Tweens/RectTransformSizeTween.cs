@@ -59,6 +59,7 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
             await _rectTransform
                 .DOSizeDelta(_initialSize * _tweenData.Forward.Value, _tweenData.Forward.Duration)
                 .SetEase(_tweenData.Forward.Ease)
+                .SetUpdate(_tweenData.IgnoreTimeScale)
                 .WithCancellation(_cancellationTokenSource.Token);
 
             _inProgress = false;
@@ -81,6 +82,7 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
             await _rectTransform
                 .DOSizeDelta(_initialSize * _tweenData.Backward.Value, _tweenData.Backward.Duration)
                 .SetEase(_tweenData.Backward.Ease)
+                .SetUpdate(_tweenData.IgnoreTimeScale)
                 .WithCancellation(_cancellationTokenSource.Token);
 
             _inProgress = false;

@@ -78,6 +78,8 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
                 _abilityUpgradeDataByView.Add(upgradeView, null);
                 upgradeView.Selected += OnUpgradeSelected;
             }
+            
+            _view.ContinueButton.SetInteractionLock(false);
         }
 
         protected override void OnAfterDisable()
@@ -89,6 +91,14 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             _view.ContinueButton.Clicked -= OnContinueButtonClicked;
             _view.ReRollButton.Clicked -= OnReRollButtonClicked;
 
+            foreach (IAbilityUpgradeView upgradeView in _abilityUpgradeViews)
+            {
+                // upgradeView.Initialize(upgradeDescriptionBuilder);
+                upgradeView.Selected -= OnUpgradeSelected;
+            }
+
+            UnsubscribeFromInputActions();
+
             _viewModel.ResetLevels();
         }
 
@@ -96,28 +106,14 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
         {
             _gamePauseService.InvokeByUI(true);
 
-            _playerInputActions.UI.ScrollUp.performed += OnScrollUpPerformed;
-            _playerInputActions.UI.ScrollDown.performed += OnScrollDownPerformed;
-            _playerInputActions.UI.Apply.performed += OnApplyPerformed;
-
-            _defaultInputActions.UI.Navigate.performed += NavigateOnPerformed;
-
-            _playerInputActions.Enable();
-            _defaultInputActions.Enable();
+            SubscribeToInputActions();
 
             Show();
         }
 
         protected override void OnAfterClosed()
         {
-            _playerInputActions.UI.ScrollUp.performed -= OnScrollUpPerformed;
-            _playerInputActions.UI.ScrollDown.performed -= OnScrollDownPerformed;
-            _playerInputActions.UI.Apply.performed -= OnApplyPerformed;
-
-            _defaultInputActions.UI.Navigate.performed -= NavigateOnPerformed;
-
-            _playerInputActions.Disable();
-            _defaultInputActions.Disable();
+            UnsubscribeFromInputActions();
 
             _gamePauseService.InvokeByUI(false);
         }
@@ -217,7 +213,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             _currentSelectedUpgrade ??= _abilityUpgradeDataByView[_abilityUpgradeViews[0]];
             _viewModel.SelectUpgrade(_currentSelectedUpgrade);
             _currentSelectedUpgrade = null;
-            
+
             WindowFsm.Close<LevelUpWindow>();
         }
 
@@ -244,6 +240,8 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
 
             AbilityUpgradeData[] upgradesData = _viewModel.GetAvailableUpgrades();
 
+            _maxId = upgradesData.Length - 1;
+
             for (int i = 0; i < _abilityUpgradeViews.Length; i++)
             {
                 if (i < upgradesData.Length)
@@ -259,6 +257,30 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             }
 
             _abilityUpgradeViews[0].SetSelected(true);
+        }
+
+        private void SubscribeToInputActions()
+        {
+            _playerInputActions.UI.ScrollUp.performed += OnScrollUpPerformed;
+            _playerInputActions.UI.ScrollDown.performed += OnScrollDownPerformed;
+            _playerInputActions.UI.Apply.performed += OnApplyPerformed;
+
+            _defaultInputActions.UI.Navigate.performed += NavigateOnPerformed;
+
+            _playerInputActions.Enable();
+            _defaultInputActions.Enable();
+        }
+
+        private void UnsubscribeFromInputActions()
+        {
+            _playerInputActions.UI.ScrollUp.performed -= OnScrollUpPerformed;
+            _playerInputActions.UI.ScrollDown.performed -= OnScrollDownPerformed;
+            _playerInputActions.UI.Apply.performed -= OnApplyPerformed;
+
+            _defaultInputActions.UI.Navigate.performed -= NavigateOnPerformed;
+
+            _playerInputActions.Disable();
+            _defaultInputActions.Disable();
         }
     }
 }
