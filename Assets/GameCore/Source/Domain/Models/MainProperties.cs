@@ -56,5 +56,11 @@ namespace GameCore.Source.Domain.Models
         }
 
         public void UpdateProperty(BaseProperty baseProperty, float baseValue) => _baseProperties[baseProperty] = baseValue;
+
+        public void Reset()
+        {
+            foreach (BaseProperty baseProperty in Enum.GetValues(typeof(BaseProperty))) 
+                _baseProperties[baseProperty] = 0;
+        }
     }
 }

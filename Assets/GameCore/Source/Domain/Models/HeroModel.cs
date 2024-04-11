@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using GameCore.Source.Domain.Data;
 
 namespace GameCore.Source.Domain.Models
@@ -15,6 +16,8 @@ namespace GameCore.Source.Domain.Models
         public void SetHeroData(HeroData heroData)
         {
             CurrentSelectedHero = heroData;
+
+            _mainProperties.Reset();
 
             foreach (AdditionalHeroProperty heroProperty in heroData.AdditionalProperties)
                 _mainProperties.UpdateProperty(heroProperty.BaseProperty, heroProperty.Value);
