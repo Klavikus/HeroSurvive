@@ -25,6 +25,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8f47b8b7df52f854f93f10f29f16d7b7, type: 2}
   - {fileID: 11400000, guid: 6566df3eee9e6df4d91f266322690b0e, type: 2}
   - {fileID: 11400000, guid: 2f16df4d150786c428364534fde6c676, type: 2}
+  - {fileID: 11400000, guid: d1419368812d01a419b241b72a1a5d9a, type: 2}
+  - {fileID: 11400000, guid: 7f7d178186cfeb741ae7615935d11cdf, type: 2}
+  - {fileID: 11400000, guid: 7643d26e848e21940b87cb8ebfc3aee0, type: 2}
+  - {fileID: 11400000, guid: 92b80def55181ad428abe15b8efb6641, type: 2}
   <VfxConfig>k__BackingField:
     <KillPrefab>k__BackingField: {fileID: 8665184405990146887, guid: cff3642f09b0f18449e2060ccf252cfc, type: 3}
   <LocalizationTablePath>k__BackingField: LangDatabase

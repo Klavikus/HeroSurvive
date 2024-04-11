@@ -64,7 +64,7 @@ namespace GameCore.Source.Application.CompositionRoots
 
             propertyProvider.Initialize();
 
-            currencyModel.Add(10000);
+            currencyModel.Add(1000000);
 
             HeroSelectorViewModel heroSelectorViewModel = new(
                 heroModel,
