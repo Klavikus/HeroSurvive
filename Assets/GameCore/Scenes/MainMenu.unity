@@ -2378,8 +2378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _countText: {fileID: 477543564}
-  _countDuration: 1
-  _countStep: 100
+  _config: {fileID: 11400000, guid: d9428cf4992b0bd4b8a7d4ea656b377e, type: 2}
 --- !u!114 &1298590929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4166,6 +4165,10 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9156833031119914208, guid: 0538b073f06c98c4bae6a2f67cf632b6, type: 3}
+      propertyPath: _config
+      value: 
+      objectReference: {fileID: 11400000, guid: d9428cf4992b0bd4b8a7d4ea656b377e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0538b073f06c98c4bae6a2f67cf632b6, type: 3}
 --- !u!1 &341929842946542758
@@ -8898,7 +8901,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1555526922374517827, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 43466.523
+      value: 46700.918
       objectReference: {fileID: 0}
     - target: {fileID: 3825262620608170728, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
       propertyPath: m_RootOrder

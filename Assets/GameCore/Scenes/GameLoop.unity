@@ -645,8 +645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _countText: {fileID: 1631564586}
-  _countDuration: 15
-  _countStep: 100
+  _config: {fileID: 0}
 --- !u!1 &122851106
 GameObject:
   m_ObjectHideFlags: 0
@@ -7415,8 +7414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _countText: {fileID: 1726321873}
-  _countDuration: 2
-  _countStep: 10
+  _config: {fileID: 11400000, guid: d9428cf4992b0bd4b8a7d4ea656b377e, type: 2}
 --- !u!1 &1786240596
 GameObject:
   m_ObjectHideFlags: 0
@@ -7930,8 +7928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _countText: {fileID: 1903589484}
-  _countDuration: 3
-  _countStep: 10
+  _config: {fileID: 11400000, guid: d9428cf4992b0bd4b8a7d4ea656b377e, type: 2}
 --- !u!1 &1903589486 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9154993774486451694, guid: f5f63eefe601984498847cbc644d2d13, type: 3}

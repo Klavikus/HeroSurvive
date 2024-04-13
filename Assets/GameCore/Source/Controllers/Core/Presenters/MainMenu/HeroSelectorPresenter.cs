@@ -111,7 +111,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.MainMenu
         private void FillView(HeroData heroData)
         {
             string heroName = _localizationService.GetLocalizedText(heroData.TranslatableName);
-            string heroDescription = _localizationService.GetLocalizedText(heroData.Description);
+            string heroDescription = _localizationService.GetLocalizedText(heroData.TranslatableDescriptions);
             string abilityName =
                 _localizationService.GetLocalizedText(heroData.InitialAbilityConfig.UpgradeViewData.TranslatableName);
 
