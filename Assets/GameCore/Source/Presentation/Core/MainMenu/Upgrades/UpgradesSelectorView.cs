@@ -7,7 +7,7 @@ namespace GameCore.Source.Presentation.Core.MainMenu.Upgrades
 {
     public class UpgradesSelectorView : ViewBase, IUpgradesSelectorView
     {
-        [field: SerializeField] public Canvas Canvas { get; private set; }
+        [field: SerializeField] public Canvas[] Canvases { get; private set; }
         [field: SerializeField] public Transform UpgradeViewsContainer { get; private set; }
         [field: SerializeField] public ActionButton CloseButton { get; private set; }
         [field: SerializeField] public ActionButton UserNameButton { get; private set; }
@@ -18,6 +18,18 @@ namespace GameCore.Source.Presentation.Core.MainMenu.Upgrades
         {
             CloseButton.Initialize();
             UserNameButton.Initialize();
+        }
+
+        public void Show()
+        {
+            foreach (Canvas canvas in Canvases)
+                canvas.enabled = true;
+        }
+
+        public void Hide()
+        {
+            foreach (Canvas canvas in Canvases)
+                canvas.enabled = false;
         }
     }
 }

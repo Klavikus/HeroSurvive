@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using Modules.Common.WindowFsm.Runtime.Abstract;
 using Modules.MVPPassiveView.Runtime;
 using UnityEngine;
@@ -8,12 +9,17 @@ namespace GameCore.Source.Controllers.Core.Presenters.Base
     public abstract class BaseWindowPresenter<T> : IPresenter
         where T : IWindow
     {
-        private readonly Canvas _canvas;
+        private readonly Action _onOpenedBaseAction;
+        private readonly Action _onClosedBaseAction;
 
-        protected BaseWindowPresenter(IWindowFsm windowFsm, Canvas canvas)
+        protected BaseWindowPresenter(
+            IWindowFsm windowFsm,
+            Action onOpenedBaseAction = null,
+            Action onClosedBaseAction = null)
         {
             WindowFsm = windowFsm ?? throw new ArgumentNullException(nameof(windowFsm));
-            _canvas = canvas ? canvas : throw new ArgumentNullException(nameof(canvas));
+            _onOpenedBaseAction = onOpenedBaseAction;
+            _onClosedBaseAction = onClosedBaseAction;
         }
 
         public IWindowFsm WindowFsm { get; }
@@ -57,7 +63,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.Base
             if (window is not T)
                 return;
 
-            _canvas.enabled = true;
+            _onOpenedBaseAction?.Invoke();
 
             OnAfterOpened();
         }
@@ -67,12 +73,17 @@ namespace GameCore.Source.Controllers.Core.Presenters.Base
             if (window is not T)
                 return;
 
-            _canvas.enabled = false;
+            _onClosedBaseAction?.Invoke();
 
             OnAfterClosed();
         }
 
-        private void InitialCheck() =>
-            _canvas.enabled = WindowFsm.CurrentWindow is T;
+        private void InitialCheck()
+        {
+            if (WindowFsm.CurrentWindow is T)
+                _onOpenedBaseAction?.Invoke();
+            else
+                _onClosedBaseAction?.Invoke();
+        }
     }
 }

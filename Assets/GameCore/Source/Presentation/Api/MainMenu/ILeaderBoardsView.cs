@@ -5,9 +5,10 @@ namespace GameCore.Source.Presentation.Api.MainMenu
 {
     public interface ILeaderBoardsView
     {
-        Canvas MainCanvas { get; }
         Transform ScoreViewsContainer { get; }
         ActionButton CloseButton { get; }
         ILeaderBoardScoreView PlayerLeaderBoardScoreView { get; }
+        void Show();
+        void Hide();
     }
 }

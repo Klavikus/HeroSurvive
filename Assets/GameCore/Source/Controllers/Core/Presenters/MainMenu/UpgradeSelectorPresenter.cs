@@ -27,7 +27,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.MainMenu
             IUpgradesSelectorView view,
             IPersistentUpgradeService persistentUpgradeService,
             IPersistentUpgradeViewFactory persistentUpgradeViewFactory)
-            : base(windowFsm, view.Canvas)
+            : base(windowFsm, view.Show, view.Hide)
         {
             _view = view;
             _persistentUpgradeService = persistentUpgradeService ??

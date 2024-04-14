@@ -8,7 +8,7 @@ namespace GameCore.Source.Presentation.Core.GameLoop
 {
     public class WinView : ViewBase, IWinView
     {
-        [field: SerializeField] public Canvas Canvas { get; private set; }
+        [field: SerializeField] public Canvas[] Canvases { get; private set; }
         [field: SerializeField] public ActionButton ContinueButton { get; private set; }
         [field: SerializeField] public ActionButton DoubleRewardButton { get; private set; }
         [field: SerializeField] public ActionCounter KillCounter { get; private set; }
@@ -18,6 +18,18 @@ namespace GameCore.Source.Presentation.Core.GameLoop
         {
             ContinueButton.Initialize();
             DoubleRewardButton.Initialize();
+        }
+
+        public void Show()
+        {
+            foreach (Canvas canvas in Canvases)
+                canvas.enabled = true;
+        }
+
+        public void Hide()
+        {
+            foreach (Canvas canvas in Canvases)
+                canvas.enabled = false;
         }
     }
 }

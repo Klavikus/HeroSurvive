@@ -28,7 +28,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             IGamePauseService gamePauseService,
             ILeveCompetitionService leveCompetitionService,
             CurrencyModel currencyModel)
-            : base(windowFsm, view.Canvas)
+            : base(windowFsm, view.Show, view.Hide)
         {
             _view = view;
             _gameStateMachine = gameStateMachine ?? throw new ArgumentNullException(nameof(gameStateMachine));

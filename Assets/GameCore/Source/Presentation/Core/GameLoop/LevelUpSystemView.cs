@@ -12,7 +12,7 @@ namespace GameCore.Source.Presentation.Core.GameLoop
     {
         [SerializeField] private AbilityUpgradeView[] _abilityUpgradeViews;
         
-        [field: SerializeField] public Canvas Canvas { get; private set; }
+        [field: SerializeField] public Canvas[] Canvases { get; private set; }
         [field: SerializeField] public Image LevelCompletionImage { get; private set; }
         [field: SerializeField] public ActionButton ContinueButton { get; private set; }
         [field: SerializeField] public ActionButton ReRollButton { get; private set; }
@@ -23,6 +23,17 @@ namespace GameCore.Source.Presentation.Core.GameLoop
         {
             ContinueButton.Initialize();
             ReRollButton.Initialize();
+        }
+        public void Show()
+        {
+            foreach (Canvas canvas in Canvases)
+                canvas.enabled = true;
+        }
+
+        public void Hide()
+        {
+            foreach (Canvas canvas in Canvases)
+                canvas.enabled = false;
         }
     }
 }

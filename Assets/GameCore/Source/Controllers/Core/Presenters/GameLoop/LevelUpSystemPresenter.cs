@@ -44,7 +44,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             IGamePauseService gamePauseService,
             ILocalizationService localizationService,
             IUpgradeDescriptionBuilder upgradeDescriptionBuilder)
-            : base(windowFsm, view.Canvas)
+            : base(windowFsm, view.Show, view.Hide)
         {
             _view = view;
             _viewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));

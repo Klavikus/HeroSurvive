@@ -14,7 +14,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.MainMenu
         public MainMenuPresenter(
             IWindowFsm windowFsm,
             IMainMenuView view)
-            : base(windowFsm, view.Canvas)
+            : base(windowFsm, view.Show, view.Hide)
         {
             _view = view;
         }

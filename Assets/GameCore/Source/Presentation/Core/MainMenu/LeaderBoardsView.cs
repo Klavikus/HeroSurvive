@@ -8,11 +8,22 @@ namespace GameCore.Source.Presentation.Core.MainMenu
     public class LeaderBoardsView : ViewBase, ILeaderBoardsView
     {
         [SerializeField] private LeaderBoardScoreView _playerLeaderBoardScoreView;
-        [field: SerializeField] public Canvas MainCanvas { get; private set; }
+        [field: SerializeField] public Canvas[] Canvases { get; private set; }
         [field: SerializeField] public Transform ScoreViewsContainer { get; private set; }
         [field: SerializeField] public ActionButton CloseButton { get; private set; }
 
         public ILeaderBoardScoreView PlayerLeaderBoardScoreView => _playerLeaderBoardScoreView;
+        public void Show()
+        {
+            foreach (Canvas canvas in Canvases)
+                canvas.enabled = true;
+        }
+
+        public void Hide()
+        {
+            foreach (Canvas canvas in Canvases)
+                canvas.enabled = false;
+        }
 
         // [SerializeField] private Button _closeButton;
         // [SerializeField] private LeaderBoardScoreView _playerScoreView;

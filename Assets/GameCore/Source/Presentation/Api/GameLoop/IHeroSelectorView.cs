@@ -5,7 +5,6 @@ namespace GameCore.Source.Presentation.Api.GameLoop
 {
     public interface IHeroSelectorView
     {
-        Canvas Canvas { get; }
         int RowCount { get; }
         int ColCount { get; }
         ActionButton ContinueButton { get; }
@@ -13,6 +12,8 @@ namespace GameCore.Source.Presentation.Api.GameLoop
         RectTransform HeroViewsContainer { get; }
         RectTransform PropertiesViewContainer { get; }
         void Initialize();
+        void Show();
+        void Hide();
         void FillHeroDescription(Sprite icon, string heroName, string description);
         void FillBaseAbilityView(Sprite icon, string abilityName);
     }

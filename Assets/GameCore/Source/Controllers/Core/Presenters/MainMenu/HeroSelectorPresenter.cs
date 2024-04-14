@@ -28,7 +28,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.MainMenu
             IHeroSelectorViewModel viewModel,
             ILocalizationService localizationService,
             IGameStateMachine gameStateMachine
-        ) : base(windowFsm, view.Canvas)
+        ) : base(windowFsm, view.Show, view.Hide)
         {
             _view = view;
             _viewModel = viewModel;

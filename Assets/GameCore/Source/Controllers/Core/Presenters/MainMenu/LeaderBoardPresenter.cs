@@ -12,7 +12,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.MainMenu
         public LeaderBoardPresenter(
             ILeaderBoardsView view,
             IWindowFsm windowFsm)
-            : base(windowFsm, view.MainCanvas)
+            : base(windowFsm,view.Show, view.Hide)
         {
             _view = view;
         }

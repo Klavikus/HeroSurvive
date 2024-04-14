@@ -23,7 +23,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             IGameStateMachine gameStateMachine,
             IGameLoopService gameLoopService,
             IGamePauseService gamePauseService)
-            : base(windowFsm, view.Canvas)
+            : base(windowFsm, view.Show, view.Hide)
         {
             _view = view;
             _gameStateMachine = gameStateMachine ?? throw new ArgumentNullException(nameof(gameStateMachine));

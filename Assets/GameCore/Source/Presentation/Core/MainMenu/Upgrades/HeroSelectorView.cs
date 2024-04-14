@@ -11,7 +11,7 @@ namespace GameCore.Source.Presentation.Core.MainMenu.Upgrades
         [SerializeField] private HeroDescriptionView _heroDescriptionView;
         [SerializeField] private BaseAbilityView _baseAbilityView;
 
-        [field: SerializeField] public Canvas Canvas { get; private set; }
+        [field: SerializeField] public Canvas[] Canvases { get; private set; }
         [field: SerializeField] public ActionButton ContinueButton { get; private set; }
         [field: SerializeField] public ActionButton CloseButton { get; private set; }
         [field: SerializeField] public RectTransform HeroViewsContainer { get; private set; }
@@ -23,6 +23,18 @@ namespace GameCore.Source.Presentation.Core.MainMenu.Upgrades
         {
             ContinueButton.Initialize();
             CloseButton.Initialize();
+        }
+
+        public void Show()
+        {
+            foreach (Canvas canvas in Canvases)
+                canvas.enabled = true;
+        }
+
+        public void Hide()
+        {
+            foreach (Canvas canvas in Canvases)
+                canvas.enabled = false;
         }
 
         public void FillHeroDescription(Sprite icon, string heroName, string description) =>

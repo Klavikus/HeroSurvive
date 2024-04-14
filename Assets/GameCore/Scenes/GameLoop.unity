@@ -460,7 +460,8 @@ MonoBehaviour:
   - {fileID: 1037059797}
   - {fileID: 997068565}
   - {fileID: 1152816744}
-  <Canvas>k__BackingField: {fileID: 2028641697}
+  <Canvases>k__BackingField:
+  - {fileID: 2028641697}
   <LevelCompletionImage>k__BackingField: {fileID: 1786240597}
   <ContinueButton>k__BackingField: {fileID: 739859817}
   <ReRollButton>k__BackingField: {fileID: 1524819687}
@@ -8596,7 +8597,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58e7c85ea894b90ac525269d48c010d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Canvas>k__BackingField: {fileID: 892030863}
+  <Canvases>k__BackingField:
+  - {fileID: 892030863}
   <ContinueButton>k__BackingField: {fileID: 1323986800}
   <DoubleRewardButton>k__BackingField: {fileID: 1334828557}
   <KillCounter>k__BackingField: {fileID: 1726321878}
@@ -10851,7 +10853,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c308204f1d14acd8791a0503c8ee95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Canvas>k__BackingField: {fileID: 585456174295646506}
+  <Canvases>k__BackingField:
+  - {fileID: 585456174295646506}
   <ResurrectButton>k__BackingField: {fileID: 6890316686981000702}
   <DoubleRewardAdsButton>k__BackingField: {fileID: 8781735030100607706}
   <BackToMenuButton>k__BackingField: {fileID: 6890316687069101208}
