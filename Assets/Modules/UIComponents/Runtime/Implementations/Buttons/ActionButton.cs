@@ -17,7 +17,6 @@ namespace Modules.UIComponents.Runtime.Implementations.Buttons
         public event Action Clicked;
 
         private bool _isInteractionLocked;
-        private bool _isFocused;
 
         private void OnEnable() =>
             _button.onClick.AddListener(OnButtonClicked);
@@ -35,18 +34,6 @@ namespace Modules.UIComponents.Runtime.Implementations.Buttons
         {
             _button.interactable = isLock == false;
             _isInteractionLocked = isLock;
-        }
-
-        public void Focus()
-        {
-            _isFocused = true;
-            _focusActionComponent?.PlayForward();
-        }
-
-        public void Unfocus()
-        {
-            _focusActionComponent?.Cancel();
-            _isFocused = false;
         }
 
         public async void OnButtonClicked()
@@ -73,6 +60,17 @@ namespace Modules.UIComponents.Runtime.Implementations.Buttons
             _isInteractionLocked = false;
 
             Clicked?.Invoke();
+        }
+
+        public void Focus()
+        {
+            _focusActionComponent?.PlayForward();
+        }
+
+        public void Unfocus()
+        {
+            _focusActionComponent?.Cancel();
+            _focusActionComponent?.SetBackwardState();
         }
     }
 }

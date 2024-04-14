@@ -118,6 +118,7 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource?.Dispose();
             _cancellationTokenSource = new CancellationTokenSource();
+            _rectTransform.sizeDelta = _initialSize;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
         [SerializeField] private bool _initializeByComposition;
         [SerializeField] private bool _activateBackwardAfterForward;
         [SerializeField] private bool _useDurationAsSpeed;
-        
+
         private CancellationTokenSource _cancellationTokenSource;
 
         private Vector2 _initialPosition;
@@ -80,7 +80,7 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
             float duration = _useDurationAsSpeed
                 ? _tweenData.Backward.Value.magnitude / _tweenData.Backward.Duration
                 : _tweenData.Backward.Duration;
-            
+
             await _rectTransform
                 .DOAnchorPos(_initialPosition + _tweenData.Backward.Value, duration)
                 .SetEase(_tweenData.Backward.Ease)
@@ -114,6 +114,8 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource?.Dispose();
             _cancellationTokenSource = new CancellationTokenSource();
+
+            _rectTransform.anchoredPosition = _initialPosition;
         }
     }
 }

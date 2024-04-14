@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using GameCore.Source.Controllers.Api.Factories;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Controllers.Api.ViewModels;
@@ -29,15 +28,13 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
         private readonly PlayerInputActions _playerInputActions;
         private readonly DefaultInputActions _defaultInputActions;
         private readonly IAbilityUpgradeView[] _abilityUpgradeViews;
-
-        private Dictionary<IAbilityUpgradeView, AbilityUpgradeData> _abilityUpgradeDataByView;
+        private readonly Dictionary<IAbilityUpgradeView, AbilityUpgradeData> _abilityUpgradeDataByView;
 
         private int _respawnsCount;
 
         private int _currentSelectedViewId;
         private int _maxId;
         private int _currentActiveButtonId;
-        private int _maxButtonId = 1;
         private AbilityUpgradeData _currentSelectedUpgrade;
 
         public LevelUpSystemPresenter(
@@ -75,7 +72,6 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
 
             foreach (IAbilityUpgradeView upgradeView in _abilityUpgradeViews)
             {
-                // upgradeView.Initialize(upgradeDescriptionBuilder);
                 _abilityUpgradeDataByView.Add(upgradeView, null);
                 upgradeView.Selected += OnUpgradeSelected;
             }
@@ -100,7 +96,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             _viewModel.ResetLevels();
         }
 
-        protected override async void OnAfterOpened()
+        protected override void OnAfterOpened()
         {
             _gamePauseService.InvokeByUI(true);
 
@@ -113,6 +109,9 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
         {
             UnsubscribeFromInputActions();
 
+            _view.ContinueButton.Unfocus();
+            _view.ReRollButton.Unfocus();
+            
             _gamePauseService.InvokeByUI(false);
         }
 
@@ -162,14 +161,13 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
 
         private void OnReRollButtonClicked()
         {
-            _currentActiveButtonId = 1;
             _viewModel.Reroll();
+            _currentActiveButtonId = 0;
+            ActivateSelectedTween();
         }
 
         private void OnLevelChanged(int newLevel)
         {
-            // _currentLevel.text = newLevel.ToString();
-
             if (_viewModel.GetAvailableUpgrades().Length == 0)
                 return;
 
@@ -182,7 +180,6 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             {
                 FillUpgradeView(_abilityUpgradeViews[i], abilityUpgradesData[i]);
 
-                // _abilityUpgradeViews[i].Show(abilityUpgradesData[i]);
                 _abilityUpgradeDataByView[_abilityUpgradeViews[i]] = abilityUpgradesData[i];
             }
         }
@@ -235,9 +232,10 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
 
             AbilityUpgradeData[] upgradesData = _viewModel.GetAvailableUpgrades();
 
-            _maxId = upgradesData.Length - 1;
+            int minLength = Mathf.Min(upgradesData.Length, _abilityUpgradeViews.Length);
+            _maxId = minLength - 1;
 
-            for (int i = 0; i < _abilityUpgradeViews.Length; i++)
+            for (int i = 0; i < minLength; i++)
             {
                 if (i < upgradesData.Length)
                 {
@@ -256,15 +254,15 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
 
         private void SubscribeToInputActions()
         {
-            _playerInputActions.Enable();
-            _defaultInputActions.Enable();
-
             _playerInputActions.UI.ScrollUp.performed += OnScrollUpPerformed;
             _playerInputActions.UI.ScrollDown.performed += OnScrollDownPerformed;
             _playerInputActions.UI.Apply.performed += OnApplyPerformed;
 
             _playerInputActions.UI.ScrollLeft.performed += OnScrollLeftPerformed;
             _playerInputActions.UI.ScrollRight.performed += OnScrollRightPerformed;
+
+            _playerInputActions.Enable();
+            _defaultInputActions.Enable();
         }
 
         private void UnsubscribeFromInputActions()
