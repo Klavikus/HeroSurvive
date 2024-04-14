@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using GameCore.Source.Controllers.Api.Factories;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Controllers.Api.ViewModels;
@@ -99,13 +100,13 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             _viewModel.ResetLevels();
         }
 
-        protected override void OnAfterOpened()
+        protected override async void OnAfterOpened()
         {
             _gamePauseService.InvokeByUI(true);
 
-            SubscribeToInputActions();
-
             Show();
+
+            SubscribeToInputActions();
         }
 
         protected override void OnAfterClosed()
@@ -115,27 +116,24 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             _gamePauseService.InvokeByUI(false);
         }
 
-        private void NavigateOnPerformed(InputAction.CallbackContext context)
+        private void OnScrollLeftPerformed(InputAction.CallbackContext context)
         {
-            if (context.ReadValue<Vector2>().x < 0)
-            {
-                if (context.control.IsPressed() == false || _currentActiveButtonId == 0)
-                    return;
+            if (context.control.IsPressed() == false || _currentActiveButtonId == 0)
+                return;
 
-                _currentActiveButtonId--;
+            _currentActiveButtonId--;
 
-                ActivateSelectedTween();
-            }
+            ActivateSelectedTween();
+        }
 
-            if (context.ReadValue<Vector2>().x > 0)
-            {
-                if (context.control.IsPressed() == false || _currentActiveButtonId == 1)
-                    return;
+        private void OnScrollRightPerformed(InputAction.CallbackContext context)
+        {
+            if (context.control.IsPressed() == false || _currentActiveButtonId == 1)
+                return;
 
-                _currentActiveButtonId++;
+            _currentActiveButtonId++;
 
-                ActivateSelectedTween();
-            }
+            ActivateSelectedTween();
         }
 
         private void OnScrollUpPerformed(InputAction.CallbackContext context)
@@ -218,14 +216,14 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
         {
             if (_currentActiveButtonId == 0)
             {
-                // _continueButtonTweenTrigger.InvokeShow();
-                // _reRollButtonTweenTrigger.InvokeHide();
+                _view.ContinueButton.Focus();
+                _view.ReRollButton.Unfocus();
             }
 
             if (_currentActiveButtonId == 1)
             {
-                // _continueButtonTweenTrigger.InvokeHide();
-                // _reRollButtonTweenTrigger.InvokeShow();
+                _view.ContinueButton.Unfocus();
+                _view.ReRollButton.Focus();
             }
         }
 
@@ -258,14 +256,15 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
 
         private void SubscribeToInputActions()
         {
+            _playerInputActions.Enable();
+            _defaultInputActions.Enable();
+
             _playerInputActions.UI.ScrollUp.performed += OnScrollUpPerformed;
             _playerInputActions.UI.ScrollDown.performed += OnScrollDownPerformed;
             _playerInputActions.UI.Apply.performed += OnApplyPerformed;
 
-            _defaultInputActions.UI.Navigate.performed += NavigateOnPerformed;
-
-            _playerInputActions.Enable();
-            _defaultInputActions.Enable();
+            _playerInputActions.UI.ScrollLeft.performed += OnScrollLeftPerformed;
+            _playerInputActions.UI.ScrollRight.performed += OnScrollRightPerformed;
         }
 
         private void UnsubscribeFromInputActions()
@@ -274,7 +273,8 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             _playerInputActions.UI.ScrollDown.performed -= OnScrollDownPerformed;
             _playerInputActions.UI.Apply.performed -= OnApplyPerformed;
 
-            _defaultInputActions.UI.Navigate.performed -= NavigateOnPerformed;
+            _playerInputActions.UI.ScrollLeft.performed += OnScrollLeftPerformed;
+            _playerInputActions.UI.ScrollRight.performed -= OnScrollRightPerformed;
 
             _playerInputActions.Disable();
             _defaultInputActions.Disable();

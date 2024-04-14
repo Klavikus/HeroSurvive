@@ -2735,6 +2735,7 @@ GameObject:
   - component: {fileID: 739859814}
   - component: {fileID: 739859818}
   - component: {fileID: 739859817}
+  - component: {fileID: 739859819}
   m_Layer: 5
   m_Name: Button_Continue
   m_TagString: Untagged
@@ -2860,6 +2861,7 @@ MonoBehaviour:
   _button: {fileID: 739859814}
   _upAndDown: 0
   _actionComponent: {fileID: 739859818}
+  _focusActionComponent: {fileID: 739859819}
 --- !u!114 &739859818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2877,6 +2879,25 @@ MonoBehaviour:
   _lockDoubleInteraction: 1
   _initializeByComposition: 1
   _activateBackwardAfterForward: 0
+  _autoRestart: 0
+--- !u!114 &739859819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739859810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7a053bfa284aa8b7734e161c369c56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 739859811}
+  _tweenData: {fileID: 11400000, guid: 70469131b5fbe3b40bdc800530ff8db6, type: 2}
+  _lockDoubleInteraction: 1
+  _initializeByComposition: 1
+  _activateBackwardAfterForward: 1
+  _autoRestart: 1
 --- !u!1 &759595740
 GameObject:
   m_ObjectHideFlags: 0
@@ -4449,6 +4470,7 @@ MonoBehaviour:
   _button: {fileID: 831766379}
   _upAndDown: 1
   _actionComponent: {fileID: 1110970577}
+  _focusActionComponent: {fileID: 0}
 --- !u!114 &1110970577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4466,6 +4488,7 @@ MonoBehaviour:
   _lockDoubleInteraction: 1
   _initializeByComposition: 1
   _activateBackwardAfterForward: 0
+  _autoRestart: 0
 --- !u!1001 &1138780581
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5212,6 +5235,7 @@ MonoBehaviour:
   _button: {fileID: 1323986797}
   _upAndDown: 0
   _actionComponent: {fileID: 1323986801}
+  _focusActionComponent: {fileID: 0}
 --- !u!114 &1323986801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5229,6 +5253,7 @@ MonoBehaviour:
   _lockDoubleInteraction: 1
   _initializeByComposition: 1
   _activateBackwardAfterForward: 0
+  _autoRestart: 0
 --- !u!1 &1334828552
 GameObject:
   m_ObjectHideFlags: 0
@@ -5370,6 +5395,7 @@ MonoBehaviour:
   _button: {fileID: 1334828554}
   _upAndDown: 0
   _actionComponent: {fileID: 1334828558}
+  _focusActionComponent: {fileID: 0}
 --- !u!114 &1334828558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5387,6 +5413,7 @@ MonoBehaviour:
   _lockDoubleInteraction: 1
   _initializeByComposition: 1
   _activateBackwardAfterForward: 0
+  _autoRestart: 0
 --- !u!1 &1335618618
 GameObject:
   m_ObjectHideFlags: 0
@@ -6050,6 +6077,7 @@ GameObject:
   - component: {fileID: 1524819684}
   - component: {fileID: 1524819688}
   - component: {fileID: 1524819687}
+  - component: {fileID: 1524819689}
   m_Layer: 5
   m_Name: Button_Reroll
   m_TagString: Untagged
@@ -6075,10 +6103,10 @@ RectTransform:
   m_Father: {fileID: 1152983885}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.521, y: 0.066250004}
-  m_AnchorMax: {x: 0.92, y: 0.16625}
-  m_AnchoredPosition: {x: -0.4999237, y: -0.000091552734}
-  m_SizeDelta: {x: 1, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 137.00008, y: -307.0001}
+  m_SizeDelta: {x: 250, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1524819684
 MonoBehaviour:
@@ -6177,6 +6205,7 @@ MonoBehaviour:
   _button: {fileID: 1524819684}
   _upAndDown: 0
   _actionComponent: {fileID: 1524819688}
+  _focusActionComponent: {fileID: 1524819689}
 --- !u!114 &1524819688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6194,6 +6223,25 @@ MonoBehaviour:
   _lockDoubleInteraction: 1
   _initializeByComposition: 1
   _activateBackwardAfterForward: 0
+  _autoRestart: 0
+--- !u!114 &1524819689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524819680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7a053bfa284aa8b7734e161c369c56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 1524819681}
+  _tweenData: {fileID: 11400000, guid: 70469131b5fbe3b40bdc800530ff8db6, type: 2}
+  _lockDoubleInteraction: 1
+  _initializeByComposition: 1
+  _activateBackwardAfterForward: 1
+  _autoRestart: 1
 --- !u!1 &1526332830 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2265610591754798725, guid: f5f63eefe601984498847cbc644d2d13, type: 3}
@@ -12671,6 +12719,7 @@ MonoBehaviour:
   _button: {fileID: 6890316686981000691}
   _upAndDown: 0
   _actionComponent: {fileID: 6890316686981000703}
+  _focusActionComponent: {fileID: 0}
 --- !u!114 &6890316686981000703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12688,6 +12737,7 @@ MonoBehaviour:
   _lockDoubleInteraction: 1
   _initializeByComposition: 1
   _activateBackwardAfterForward: 0
+  _autoRestart: 0
 --- !u!114 &6890316687069101200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12827,6 +12877,7 @@ MonoBehaviour:
   _button: {fileID: 6890316687069101201}
   _upAndDown: 0
   _actionComponent: {fileID: 6890316687069101209}
+  _focusActionComponent: {fileID: 0}
 --- !u!114 &6890316687069101209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12844,6 +12895,7 @@ MonoBehaviour:
   _lockDoubleInteraction: 1
   _initializeByComposition: 1
   _activateBackwardAfterForward: 0
+  _autoRestart: 0
 --- !u!224 &6890316687310175400
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14413,6 +14465,7 @@ MonoBehaviour:
   _button: {fileID: 8558418929235484314}
   _upAndDown: 0
   _actionComponent: {fileID: 8781735030100607707}
+  _focusActionComponent: {fileID: 0}
 --- !u!114 &8781735030100607707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14430,6 +14483,7 @@ MonoBehaviour:
   _lockDoubleInteraction: 1
   _initializeByComposition: 1
   _activateBackwardAfterForward: 0
+  _autoRestart: 0
 --- !u!114 &8812286579908247947
 MonoBehaviour:
   m_ObjectHideFlags: 0

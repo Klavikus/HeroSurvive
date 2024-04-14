@@ -2,7 +2,7 @@
 
 namespace Modules.UIComponents.Runtime.Interfaces
 {
-    public interface ITweenActionBaseComponent
+    public interface ITweenAction
     {
         void Initialize();
         void Cancel();

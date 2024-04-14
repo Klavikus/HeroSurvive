@@ -6,13 +6,14 @@ using UnityEngine;
 
 namespace Modules.UIComponents.Runtime.Implementations.Tweens
 {
-    public sealed class RectTransformSizeTween : TweenActionBaseComponent
+    public sealed class RectTransformSizeTween : TweenAction
     {
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private TwoSidedVector2TweenData _tweenData;
         [SerializeField] private bool _lockDoubleInteraction = true;
         [SerializeField] private bool _initializeByComposition = true;
         [SerializeField] private bool _activateBackwardAfterForward;
+        [SerializeField] private bool _autoRestart;
 
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -56,11 +57,23 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
 
             _inProgress = true;
 
-            await _rectTransform
-                .DOSizeDelta(_initialSize * _tweenData.Forward.Value, _tweenData.Forward.Duration)
-                .SetEase(_tweenData.Forward.Ease)
-                .SetUpdate(_tweenData.IgnoreTimeScale)
-                .WithCancellation(_cancellationTokenSource.Token);
+            if (_autoRestart)
+            {
+                await _rectTransform
+                    .DOSizeDelta(_initialSize * _tweenData.Forward.Value, _tweenData.Forward.Duration)
+                    .SetEase(_tweenData.Forward.Ease)
+                    .SetUpdate(_tweenData.IgnoreTimeScale)
+                    .SetLoops(-1, LoopType.Yoyo)
+                    .WithCancellation(_cancellationTokenSource.Token);
+            }
+            else
+            {
+                await _rectTransform
+                    .DOSizeDelta(_initialSize * _tweenData.Forward.Value, _tweenData.Forward.Duration)
+                    .SetEase(_tweenData.Forward.Ease)
+                    .SetUpdate(_tweenData.IgnoreTimeScale)
+                    .WithCancellation(_cancellationTokenSource.Token);
+            }
 
             _inProgress = false;
 

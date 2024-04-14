@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Modules.UIComponents.Runtime.Implementations.Tweens
 {
-    public sealed class LayoutElementPreferredSizeTween : TweenActionBaseComponent
+    public sealed class LayoutElementPreferredSizeTween : TweenAction
     {
         [SerializeField] private LayoutElement _layoutElement;
         [SerializeField] private TwoSidedVector2TweenData _tweenData;

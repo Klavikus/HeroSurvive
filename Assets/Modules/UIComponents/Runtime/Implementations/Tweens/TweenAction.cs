@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Modules.UIComponents.Runtime.Implementations.Tweens
 {
-    public abstract class TweenActionBaseComponent : MonoBehaviour, ITweenActionBaseComponent
+    public abstract class TweenAction : MonoBehaviour, ITweenAction
     {
         public abstract void Initialize();
         public abstract void Cancel();

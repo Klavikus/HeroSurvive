@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Modules.UIComponents.Runtime.Implementations.Tweens
 {
-    public sealed class ParallelCompositionTween : TweenActionBaseComponent
+    public sealed class ParallelCompositionTween : TweenAction
     {
-        [SerializeField] private TweenActionBaseComponent[] _tweenActionComponents;
+        [SerializeField] private TweenAction[] _tweenActionComponents;
         [SerializeField] private bool _lockDoubleInteraction;
         [SerializeField] private bool _initializeByComposition;
 
@@ -33,7 +33,7 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
         {
             _cancellationTokenSource = new CancellationTokenSource();
 
-            foreach (TweenActionBaseComponent actionComponent in _tweenActionComponents)
+            foreach (TweenAction actionComponent in _tweenActionComponents)
                 actionComponent.Initialize();
         }
 
@@ -48,7 +48,7 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
 
             _cachedTasks.Clear();
 
-            foreach (TweenActionBaseComponent tween in _tweenActionComponents)
+            foreach (TweenAction tween in _tweenActionComponents)
                 _cachedTasks.Add(tween.PlayForward());
 
             foreach (var task in _cachedTasks)
@@ -68,7 +68,7 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
 
             _cachedTasks.Clear();
 
-            foreach (TweenActionBaseComponent tween in _tweenActionComponents)
+            foreach (TweenAction tween in _tweenActionComponents)
                 _cachedTasks.Add(tween.PlayBackward());
 
             foreach (var task in _cachedTasks)
@@ -79,7 +79,7 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
 
         public override void Cancel()
         {
-            foreach (TweenActionBaseComponent actionComponent in _tweenActionComponents)
+            foreach (TweenAction actionComponent in _tweenActionComponents)
                 actionComponent.Cancel();
 
             CancelTweens();
@@ -89,13 +89,13 @@ namespace Modules.UIComponents.Runtime.Implementations.Tweens
 
         public override void SetForwardState()
         {
-            foreach (TweenActionBaseComponent actionComponent in _tweenActionComponents)
+            foreach (TweenAction actionComponent in _tweenActionComponents)
                 actionComponent.SetForwardState();
         }
 
         public override void SetBackwardState()
         {
-            foreach (TweenActionBaseComponent actionComponent in _tweenActionComponents)
+            foreach (TweenAction actionComponent in _tweenActionComponents)
                 actionComponent.SetBackwardState();
         }
 

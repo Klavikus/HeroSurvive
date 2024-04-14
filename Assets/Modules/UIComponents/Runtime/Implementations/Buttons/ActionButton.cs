@@ -11,11 +11,13 @@ namespace Modules.UIComponents.Runtime.Implementations.Buttons
         [SerializeField] private Button _button;
         [SerializeField] private bool _upAndDown;
 
-        [SerializeField] private TweenActionBaseComponent _actionComponent;
+        [SerializeField] private TweenAction _actionComponent;
+        [SerializeField] private TweenAction _focusActionComponent;
 
         public event Action Clicked;
 
         private bool _isInteractionLocked;
+        private bool _isFocused;
 
         private void OnEnable() =>
             _button.onClick.AddListener(OnButtonClicked);
@@ -23,8 +25,11 @@ namespace Modules.UIComponents.Runtime.Implementations.Buttons
         private void OnDestroy() =>
             _button.onClick.RemoveListener(OnButtonClicked);
 
-        public void Initialize() =>
+        public void Initialize()
+        {
             _actionComponent.Initialize();
+            _focusActionComponent?.Initialize();
+        }
 
         public void SetInteractionLock(bool isLock)
         {
@@ -32,7 +37,19 @@ namespace Modules.UIComponents.Runtime.Implementations.Buttons
             _isInteractionLocked = isLock;
         }
 
-        private async void OnButtonClicked()
+        public void Focus()
+        {
+            _isFocused = true;
+            _focusActionComponent?.PlayForward();
+        }
+
+        public void Unfocus()
+        {
+            _focusActionComponent?.Cancel();
+            _isFocused = false;
+        }
+
+        public async void OnButtonClicked()
         {
             if (_isInteractionLocked)
                 return;

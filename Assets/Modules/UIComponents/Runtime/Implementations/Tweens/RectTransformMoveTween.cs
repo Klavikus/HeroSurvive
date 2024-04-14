@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Modules.UIComponents.Runtime.Implementations.Tweens
 {
-    public sealed class RectTransformMoveTween : TweenActionBaseComponent
+    public sealed class RectTransformMoveTween : TweenAction
     {
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private TwoSidedVector2TweenData _tweenData;

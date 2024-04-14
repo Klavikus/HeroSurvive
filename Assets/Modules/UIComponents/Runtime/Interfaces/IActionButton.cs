@@ -7,5 +7,8 @@ namespace Modules.UIComponents.Runtime.Interfaces
         event Action Clicked;
         void Initialize();
         void SetInteractionLock(bool isLock);
+        void Focus();
+        void Unfocus();
+        void OnButtonClicked();
     }
 }
