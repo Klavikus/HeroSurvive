@@ -19,6 +19,7 @@ namespace GameCore.Source.Controllers.Core.Presenters
         public void Enable()
         {
             _view.Counter.Initialize(_currencyModel.CurrentAmount);
+            
             _currencyModel.CurrencyChanged += OnCurrencyChanged;
         }
 

@@ -5,9 +5,13 @@ namespace GameCore.Source.Domain.Models
     public class CurrencyModel
     {
         private int _currentCurrency;
+        
         public event Action<int> CurrencyChanged;
+        
         public int CurrentAmount => _currentCurrency;
-        public bool CheckPayAvailability(int price) => _currentCurrency >= price;
+        
+        public bool CheckPayAvailability(int price) =>
+            _currentCurrency >= price;
 
         public void Pay(int price)
         {

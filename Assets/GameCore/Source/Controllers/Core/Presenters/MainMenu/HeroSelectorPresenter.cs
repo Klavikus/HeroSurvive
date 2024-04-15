@@ -6,6 +6,7 @@ using GameCore.Source.Domain.Data;
 using GameCore.Source.Infrastructure.Api.GameFsm;
 using GameCore.Source.Presentation.Api.GameLoop;
 using Modules.Common.WindowFsm.Runtime.Abstract;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace GameCore.Source.Controllers.Core.Presenters.MainMenu
