@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using GameCore.Source.Domain.Data.Dto;
+using GameCore.Source.Domain.Models;
 using GameCore.Source.Infrastructure.Api.Services;
 using Modules.DAL.Abstract.Data;
 using Modules.DAL.Abstract.Repositories;
 using Modules.DAL.Abstract.Services;
 using Modules.DAL.Implementation.Data.Entities;
+using UnityEngine;
 
 namespace GameCore.Source.Infrastructure.Core.Services
 {
@@ -31,6 +33,8 @@ namespace GameCore.Source.Infrastructure.Core.Services
                                                 ?? AddNewEntity<CurrencyDto>(new CurrencyDto()),
                 [typeof(UpgradeDto)] = (id) => _compositeRepository.GetById<UpgradeDto>(id)
                                                ?? AddNewEntity<UpgradeDto>(new UpgradeDto(id)),
+                [typeof(AccountDto)] = (id) => _compositeRepository.GetById<AccountDto>(id)
+                                               ?? AddNewEntity<AccountDto>(new AccountDto()),
             };
         }
 
@@ -95,6 +99,13 @@ namespace GameCore.Source.Infrastructure.Core.Services
         public void UpdateUpgradeData(string id, int level)
         {
             Get<UpgradeDto>(id).Level = level;
+        }
+
+        public void UpdateAccountData(AccountModel accountModel)
+        {
+            AccountDto accountDto = Get<AccountDto>(AccountDto.DefaultId);
+            accountDto.TotalWavesCleared = accountModel.TotalWavesCleared;
+            Debug.Log($"Total progress updated: {accountDto.TotalWavesCleared}");
         }
 
         private T AddNewEntity<T>(IEntity entity)

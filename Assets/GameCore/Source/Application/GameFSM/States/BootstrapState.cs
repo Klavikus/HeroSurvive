@@ -104,7 +104,13 @@ namespace GameCore.Source.Application.GameFSM.States
             localizationService.Initialize(new EnvironmentData(configurationProvider.BaseLanguage, false));
 
 #if DAL_YANDEX_GAME_PLUGIN
-            Type[] repoTypes = {typeof(SyncData), typeof(CurrencyDto), typeof(UpgradeDto)};
+            Type[] repoTypes =
+            {
+                typeof(SyncData),
+                typeof(CurrencyDto),
+                typeof(AccountDto),
+                typeof(UpgradeDto)
+            };
             GameData data = new(repoTypes);
 
             JsonPrefsDataContext localDataContext = new(data, nameof(JsonPrefsDataContext));

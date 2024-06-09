@@ -27,6 +27,7 @@ namespace GameCore.Source.Controllers.Core.Services
         private int _maxStageId;
 
         private int _enemiesInWave;
+        private AccountModel _accountModel;
 
         public int KilledEnemiesCount { get; private set; }
         public int TotalKilledEnemiesCount { get; private set; }
@@ -68,6 +69,7 @@ namespace GameCore.Source.Controllers.Core.Services
             _currentStageId = 0;
             _maxStageId = _competitionConfig.WavesData.Length;
             _allWavesCounter = 0;
+            _accountModel = _modelProvider.Get<AccountModel>();
             SpawnNextWave();
         }
 
@@ -146,6 +148,8 @@ namespace GameCore.Source.Controllers.Core.Services
             _allWavesCounter++;
             CurrentWaveId++;
 
+            _accountModel.HandleWaveClearing();
+            
             if (CurrentWaveId == _maxWaveId)
             {
                 _currentStageId++;

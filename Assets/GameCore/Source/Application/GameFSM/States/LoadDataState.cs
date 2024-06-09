@@ -75,6 +75,17 @@ namespace GameCore.Source.Application.GameFSM.States
 
             PlayerModel playerModel = new PlayerModel();
             modelProvider.Bind(playerModel);
+
+            AccountDto accountDto = _progressService.Get<AccountDto>(AccountDto.DefaultId);
+            AccountModel accountModel = new AccountModel(accountDto);
+            modelProvider.Bind(accountModel);
+
+            //TODO: Refactor this
+            accountModel.TotalWavesClearChanged += _ =>
+            {
+                _progressService.UpdateAccountData(accountModel);
+                _progressService.Save();
+            };
         }
     }
 }

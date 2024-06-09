@@ -67,19 +67,9 @@ namespace GameCore.Source.Application.CompositionRoots
             HeroModel heroModel = modelProvider.Get<HeroModel>();
             PropertiesModel propertiesModel = modelProvider.Get<PropertiesModel>();
 
-            int gold = _progressService.GetGold();
-
-            if (gold == 0)
-            {
-                gold = 10000;
-                _progressService.SetGold(gold);
-                await _progressService.Save();
-            }
-
             propertyProvider.Initialize();
 
             currencyModel.CurrencyChanged += (currency) => { _progressService.SetGold(currency); };
-            currencyModel.SetAmount(gold);
 
             HeroSelectorViewModel heroSelectorViewModel = new(
                 heroModel,
