@@ -7763,17 +7763,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 641731461958194029, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1555526922374517827, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1555526922374517827, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 116375.555
+      value: 1240.9489
       objectReference: {fileID: 0}
     - target: {fileID: 3825262620608170728, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
       propertyPath: m_RootOrder
@@ -7819,37 +7811,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3825262620608170730, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
-      propertyPath: <Canvases>k__BackingField.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3825262620608170730, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
-      propertyPath: <Canvases>k__BackingField.Array.data[0]
-      value: 
-      objectReference: {fileID: 8491237934707297534}
     - target: {fileID: 3825262620608170731, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
       propertyPath: m_Name
       value: MVP-LeaderBoardsView
       objectReference: {fileID: 0}
-    - target: {fileID: 3825262620608170731, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3825262620791097194, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3825262621025103442, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
-      propertyPath: _upAndDown
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
---- !u!223 &8491237934707297534 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 3825262620791097194, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
-  m_PrefabInstance: {fileID: 8491237934707297533}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8883131260944178216
 RectTransform:
   m_ObjectHideFlags: 0

@@ -62,6 +62,8 @@ namespace GameCore.Source.Application.CompositionRoots
             HeroModel heroModel = modelProvider.Get<HeroModel>();
             PropertiesModel propertiesModel = modelProvider.Get<PropertiesModel>();
 
+            
+            
             propertyProvider.Initialize();
 
             currencyModel.Add(1000000);
