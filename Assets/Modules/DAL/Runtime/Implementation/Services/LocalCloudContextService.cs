@@ -3,9 +3,7 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using Modules.DAL.Abstract.Repositories;
 using Modules.DAL.Abstract.Services;
-using Modules.DAL.Implementation.Data;
 using Modules.DAL.Implementation.Data.Entities;
-using UnityEngine;
 
 namespace Modules.DAL.Implementation.Services
 {
@@ -91,6 +89,25 @@ namespace Modules.DAL.Implementation.Services
         {
             _cloudCompositeRepository.Clear();
             await _cloudCompositeRepository.Save();
+        }
+
+        public UniTask Synchronize()
+        {
+            if (CheckUpdateFromCloud())
+            {
+                TransferCloudToLocal();
+
+                return _localCompositeRepository.Save();
+            }
+
+            if (CheckUpdateFromLocal())
+            {
+                TransferLocalToCloud();
+
+                return _cloudCompositeRepository.Save();
+            }
+
+            return default;
         }
     }
 }

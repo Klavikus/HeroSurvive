@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using GameCore.Source.Controllers.Api.Factories;
 using GameCore.Source.Controllers.Api.Providers;
 using GameCore.Source.Controllers.Api.Services;
@@ -13,6 +14,7 @@ using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Domain.Models;
 using GameCore.Source.Domain.Services;
 using GameCore.Source.Infrastructure.Api.GameFsm;
+using GameCore.Source.Infrastructure.Api.Services;
 using GameCore.Source.Infrastructure.Core.Services.DI;
 using GameCore.Source.Presentation.Api.MainMenu.HeroSelector;
 using GameCore.Source.Presentation.Core;
@@ -34,8 +36,9 @@ namespace GameCore.Source.Application.CompositionRoots
         [SerializeField] private CurrencyView[] _currencyViews;
         [SerializeField] private UpgradeFocusView _upgradeFocusView;
         [SerializeField] private HeroSelectorView _heroSelectorView;
+        private IProgressService _progressService;
 
-        public override void Initialize(ServiceContainer serviceContainer)
+        public override async void Initialize(ServiceContainer serviceContainer)
         {
             Dictionary<Type, IWindow> windows = new Dictionary<Type, IWindow>()
             {
@@ -57,16 +60,27 @@ namespace GameCore.Source.Application.CompositionRoots
             IUpgradeService upgradeService = serviceContainer.Single<IUpgradeService>();
             IUpgradeDescriptionBuilder descriptionBuilder = serviceContainer.Single<IUpgradeDescriptionBuilder>();
 
+            _progressService = serviceContainer.Single<IProgressService>();
+
             UpgradeModel[] upgradeModels = modelProvider.Get<UpgradeModel[]>();
             CurrencyModel currencyModel = modelProvider.Get<CurrencyModel>();
             HeroModel heroModel = modelProvider.Get<HeroModel>();
             PropertiesModel propertiesModel = modelProvider.Get<PropertiesModel>();
 
-            
-            
+            await _progressService.Load();
+            int gold = _progressService.GetGold();
+
+            if (gold == 0)
+            {
+                gold = 10000;
+                _progressService.SetGold(gold);
+                await _progressService.Save();
+            }
+
             propertyProvider.Initialize();
 
-            currencyModel.Add(1000000);
+            currencyModel.CurrencyChanged += (currency) => { _progressService.SetGold(currency); };
+            currencyModel.SetAmount(gold);
 
             HeroSelectorViewModel heroSelectorViewModel = new(
                 heroModel,
@@ -151,6 +165,11 @@ namespace GameCore.Source.Application.CompositionRoots
                 propertyView.Transform.SetParent(_heroSelectorView.PropertiesViewContainer);
                 propertyView.Transform.localScale = Vector3.one;
             }
+        }
+
+        private void OnDestroy()
+        {
+            _progressService.Save().Forget();
         }
     }
 }

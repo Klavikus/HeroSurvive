@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.ComponentModel.Composition;
+using System.Linq;
 using GameCore.Source.Controllers.Api.Factories;
 using GameCore.Source.Controllers.Api.Providers;
 using GameCore.Source.Controllers.Api.Services;
@@ -7,6 +9,7 @@ using GameCore.Source.Controllers.Core.Providers;
 using GameCore.Source.Controllers.Core.Services;
 using GameCore.Source.Domain.Configs;
 using GameCore.Source.Domain.Data;
+using GameCore.Source.Domain.Data.Dto;
 using GameCore.Source.Domain.Models;
 using GameCore.Source.Domain.Services;
 using GameCore.Source.Infrastructure.Api;
@@ -17,6 +20,11 @@ using GameCore.Source.Infrastructure.Core.Services;
 using GameCore.Source.Infrastructure.Core.Services.DI;
 using GameCore.Source.Infrastructure.Core.Services.Providers;
 using Modules.Common.Utils;
+using Modules.DAL.Implementation.Data;
+using Modules.DAL.Implementation.Data.Entities;
+using Modules.DAL.Implementation.DataContexts;
+using Modules.DAL.Implementation.Repositories;
+using Modules.DAL.Implementation.Services;
 using Modules.GamePauseSystem.Runtime;
 using UnityEngine;
 
@@ -92,6 +100,17 @@ namespace GameCore.Source.Application.GameFSM.States
             PrepareModels(configurationProvider, modelProvider);
 
             localizationService.Initialize(new EnvironmentData(configurationProvider.BaseLanguage, false));
+
+            Type[] repoTypes = {typeof(SyncData), typeof(CurrencyData)};
+            GameData data = new(repoTypes);
+
+            JsonPrefsDataContext localDataContext = new(data, nameof(JsonPrefsDataContext));
+
+            CompositeRepository compositeRepository = new CompositeRepository(localDataContext, repoTypes);
+
+            LocalCloudContextService contextService = new(compositeRepository, compositeRepository);
+            IProgressService progressService = new ProgressService(compositeRepository, contextService);
+            _services.RegisterAsSingle(progressService);
 
             _services.LockRegister();
         }

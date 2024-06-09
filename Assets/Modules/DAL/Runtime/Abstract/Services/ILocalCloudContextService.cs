@@ -14,5 +14,6 @@ namespace Modules.DAL.Abstract.Services
         void TransferLocalToCloud();
         UniTask ClearLocalContext();
         UniTask ClearCloudContext();
+        UniTask Synchronize();
     }
 }

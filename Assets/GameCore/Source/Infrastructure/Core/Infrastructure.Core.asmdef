@@ -2,11 +2,12 @@
     "name": "Infrastructure.Core",
     "rootNamespace": "",
     "references": [
-        "GUID:3c14eac83d989cf45912aff277ecbb47",
-        "GUID:c3e9389d27f04640a308356ef13838c9",
-        "GUID:b446efa017f54499abe8da34d1ee75b4",
-        "GUID:641736b40241467b8c03e61c7d6a60cd",
-        "GUID:a155cb15d204444f8e92444823e76043"
+        "Infrastructure.Api",
+        "Presentation.Api",
+        "Domain",
+        "Controllers.Api",
+        "DAL.Runtime",
+        "UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
