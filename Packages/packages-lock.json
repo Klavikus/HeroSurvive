@@ -7,13 +7,6 @@
       "dependencies": {},
       "hash": "8b3ff533346e27727613880171be328b15cb4e84"
     },
-    "com.agava.yandexgames": {
-      "version": "https://github.com/forcepusher/com.agava.yandexgames.git#11.0.0",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "fe9ac9236b998e5d311928492accaba3df180db5"
-    },
     "com.cysharp.unitask": {
       "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
       "depth": 0,

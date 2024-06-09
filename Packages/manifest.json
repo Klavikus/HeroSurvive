@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "com.agava.webutility": "https://github.com/forcepusher/com.agava.webutility.git#3.0.0",
-    "com.agava.yandexgames": "https://github.com/forcepusher/com.agava.yandexgames.git#11.0.0",
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
     "com.h8man.2d.navmeshplus": "https://github.com/h8man/NavMeshPlus.git",
     "com.unity.2d.animation": "7.0.8",
