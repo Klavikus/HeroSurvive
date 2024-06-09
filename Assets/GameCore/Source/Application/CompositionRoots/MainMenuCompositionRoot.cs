@@ -67,7 +67,6 @@ namespace GameCore.Source.Application.CompositionRoots
             HeroModel heroModel = modelProvider.Get<HeroModel>();
             PropertiesModel propertiesModel = modelProvider.Get<PropertiesModel>();
 
-            await _progressService.Load();
             int gold = _progressService.GetGold();
 
             if (gold == 0)
@@ -93,7 +92,8 @@ namespace GameCore.Source.Application.CompositionRoots
                 upgradeModels,
                 currencyModel,
                 upgradeService,
-                audioPlayerService
+                audioPlayerService,
+                _progressService
             );
             PersistentUpgradeLevelViewFactory persistentUpgradeLevelViewFactory = new(configurationProvider);
 

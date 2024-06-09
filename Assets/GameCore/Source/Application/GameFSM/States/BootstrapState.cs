@@ -50,11 +50,13 @@ namespace GameCore.Source.Application.GameFSM.States
             _services = serviceContainer;
         }
 
-        public void Enter()
+        public async void Enter()
         {
+            await _sceneLoader.LoadAsync(BootstrapScene);
+
             RegisterServices();
 
-            _sceneLoader.Load(BootstrapScene, onLoaded: EnterLoadLevel);
+            _gameStateMachine.Enter<LoadDataState>();
         }
 
         public void Exit()
@@ -97,20 +99,24 @@ namespace GameCore.Source.Application.GameFSM.States
             IAdsProvider adsProvider = new AdsProvider();
             _services.RegisterAsSingle(adsProvider);
 
-            PrepareModels(configurationProvider, modelProvider);
+            // PrepareModels(configurationProvider, modelProvider);
 
             localizationService.Initialize(new EnvironmentData(configurationProvider.BaseLanguage, false));
 
-            Type[] repoTypes = {typeof(SyncData), typeof(CurrencyData)};
+#if DAL_YANDEX_GAME_PLUGIN
+            Type[] repoTypes = {typeof(SyncData), typeof(CurrencyDto), typeof(UpgradeDto)};
             GameData data = new(repoTypes);
 
             JsonPrefsDataContext localDataContext = new(data, nameof(JsonPrefsDataContext));
+            YandexPluginGameContext cloudDataContext = new(data);
 
-            CompositeRepository compositeRepository = new CompositeRepository(localDataContext, repoTypes);
+            CompositeRepository localRepository = new(localDataContext, repoTypes);
+            CompositeRepository cloudRepository = new(cloudDataContext, repoTypes);
 
-            LocalCloudContextService contextService = new(compositeRepository, compositeRepository);
-            IProgressService progressService = new ProgressService(compositeRepository, contextService);
+            LocalCloudContextService contextService = new(localRepository, cloudRepository);
+            IProgressService progressService = new ProgressService(localRepository, contextService);
             _services.RegisterAsSingle(progressService);
+#endif
 
             _services.LockRegister();
         }
@@ -218,33 +224,5 @@ namespace GameCore.Source.Application.GameFSM.States
 
             return modelProvider;
         }
-
-        private void PrepareModels(IConfigurationProvider configurationProvider, IModelProvider modelProvider)
-        {
-            //TODO: Move to LoadDataState
-            UpgradesConfigSO upgradesConfig = configurationProvider.UpgradesConfig;
-            UpgradeModel[] result = new UpgradeModel[upgradesConfig.UpgradeData.Length];
-            for (var i = 0; i < result.Length; i++)
-                result[i] = new UpgradeModel(upgradesConfig.UpgradeData[i]);
-            modelProvider.Bind(result);
-
-            PropertiesModel propertiesModel = new PropertiesModel();
-            modelProvider.Bind(propertiesModel);
-
-            HeroModel heroModel = new HeroModel();
-            HeroData[] availableHeroesData =
-                configurationProvider.HeroConfig.HeroesData.Select(heroData => heroData).ToArray();
-            heroModel.SetHeroData(availableHeroesData.First());
-            modelProvider.Bind(heroModel);
-
-            CurrencyModel currencyModel = new CurrencyModel();
-            modelProvider.Bind(currencyModel);
-
-            PlayerModel playerModel = new PlayerModel();
-            modelProvider.Bind(playerModel);
-        }
-
-        private void EnterLoadLevel() =>
-            _gameStateMachine.Enter<MainMenuState>();
     }
 }

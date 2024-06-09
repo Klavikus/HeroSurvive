@@ -19,7 +19,7 @@ namespace GameCore.Source.Application.GameFSM.States
             _serviceContainer = serviceContainer;
         }
 
-        public void Enter() => 
+        public void Enter() =>
             _sceneLoader.Load(MainMenuScene, OnSceneLoaded);
 
         public void Exit()
@@ -30,7 +30,7 @@ namespace GameCore.Source.Application.GameFSM.States
         {
         }
 
-        private void OnSceneLoaded() => 
+        private void OnSceneLoaded() =>
             new SceneInitializer().Initialize(_serviceContainer);
     }
 }

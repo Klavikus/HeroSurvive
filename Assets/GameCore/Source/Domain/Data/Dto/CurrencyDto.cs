@@ -4,16 +4,16 @@ using Modules.DAL.Abstract.Data;
 namespace GameCore.Source.Domain.Data.Dto
 {
     [Serializable]
-    public class CurrencyData : IEntity
+    public class CurrencyDto : IEntity
     {
         public int Gold;
 
-        private static string s_id = nameof(CurrencyData);
+        public static string DefaultId = nameof(CurrencyDto);
 
-        public string Id => s_id;
+        public string Id => DefaultId;
 
         public object Clone() =>
-            new CurrencyData()
+            new CurrencyDto()
             {
                 Gold = Gold
             };

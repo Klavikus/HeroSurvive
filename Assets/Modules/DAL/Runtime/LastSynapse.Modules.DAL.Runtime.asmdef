@@ -2,7 +2,8 @@
     "name": "DAL.Runtime",
     "rootNamespace": "",
     "references": [
-        "UniTask"
+        "UniTask",
+        "YG.Core"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

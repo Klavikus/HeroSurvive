@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Domain.Data;
+using GameCore.Source.Domain.Data.Dto;
 using GameCore.Source.Domain.Models;
+using GameCore.Source.Infrastructure.Api.Services;
 
 namespace GameCore.Source.Controllers.Core.Services
 {
@@ -14,6 +16,7 @@ namespace GameCore.Source.Controllers.Core.Services
         private readonly Dictionary<UpgradeData, UpgradeModel> _upgradeModels;
         private readonly IUpgradeService _upgradeService;
         private readonly IAudioPlayerService _sfxService;
+        private readonly IProgressService _progressService;
 
         private UpgradeData _currentSelected;
 
@@ -21,12 +24,14 @@ namespace GameCore.Source.Controllers.Core.Services
             UpgradeModel[] upgrades,
             CurrencyModel currencyModel,
             IUpgradeService upgradeService,
-            IAudioPlayerService sfxService)
+            IAudioPlayerService sfxService,
+            IProgressService progressService)
         {
             _upgrades = upgrades;
             _currencyModel = currencyModel;
             _upgradeService = upgradeService;
             _sfxService = sfxService;
+            _progressService = progressService;
 
             _upgradeModels = new Dictionary<UpgradeData, UpgradeModel>();
 
@@ -48,8 +53,11 @@ namespace GameCore.Source.Controllers.Core.Services
         private int CurrentSelectedUpgradeId =>
             _upgrades.TakeWhile(upgrade => upgrade.Data != _currentSelected).Count();
 
-        private void OnUpgradeChanged(UpgradeModel upgradeModel)
+        private async void OnUpgradeChanged(UpgradeModel upgradeModel)
         {
+            _progressService.UpdateUpgradeData(upgradeModel.Data.KeyName, upgradeModel.CurrentLevel);
+            await _progressService.Save();
+            await _progressService.SyncWithCloud();
             _upgradeService.AddProperties(upgradeModel);
             Upgraded?.Invoke(upgradeModel.Data, upgradeModel.CurrentLevel);
         }

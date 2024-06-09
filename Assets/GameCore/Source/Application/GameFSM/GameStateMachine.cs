@@ -20,6 +20,7 @@ namespace GameCore.Source.Application.GameFSM
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, serviceContainer),
+                [typeof(LoadDataState)] = new LoadDataState(serviceContainer),
                 [typeof(MainMenuState)] = new MainMenuState(sceneLoader, serviceContainer),
                 [typeof(GameLoopState)] = new GameLoopState(sceneLoader, serviceContainer),
             };
@@ -31,13 +32,13 @@ namespace GameCore.Source.Application.GameFSM
             state.Enter();
         }
 
-        public void Update() => 
+        public void Update() =>
             _activeState.Update();
 
-        public void GoToGameLoop() => 
+        public void GoToGameLoop() =>
             Enter<GameLoopState>();
 
-        public void GoToMainMenu() => 
+        public void GoToMainMenu() =>
             Enter<MainMenuState>();
 
         private TState ChangeState<TState>() where TState : class, IExitableState
@@ -50,7 +51,7 @@ namespace GameCore.Source.Application.GameFSM
             return state;
         }
 
-        private TState GetState<TState>() where TState : class, IExitableState => 
+        private TState GetState<TState>() where TState : class, IExitableState =>
             _states[typeof(TState)] as TState;
     }
 }

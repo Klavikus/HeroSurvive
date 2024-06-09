@@ -4,7 +4,8 @@
     "references": [
         "Domain",
         "Presentation.Api",
-        "UniTask"
+        "UniTask",
+        "DAL.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

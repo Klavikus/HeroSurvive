@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using GameCore.Source.Domain.Data.Dto;
 using GameCore.Source.Infrastructure.Api.Services;
+using Modules.DAL.Abstract.Data;
 using Modules.DAL.Abstract.Repositories;
 using Modules.DAL.Abstract.Services;
 using Modules.DAL.Implementation.Data.Entities;
@@ -13,6 +15,7 @@ namespace GameCore.Source.Infrastructure.Core.Services
     {
         private readonly ICompositeRepository _compositeRepository;
         private readonly ILocalCloudContextService _localCloudContextService;
+        private readonly Dictionary<Type, Func<string, IEntity>> _getFuncByType;
 
         public ProgressService(
             ICompositeRepository compositeRepository,
@@ -21,6 +24,14 @@ namespace GameCore.Source.Infrastructure.Core.Services
             _compositeRepository = compositeRepository ?? throw new ArgumentNullException(nameof(compositeRepository));
             _localCloudContextService = localCloudContextService ??
                                         throw new ArgumentNullException(nameof(localCloudContextService));
+
+            _getFuncByType = new Dictionary<Type, Func<string, IEntity>>()
+            {
+                [typeof(CurrencyDto)] = (id) => _compositeRepository.GetById<CurrencyDto>(id)
+                                                ?? AddNewEntity<CurrencyDto>(new CurrencyDto()),
+                [typeof(UpgradeDto)] = (id) => _compositeRepository.GetById<UpgradeDto>(id)
+                                               ?? AddNewEntity<UpgradeDto>(new UpgradeDto(id)),
+            };
         }
 
         public UniTask Load() =>
@@ -47,34 +58,47 @@ namespace GameCore.Source.Infrastructure.Core.Services
 
         public int GetGold()
         {
-            CurrencyData currencyData = _compositeRepository.GetById<CurrencyData>(nameof(CurrencyData));
+            CurrencyDto currencyDto = _compositeRepository.GetById<CurrencyDto>(nameof(CurrencyDto));
 
-            if (currencyData == null)
+            if (currencyDto == null)
             {
-                currencyData = new CurrencyData()
+                currencyDto = new CurrencyDto()
                 {
                     Gold = 0
                 };
-                _compositeRepository.Add<CurrencyData>(currencyData);
+                _compositeRepository.Add<CurrencyDto>(currencyDto);
             }
 
-            return currencyData.Gold;
+            return currencyDto.Gold;
         }
 
         public void SetGold(int amount)
         {
-            CurrencyData currencyData = _compositeRepository.GetById<CurrencyData>(nameof(CurrencyData));
+            CurrencyDto currencyDto = _compositeRepository.GetById<CurrencyDto>(nameof(CurrencyDto));
 
-            if (currencyData == null)
+            if (currencyDto == null)
             {
-                currencyData = new CurrencyData()
+                currencyDto = new CurrencyDto()
                 {
                     Gold = 0
                 };
-                _compositeRepository.Add<CurrencyData>(currencyData);
+                _compositeRepository.Add<CurrencyDto>(currencyDto);
             }
 
-            currencyData.Gold = amount;
+            currencyDto.Gold = amount;
         }
+
+        public T Get<T>(string id)
+            where T : class, IEntity =>
+            _getFuncByType[typeof(T)](id) as T;
+
+        public void UpdateUpgradeData(string id, int level)
+        {
+            Get<UpgradeDto>(id).Level = level;
+        }
+
+        private T AddNewEntity<T>(IEntity entity)
+            where T : class, IEntity =>
+            _compositeRepository.Add<T>(entity) as T;
     }
 }

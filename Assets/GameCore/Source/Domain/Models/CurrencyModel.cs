@@ -1,15 +1,21 @@
 ﻿using System;
+using GameCore.Source.Domain.Data.Dto;
 
 namespace GameCore.Source.Domain.Models
 {
     public class CurrencyModel
     {
         private int _currentCurrency;
-        
+
+        public CurrencyModel(CurrencyDto currencyDto)
+        {
+            _currentCurrency = currencyDto.Gold;
+        }
+
         public event Action<int> CurrencyChanged;
-        
+
         public int CurrentAmount => _currentCurrency;
-        
+
         public bool CheckPayAvailability(int price) =>
             _currentCurrency >= price;
 
