@@ -7,6 +7,7 @@ namespace GameCore.Source.Presentation.Api.MainMenu
         ActionButton StartButton { get; }
         ActionButton LeaderBoardButton { get; }
         ActionButton PersistentUpgradesButton { get; }
+        ActionButton SettingsButton { get; }
         void Show();
         void Hide();
     }

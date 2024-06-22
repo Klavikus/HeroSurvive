@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using GameCore.Source.Application.Factories;
 using GameCore.Source.Controllers.Api.Providers;
 using GameCore.Source.Domain.Configs;
 using GameCore.Source.Domain.Data;
@@ -8,7 +7,6 @@ using GameCore.Source.Domain.Models;
 using GameCore.Source.Domain.Services;
 using GameCore.Source.Infrastructure.Api.GameFsm;
 using GameCore.Source.Infrastructure.Api.Services;
-using GameCore.Source.Infrastructure.Core.Services;
 using GameCore.Source.Infrastructure.Core.Services.DI;
 
 namespace GameCore.Source.Application.GameFSM.States
@@ -86,6 +84,10 @@ namespace GameCore.Source.Application.GameFSM.States
                 _progressService.UpdateAccountData(accountModel);
                 _progressService.Save();
             };
+            
+            SettingsDto settingsDto = _progressService.Get<SettingsDto>(SettingsDto.DefaultId);
+            SettingsModel settingsModel = new SettingsModel(settingsDto);
+            modelProvider.Bind(settingsModel);
         }
     }
 }

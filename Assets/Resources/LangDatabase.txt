@@ -12,3 +12,4 @@ GameLoopX2,x2 gold,x2 gold,x2 gold
 GameLoopFree,Free,Рекл,Free
 GameLoopKilled,KILLED:,KILLED:,KILLED:
 GameLoopGold,GOLD:,GOLD:,GOLD:
+SettingsLabel,Settings,Настройки,Settings

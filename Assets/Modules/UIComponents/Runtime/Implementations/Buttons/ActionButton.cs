@@ -36,7 +36,7 @@ namespace Modules.UIComponents.Runtime.Implementations.Buttons
             _isInteractionLocked = isLock;
         }
 
-        public async void OnButtonClicked()
+        private async void OnButtonClicked()
         {
             if (_isInteractionLocked)
                 return;

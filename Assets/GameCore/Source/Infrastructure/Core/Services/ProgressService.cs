@@ -35,6 +35,8 @@ namespace GameCore.Source.Infrastructure.Core.Services
                                                ?? AddNewEntity<UpgradeDto>(new UpgradeDto(id)),
                 [typeof(AccountDto)] = (id) => _compositeRepository.GetById<AccountDto>(id)
                                                ?? AddNewEntity<AccountDto>(new AccountDto()),
+                [typeof(SettingsDto)] = (id) => _compositeRepository.GetById<SettingsDto>(id)
+                                                ?? AddNewEntity<SettingsDto>(new SettingsDto()),
             };
         }
 
@@ -106,6 +108,17 @@ namespace GameCore.Source.Infrastructure.Core.Services
             AccountDto accountDto = Get<AccountDto>(AccountDto.DefaultId);
             accountDto.TotalWavesCleared = accountModel.TotalWavesCleared;
             Debug.Log($"Total progress updated: {accountDto.TotalWavesCleared}");
+        }
+
+        public async void UpdateMasterVolume(SettingsDto newData)
+        {
+            SettingsDto settingsDto = Get<SettingsDto>(SettingsDto.DefaultId);
+            settingsDto.IsMuted = newData.IsMuted;
+            settingsDto.MasterVolume = newData.MasterVolume;
+            settingsDto.MusicVolume = newData.MusicVolume;
+            settingsDto.VfxVolume = newData.VfxVolume;
+
+            await _compositeRepository.Save();
         }
 
         private T AddNewEntity<T>(IEntity entity)

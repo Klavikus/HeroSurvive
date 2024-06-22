@@ -109,7 +109,8 @@ namespace GameCore.Source.Application.GameFSM.States
                 typeof(SyncData),
                 typeof(CurrencyDto),
                 typeof(AccountDto),
-                typeof(UpgradeDto)
+                typeof(UpgradeDto),
+                typeof(SettingsDto)
             };
             GameData data = new(repoTypes);
 

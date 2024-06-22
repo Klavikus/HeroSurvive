@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace CodeBase.GameCore.Presentation.Views
+namespace GameCore.Source.Presentation.Core.GameLoop
 {
     public class AbilityUpgradeView : MonoBehaviour, IAbilityUpgradeView, IPointerClickHandler
     {

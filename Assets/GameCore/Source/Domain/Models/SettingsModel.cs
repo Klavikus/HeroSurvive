@@ -1,16 +1,25 @@
 ﻿using System;
+using GameCore.Source.Domain.Data.Dto;
 
 namespace GameCore.Source.Domain.Models
 {
     public class SettingsModel
     {
+        public SettingsModel(SettingsDto settingsDto)
+        {
+            MasterVolume = settingsDto.MasterVolume;
+            MusicVolume = settingsDto.MusicVolume;
+            VfxVolume = settingsDto.VfxVolume;
+            IsMuted = settingsDto.IsMuted;
+        }
+
         public event Action<int> MasterVolumeChanged;
         public event Action<int> MusicVolumeChanged;
         public event Action<int> SfxVolumeChanged;
         public event Action<bool> MuteChanged;
         public int MasterVolume { get; private set; }
         public int MusicVolume { get; private set; }
-        public int SfxVolume { get; private set; }
+        public int VfxVolume { get; private set; }
         public bool IsMuted { get; private set; }
 
         public void SetMasterVolume(int volume)
@@ -27,7 +36,7 @@ namespace GameCore.Source.Domain.Models
 
         public void SetSfxVolume(int volume)
         {
-            SfxVolume = volume;
+            VfxVolume = volume;
             SfxVolumeChanged?.Invoke(volume);
         }
 
@@ -49,6 +58,17 @@ namespace GameCore.Source.Domain.Models
                 Mute();
             else
                 UnMute();
+        }
+
+        public SettingsDto AsDto()
+        {
+            return new SettingsDto()
+            {
+                IsMuted = IsMuted,
+                MasterVolume = MasterVolume,
+                MusicVolume = MusicVolume,
+                VfxVolume = VfxVolume
+            };
         }
     }
 }

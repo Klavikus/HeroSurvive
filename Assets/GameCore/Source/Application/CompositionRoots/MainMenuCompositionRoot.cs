@@ -36,6 +36,8 @@ namespace GameCore.Source.Application.CompositionRoots
         [SerializeField] private CurrencyView[] _currencyViews;
         [SerializeField] private UpgradeFocusView _upgradeFocusView;
         [SerializeField] private HeroSelectorView _heroSelectorView;
+        [SerializeField] private SettingsView _settingsView;
+
         private IProgressService _progressService;
 
         public override async void Initialize(ServiceContainer serviceContainer)
@@ -46,6 +48,7 @@ namespace GameCore.Source.Application.CompositionRoots
                 [typeof(LeaderBoardWindow)] = new LeaderBoardWindow(),
                 [typeof(UpgradeSelectorWindow)] = new UpgradeSelectorWindow(),
                 [typeof(HeroSelectorWindow)] = new HeroSelectorWindow(),
+                [typeof(SettingsWindow)] = new SettingsWindow(),
             };
 
             WindowFsm<MainMenuWindow> windowFsm = new WindowFsm<MainMenuWindow>(windows);
@@ -66,6 +69,7 @@ namespace GameCore.Source.Application.CompositionRoots
             CurrencyModel currencyModel = modelProvider.Get<CurrencyModel>();
             HeroModel heroModel = modelProvider.Get<HeroModel>();
             PropertiesModel propertiesModel = modelProvider.Get<PropertiesModel>();
+            SettingsModel settingsModel = modelProvider.Get<SettingsModel>();
 
             propertyProvider.Initialize();
 
@@ -155,6 +159,11 @@ namespace GameCore.Source.Application.CompositionRoots
                 propertyView.Transform.SetParent(_heroSelectorView.PropertiesViewContainer);
                 propertyView.Transform.localScale = Vector3.one;
             }
+
+            SettingsViewModel settingsViewModel = new SettingsViewModel(settingsModel, _progressService);
+            SettingsPresenter settingsPresenter = new SettingsPresenter(windowFsm, _settingsView, settingsViewModel);
+
+            _settingsView.Construct(settingsPresenter);
         }
 
         private void OnDestroy()

@@ -9,6 +9,5 @@ namespace Modules.UIComponents.Runtime.Interfaces
         void SetInteractionLock(bool isLock);
         void Focus();
         void Unfocus();
-        void OnButtonClicked();
     }
 }

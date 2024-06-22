@@ -24,10 +24,12 @@ namespace GameCore.Source.Controllers.Core.Presenters.MainMenu
             _view.StartButton.Initialize();
             _view.LeaderBoardButton.Initialize();
             _view.PersistentUpgradesButton.Initialize();
+            _view.SettingsButton.Initialize();
 
             _view.StartButton.Clicked += OnStartButtonClicked;
             _view.LeaderBoardButton.Clicked += OnLeaderBoardButtonClicked;
             _view.PersistentUpgradesButton.Clicked += OnPersistentUpgradesButtonClicked;
+            _view.SettingsButton.Clicked += OnSettingsButtonClicked;
         }
 
         protected override void OnAfterDisable()
@@ -35,6 +37,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.MainMenu
             _view.StartButton.Clicked -= OnStartButtonClicked;
             _view.LeaderBoardButton.Clicked -= OnLeaderBoardButtonClicked;
             _view.PersistentUpgradesButton.Clicked -= OnPersistentUpgradesButtonClicked;
+            _view.SettingsButton.Clicked -= OnSettingsButtonClicked;
         }
 
         private void OnStartButtonClicked() =>
@@ -45,5 +48,8 @@ namespace GameCore.Source.Controllers.Core.Presenters.MainMenu
 
         private void OnPersistentUpgradesButtonClicked() =>
             WindowFsm.OpenWindow<UpgradeSelectorWindow>();
+
+        private void OnSettingsButtonClicked() =>
+            WindowFsm.OpenWindow<SettingsWindow>();
     }
 }

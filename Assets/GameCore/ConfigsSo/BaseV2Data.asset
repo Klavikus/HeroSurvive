@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Forward>k__BackingField:
     Value: {x: 0.95, y: 0.95}
-    Duration: 0.2
+    Duration: 0.1
     Ease: 1
   <Backward>k__BackingField:
     Value: {x: 1, y: 1}
-    Duration: 0.2
+    Duration: 0.1
     Ease: 1
   <IgnoreTimeScale>k__BackingField: 1

@@ -14,7 +14,7 @@ namespace GameCore.Source.Domain.Data.Dto
             return new AccountDto()
             {
                 TotalRunCompleted = TotalRunCompleted,
-                TotalWavesCleared = TotalWavesCleared
+                TotalWavesCleared = TotalWavesCleared,
             };
         }
 

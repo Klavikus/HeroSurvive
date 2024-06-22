@@ -10,7 +10,7 @@ namespace GameCore.Source.Presentation.Core.MainMenu
         [field: SerializeField] public Canvas[] Canvases { get; private set; }
         [field: SerializeField] public ActionButton StartButton { get; private set; }
         [field: SerializeField] public ActionButton PersistentUpgradesButton { get; private set; }
-
+        [field: SerializeField] public ActionButton SettingsButton { get; private set; }
         [field: SerializeField] public ActionButton LeaderBoardButton { get; private set; }
 
         public void Show()

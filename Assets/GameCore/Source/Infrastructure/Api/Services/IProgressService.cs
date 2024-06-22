@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using GameCore.Source.Domain.Data.Dto;
 using GameCore.Source.Domain.Models;
 using Modules.DAL.Abstract.Data;
 
@@ -14,5 +15,6 @@ namespace GameCore.Source.Infrastructure.Api.Services
         T Get<T>(string id) where T : class, IEntity;
         void UpdateUpgradeData(string id, int level);
         void UpdateAccountData(AccountModel accountModel);
+        void UpdateMasterVolume(SettingsDto newData);
     }
 }
