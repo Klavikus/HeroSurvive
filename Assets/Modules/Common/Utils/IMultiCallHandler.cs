@@ -10,5 +10,6 @@ namespace Modules.Common.Utils
         void Call(string key);
         void Release(string key);
         void Reset();
+        bool CheckCallStatus(string key);
     }
 }

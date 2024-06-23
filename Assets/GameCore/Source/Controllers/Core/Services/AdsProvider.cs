@@ -1,6 +1,7 @@
 ﻿using System;
+using GameCore.Source.Controllers.Api.Providers;
 
-namespace GameCore.Source.Controllers.Api.Providers
+namespace GameCore.Source.Controllers.Core.Services
 {
     public class AdsProvider : IAdsProvider
     {

@@ -2,9 +2,11 @@
 using System.ComponentModel.Composition;
 using System.Linq;
 using GameCore.Source.Controllers.Api.Factories;
+using GameCore.Source.Controllers.Api.Handlers;
 using GameCore.Source.Controllers.Api.Providers;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Controllers.Core.Factories;
+using GameCore.Source.Controllers.Core.Handlers;
 using GameCore.Source.Controllers.Core.Providers;
 using GameCore.Source.Controllers.Core.Services;
 using GameCore.Source.Domain.Configs;
@@ -27,6 +29,7 @@ using Modules.DAL.Implementation.Repositories;
 using Modules.DAL.Implementation.Services;
 using Modules.GamePauseSystem.Runtime;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace GameCore.Source.Application.GameFSM.States
 {
@@ -124,6 +127,11 @@ namespace GameCore.Source.Application.GameFSM.States
             IProgressService progressService = new ProgressService(localRepository, contextService);
             _services.RegisterAsSingle(progressService);
 #endif
+
+            ApplicationFocusChangeHandler focusChangeHandler =
+                new GameObject("FocusChangeHandler").AddComponent<ApplicationFocusChangeHandler>();
+            Object.DontDestroyOnLoad(focusChangeHandler);
+            _services.RegisterAsSingle<IApplicationFocusChangeHandler>(focusChangeHandler);
 
             _services.LockRegister();
         }

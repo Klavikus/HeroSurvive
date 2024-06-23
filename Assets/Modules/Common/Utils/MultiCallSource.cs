@@ -34,6 +34,9 @@ namespace Modules.Common.Utils
             Released?.Invoke();
         }
 
+        public bool CheckCallStatus(string key) =>
+            _callers[key];
+
         private void CheckStatus()
         {
             bool isAnyActiveCall = _callers.Values.Any(caller => caller);

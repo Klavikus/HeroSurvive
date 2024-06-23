@@ -6,8 +6,10 @@ namespace Modules.GamePauseSystem.Runtime
     {
         event Action Paused;
         event Action Resumed;
+        bool IsInvokeByUI { get; }
         void InvokeByAds(bool isCall);
         void InvokeByUI(bool isCall);
         void InvokeByFocusChanging(bool isCall);
+        bool CheckPauseReason(string reasonKey);
     }
 }

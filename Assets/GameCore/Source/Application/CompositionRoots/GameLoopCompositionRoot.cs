@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameCore.Source.Controllers.Api.Factories;
+using GameCore.Source.Controllers.Api.Handlers;
 using GameCore.Source.Controllers.Api.Providers;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Controllers.Api.ViewModels;
@@ -53,7 +54,9 @@ namespace GameCore.Source.Application.CompositionRoots
             IUpgradeDescriptionBuilder upgradeDescriptionBuilder =
                 serviceContainer.Single<IUpgradeDescriptionBuilder>();
             IProgressService progressService = serviceContainer.Single<IProgressService>();
-
+            IApplicationFocusChangeHandler focusChangeHandler =
+                serviceContainer.Single<IApplicationFocusChangeHandler>();
+            
             HeroModel heroModel = modelProvider.Get<HeroModel>();
             PlayerModel playerModel = modelProvider.Get<PlayerModel>();
 
@@ -113,6 +116,16 @@ namespace GameCore.Source.Application.CompositionRoots
                 levelUpViewModel,
                 upgradeDescriptionBuilder,
                 settingsViewModel);
+
+            gamePauseService.Paused += () =>
+            {
+                if (gamePauseService.IsInvokeByUI)
+                    return;
+
+                windowFsm.OpenWindow<PauseWindow>();
+            };
+
+            focusChangeHandler.FocusDropped += gamePauseService.InvokeByFocusChanging;
         }
 
         private WindowFsm<GameLoopWindow> CreateWindowFsm()
@@ -184,7 +197,7 @@ namespace GameCore.Source.Application.CompositionRoots
             SettingsPresenter settingsPresenter = new(windowFsm, _settingsView, settingsViewModel, gamePauseService);
 
             PausePresenter pausePresenter = new(windowFsm, _pauseView, gameStateMachine, gamePauseService);
-            
+
             _localizationSystemView.Construct(localizationSystemPresenter);
             _levelUpSystemView.Construct(levelUpSystemPresenter);
             _deathView.Construct(deathPresenter);

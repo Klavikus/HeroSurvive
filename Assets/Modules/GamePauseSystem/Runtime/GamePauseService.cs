@@ -18,6 +18,8 @@ namespace Modules.GamePauseSystem.Runtime
         public event Action Paused;
         public event Action Resumed;
 
+        public bool IsInvokeByUI => CheckPauseReason(nameof(InvokeByUI));
+
         public void InvokeByAds(bool isCall) =>
             HandleInvoke(nameof(InvokeByAds), isCall);
 
@@ -26,6 +28,9 @@ namespace Modules.GamePauseSystem.Runtime
 
         public void InvokeByFocusChanging(bool isCall) =>
             HandleInvoke(nameof(InvokeByFocusChanging), isCall);
+
+        public bool CheckPauseReason(string reasonKey) =>
+            _multiCallHandler.CheckCallStatus(reasonKey);
 
         private void HandleInvoke(string invokeBy, bool isCall)
         {
