@@ -4,6 +4,9 @@ namespace GameCore.Source.Controllers.Api.Providers
 {
     public interface IAdsProvider
     {
-        void ShowAds(Action onRewardCallback);
+        event Action ReRollAdCompleted;
+        event Action RespawnAdCompleted;
+        void ShowReRollAd();
+        void ShowRespawnAd();
     }
 }

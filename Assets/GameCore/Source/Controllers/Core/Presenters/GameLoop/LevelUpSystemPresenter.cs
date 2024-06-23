@@ -161,7 +161,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
 
         private void OnReRollButtonClicked()
         {
-            _viewModel.Reroll();
+            _viewModel.ReRoll();
             _currentActiveButtonId = 0;
             ActivateSelectedTween();
         }

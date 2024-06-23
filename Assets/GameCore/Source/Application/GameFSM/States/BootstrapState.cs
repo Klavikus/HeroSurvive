@@ -99,7 +99,7 @@ namespace GameCore.Source.Application.GameFSM.States
                 new UpgradeDescriptionBuilder(configurationProvider, localizationService);
             _services.RegisterAsSingle(descriptionBuilder);
 
-            IAdsProvider adsProvider = new AdsProvider();
+            IAdsProvider adsProvider = new YandexGamesAdsProvider();
             _services.RegisterAsSingle(adsProvider);
 
             // PrepareModels(configurationProvider, modelProvider);

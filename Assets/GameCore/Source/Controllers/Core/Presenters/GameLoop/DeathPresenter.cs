@@ -1,9 +1,11 @@
 ﻿using System;
+using GameCore.Source.Controllers.Api.Providers;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Controllers.Core.Presenters.Base;
 using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Infrastructure.Api.GameFsm;
 using GameCore.Source.Presentation.Api.GameLoop;
+using JetBrains.Annotations;
 using Modules.Common.WindowFsm.Runtime.Abstract;
 using Modules.GamePauseSystem.Runtime;
 
@@ -15,6 +17,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
         private readonly IGameStateMachine _gameStateMachine;
         private readonly IGameLoopService _gameLoopService;
         private readonly IGamePauseService _gamePauseService;
+        private readonly IAdsProvider _adsProvider;
 
         private int _respawnsCount;
 
@@ -22,20 +25,22 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             IDeathView view,
             IGameStateMachine gameStateMachine,
             IGameLoopService gameLoopService,
-            IGamePauseService gamePauseService)
+            IGamePauseService gamePauseService,
+            IAdsProvider adsProvider)
             : base(windowFsm, view.Show, view.Hide)
         {
             _view = view;
             _gameStateMachine = gameStateMachine ?? throw new ArgumentNullException(nameof(gameStateMachine));
             _gameLoopService = gameLoopService ?? throw new ArgumentNullException(nameof(gameLoopService));
             _gamePauseService = gamePauseService ?? throw new ArgumentNullException(nameof(gamePauseService));
+            _adsProvider = adsProvider ?? throw new ArgumentNullException(nameof(adsProvider));
         }
 
         protected override void OnAfterEnable()
         {
             _view.Initialize();
 
-            _view.ResurrectButton.Clicked += _gameLoopService.ResurrectPlayer;
+            _view.ResurrectButton.Clicked += _adsProvider.ShowRespawnAd;
             _view.BackToMenuButton.Clicked += _gameStateMachine.GoToMainMenu;
 
             UpdateVisibilityResurrectButton();
@@ -44,14 +49,17 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
 
             _gameLoopService.PlayerDied += OnPlayerDied;
             _gameLoopService.PlayerResurrected += OnPlayerResurrectInvoked;
+
+            _adsProvider.RespawnAdCompleted += _gameLoopService.ResurrectPlayer;
         }
 
         protected override void OnAfterDisable()
         {
-            _view.ResurrectButton.Clicked -= _gameLoopService.ResurrectPlayer;
+            _view.ResurrectButton.Clicked -= _adsProvider.ShowRespawnAd;
             _view.BackToMenuButton.Clicked -= _gameStateMachine.GoToMainMenu;
             _gameLoopService.PlayerDied -= OnPlayerDied;
             _gameLoopService.PlayerResurrected -= OnPlayerResurrectInvoked;
+            _adsProvider.RespawnAdCompleted -= _gameLoopService.ResurrectPlayer;
         }
 
         private void OnPlayerDied()

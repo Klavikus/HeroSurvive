@@ -115,8 +115,10 @@ namespace GameCore.Source.Application.CompositionRoots
                 healthViewBuilder,
                 levelUpViewModel,
                 upgradeDescriptionBuilder,
-                settingsViewModel);
+                settingsViewModel,
+                adsProvider);
 
+            // TODO: Fix this
             gamePauseService.Paused += () =>
             {
                 if (gamePauseService.IsInvokeByUI)
@@ -158,7 +160,8 @@ namespace GameCore.Source.Application.CompositionRoots
             HealthViewBuilder healthViewBuilder,
             ILevelUpViewModel levelUpViewModel,
             IUpgradeDescriptionBuilder upgradeDescriptionBuilder,
-            SettingsViewModel settingsViewModel)
+            SettingsViewModel settingsViewModel,
+            IAdsProvider adsProvider)
         {
             LevelUpSystemPresenter levelUpSystemPresenter =
                 new(windowFsm, _levelUpSystemView, levelUpViewModel, gamePauseService, localizationService,
@@ -171,7 +174,8 @@ namespace GameCore.Source.Application.CompositionRoots
                 _deathView,
                 gameStateMachine,
                 gameLoopService,
-                gamePauseService);
+                gamePauseService,
+                adsProvider);
 
             WinPresenter winPresenter = new(
                 windowFsm,

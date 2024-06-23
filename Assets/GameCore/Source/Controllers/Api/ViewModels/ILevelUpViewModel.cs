@@ -12,6 +12,6 @@ namespace GameCore.Source.Controllers.Api.ViewModels
         void SelectUpgrade(AbilityUpgradeData abilityUpgradeData);
         void ResetLevels();
         AbilityUpgradeData[] GetAvailableUpgrades();
-        void Reroll();
+        void ReRoll();
     }
 }

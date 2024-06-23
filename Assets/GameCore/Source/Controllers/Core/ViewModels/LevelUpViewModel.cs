@@ -31,6 +31,7 @@ namespace GameCore.Source.Controllers.Core.ViewModels
             _abilityUpgradeService.AvailableUpgradesChanged += OnAvailableUpgradesChanged;
             _levelUpModel.LevelProgressChanged += OnLevelProgressChanged;
             _levelUpModel.UpgradeSelected += OnUpgradeSelected;
+            _adsProvider.ReRollAdCompleted += () => Rerolled?.Invoke();
         }
 
         public void SelectUpgrade(AbilityUpgradeData abilityUpgradeData) =>
@@ -42,8 +43,8 @@ namespace GameCore.Source.Controllers.Core.ViewModels
         public AbilityUpgradeData[] GetAvailableUpgrades() =>
             _abilityUpgradeService.GetAvailableUpgrades();
 
-        public void Reroll() =>
-            _adsProvider.ShowAds(onRewardCallback: () => Rerolled?.Invoke());
+        public void ReRoll() =>
+            _adsProvider.ShowReRollAd();
 
         private void OnUpgradeSelected(AbilityUpgradeData _) =>
             InvokedViewHide?.Invoke();
