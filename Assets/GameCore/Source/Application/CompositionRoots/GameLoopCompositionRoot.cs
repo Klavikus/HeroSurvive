@@ -56,7 +56,7 @@ namespace GameCore.Source.Application.CompositionRoots
             IProgressService progressService = serviceContainer.Single<IProgressService>();
             IApplicationFocusChangeHandler focusChangeHandler =
                 serviceContainer.Single<IApplicationFocusChangeHandler>();
-            
+
             HeroModel heroModel = modelProvider.Get<HeroModel>();
             PlayerModel playerModel = modelProvider.Get<PlayerModel>();
 
@@ -68,7 +68,7 @@ namespace GameCore.Source.Application.CompositionRoots
             ILevelUpViewModel levelUpViewModel = new LevelUpViewModel(levelUpModel, abilityUpgradeService, adsProvider);
 
             SettingsModel settingsModel = modelProvider.Get<SettingsModel>();
-            SettingsViewModel settingsViewModel = new SettingsViewModel(settingsModel, progressService);
+            SettingsViewModel settingsViewModel = new(settingsModel, progressService);
 
             EnemyFactory enemyFactory = new(configurationProvider, vfxService, audioPlayerService, gameLoopService);
 
@@ -116,18 +116,8 @@ namespace GameCore.Source.Application.CompositionRoots
                 levelUpViewModel,
                 upgradeDescriptionBuilder,
                 settingsViewModel,
-                adsProvider);
-
-            // TODO: Fix this
-            gamePauseService.Paused += () =>
-            {
-                if (gamePauseService.IsInvokeByUI)
-                    return;
-
-                windowFsm.OpenWindow<PauseWindow>();
-            };
-
-            focusChangeHandler.FocusDropped += gamePauseService.InvokeByFocusChanging;
+                adsProvider,
+                focusChangeHandler);
         }
 
         private WindowFsm<GameLoopWindow> CreateWindowFsm()
@@ -161,7 +151,8 @@ namespace GameCore.Source.Application.CompositionRoots
             ILevelUpViewModel levelUpViewModel,
             IUpgradeDescriptionBuilder upgradeDescriptionBuilder,
             SettingsViewModel settingsViewModel,
-            IAdsProvider adsProvider)
+            IAdsProvider adsProvider,
+            IApplicationFocusChangeHandler focusChangeHandler)
         {
             LevelUpSystemPresenter levelUpSystemPresenter =
                 new(windowFsm, _levelUpSystemView, levelUpViewModel, gamePauseService, localizationService,
@@ -196,7 +187,9 @@ namespace GameCore.Source.Application.CompositionRoots
                 audioPlayerService,
                 healthViewBuilder,
                 currencyModel,
-                levelUpModel);
+                levelUpModel,
+                gamePauseService,
+                focusChangeHandler);
 
             SettingsPresenter settingsPresenter = new(windowFsm, _settingsView, settingsViewModel, gamePauseService);
 

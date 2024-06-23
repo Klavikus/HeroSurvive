@@ -1,12 +1,15 @@
 ﻿using System;
 using GameCore.Source.Controllers.Api.Factories;
+using GameCore.Source.Controllers.Api.Handlers;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Controllers.Core.Factories;
 using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Domain.Models;
 using GameCore.Source.Infrastructure.Api.GameFsm;
 using GameCore.Source.Presentation.Api.GameLoop;
+using JetBrains.Annotations;
 using Modules.Common.WindowFsm.Runtime.Abstract;
+using Modules.GamePauseSystem.Runtime;
 using Modules.MVPPassiveView.Runtime;
 
 namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
@@ -23,6 +26,8 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
         private readonly IHealthViewBuilder _healthViewBuilder;
         private readonly CurrencyModel _currencyModel;
         private readonly LevelUpModel _levelUpModel;
+        private readonly IGamePauseService _gamePauseService;
+        private readonly IApplicationFocusChangeHandler _focusChangeHandler;
         private readonly ILocalizationService _localizationService;
 
         public GameLoopPresenter(
@@ -35,7 +40,9 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             IAudioPlayerService audioPlayerService,
             IHealthViewBuilder healthViewBuilder,
             CurrencyModel currencyModel,
-            LevelUpModel levelUpModel)
+            LevelUpModel levelUpModel,
+            IGamePauseService gamePauseService,
+            IApplicationFocusChangeHandler focusChangeHandler)
         {
             _windowFsm = windowFsm;
             _view = view;
@@ -48,6 +55,8 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             _healthViewBuilder = healthViewBuilder ?? throw new ArgumentNullException(nameof(healthViewBuilder));
             _currencyModel = currencyModel ?? throw new ArgumentNullException(nameof(currencyModel));
             _levelUpModel = levelUpModel ?? throw new ArgumentNullException(nameof(levelUpModel));
+            _gamePauseService = gamePauseService ?? throw new ArgumentNullException(nameof(gamePauseService));
+            _focusChangeHandler = focusChangeHandler ?? throw new ArgumentNullException(nameof(focusChangeHandler));
         }
 
         public void Enable()
@@ -71,6 +80,9 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             _gameLoopService.NotifyPlayerRespawn();
             _levelCompetitionService.StartCompetition();
             _audioPlayerService.PlayAmbient();
+
+            _gamePauseService.Paused += OnPaused;
+            _focusChangeHandler.FocusDropped += _gamePauseService.InvokeByFocusChanging;
         }
 
         public void Disable()
@@ -84,6 +96,9 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
 
             _levelCompetitionService.Stop();
             _audioPlayerService.StopAmbient();
+
+            _gamePauseService.Paused -= OnPaused;
+            _focusChangeHandler.FocusDropped -= _gamePauseService.InvokeByFocusChanging;
         }
 
         private void OpenPauseMenu() =>
@@ -103,5 +118,12 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
 
         private void UpdateWaveCounter(int wave) =>
             _view.WaveCountText.text = (wave + 1).ToString();
+
+        private void OnPaused()
+        {
+            if (_gamePauseService.IsInvokeByUI) return;
+
+            _windowFsm.OpenWindow<PauseWindow>();
+        }
     }
 }
