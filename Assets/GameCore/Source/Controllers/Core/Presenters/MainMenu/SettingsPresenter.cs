@@ -5,7 +5,9 @@ using GameCore.Source.Controllers.Core.ViewModels;
 using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Infrastructure.Api.GameFsm;
 using GameCore.Source.Presentation.Api;
+using JetBrains.Annotations;
 using Modules.Common.WindowFsm.Runtime.Abstract;
+using Modules.GamePauseSystem.Runtime;
 
 namespace GameCore.Source.Controllers.Core.Presenters.MainMenu
 {
@@ -16,21 +18,24 @@ namespace GameCore.Source.Controllers.Core.Presenters.MainMenu
         private readonly ILocalizationService _localizationService;
 
         private readonly IGameStateMachine _gameStateMachine;
+        private readonly IGamePauseService _gamePauseService;
 
         public SettingsPresenter(
             IWindowFsm windowFsm,
             ISettingsView view,
-            ISettingsViewModel settingsViewModel
+            ISettingsViewModel settingsViewModel,
+            IGamePauseService gamePauseService
         ) : base(windowFsm, view.Show, view.Hide)
         {
             _view = view;
             _viewModel = settingsViewModel ?? throw new ArgumentNullException(nameof(settingsViewModel));
+            _gamePauseService = gamePauseService ?? throw new ArgumentNullException(nameof(gamePauseService));
         }
 
         protected override void OnAfterEnable()
         {
             _view.ExitButton.Initialize();
-            
+
             _view.MasterAudio.SetValueWithoutNotify(_viewModel.GetMasterVolume());
             _view.MusicAudio.SetValueWithoutNotify(_viewModel.GetMusicVolume());
             _view.VfxAudio.SetValueWithoutNotify(_viewModel.GetSfxVolume());
@@ -48,6 +53,12 @@ namespace GameCore.Source.Controllers.Core.Presenters.MainMenu
             _view.MusicAudio.onValueChanged.RemoveListener(OnMusicSliderChanged);
             _view.VfxAudio.onValueChanged.RemoveListener(OnVfxSliderChanged);
         }
+
+        protected override void OnAfterOpened() =>
+            _gamePauseService.InvokeByUI(true);
+
+        protected override void OnAfterClosed() =>
+            _gamePauseService.InvokeByUI(false);
 
         private void OnCloseButtonClicked() =>
             WindowFsm.Close<SettingsWindow>();

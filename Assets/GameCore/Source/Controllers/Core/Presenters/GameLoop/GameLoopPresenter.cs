@@ -2,6 +2,7 @@
 using GameCore.Source.Controllers.Api.Factories;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Controllers.Core.Factories;
+using GameCore.Source.Controllers.Core.WindowFsms.Windows;
 using GameCore.Source.Domain.Models;
 using GameCore.Source.Infrastructure.Api.GameFsm;
 using GameCore.Source.Presentation.Api.GameLoop;
@@ -12,6 +13,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
 {
     public class GameLoopPresenter : IPresenter
     {
+        private readonly IWindowFsm _windowFsm;
         private readonly IGameLoopView _view;
         private readonly IGameStateMachine _gameStateMachine;
         private readonly IGameLoopService _gameLoopService;
@@ -35,6 +37,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             CurrencyModel currencyModel,
             LevelUpModel levelUpModel)
         {
+            _windowFsm = windowFsm;
             _view = view;
             _gameStateMachine = gameStateMachine ?? throw new ArgumentNullException(nameof(gameStateMachine));
             _gameLoopService = gameLoopService ?? throw new ArgumentNullException(nameof(gameLoopService));
@@ -50,7 +53,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
         public void Enable()
         {
             _view.CloseButton.Initialize();
-            _view.CloseButton.Clicked += GoToMainMenu;
+            _view.CloseButton.Clicked += OpenPauseMenu;
 
             UpdateCurrencyCounter(_currencyModel.CurrentAmount);
             UpdateEnemyCounter();
@@ -72,7 +75,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
 
         public void Disable()
         {
-            _view.CloseButton.Clicked -= GoToMainMenu;
+            _view.CloseButton.Clicked -= OpenPauseMenu;
 
             _currencyModel.CurrencyChanged -= UpdateCurrencyCounter;
             _levelCompetitionService.EnemyKilled -= UpdateEnemyCounter;
@@ -83,8 +86,8 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             _audioPlayerService.StopAmbient();
         }
 
-        private void GoToMainMenu() =>
-            _gameStateMachine.GoToMainMenu();
+        private void OpenPauseMenu() =>
+            _windowFsm.OpenWindow<PauseWindow>();
 
         private void UpdateCurrencyCounter(int _) =>
             _view.GoldCountText.text = _levelCompetitionService.TotalGoldGained.ToString();

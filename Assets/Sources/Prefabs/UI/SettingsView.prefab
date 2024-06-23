@@ -1671,6 +1671,8 @@ GameObject:
   - component: {fileID: 8122449527589074454}
   - component: {fileID: 8122449527589074453}
   - component: {fileID: 8122449527589074452}
+  - component: {fileID: 2461107935072853495}
+  - component: {fileID: 955236230861896651}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -1779,6 +1781,40 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2461107935072853495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8122449527589074450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2acda699229a47f59c4b5c14e26f2575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 8122449527589074452}
+  _upAndDown: 0
+  _actionComponent: {fileID: 955236230861896651}
+  _focusActionComponent: {fileID: 0}
+--- !u!114 &955236230861896651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8122449527589074450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7a053bfa284aa8b7734e161c369c56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 8122449527589074451}
+  _tweenData: {fileID: 11400000, guid: 70469131b5fbe3b40bdc800530ff8db6, type: 2}
+  _lockDoubleInteraction: 1
+  _initializeByComposition: 1
+  _activateBackwardAfterForward: 0
+  _autoRestart: 0
 --- !u!1 &8122449527823064916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1931,6 +1967,7 @@ MonoBehaviour:
   <MasterAudio>k__BackingField: {fileID: 9084473138087807269}
   <MusicAudio>k__BackingField: {fileID: 1120443151965221516}
   <VfxAudio>k__BackingField: {fileID: 8671254062561116486}
+  <ExitButton>k__BackingField: {fileID: 2461107935072853495}
 --- !u!1 &8122449528017928100
 GameObject:
   m_ObjectHideFlags: 0

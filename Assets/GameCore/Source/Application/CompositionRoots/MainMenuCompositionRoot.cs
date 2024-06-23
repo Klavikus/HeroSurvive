@@ -23,6 +23,7 @@ using GameCore.Source.Presentation.Core.MainMenu;
 using GameCore.Source.Presentation.Core.MainMenu.Upgrades;
 using Modules.Common.WindowFsm.Runtime.Abstract;
 using Modules.Common.WindowFsm.Runtime.Implementation;
+using Modules.GamePauseSystem.Runtime;
 using UnityEngine;
 
 namespace GameCore.Source.Application.CompositionRoots
@@ -40,7 +41,7 @@ namespace GameCore.Source.Application.CompositionRoots
 
         private IProgressService _progressService;
 
-        public override async void Initialize(ServiceContainer serviceContainer)
+        public override void Initialize(ServiceContainer serviceContainer)
         {
             Dictionary<Type, IWindow> windows = new Dictionary<Type, IWindow>()
             {
@@ -62,6 +63,7 @@ namespace GameCore.Source.Application.CompositionRoots
             IPropertyProvider propertyProvider = serviceContainer.Single<IPropertyProvider>();
             IUpgradeService upgradeService = serviceContainer.Single<IUpgradeService>();
             IUpgradeDescriptionBuilder descriptionBuilder = serviceContainer.Single<IUpgradeDescriptionBuilder>();
+            IGamePauseService gamePauseService = serviceContainer.Single<IGamePauseService>();
 
             _progressService = serviceContainer.Single<IProgressService>();
 
@@ -161,7 +163,8 @@ namespace GameCore.Source.Application.CompositionRoots
             }
 
             SettingsViewModel settingsViewModel = new SettingsViewModel(settingsModel, _progressService);
-            SettingsPresenter settingsPresenter = new SettingsPresenter(windowFsm, _settingsView, settingsViewModel);
+            SettingsPresenter settingsPresenter =
+                new SettingsPresenter(windowFsm, _settingsView, settingsViewModel, gamePauseService);
 
             _settingsView.Construct(settingsPresenter);
         }

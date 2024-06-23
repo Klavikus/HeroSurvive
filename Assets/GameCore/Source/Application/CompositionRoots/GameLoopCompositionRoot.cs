@@ -7,6 +7,7 @@ using GameCore.Source.Controllers.Api.ViewModels;
 using GameCore.Source.Controllers.Core.Factories;
 using GameCore.Source.Controllers.Core.Presenters;
 using GameCore.Source.Controllers.Core.Presenters.GameLoop;
+using GameCore.Source.Controllers.Core.Presenters.MainMenu;
 using GameCore.Source.Controllers.Core.Services;
 using GameCore.Source.Controllers.Core.ViewModels;
 using GameCore.Source.Controllers.Core.WindowFsms.Windows;
@@ -31,6 +32,8 @@ namespace GameCore.Source.Application.CompositionRoots
         [SerializeField] private WinView _winView;
         [SerializeField] private LevelUpSystemView _levelUpSystemView;
         [SerializeField] private LocalizationSystemView _localizationSystemView;
+        [SerializeField] private SettingsView _settingsView;
+        [SerializeField] private PauseView _pauseView;
 
         public override void Initialize(ServiceContainer serviceContainer)
         {
@@ -47,7 +50,9 @@ namespace GameCore.Source.Application.CompositionRoots
             IPropertyProvider propertyProvider = serviceContainer.Single<IPropertyProvider>();
             IGameLoopService gameLoopService = serviceContainer.Single<IGameLoopService>();
             IAdsProvider adsProvider = serviceContainer.Single<IAdsProvider>();
-            IUpgradeDescriptionBuilder upgradeDescriptionBuilder = serviceContainer.Single<IUpgradeDescriptionBuilder>();
+            IUpgradeDescriptionBuilder upgradeDescriptionBuilder =
+                serviceContainer.Single<IUpgradeDescriptionBuilder>();
+            IProgressService progressService = serviceContainer.Single<IProgressService>();
 
             HeroModel heroModel = modelProvider.Get<HeroModel>();
             PlayerModel playerModel = modelProvider.Get<PlayerModel>();
@@ -58,6 +63,9 @@ namespace GameCore.Source.Application.CompositionRoots
             LevelUpModel levelUpModel = new(abilityUpgradeService, currencyModel);
 
             ILevelUpViewModel levelUpViewModel = new LevelUpViewModel(levelUpModel, abilityUpgradeService, adsProvider);
+
+            SettingsModel settingsModel = modelProvider.Get<SettingsModel>();
+            SettingsViewModel settingsViewModel = new SettingsViewModel(settingsModel, progressService);
 
             EnemyFactory enemyFactory = new(configurationProvider, vfxService, audioPlayerService, gameLoopService);
 
@@ -102,8 +110,9 @@ namespace GameCore.Source.Application.CompositionRoots
                 playerFactory,
                 audioPlayerService,
                 healthViewBuilder,
-                levelUpViewModel, 
-                upgradeDescriptionBuilder);
+                levelUpViewModel,
+                upgradeDescriptionBuilder,
+                settingsViewModel);
         }
 
         private WindowFsm<GameLoopWindow> CreateWindowFsm()
@@ -114,6 +123,8 @@ namespace GameCore.Source.Application.CompositionRoots
                 [typeof(DeathWindow)] = new DeathWindow(),
                 [typeof(WinWindow)] = new WinWindow(),
                 [typeof(LevelUpWindow)] = new LevelUpWindow(),
+                [typeof(SettingsWindow)] = new SettingsWindow(),
+                [typeof(PauseWindow)] = new PauseWindow(),
             };
 
             WindowFsm<GameLoopWindow> windowFsm = new WindowFsm<GameLoopWindow>(windows);
@@ -132,11 +143,13 @@ namespace GameCore.Source.Application.CompositionRoots
             PlayerFactory playerFactory,
             IAudioPlayerService audioPlayerService,
             HealthViewBuilder healthViewBuilder,
-            ILevelUpViewModel levelUpViewModel, 
-            IUpgradeDescriptionBuilder upgradeDescriptionBuilder)
+            ILevelUpViewModel levelUpViewModel,
+            IUpgradeDescriptionBuilder upgradeDescriptionBuilder,
+            SettingsViewModel settingsViewModel)
         {
             LevelUpSystemPresenter levelUpSystemPresenter =
-                new(windowFsm, _levelUpSystemView, levelUpViewModel, gamePauseService, localizationService, upgradeDescriptionBuilder);
+                new(windowFsm, _levelUpSystemView, levelUpViewModel, gamePauseService, localizationService,
+                    upgradeDescriptionBuilder);
 
             LocalizationSystemPresenter localizationSystemPresenter = new(_localizationSystemView, localizationService);
 
@@ -168,11 +181,17 @@ namespace GameCore.Source.Application.CompositionRoots
                 currencyModel,
                 levelUpModel);
 
+            SettingsPresenter settingsPresenter = new(windowFsm, _settingsView, settingsViewModel, gamePauseService);
+
+            PausePresenter pausePresenter = new(windowFsm, _pauseView, gameStateMachine, gamePauseService);
+            
             _localizationSystemView.Construct(localizationSystemPresenter);
             _levelUpSystemView.Construct(levelUpSystemPresenter);
             _deathView.Construct(deathPresenter);
             _winView.Construct(winPresenter);
             _gameLoopView.Construct(gameLoopPresenter);
+            _settingsView.Construct(settingsPresenter);
+            _pauseView.Construct(pausePresenter);
         }
     }
 }
