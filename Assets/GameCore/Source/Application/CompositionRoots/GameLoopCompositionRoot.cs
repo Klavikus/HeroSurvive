@@ -35,6 +35,7 @@ namespace GameCore.Source.Application.CompositionRoots
         [SerializeField] private LocalizationSystemView _localizationSystemView;
         [SerializeField] private SettingsView _settingsView;
         [SerializeField] private PauseView _pauseView;
+        [SerializeField] private AdPauseView _adPauseView;
 
         public override void Initialize(ServiceContainer serviceContainer)
         {
@@ -195,6 +196,8 @@ namespace GameCore.Source.Application.CompositionRoots
 
             PausePresenter pausePresenter = new(windowFsm, _pauseView, gameStateMachine, gamePauseService);
 
+            AdPausePresenter adPausePresenter = new(_adPauseView, adsProvider);
+            
             _localizationSystemView.Construct(localizationSystemPresenter);
             _levelUpSystemView.Construct(levelUpSystemPresenter);
             _deathView.Construct(deathPresenter);
@@ -202,6 +205,7 @@ namespace GameCore.Source.Application.CompositionRoots
             _gameLoopView.Construct(gameLoopPresenter);
             _settingsView.Construct(settingsPresenter);
             _pauseView.Construct(pausePresenter);
+            _adPauseView.Construct(adPausePresenter);
         }
     }
 }

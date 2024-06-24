@@ -7,17 +7,14 @@ namespace GameCore.Source.Controllers.Core.Services
 {
     public class YandexGamesAdsProvider : IAdsProvider
     {
-        private const int ReRollAdId = 0;
-        private const int RespawnAdId = 1;
-        private const int DoubleRewardAdId = 2;
+        private const string s_rewardVideoCallKey = "RewardVideoAd";
+        private const string s_interCallKey = "InterAd";
+
+        private const int s_reRollAdId = 0;
+        private const int s_respawnAdId = 1;
+        private const int s_doubleRewardAdId = 2;
 
         private readonly IMultiCallHandler _adCallHandler;
-
-        public event Action ReRollAdCompleted;
-        public event Action RespawnAdCompleted;
-        public event Action DoubleRewardAdCompleted;
-        public event Action AdStarted;
-        public event Action AdClosed;
 
         public YandexGamesAdsProvider()
         {
@@ -26,22 +23,32 @@ namespace GameCore.Source.Controllers.Core.Services
             _adCallHandler.Called += () => AdStarted?.Invoke();
             _adCallHandler.Released += () => AdClosed?.Invoke();
 
+            //TODO: Fix this
             YandexGame.RewardVideoEvent += OnRewardVideoEvent;
-            YandexGame.OpenVideoEvent += () => _adCallHandler.Call("RewardVideoAd");
-            YandexGame.CloseVideoEvent += () => _adCallHandler.Release("RewardVideoAd");
-            YandexGame.ErrorVideoEvent += () => _adCallHandler.Release("RewardVideoAd");
+            YandexGame.OpenVideoEvent += () => _adCallHandler.Call(s_rewardVideoCallKey);
+            YandexGame.CloseVideoEvent += () => _adCallHandler.Release(s_rewardVideoCallKey);
+            YandexGame.ErrorVideoEvent += () => _adCallHandler.Release(s_rewardVideoCallKey);
 
-            YandexGame.OpenFullAdEvent += () => _adCallHandler.Call("InterAd");
-            YandexGame.CloseFullAdEvent += () => _adCallHandler.Release("InterAd");
-            YandexGame.ErrorFullAdEvent += () => _adCallHandler.Release("InterAd");
+            YandexGame.OpenFullAdEvent += () => _adCallHandler.Call(s_interCallKey);
+            YandexGame.CloseFullAdEvent += () => _adCallHandler.Release(s_interCallKey);
+            YandexGame.ErrorFullAdEvent += () => _adCallHandler.Release(s_interCallKey);
         }
+
+        public event Action ReRollAdCompleted;
+        public event Action RespawnAdCompleted;
+        public event Action DoubleRewardAdCompleted;
+        public event Action AdStarted;
+        public event Action AdClosed;
+
+        public bool IsAdInProgress => _adCallHandler.IsCalled;
 
         public void ShowReRollAd()
         {
             if (YandexGame.nowAdsShow)
                 return;
 
-            YandexGame.RewVideoShow(ReRollAdId);
+            _adCallHandler.Call(s_rewardVideoCallKey);
+            YandexGame.RewVideoShow(s_reRollAdId);
         }
 
         public void ShowRespawnAd()
@@ -49,7 +56,8 @@ namespace GameCore.Source.Controllers.Core.Services
             if (YandexGame.nowAdsShow)
                 return;
 
-            YandexGame.RewVideoShow(RespawnAdId);
+            _adCallHandler.Call(s_rewardVideoCallKey);
+            YandexGame.RewVideoShow(s_respawnAdId);
         }
 
         public void ShowDoubleRewardAd()
@@ -57,22 +65,23 @@ namespace GameCore.Source.Controllers.Core.Services
             if (YandexGame.nowAdsShow)
                 return;
 
-            YandexGame.RewVideoShow(DoubleRewardAdId);
+            _adCallHandler.Call(s_rewardVideoCallKey);
+            YandexGame.RewVideoShow(s_doubleRewardAdId);
         }
 
         private void OnRewardVideoEvent(int id)
         {
             switch (id)
             {
-                case ReRollAdId:
+                case s_reRollAdId:
                     ReRollAdCompleted?.Invoke();
 
                     break;
-                case RespawnAdId:
+                case s_respawnAdId:
                     RespawnAdCompleted?.Invoke();
 
                     break;
-                case DoubleRewardAdId:
+                case s_doubleRewardAdId:
                     DoubleRewardAdCompleted?.Invoke();
 
                     break;
