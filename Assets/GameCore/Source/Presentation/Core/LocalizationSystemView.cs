@@ -11,5 +11,11 @@ namespace GameCore.Source.Presentation.Core
         [SerializeField] private LocalizableTMPText[] _localizableTMPTexts;
 
         public ILocalizable[] Localizables => _localizableTMPTexts.Cast<ILocalizable>().ToArray();
+
+        [ContextMenu(nameof(CollectAllLocalizable))]
+        public void CollectAllLocalizable()
+        {
+            _localizableTMPTexts = FindObjectsOfType<LocalizableTMPText>(true);
+        }
     }
 }

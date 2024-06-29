@@ -104,8 +104,6 @@ namespace GameCore.Source.Application.GameFSM.States
             IAdsProvider adsProvider = new YandexGamesAdsProvider();
             _services.RegisterAsSingle(adsProvider);
 
-            // PrepareModels(configurationProvider, modelProvider);
-
             localizationService.Initialize(new EnvironmentData(configurationProvider.BaseLanguage, false));
 
 #if DAL_YANDEX_GAME_PLUGIN
