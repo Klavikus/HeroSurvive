@@ -79,14 +79,16 @@ namespace GameCore.Source.Application.GameFSM.States
             IResourceProvider resourceProvider = RegisterResourceProvider();
             IGamePauseService gamePauseService = RegisterGamePauseService();
             ILocalizationService localizationService = RegisterLocalizationService(configurationProvider);
+            
+            IModelProvider modelProvider = RegisterModelProvider();
 
             IAudioPlayerService audioPlayerService = RegisterAudioPlayerService(
                 configurationProvider,
                 coroutineRunner,
-                gamePauseService);
+                gamePauseService,
+                modelProvider);
 
             IVfxService vfxService = RegisterVfxService(configurationProvider);
-            IModelProvider modelProvider = RegisterModelProvider();
             IGameLoopService gameLoopService = RegisterGameLoopService();
             IUpgradeService upgradeService = RegisterUpgradeService(modelProvider);
 
@@ -213,12 +215,14 @@ namespace GameCore.Source.Application.GameFSM.States
         }
 
         private IAudioPlayerService RegisterAudioPlayerService(IConfigurationProvider configurationProvider,
-            ICoroutineRunner coroutineRunner, IGamePauseService gamePauseService)
+            ICoroutineRunner coroutineRunner, IGamePauseService gamePauseService, IModelProvider modelProvider)
         {
             IAudioPlayerService audioPlayerService = new AudioPlayerService(
                 configurationProvider,
                 coroutineRunner,
-                gamePauseService);
+                gamePauseService,
+                modelProvider);
+
             _services.RegisterAsSingle(audioPlayerService);
 
             return audioPlayerService;

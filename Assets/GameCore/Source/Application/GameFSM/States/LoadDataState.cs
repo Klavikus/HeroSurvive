@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using GameCore.Source.Controllers.Api.Providers;
+using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Domain.Configs;
 using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Data.Dto;
@@ -31,6 +32,8 @@ namespace GameCore.Source.Application.GameFSM.States
             await _progressService.SyncWithCloud();
 
             PrepareModels(configurationProvider, modelProvider, _progressService);
+            
+            _serviceContainer.Single<IAudioPlayerService>().Enable();
 
             _serviceContainer.Single<IGameStateMachine>().Enter<MainMenuState>();
         }

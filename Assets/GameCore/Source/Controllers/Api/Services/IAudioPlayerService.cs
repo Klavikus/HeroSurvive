@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GameCore.Source.Controllers.Api.Services
 {
-    public interface IAudioPlayerService
+    public interface IAudioPlayerService : IEnable, IDisable
     {
         void BindListenerTo(GameObject gameObject);
         void PlayHit(Vector3 position);
