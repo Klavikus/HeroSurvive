@@ -5,6 +5,7 @@ namespace GameCore.Source.Controllers.Api.Services
 {
     public interface IAudioPlayerService
     {
+        void BindListenerTo(GameObject gameObject);
         void PlayHit(Vector3 position);
         void PlayUpgradeBuy();
         void PlayPlayerDied();
@@ -13,7 +14,6 @@ namespace GameCore.Source.Controllers.Api.Services
         void StopAmbient();
         void StartMainMenuAmbient();
         void StopMainMenuAmbient();
-        void PlayThunder();
         void PlayOneShot(EventReference reference);
         void PlayOneShot(EventReference reference, Vector3 position);
     }

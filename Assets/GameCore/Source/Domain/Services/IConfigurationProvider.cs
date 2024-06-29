@@ -1,4 +1,5 @@
 ﻿using GameCore.Source.Domain.Configs;
+using GameCore.Source.Domain.Data;
 using UnityEngine;
 
 namespace GameCore.Source.Domain.Services
@@ -19,5 +20,6 @@ namespace GameCore.Source.Domain.Services
         GameObject UpgradeLevelView { get; }
         GameObject PersistentUpgradeView { get; }
         GameObject SelectableHeroView { get; }
+        AudioConfig AudioConfig { get; }
     }
 }

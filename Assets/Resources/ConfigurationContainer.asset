@@ -37,3 +37,4 @@ MonoBehaviour:
   <UpgradeLevelView>k__BackingField: {fileID: 5975574734927706464, guid: f8a614f8aae216d43a798034a8cf2545, type: 3}
   <PersistentUpgradeView>k__BackingField: {fileID: 1036896767021991421, guid: fa3e5e933a0e51c4c844db1f51ff99e6, type: 3}
   <SelectableHeroView>k__BackingField: {fileID: 827499140331234276, guid: b875eb1b778aefc42a54cc05f78be2f0, type: 3}
+  <AudioConfigSo>k__BackingField: {fileID: 11400000, guid: 669fc50df718e5d43937256531885fe8, type: 2}

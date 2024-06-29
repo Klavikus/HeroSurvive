@@ -61,6 +61,8 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
             _gameLoopService.PlayerResurrectInvoked += OnResurrectInvoked;
             _propertyProvider.PropertiesUpdated += ApplyProperties;
             _damageable.Died += OnDied;
+
+            _audioPlayerService.BindListenerTo(_playerController.gameObject);
         }
 
         public void Disable()

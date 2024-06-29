@@ -20,5 +20,6 @@ namespace GameCore.Source.Domain.Configs
         [field: SerializeField] public GameObject UpgradeLevelView { get; private set; }
         [field: SerializeField] public GameObject PersistentUpgradeView { get; private set; }
         [field: SerializeField] public GameObject SelectableHeroView { get; private set; }
+        [field: SerializeField] public AudioConfigSo AudioConfigSo { get; private set; }
     }
 }

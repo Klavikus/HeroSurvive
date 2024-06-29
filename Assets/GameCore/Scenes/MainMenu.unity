@@ -1275,6 +1275,7 @@ GameObject:
   - component: {fileID: 723521475}
   - component: {fileID: 723521474}
   - component: {fileID: 723521473}
+  - component: {fileID: 723521476}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1356,6 +1357,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &723521476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723521472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 723521472}
 --- !u!224 &770441296
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3471,7 +3485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1555526922374517827, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 174139.33
+      value: 182972.88
       objectReference: {fileID: 0}
     - target: {fileID: 3825262620608170728, guid: 7e2e4ac3c6d26e94481e94408796d242, type: 3}
       propertyPath: m_LocalPosition.x

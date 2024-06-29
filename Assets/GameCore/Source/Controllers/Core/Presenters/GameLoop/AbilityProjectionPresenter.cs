@@ -97,7 +97,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
 
         private void OnEnemyHitted(Transform enemy)
         {
-            _audioPlayerService.PlayHit(enemy.position);
+            // _audioPlayerService.PlayHit(enemy.position);
         }
 
         private void OnAttackExpired()

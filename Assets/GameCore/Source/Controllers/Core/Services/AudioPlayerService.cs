@@ -2,10 +2,12 @@ using System.Collections;
 using System.Diagnostics;
 using FMODUnity;
 using GameCore.Source.Controllers.Api.Services;
+using GameCore.Source.Domain.Data;
 using GameCore.Source.Domain.Services;
 using GameCore.Source.Infrastructure.Api.Services;
 using Modules.GamePauseSystem.Runtime;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace GameCore.Source.Controllers.Core.Services
 {
@@ -14,6 +16,8 @@ namespace GameCore.Source.Controllers.Core.Services
         private readonly IGamePauseService _gamePauseService;
         private readonly IConfigurationProvider _configurationProvider;
         private readonly ICoroutineRunner _coroutineRunner;
+
+        private readonly AudioConfig _audioConfig;
         private EventInstance _ambientInstance;
         private EventInstance _mainMenuAmbientInstance;
 
@@ -27,6 +31,13 @@ namespace GameCore.Source.Controllers.Core.Services
             _gamePauseService = gamePauseService;
             _configurationProvider = configurationProvider;
             _coroutineRunner = coroutineRunner;
+
+            _audioConfig = configurationProvider.AudioConfig;
+        }
+
+        public void BindListenerTo(GameObject gameObject)
+        {
+            Object.FindObjectOfType<StudioListener>().BindAttenuation(gameObject);
         }
 
         public void Initialize()
@@ -52,81 +63,48 @@ namespace GameCore.Source.Controllers.Core.Services
 
         public void PlayHit(Vector3 position)
         {
-            // RuntimeManager.PlayOneShot(_configurationProvider.FMOD_HitReference, position);
+            RuntimeManager.PlayOneShot(_audioConfig.HitReference, position);
         }
 
         public void PlayUpgradeBuy()
         {
-            // RuntimeManager.PlayOneShot(_configurationProvider.FMOD_UpgradeBuyReference);
+            RuntimeManager.PlayOneShot(_audioConfig.UpgradeBuyReference);
         }
 
         public void PlayPlayerDied()
         {
-            // RuntimeManager.PlayOneShot(_configurationProvider.FMOD_PlayerDiedReference);
+            RuntimeManager.PlayOneShot(_audioConfig.PlayerDiedReference);
         }
 
         public void PlayStartLevel()
         {
-            // RuntimeManager.PlayOneShot(_configurationProvider.FMOD_StartLevelReference);
+            RuntimeManager.PlayOneShot(_audioConfig.StartLevelReference);
         }
 
         public void PlayAmbient()
         {
-            // _coroutineRunner.StartCoroutine(DelayedStartGameLoop());
         }
 
         public void StopAmbient()
         {
-            // _coroutineRunner.StartCoroutine(DelayedStopGameLoop());
         }
 
         public void StartMainMenuAmbient()
         {
-            // _coroutineRunner.StartCoroutine(DelayedStartMainMenu());
         }
 
         public void StopMainMenuAmbient()
         {
-            // _coroutineRunner.StartCoroutine(DelayedStopMainMenu());
-        }
-
-        public void PlayThunder()
-        {
-            // RuntimeManager.PlayOneShot(_configurationProvider.FMOD_Thunder);
         }
 
         public void PlayOneShot(EventReference reference)
         {
-            // RuntimeManager.PlayOneShot(reference);
+            RuntimeManager.PlayOneShot(reference);
         }
 
         public void PlayOneShot(EventReference reference, Vector3 position)
         {
-            // RuntimeManager.PlayOneShot(reference, position);
-        }
-
-        private IEnumerator DelayedStartMainMenu()
-        {
-            yield return new WaitForSeconds(0.1f);
-            // _mainMenuAmbientInstance.start();
-        }
-
-        private IEnumerator DelayedStopMainMenu()
-        {
-            yield return new WaitForSeconds(0.1f);
-            // _mainMenuAmbientInstance.stop(STOP_MODE.ALLOWFADEOUT);
-        }
-
-        private IEnumerator DelayedStartGameLoop()
-        {
-            yield return new WaitForSeconds(0.1f);
-            // _ambientInstance.start();
-        }
-
-        private IEnumerator DelayedStopGameLoop()
-        {
-            yield return new WaitForSeconds(0.1f);
-            // _ambientInstance.stop(STOP_MODE.ALLOWFADEOUT);
+            RuntimeManager.PlayOneShot(reference, position);
         }
     }
 }

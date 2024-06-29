@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e37a8d82c5f4252ad2a6011fa47e84d, type: 3}
+  m_Name: AudioConfigSo
+  m_EditorClassIdentifier: 
+  <AudioConfig>k__BackingField:
+    HitReference:
+      Guid:
+        Data1: -349235796
+        Data2: 1150741416
+        Data3: -519333958
+        Data4: -1099204818
+      Path: event:/EnemyHitted
+    UpgradeBuyReference:
+      Guid:
+        Data1: -1974874719
+        Data2: 1260626009
+        Data3: 1349293726
+        Data4: 910228622
+      Path: event:/Upgraded
+    PlayerDiedReference:
+      Guid:
+        Data1: -324358503
+        Data2: 1134022982
+        Data3: 1014423475
+        Data4: 2024186393
+      Path: event:/Died
+    StartLevelReference:
+      Guid:
+        Data1: -1770848749
+        Data2: 1270757978
+        Data3: 1231208344
+        Data4: 851202207
+      Path: event:/StartLevel
