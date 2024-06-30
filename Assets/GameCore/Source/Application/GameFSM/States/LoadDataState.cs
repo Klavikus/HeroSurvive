@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Cysharp.Threading.Tasks;
 using GameCore.Source.Controllers.Api.Providers;
 using GameCore.Source.Controllers.Api.Services;
 using GameCore.Source.Domain.Configs;
@@ -22,7 +23,7 @@ namespace GameCore.Source.Application.GameFSM.States
             _serviceContainer = serviceContainer;
         }
 
-        public async void Enter()
+        public async UniTask Enter()
         {
             _progressService = _serviceContainer.Single<IProgressService>();
             IConfigurationProvider configurationProvider = _serviceContainer.Single<IConfigurationProvider>();
@@ -32,7 +33,7 @@ namespace GameCore.Source.Application.GameFSM.States
             await _progressService.SyncWithCloud();
 
             PrepareModels(configurationProvider, modelProvider, _progressService);
-            
+
             _serviceContainer.Single<IAudioPlayerService>().Enable();
 
             _serviceContainer.Single<IGameStateMachine>().Enter<MainMenuState>();
@@ -87,7 +88,7 @@ namespace GameCore.Source.Application.GameFSM.States
                 _progressService.UpdateAccountData(accountModel);
                 _progressService.Save();
             };
-            
+
             SettingsDto settingsDto = _progressService.Get<SettingsDto>(SettingsDto.DefaultId);
             SettingsModel settingsModel = new SettingsModel(settingsDto);
             modelProvider.Bind(settingsModel);

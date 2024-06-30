@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using GameCore.Source.Controllers.Api.Factories;
 using GameCore.Source.Controllers.Api.Handlers;
 using GameCore.Source.Controllers.Api.Providers;
@@ -21,6 +22,7 @@ using GameCore.Source.Infrastructure.Core;
 using GameCore.Source.Infrastructure.Core.Services;
 using GameCore.Source.Infrastructure.Core.Services.DI;
 using GameCore.Source.Infrastructure.Core.Services.Providers;
+using GameCore.Source.Presentation.Core;
 using Modules.Common.Utils;
 using Modules.DAL.Implementation.Data;
 using Modules.DAL.Implementation.Data.Entities;
@@ -53,13 +55,13 @@ namespace GameCore.Source.Application.GameFSM.States
             _services = serviceContainer;
         }
 
-        public async void Enter()
+        public async UniTask Enter()
         {
             await _sceneLoader.LoadAsync(BootstrapScene);
 
             RegisterServices();
 
-            _gameStateMachine.Enter<LoadDataState>();
+            await _gameStateMachine.Enter<LoadDataState>();
         }
 
         public void Exit()
@@ -79,7 +81,7 @@ namespace GameCore.Source.Application.GameFSM.States
             IResourceProvider resourceProvider = RegisterResourceProvider();
             IGamePauseService gamePauseService = RegisterGamePauseService();
             ILocalizationService localizationService = RegisterLocalizationService(configurationProvider);
-            
+
             IModelProvider modelProvider = RegisterModelProvider();
 
             IAudioPlayerService audioPlayerService = RegisterAudioPlayerService(
@@ -133,6 +135,10 @@ namespace GameCore.Source.Application.GameFSM.States
             Object.DontDestroyOnLoad(focusChangeHandler);
             _services.RegisterAsSingle<IApplicationFocusChangeHandler>(focusChangeHandler);
 
+            LoadingCurtain loadingCurtain = Object.FindObjectOfType<LoadingCurtain>(true);
+            _services.RegisterAsSingle(loadingCurtain);
+            loadingCurtain.Initialize();
+            
             _services.LockRegister();
         }
 

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using GameCore.Source.Application.GameFSM.States;
 using GameCore.Source.Infrastructure.Api.GameFsm;
 
@@ -13,7 +14,7 @@ namespace GameCore.Source.Application
         }
     
         public void Run() => 
-            _gameStateMachine.Enter<BootstrapState>();
+            _gameStateMachine.Enter<BootstrapState>().Forget();
 
         public void Update() => 
             _gameStateMachine.Update();

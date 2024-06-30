@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using GameCore.Source.Application.GameFSM.States;
 using GameCore.Source.Infrastructure.Api.GameFsm;
-using GameCore.Source.Infrastructure.Core;
 using GameCore.Source.Infrastructure.Core.Services;
 using GameCore.Source.Infrastructure.Core.Services.DI;
 
@@ -11,8 +11,10 @@ namespace GameCore.Source.Application.GameFSM
     public class GameStateMachine : IGameStateMachine
     {
         private readonly Dictionary<Type, IExitableState> _states;
+        private readonly List<UniTask> _beforeExitHandlers;
 
         private IExitableState _activeState;
+        private IExitableState _nextState;
 
         public GameStateMachine(SceneLoader sceneLoader)
         {
@@ -26,32 +28,38 @@ namespace GameCore.Source.Application.GameFSM
             };
         }
 
-        public void Enter<TState>() where TState : class, IState
+        public async UniTask Enter<TState>() where TState : class, IState
         {
-            IState state = ChangeState<TState>();
-            state.Enter();
+            TState targetState = GetState<TState>();
+
+            if (_activeState == targetState || _nextState == targetState)
+                return;
+
+            _nextState = targetState;
+
+            await ChangeState(targetState);
         }
 
         public void Update() =>
             _activeState.Update();
 
-        public void GoToGameLoop() =>
-            Enter<GameLoopState>();
+        public async void GoToGameLoop() =>
+            await Enter<GameLoopState>();
 
-        public void GoToMainMenu() =>
-            Enter<MainMenuState>();
+        public async void GoToMainMenu() =>
+            await Enter<MainMenuState>();
 
-        private TState ChangeState<TState>() where TState : class, IExitableState
+        private async UniTask ChangeState(IState state)
         {
-            _activeState?.Exit();
+            if (_activeState != null)
+                _activeState.Exit();
 
-            TState state = GetState<TState>();
             _activeState = state;
-
-            return state;
+            await state.Enter();
         }
 
-        private TState GetState<TState>() where TState : class, IExitableState =>
+        private TState GetState<TState>()
+            where TState : class, IExitableState =>
             _states[typeof(TState)] as TState;
     }
 }

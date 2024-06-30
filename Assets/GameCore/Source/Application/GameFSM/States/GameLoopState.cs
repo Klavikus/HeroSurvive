@@ -1,8 +1,9 @@
+using Cysharp.Threading.Tasks;
 using GameCore.Source.Application.Factories;
 using GameCore.Source.Infrastructure.Api.GameFsm;
-using GameCore.Source.Infrastructure.Core;
 using GameCore.Source.Infrastructure.Core.Services;
-using ServiceContainer = GameCore.Source.Infrastructure.Core.Services.DI.ServiceContainer;
+using GameCore.Source.Infrastructure.Core.Services.DI;
+using GameCore.Source.Presentation.Core;
 
 namespace GameCore.Source.Application.GameFSM.States
 {
@@ -19,18 +20,20 @@ namespace GameCore.Source.Application.GameFSM.States
             _serviceContainer = serviceContainer;
         }
 
-        public void Enter() =>
-            _sceneLoader.Load(GameLoopScene, OnSceneLoaded);
+        public async UniTask Enter()
+        {
+            await _serviceContainer.Single<LoadingCurtain>().ShowAsync();
+            await _sceneLoader.LoadAsync(GameLoopScene);
+            new SceneInitializer().Initialize(_serviceContainer);
+            await _serviceContainer.Single<LoadingCurtain>().HideAsync();
+        }
 
-        public void Exit()
+        public  void Exit()
         {
         }
 
         public void Update()
         {
         }
-
-        private void OnSceneLoaded() => 
-            new SceneInitializer().Initialize(_serviceContainer);
     }
 }

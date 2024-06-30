@@ -99,6 +99,7 @@ namespace GameCore.Source.Controllers.Core.Presenters.GameLoop
 
             _gamePauseService.Paused -= OnPaused;
             _focusChangeHandler.FocusDropped -= _gamePauseService.InvokeByFocusChanging;
+            _gamePauseService.InvokeByUI(false);
         }
 
         private void OpenPauseMenu() =>
